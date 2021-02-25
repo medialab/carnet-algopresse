@@ -1,0 +1,65 @@
+{
+  "name": "carnet-algopresse",
+  "version": "0.1.0",
+  "author": "robindemourat",
+  "homepage": "https://robindemourat.github.io/carnet-algopresse",
+  "repository": "https://github.com/robindemourat/carnet-algopresse",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
+    "axios": "^0.21.1",
+    "classnames": "^2.2.6",
+    "graphology": "^0.19.3",
+    "graphology-gexf": "^0.7.2",
+    "iwanthue": "^1.4.2",
+    "parse-color": "^1.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "react-table": "^7.6.3",
+    "react-vega": "^7.4.2",
+    "sigma": "^2.0.0-alpha40",
+    "uuid": "^8.3.2",
+    "vega": "^5.18.0",
+    "vega-lite": "^4.17.0",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "pack": "npm run build;node prepareDeploy"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "import/no-webpack-loader-syntax": 0
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "mdx-loader": "^3.0.2",
+    "raw-loader": "^4.0.2",
+    "react-app-rewire-yaml": "^1.1.0",
+    "react-app-rewired": "^2.1.8"
+  }
+}

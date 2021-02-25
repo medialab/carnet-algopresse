@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+body {
+  font-family: 'Karla', sans-serif;
+}
+
+#wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+/**
+ * NAV
+ */
+#wrapper > nav{
+  padding: 1rem;
+  padding-top: 2rem;
+  left: 0;
+  top: 0;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  width: 10vw;
+  /* background: rgba(240,240,240,1); */
+}
+#wrapper > nav ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#wrapper > nav li{
+  margin-bottom: 1rem;
+}
+
+#wrapper > nav a{
+  color: inherit;
+  text-decoration: none;
+}
+
+#wrapper > nav .navitem-container a {
+  background: rgba(220,220,220,1);
+  padding: 1rem;
+  display: block;
+}
+
+#wrapper > nav .navitem-container a.active {
+  background: rgba(200,200,200,1);
+}
+
+#wrapper > main {
+  flex: 1;
+  text-decoration: none;
+  padding: 1rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-content: stretch;
+  margin-left: 13vw;
+}
+
+.slide-container {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 90vw;
+  flex: 1;
+}
+
+.slide-container > section {
+  flex: 1;
+  max-width: calc(50% - 5rem);
+}
+.slide-container > aside {
+  position: fixed;
+  width: calc(50% - 5rem);
+  left: calc(50% + 5rem);
+  top: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: stretch;
+  box-sizing: border-box;
+}
+
+.slide-container aside .vis {
+  width: 100%;
+  height: 10rem;
+  flex: 1;
+}
+
+.slide-container aside .CodeContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 0 .5rem;
+  z-index: 1000;
+}
+.slide-container aside .CodeContainer pre {
+  flex: 1;
+  background: lightgrey;
+  padding: 0 1rem;
+  transition: .5s ease all;
+  overflow: hidden;
+  max-height: 0;
+}
+
+.slide-container aside .CodeContainer pre.is-active {
+  max-height: 100vh;
+  padding: 1rem;
+}
+
+.slide-container aside .CodeContainer .copy-container {
+  display: flex;
+  align-items: stretch;
+  padding: .5rem 0;
+}
+.slide-container aside .CodeContainer .copy-container button {
+  flex: 1;
+}
+.slide-container aside .CodeContainer .copy-container button:not(:first-of-type) {
+  margin-left: .5rem;
+}
+
+.GraphBlock {
+  background: rgba(240,240,240,1);
+  max-width: 100%;
+  padding: 1rem;
+  overflow: hidden;
+}
+.GraphBlock.is-focused {
+  background: rgba(50,50,50,1);
+  color: white;
+}
+
+.GraphBlock pre {
+  background: rgba(200,200,200,1);
+  padding: .5rem;
+}
+
+.GraphBlock.is-focused pre {
+  color: black;
+}
+.GraphBlock .buttons-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: stretch;
+}
+.GraphBlock .buttons-container button {
+  flex: 1;
+}
+
+.edit-help {
+  transition: all .5s ease;
+  overflow: hidden;
+  max-height: 0;
+  padding-left: 0 2rem 0 2rem;
+}
+
+.edit-help.is-active {
+  max-height: 100vh;
+  background: lightgrey;
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+button {
+  border: none;
+  background: rgba(220,220,220,1);
+  padding: .5rem;
+  font-family: 'Karla', sans-serif;
+  outline: none;
+  cursor: pointer;
+}
+
+button.is-active {
+  background: rgba(50,50,50,1);
+  color: white;
+}
+
+input, select {
+  padding: .5rem;
+  font-family: 'Karla', sans-serif;
+  border: 1px solid rgba(220,220,220,1);
+  max-width: 100%;
+  width: 100%;
+  background: white;
+  box-sizing: border-box;
+}
+.GraphControls {
+  overflow: hidden;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 15vw;
+  min-width: 15vw;
+  box-sizing: border-box;
+  max-height: calc(100% - 5rem);
+}
+.GraphControls .graph-controls-item {
+  margin-bottom: .3rem;
+}
+.GraphControls .graph-controls-item.camera {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+}
+.GraphControls .graph-controls-item.camera button:not(:first-of-type) {
+  margin-left: .1rem;
+}
+.GraphControls .graph-controls-item.camera button:last-of-type {
+  flex: 1;
+}
+
+.FiltersEditor button {
+  margin-bottom: .5rem;
+  width: 100%;
+}
+
+
+.FiltersEditor h6
+{
+  padding: .5rem;
+  margin: 0;
+  background: white;
+}
+
+.FiltersEditor select {
+  padding: .5rem;
+}
+
+.FiltersEditor .existing-filters {
+  list-style: none;
+  padding: 0;
+}
+
+.FiltersEditor .existing-filters li {
+  margin: .5rem;
+  background: rgba(240,240,240,1);
+  padding: .5rem;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+.FiltersEditor .existing-filters li div:first-of-type {
+  padding-right: .5rem;
+  flex: 1;
+  top: -.2rem;
+  position: relative;
+  font-size: .8rem;
+}
+
+.FiltersEditor .existing-filters li button {
+  border-radius: 50%;
+  max-width: 2rem;
+  max-height: 2rem;
+  font-size: .5em;
+}
+
+.ColorLegend {
+  padding: .5rem;
+  list-style: none;
+  overflow: auto;
+  max-height: 15rem;
+  background: white;
+}
+
+.ColorLegend li {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+}
+.ColorLegend li .legend-color{
+  width: 1rem;
+  height: 1rem;
+  margin-right: .5rem;
+}
+.ColorLegend li .legend-modality{
+  flex: 1;
+}
+
+.loader-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader{
+  background: lightgrey;
+  height: 10px;
+  width: 50%;
+  position: relative;
+}
+.loader .loading-bar {
+  background: turquoise;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  transition: width .2s ease;
+}
