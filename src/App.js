@@ -9,6 +9,7 @@ import {
 import './App.css';
 
 import GraphCritic from './slides/GraphCritic';
+import DatesAnalysis from './slides/DatesAnalysis';
 
 const Home = () => {
   return (
@@ -26,6 +27,11 @@ const routes = [
     title: 'Graphe des critiques anglophones',
     route: '/graph-critic-en',
     Component: () => <GraphCritic />
+  },
+  {
+    title: 'Analyse des dates',
+    route: '/dates-analysis',
+    Component: () => <DatesAnalysis />
   },
   
 ]

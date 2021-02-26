@@ -129,32 +129,32 @@ body {
   margin-left: .5rem;
 }
 
-.GraphBlock {
+.VisualizationBlock {
   background: rgba(240,240,240,1);
   max-width: 100%;
   padding: 1rem;
   overflow: hidden;
   cursor: pointer;
 }
-.GraphBlock.is-focused {
+.VisualizationBlock.is-focused {
   background: rgba(50,50,50,1);
   color: white;
 }
 
-.GraphBlock pre {
+.VisualizationBlock pre {
   background: rgba(200,200,200,1);
   padding: .5rem;
 }
 
-.GraphBlock.is-focused pre {
+.VisualizationBlock.is-focused pre {
   color: black;
 }
-.GraphBlock .buttons-container {
+.VisualizationBlock .buttons-container {
   display: flex;
   flex-flow: row nowrap;
   justify-content: stretch;
 }
-.GraphBlock .buttons-container button {
+.VisualizationBlock .buttons-container button {
   flex: 1;
 }
 

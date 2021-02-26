@@ -2,9 +2,9 @@ import React, {useContext, useEffect, useState} from 'react';
 import cx from 'classnames';
 import {v4 as genId} from 'uuid';
 import {VisualizationControlContext} from '../../contexts'
-import {buildGraphCode} from '../../helpers/misc';
+// import {buildGraphCode} from '../../helpers/misc';
 
-const GraphBlock = (inputProps) => {
+const IceCreamBlock = (inputProps) => {
   const {
     onVisualizationUpdate, 
     focusedVisualizationId, 
@@ -41,15 +41,15 @@ const GraphBlock = (inputProps) => {
   const handleCopy = e => {
     e.preventDefault();
     e.stopPropagation();
-    navigator.clipboard.writeText(buildGraphCode(props));
+    navigator.clipboard.writeText(/*buildGraphCode(props)*/JSON.stringify(props));
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }
   return (
-    <div onClick={handleClick} className={cx("VisualizationBlock GraphBlock", {'is-focused': isFocused})}>
+    <div onClick={handleClick} className={cx("VisualizationBlock IcecreamBlock", {'is-focused': isFocused})}>
       <pre>
         <code>
-          {buildGraphCode(props)}
+          {/*buildGraphCode(props)*/ JSON.stringify(props)}
         </code>
       </pre>
       <div className="buttons-container">
@@ -64,4 +64,4 @@ const GraphBlock = (inputProps) => {
   )
 }
 
-export default GraphBlock;
+export default IceCreamBlock;

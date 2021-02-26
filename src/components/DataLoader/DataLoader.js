@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { csvParse } from 'd3-dsv';
 
 const Loader = ({percentsLoaded = 0}) =>{
   return  (
@@ -21,8 +22,12 @@ const DataLoader = ({url, children}) => {
         setLoadingFraction(status);
       }
     })
-    .then(({data}) => {
+    .then(({data: inputData}) => {
       setTimeout(() => {
+        let data = inputData;
+        if (url.split('.').pop() === 'csv') {
+          data = csvParse(inputData);
+        }
         setData(data);
       })
     })
