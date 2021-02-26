@@ -170,29 +170,33 @@ export default function GraphContainer({
         
         const matches = filters.length ? evalIfNodeMatches(attributes, filters, filtersModeAnd) : true;
 
-        // if (matches) {
-        //   graph.setNodeAttribute(id, 'hidden', true)
-        // } else {
-        //   graph.setNodeAttribute(id, 'hidden', false)
-        // }
-
-        if (matches && alpha !== 1) {
-          graph.setNodeAttribute(id, 'color', `rgba(${r}, ${g}, ${b}, ${1})`);
-          graph.forEachEdge(id, (edgeId, edgeAttributes) => {
-            const [r1, g1, b1,] = colorParse(edgeAttributes.color || 'lightgrey').rgba;
-            graph.setEdgeAttribute(edgeId, 'color', `rgba(${r1}, ${g1}, ${b1}, ${1})`)
-          })
-        } else if (alpha !== ALPHA) {
-          graph.setNodeAttribute(id, 'color', `rgba(${r}, ${g}, ${b}, ${ALPHA})`);
-          graph.forEachEdge(id, (edgeId, edgeAttributes) => {
-            const [r1, g1, b1] = colorParse(edgeAttributes.color || 'lightgrey').rgba;
-            graph.setEdgeAttribute(edgeId, 'color', `rgba(${r1}, ${g1}, ${b1}, ${ALPHA})`)
-          })
+        if (!matches) {
+          graph.setNodeAttribute(id, 'hidden', true)
+        } else {
+          graph.setNodeAttribute(id, 'hidden', false)
         }
+        needToRefresh = true;
+        // if (matches && alpha !== 1) {
+        //   graph.setNodeAttribute(id, 'color', `rgba(${r}, ${g}, ${b}, ${1})`);
+        //   graph.forEachEdge(id, (edgeId, edgeAttributes) => {
+        //     const [r1, g1, b1,] = colorParse(edgeAttributes.color || 'lightgrey').rgba;
+        //     graph.setEdgeAttribute(edgeId, 'color', `rgba(${r1}, ${g1}, ${b1}, ${1})`)
+        //   })
+        // } else if (alpha !== ALPHA) {
+        //   graph.setNodeAttribute(id, 'color', `rgba(${r}, ${g}, ${b}, ${ALPHA})`);
+        //   graph.forEachEdge(id, (edgeId, edgeAttributes) => {
+        //     const [r1, g1, b1] = colorParse(edgeAttributes.color || 'lightgrey').rgba;
+        //     graph.setEdgeAttribute(edgeId, 'color', `rgba(${r1}, ${g1}, ${b1}, ${ALPHA})`)
+        //   })
+        // }
       })
     }
 
-    if (needToRefresh) renderer.refresh();
+    if (needToRefresh) {
+      // graph.forEachNode(console.log)
+      renderer.process();
+      renderer.refresh();
+    }
   }
 
   const setContainer = useCallback(
@@ -203,6 +207,7 @@ export default function GraphContainer({
       }
 
       if (node && graph) {
+       
         const newRenderer = new WebGLRenderer(graph, node, {nodeReducer});
         setRenderer(newRenderer);
         const camera = newRenderer.getCamera();

@@ -15,7 +15,9 @@ const GraphAnnotation = ({
   gexfData,
   contentsURL,
 }) => {
-  const graph = useMemo(() => gexf.parse(Graph, gexfData), [gexfData]);
+  const graph = useMemo(() => {
+    return gexf.parse(Graph, gexfData);
+  }, [gexfData]);
   const filtersOptions = useMemo(() => computeFiltersOptions(graph, gexfData), [graph, gexfData]);
 
   const [cameraPosition, setCameraPosition] = useState(undefined);
