@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import cx from 'classnames';
 
 export function ControlButton({children, onClick}) {
   return (
@@ -147,12 +148,12 @@ const VariablesEditor = ({
   return (
     <div className="FiltersEditor">
       <div>
-        <button className={isOpen ? 'is-active' : ''} onClick={() => setIsOpen(!isOpen)}>
+        <button className={isOpen || nodeColorVariable !== 'default' || nodeSizeVariable !== 'default' ? 'is-active' : ''} onClick={() => setIsOpen(!isOpen)}>
           Variables ...
         </button>
       </div>
       {
-        isOpen &&
+        (isOpen || nodeColorVariable !== 'default' || nodeSizeVariable !== 'default') &&
         <div>
           <div>
             <h6>Couleur des noeuds</h6>
@@ -231,52 +232,59 @@ export default function GraphControls({
   colorPalette,
 }) {
   const handleSearchChange = e => onSearchStringChange(e.target.value);
+  const [isMinified, setIsMinified] = useState(true)
   return (
-    <ul className="GraphControls">
-      <li className="graph-controls-item camera">
-      
-      <ControlButton onClick={zoomOut}>
-        -
-      </ControlButton>
-      <ControlButton onClick={zoomIn}>
-        +
-      </ControlButton>
-      <ControlButton onClick={rescale}>
-        Recentrer
-      </ControlButton>
-      </li>
-      <li className="graph-controls-item">
-      <form onSubmit={e => e.preventDefault()}>
-        <input type="text" onChange={handleSearchChange} placeholder="rechercher" value={searchString} />
-      </form>
-      </li>
-      <li className="graph-controls-item">
-        <VariablesEditor
+    <>
+      <button onClick={() => setIsMinified(!isMinified)} className={cx('minify-button', {'is-active': isMinified})}>
+        {'>'}
+      </button>
+      <ul className={cx("GraphControls", {'is-minified': isMinified})}>
+        
+        <li className="graph-controls-item camera">
+        
+        <ControlButton onClick={zoomOut}>
+          -
+        </ControlButton>
+        <ControlButton onClick={zoomIn}>
+          +
+        </ControlButton>
+        <ControlButton onClick={rescale}>
+          Recentrer
+        </ControlButton>
+        </li>
+        <li className="graph-controls-item">
+        <form onSubmit={e => e.preventDefault()}>
+          <input type="text" onChange={handleSearchChange} placeholder="rechercher" value={searchString} />
+        </form>
+        </li>
+        <li className="graph-controls-item">
+          <VariablesEditor
+            {
+              ...{
+                filtersOptions,
+                nodeSizeVariable,
+                nodeColorVariable,
+                onNodeSizeVariableChange,
+                onNodeColorVariableChange,
+                colorPalette,
+              }
+            }
+          />
+        </li>
+        <li className="graph-controls-item">
+        <FiltersEditor
           {
             ...{
+              onToggleFiltersModeAnd,
+              filtersModeAnd,
               filtersOptions,
-              nodeSizeVariable,
-              nodeColorVariable,
-              onNodeSizeVariableChange,
-              onNodeColorVariableChange,
-              colorPalette,
+              onFiltersChange,
+              filters
             }
           }
         />
-      </li>
-      <li className="graph-controls-item">
-      <FiltersEditor
-        {
-          ...{
-            onToggleFiltersModeAnd,
-            filtersModeAnd,
-            filtersOptions,
-            onFiltersChange,
-            filters
-          }
-        }
-      />
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </>
   );
 }
