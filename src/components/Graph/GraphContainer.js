@@ -69,7 +69,7 @@ export default function GraphContainer({
 }) {
 
   const nodeSize = useMemo(() => {
-    if (nodeSizeVariable && nodeSizeVariable !== 'default') {
+    if (nodeSizeVariable && nodeSizeVariable !== 'default' && filtersOptions[nodeSizeVariable]) {
       const values = Array.from(filtersOptions[nodeSizeVariable].options)
       return {
         min: min(values),
@@ -80,7 +80,7 @@ export default function GraphContainer({
   }, [nodeSizeVariable])
 
   const nodeColor = useMemo(() => {
-    if (nodeColorVariable && nodeColorVariable !== 'default') {
+    if (nodeColorVariable && nodeColorVariable !== 'default' && filtersOptions[nodeColorVariable]) {
       const colors = generatePalette(nodeColorVariable, filtersOptions[nodeColorVariable].options.size);
       let palette = {};
       let i = 0;
