@@ -164,9 +164,9 @@ export default function GraphContainer({
       }
     }
     if (previousFilters !== filters) {
-      const ALPHA = 0.5;
+      // const ALPHA = 0.5;
       graph.forEachNode((id, attributes) => {
-        const [r, g, b, alpha] = colorParse(attributes.color || '#333').rgba;
+        // const [r, g, b, alpha] = colorParse(attributes.color || '#333').rgba;
         
         const matches = filters.length ? evalIfNodeMatches(attributes, filters, filtersModeAnd) : true;
 
