@@ -2,8 +2,8 @@
   "name": "carnet-algopresse",
   "version": "0.1.0",
   "author": "robindemourat",
-  "homepage": "https://robindemourat.github.io/carnet-algopresse",
-  "repository": "https://github.com/robindemourat/carnet-algopresse",
+  "homepage": "https://medialab.github.io/carnet-algopresse",
+  "repository": "https://github.com/medialab/carnet-algopresse",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.8",
