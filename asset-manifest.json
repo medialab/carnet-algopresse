@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/carnet-algopresse/static/css/main.94e7e609.chunk.css",
-    "main.js": "/carnet-algopresse/static/js/main.9e0f3f14.chunk.js",
-    "main.js.map": "/carnet-algopresse/static/js/main.9e0f3f14.chunk.js.map",
+    "main.css": "/carnet-algopresse/static/css/main.b534961c.chunk.css",
+    "main.js": "/carnet-algopresse/static/js/main.b408a2bd.chunk.js",
+    "main.js.map": "/carnet-algopresse/static/js/main.b408a2bd.chunk.js.map",
     "runtime-main.js": "/carnet-algopresse/static/js/runtime-main.c8c8dbf3.js",
     "runtime-main.js.map": "/carnet-algopresse/static/js/runtime-main.c8c8dbf3.js.map",
-    "static/js/2.a60f6039.chunk.js": "/carnet-algopresse/static/js/2.a60f6039.chunk.js",
-    "static/js/2.a60f6039.chunk.js.map": "/carnet-algopresse/static/js/2.a60f6039.chunk.js.map",
+    "static/js/2.f3012f18.chunk.js": "/carnet-algopresse/static/js/2.f3012f18.chunk.js",
+    "static/js/2.f3012f18.chunk.js.map": "/carnet-algopresse/static/js/2.f3012f18.chunk.js.map",
     "static/js/3.a1bb6c61.chunk.js": "/carnet-algopresse/static/js/3.a1bb6c61.chunk.js",
     "static/js/3.a1bb6c61.chunk.js.map": "/carnet-algopresse/static/js/3.a1bb6c61.chunk.js.map",
     "index.html": "/carnet-algopresse/index.html",
-    "static/css/main.94e7e609.chunk.css.map": "/carnet-algopresse/static/css/main.94e7e609.chunk.css.map",
-    "static/js/2.a60f6039.chunk.js.LICENSE.txt": "/carnet-algopresse/static/js/2.a60f6039.chunk.js.LICENSE.txt"
+    "static/css/main.b534961c.chunk.css.map": "/carnet-algopresse/static/css/main.b534961c.chunk.css.map",
+    "static/js/2.f3012f18.chunk.js.LICENSE.txt": "/carnet-algopresse/static/js/2.f3012f18.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c8c8dbf3.js",
-    "static/js/2.a60f6039.chunk.js",
-    "static/css/main.94e7e609.chunk.css",
-    "static/js/main.9e0f3f14.chunk.js"
+    "static/js/2.f3012f18.chunk.js",
+    "static/css/main.b534961c.chunk.css",
+    "static/js/main.b408a2bd.chunk.js"
   ]
 }
