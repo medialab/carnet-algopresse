@@ -10,6 +10,7 @@ const serializeValue = val => {
 export const buildGraphCode = props => `<GraphBlock 
   ${
   Object.entries(props)
+  .filter(([key, val]) => !(val === undefined || val === false || val === '' || (Array.isArray(val) && !val.length)))
   .map(([key, val]) => `${key}={${serializeValue(val)}}`)
   .join(' \n  ')
 }
