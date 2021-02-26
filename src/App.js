@@ -8,9 +8,7 @@ import {
 
 import './App.css';
 
-import ExampleMiserables from './slides/ExampleMiserables';
-import ExampleRio from './slides/ExampleRio';
-import AlgoPresse from './slides/Algopresse';
+import GraphCritic from './slides/GraphCritic';
 
 const Home = () => {
   return (
@@ -25,19 +23,9 @@ const Home = () => {
 
 const routes = [
   {
-    title: 'Misérables',
-    route: '/miserables',
-    Component: () => <ExampleMiserables />
-  },
-  {
-    title: 'RIO',
-    route: '/rio',
-    Component: () => <ExampleRio />
-  },
-  {
-    title: 'Algopresse',
-    route: '/algopresse',
-    Component: () => <AlgoPresse />
+    title: 'Graphe des critiques anglophones',
+    route: '/graph-critic-en',
+    Component: () => <GraphCritic />
   },
   
 ]
