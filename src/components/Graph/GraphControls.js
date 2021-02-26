@@ -84,9 +84,9 @@ const FiltersEditor = ({
             <h6>Ajouter un nouveau filtre</h6>
             <select value={newFilterAttribute || ''} onChange={handleNewFilterChange}>
               {
-                Object.entries(filtersOptions).map(([id, {title,}]) => {
+                Object.entries(filtersOptions).map(([id, {title}], index) => {
                   return (
-                    <option value={id} key={id}>{title}</option>
+                    <option value={id} key={index}>{title}</option>
                   )
                 })
               }
@@ -96,9 +96,9 @@ const FiltersEditor = ({
               newFilterAttribute !== undefined ?
               <select value={''} onChange={handleNewFilterSubmit}>
                 {
-                  newFilterOptions.map((id) => {
+                  newFilterOptions.map((id, index) => {
                     return (
-                      <option value={id} key={id}>{id}</option>
+                      <option value={id} key={index}>{id}</option>
                     )
                   })
                 }
