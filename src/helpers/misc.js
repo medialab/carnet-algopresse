@@ -47,10 +47,10 @@ export const computeFiltersOptions = (graph, gexfData) => {
 
 export const evalIfNodeMatches = (attributes, filters, filtersModeAnd) => {
   if (filtersModeAnd) {
-    const oneFilterDoesNotMatches = filters.find(({attribute, value}) => attributes[attribute] !== value) !== undefined;
+    const oneFilterDoesNotMatches = filters.find(({attribute, value}) => attributes[attribute] !== '' + value) !== undefined;
     return !oneFilterDoesNotMatches;
   } else {
-    const oneFilterMatches = filters.find(({attribute, value}) => attributes[attribute] === value) !== undefined;
+    const oneFilterMatches = filters.find(({attribute, value}) => attributes[attribute] === '' + value) !== undefined;
     return oneFilterMatches;
   }
 }

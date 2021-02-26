@@ -10,7 +10,6 @@ import {
 } from './hooks';
 import GraphControls from './GraphControls';
 import {createNodeReducer} from './reducers';
-import {evalIfNodeMatches} from '../../helpers/misc';
 import {generatePalette} from '../../helpers/palettes';
 
 import './GraphContainer.css';
@@ -108,6 +107,8 @@ export default function GraphContainer({
     nodeSize,
     nodeLabel,
     extents,
+    filters,
+    filtersModeAnd,
   });
 
   const container = useRef(null);
@@ -128,10 +129,10 @@ export default function GraphContainer({
 
     if (
       previousNodeColor !== nodeColor ||
-      previousNodeSize !== nodeSize // ||
+      previousNodeSize !== nodeSize ||
       // previousNodeLabel !== nodeLabel ||
       // previousSearchString !== searchString ||
-      // previousFilters !== filters
+      previousFilters !== filters
     ) {
       // console.log('Refreshing sigma');
 
@@ -163,38 +164,8 @@ export default function GraphContainer({
         renderer.highlightedNodes = new Set();
       }
     }
-    if (previousFilters !== filters) {
-      // const ALPHA = 0.5;
-      graph.forEachNode((id, attributes) => {
-        // const [r, g, b, alpha] = colorParse(attributes.color || '#333').rgba;
-        
-        const matches = filters.length ? evalIfNodeMatches(attributes, filters, filtersModeAnd) : true;
-
-        if (!matches) {
-          graph.setNodeAttribute(id, 'hidden', true)
-        } else {
-          graph.setNodeAttribute(id, 'hidden', false)
-        }
-        needToRefresh = true;
-        // if (matches && alpha !== 1) {
-        //   graph.setNodeAttribute(id, 'color', `rgba(${r}, ${g}, ${b}, ${1})`);
-        //   graph.forEachEdge(id, (edgeId, edgeAttributes) => {
-        //     const [r1, g1, b1,] = colorParse(edgeAttributes.color || 'lightgrey').rgba;
-        //     graph.setEdgeAttribute(edgeId, 'color', `rgba(${r1}, ${g1}, ${b1}, ${1})`)
-        //   })
-        // } else if (alpha !== ALPHA) {
-        //   graph.setNodeAttribute(id, 'color', `rgba(${r}, ${g}, ${b}, ${ALPHA})`);
-        //   graph.forEachEdge(id, (edgeId, edgeAttributes) => {
-        //     const [r1, g1, b1] = colorParse(edgeAttributes.color || 'lightgrey').rgba;
-        //     graph.setEdgeAttribute(edgeId, 'color', `rgba(${r1}, ${g1}, ${b1}, ${ALPHA})`)
-        //   })
-        // }
-      })
-    }
 
     if (needToRefresh) {
-      // graph.forEachNode(console.log)
-      renderer.process();
       renderer.refresh();
     }
   }

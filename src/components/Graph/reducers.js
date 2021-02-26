@@ -1,4 +1,6 @@
 import {scaleLinear} from 'd3-scale';
+import {evalIfNodeMatches} from '../../helpers/misc';
+
 
 // Defaults
 const DEFAULT_NODE_COLOR = '#999';
@@ -9,7 +11,9 @@ export function createNodeReducer({
   nodeSize,
   nodeLabel,
   nodeSizeFactor = 1,
-  extents
+  extents,
+  filters = [],
+  filtersModeAnd
 }) {
   let nodeSizeScale = null;
 
@@ -55,6 +59,8 @@ export function createNodeReducer({
     } else {
       renderedNode.label = attr[nodeLabel.name] || '<no-label>';
     }
+    // hidden
+    renderedNode.hidden = filters.length ? !evalIfNodeMatches(attr, filters, filtersModeAnd) : false;
 
     return renderedNode;
   };
