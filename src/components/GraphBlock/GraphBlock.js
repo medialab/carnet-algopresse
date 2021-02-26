@@ -30,7 +30,6 @@ const GraphBlock = (inputProps) => {
   }, ['id', 'inputProps', 'onRegisterVisualization', 'onUnregisterVisualization'])
 
   const isFocused = focusedVisualizationId === id;
-  console.log(id, focusedVisualizationId)
 
   const handleClick = () => {
     onVisualizationUpdate(inputProps);
