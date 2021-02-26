@@ -2,7 +2,7 @@ import React, {useCallback, useRef, useState, useEffect, useMemo} from 'react';
 // import Graph from 'graphology';
 import {WebGLRenderer} from 'sigma';
 import {scaleLinear} from 'd3-scale';
-import colorParse from 'parse-color';
+// import colorParse from 'parse-color';
 import {min, max} from 'd3-array';
 
 import {
