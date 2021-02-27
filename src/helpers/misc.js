@@ -7,16 +7,29 @@ const serializeValue = val => {
     return JSON.stringify(val);
   else return val;
 }
-export const buildGraphCode = props => `<GraphBlock 
+
+const buildComponentCode = (componentName, props) => `<${componentName} 
   ${
   Object.entries(props)
   .filter(([key, val]) => !(val === undefined || val === false || val === '' || (Array.isArray(val) && !val.length)))
   .map(([key, val]) => `${key}={${serializeValue(val)}}`)
   .join(' \n  ')
+  .trim()
 }
 />`
 
-export const computeFiltersOptions = (graph, gexfData) => {
+export const buildGraphCode = props => buildComponentCode('GraphBlock', props)
+
+export const buildIceCreamScatterPlotCode = props => buildComponentCode('IceCreamBlock', props)
+
+export const computeFiltersOptions = (type, ...args) => {
+  switch(type) {
+    case 'graph':
+    default:
+      return computeGraphFiltersOptions(...args);
+  }
+}
+export const computeGraphFiltersOptions = (graph, gexfData) => {
   const domparser = new DOMParser()
   const doc = domparser.parseFromString(gexfData, 'application/xml')
   const attrs = doc.querySelectorAll('attributes.node attribute');

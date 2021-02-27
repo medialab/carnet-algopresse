@@ -18,7 +18,7 @@ const GraphAnnotation = ({
   const graph = useMemo(() => {
     return gexf.parse(Graph, gexfData);
   }, [gexfData]);
-  const filtersOptions = useMemo(() => computeFiltersOptions(graph, gexfData), [graph, gexfData]);
+  const filtersOptions = useMemo(() => computeFiltersOptions('graph', graph, gexfData), [graph, gexfData]);
 
   const [cameraPosition, setCameraPosition] = useState(undefined);
   const [helpVisible, setHelpVisible] = useState(false);
@@ -84,16 +84,6 @@ const GraphAnnotation = ({
     setSearchString(str);
 
   }
-  // const currentCode = useMemo(() => {
-  //   return buildGraphCode({
-  //     ...cameraPosition,
-  //     searchString,
-  //     filtersModeAnd,
-  //     filters,
-  //     nodeSizeVariable,
-  //     nodeColorVariable,
-  //   })
-  // }, [cameraPosition, searchString, filtersModeAnd, filters, nodeSizeVariable, nodeColorVariable])
   return (
     <VisualizationControlContext.Provider value={{
       onVisualizationUpdate, 

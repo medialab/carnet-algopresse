@@ -194,7 +194,7 @@ export default function GraphContainer({
   );
 
   return (
-    <div className="GraphContainer">
+    <div className="VisContainer GraphContainer">
 
       <div ref={setContainer} style={{width: '100%', height: '100%'}}></div>
       {renderer && (
