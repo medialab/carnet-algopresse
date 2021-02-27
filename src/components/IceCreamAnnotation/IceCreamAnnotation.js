@@ -1,33 +1,28 @@
-import React, {useState, useEffect} from 'react';
-// import {extent} from 'd3-array';
-
-// import gexf from 'graphology-gexf';
-// import Graph from 'graphology';
-
-// import GraphVis from '../Graph';
-// import CodeContainer from '../../components/CodeContainer';
-// import {computeFiltersOptions} from '../../helpers/misc';
+import React, {useState, useEffect, useMemo} from 'react';
+import IceCreamVis from '../IceCream';
 
 import {VisualizationControlContext} from '../../contexts';
 
-const GraphAnnotation = ({
+import {computeFiltersOptions} from '../../helpers/misc';
+
+const IceCreamAnnotation = ({
   Content,
   data,
   contentsURL,
 }) => {
-  // const graph = useMemo(() => {
-  //   return gexf.parse(Graph, gexfData);
-  // }, [gexfData]);
-  // const filtersOptions = useMemo(() => computeFiltersOptions(graph, gexfData), [graph, gexfData]);
-
-  // const [cameraPosition, setCameraPosition] = useState(undefined);
+  const filtersOptions = useMemo(() => computeFiltersOptions('table', data), [data]);
   const [helpVisible, setHelpVisible] = useState(false);
-  // const [searchString, setSearchString] = useState('');
-  // const [filtersModeAnd, setFiltersModeAnd] = useState(false);
-  // const [updateTimestamp, setUpdateTimeStamp] = useState(new Date().getTime());
-  // const [filters, setFilters] = useState([]);
-  // const [nodeColorVariable, setNodeColorVariable] = useState(undefined);
-  // const [nodeSizeVariable, setNodeSizeVariable] = useState(undefined);
+  const [searchString, setSearchString] = useState('');
+
+  const [xVariable, setXVariable] = useState(undefined);
+  const [yVariable, setYVariable] = useState(undefined);
+  const [reverseX, setReverseX] = useState(false);
+  const [reverseY, setReverseY] = useState(false);
+  const [sizeVariable,setSizeVariable] = useState(undefined);
+  const [colorVariable, setColorVariable] = useState(undefined);
+  const [labelVariable, setLabelVariable] = useState(undefined);
+
+  const [rotateMode, setRotateMode] = useState(false);
 
   const [focusedVisualizationId, setFocusedVisualizationId] = useState(null);
   const [registeredVisualizations, setRegisteredVisualizations] = useState({});
@@ -45,42 +40,43 @@ const GraphAnnotation = ({
     setRegisteredVisualizations(copyOfRegistered)
   }
 
+  const onVisualizationUpdate = ({
+    xVariable: thatXVariable,
+    yVariable: thatYVariable,
+
+    reverseX: thatReverseX,
+    reverseY: thatReverseY,
+
+    sizeVariable: thatSizeVariable,
+    colorVariable: thatColorVariable,
+    labelVariable: thatLabelVariable,
+
+    rotateMode: thatRotateMode,
+    searchString: thatSearchString,
+  } ) => {
+    setXVariable(thatXVariable);
+    setYVariable(thatYVariable);
+    setReverseX(thatReverseX);
+    setReverseY(thatReverseY);
+    setSizeVariable(thatSizeVariable);
+    setColorVariable(thatColorVariable);
+    setLabelVariable(thatLabelVariable);
+    setRotateMode(thatRotateMode);
+    setSearchString(thatSearchString);
+  }
+
   useEffect(() => {
     if (!focusedVisualizationId && Object.keys(registeredVisualizations).length) {
       const thatId = Object.keys(registeredVisualizations)[0];
       setFocusedVisualizationId(thatId )
+      onVisualizationUpdate(registeredVisualizations[thatId])
     }
   }, [registeredVisualizations, focusedVisualizationId])
 
-
-  // const onCameraUpdate = state => {
-  //   const {x, y, ratio} = state;
-  //   setCameraPosition({x, y, ratio});
-  // }
-  const onVisualizationUpdate = (
-    // {
-    // x, 
-    // y, 
-    // ratio, 
-    // searchString, 
-    // filtersModeAnd, 
-    // filters, 
-    // nodeColorVariable,
-    // nodeSizeVariable,
-    // }
-  ) => {
-    // setCameraPosition({x, y, ratio});
-    // setUpdateTimeStamp(new Date().getTime());
-    // setSearchString(searchString);
-    // setFiltersModeAnd(filtersModeAnd);
-    // setFilters(filters);
-    // setNodeColorVariable(nodeColorVariable);
-    // setNodeSizeVariable(nodeSizeVariable);
-  }
-  // const onSearchStringChange = str => {
-  //   setSearchString(str);
-  // }
   
+  const onSearchStringChange = str => {
+    setSearchString(str);
+  }
   return (
     <VisualizationControlContext.Provider value={{
       onVisualizationUpdate, 
@@ -89,14 +85,18 @@ const GraphAnnotation = ({
       focusedVisualizationId,
       setFocusedVisualizationId,
       visualizationParams: {
-        // ...cameraPosition,
-        // searchString,
-        // // filtersOptions,
-        // filters,
-        // // updateTimestamp,
-        // nodeSizeVariable,
-        // nodeColorVariable,
-        // filtersModeAnd,
+        xVariable,
+        yVariable,
+
+        reverseX,
+        reverseY,
+
+        sizeVariable,
+        colorVariable,
+        labelVariable,
+
+        rotateMode,
+        searchString,
       }
     }}>
     <div className="slide-container">
@@ -129,18 +129,43 @@ const GraphAnnotation = ({
       </section>
       <aside>
         <div className="vis">
-          Scatterplot ici
-          <pre>
-            <code>
-              {JSON.stringify(data, null, 2)}
-            </code>
-          </pre>
+          <IceCreamVis
+              {
+                ...{
+                  data,
+                  filtersOptions,
+
+                  xVariable,
+                  reverseX,
+                  yVariable,
+                  reverseY,
+                  sizeVariable,
+                  colorVariable,
+                  labelVariable,
+
+                  rotateMode,
+                  searchString,
+
+                  onSearchStringChange,
+                  onToggleRotateMode: () => setRotateMode(!rotateMode) ,
+                  
+                  onXVariableChange: (val) => setXVariable(val),
+                  onYVariableChange: (val) => setYVariable(val),
+
+                  onToggleReverseX: () => setReverseX(!reverseX),
+                  onToggleReverseY: () => setReverseY(!reverseY),
+
+                  onColorVariableChange: (val) => setColorVariable(val),
+                  onSizeVariableChange: (val) => setSizeVariable(val),
+                  onLabelVariableChange: (val) => setLabelVariable(val),
+                }
+              }
+            />
         </div>
-        {/* <CodeContainer code={currentCode} /> */}
       </aside>
   </div>
   </VisualizationControlContext.Provider>
   )
 }
 
-export default GraphAnnotation;
+export default IceCreamAnnotation;

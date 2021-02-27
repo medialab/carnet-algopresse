@@ -2,10 +2,48 @@ import IceCreamBlock from '../../components/IceCreamBlock';
 
 # Mentions de dates
 
-Test d'ice-cream
+Visualisation du scatterplot renversé (mode "icecream") :
 
 <IceCreamBlock 
-  x={0.5} 
-  y={0.5} 
-  ratio={1}
+  xVariable={'robots'} 
+  yVariable={'algorithms'} 
+  sizeVariable={'frequency'} 
+  labelVariable={'entity'}
+  reverseX={'true'}
+  rotateMode={true}
+/>
+
+Rajout de couleurs (pas pertinent en l'état) : 
+
+<IceCreamBlock 
+  xVariable={'robots'} 
+  yVariable={'algorithms'} 
+  sizeVariable={'frequency'} 
+  labelVariable={'entity'}
+  reverseX={'true'}
+  rotateMode={true}
+  colorVariable={'entity'}
+/>
+
+Avec une recherche plein texte de "research year" : 
+
+<IceCreamBlock 
+  xVariable={'robots'} 
+  yVariable={'algorithms'} 
+  sizeVariable={'frequency'} 
+  labelVariable={'entity'}
+  reverseX={'true'}
+  rotateMode={true}
+  colorVariable={'entity'}
+  searchString={'recent years'}
+/>
+
+Visualisation plus classique du scatterplot :
+
+<IceCreamBlock 
+  xVariable={'robots'} 
+  yVariable={'algorithms'} 
+  sizeVariable={'frequency'} 
+  labelVariable={'entity'}
+  reverseX={'true'}
 />

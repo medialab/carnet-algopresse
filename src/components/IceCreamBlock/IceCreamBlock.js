@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import cx from 'classnames';
 import {v4 as genId} from 'uuid';
 import {VisualizationControlContext} from '../../contexts'
-// import {buildGraphCode} from '../../helpers/misc';
+import {buildIceCreamScatterPlotCode} from '../../helpers/misc';
 
 const IceCreamBlock = (inputProps) => {
   const {
@@ -41,7 +41,7 @@ const IceCreamBlock = (inputProps) => {
   const handleCopy = e => {
     e.preventDefault();
     e.stopPropagation();
-    navigator.clipboard.writeText(/*buildGraphCode(props)*/JSON.stringify(props));
+    navigator.clipboard.writeText(buildIceCreamScatterPlotCode(props));
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }
@@ -49,7 +49,7 @@ const IceCreamBlock = (inputProps) => {
     <div onClick={handleClick} className={cx("VisualizationBlock IcecreamBlock", {'is-focused': isFocused})}>
       <pre>
         <code>
-          {/*buildGraphCode(props)*/ JSON.stringify(props)}
+          {buildIceCreamScatterPlotCode(props)}
         </code>
       </pre>
       <div className="buttons-container">

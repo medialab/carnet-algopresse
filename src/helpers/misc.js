@@ -1,4 +1,5 @@
-
+import { uniq } from "lodash";
+import {min, max} from 'd3-array';
 
 const serializeValue = val => {
   if (typeof val === 'string')
@@ -11,7 +12,9 @@ const serializeValue = val => {
 const buildComponentCode = (componentName, props) => `<${componentName} 
   ${
   Object.entries(props)
-  .filter(([key, val]) => !(val === undefined || val === false || val === '' || (Array.isArray(val) && !val.length)))
+  .filter(([_key, val]) => {
+    return !(val === undefined || val === false || val === '' || (Array.isArray(val) && !val.length))
+  })
   .map(([key, val]) => `${key}={${serializeValue(val)}}`)
   .join(' \n  ')
   .trim()
@@ -24,10 +27,43 @@ export const buildIceCreamScatterPlotCode = props => buildComponentCode('IceCrea
 
 export const computeFiltersOptions = (type, ...args) => {
   switch(type) {
+    case 'table':
+      return computeTableOptions(...args);
     case 'graph':
     default:
       return computeGraphFiltersOptions(...args);
   }
+}
+
+const computeTableOptions = data => {
+  return data.columns.reduce((res, key) => {
+    const options = uniq(data.map(d => d[key]))
+    let type = 'string';
+    
+    // if number
+    if (!options.find(o => isNaN(+o))) {
+      if (!options.find(o => !Number.isInteger(+o))) {
+        type = 'integer';
+      } else {
+        type = 'float'
+      }
+    }
+    const props =  {
+      id: key,
+      title: key,
+      type,
+      options
+    }
+    if (['float', 'integer'].includes(type)) {
+      props.options = props.options.map(o => +o);
+      props.min = min(props.options);
+      props.max = max(props.options);
+    }
+    return {
+      ...res,
+      [key]: props
+    }
+  }, {})
 }
 export const computeGraphFiltersOptions = (graph, gexfData) => {
   const domparser = new DOMParser()

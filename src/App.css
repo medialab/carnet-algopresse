@@ -52,7 +52,8 @@ body {
 }
 
 #wrapper > nav .navitem-container a.active {
-  background: rgba(200,200,200,1);
+  background: rgba(100,100,100,1);
+  color: white;
 }
 
 #wrapper > main {
@@ -213,18 +214,18 @@ input, select {
 .GraphControls.is-minified {
   right: -15vw;
 }
-.GraphControls .graph-controls-item {
+.GraphControls .vis-controls-item {
   margin-bottom: .3rem;
 }
-.GraphControls .graph-controls-item.camera {
+.GraphControls .vis-controls-item.camera {
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
 }
-.GraphControls .graph-controls-item.camera button:not(:first-of-type) {
+.GraphControls .vis-controls-item.camera button:not(:first-of-type) {
   margin-left: .1rem;
 }
-.GraphControls .graph-controls-item.camera button:last-of-type {
+.GraphControls .vis-controls-item.camera button:last-of-type {
   flex: 1;
 }
 
@@ -333,4 +334,63 @@ input, select {
   top: 0;
   height: 100%;
   transition: width .2s ease;
+}
+
+
+.VisControls {
+  z-index: 10;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.VisContainer {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/**
+ * Scatterplot scaling
+ */
+ .scatterplot .plot-object text {
+   font-size: .8rem;
+ }
+
+.scatterplot .plot-objects-container:hover .plot-object {
+  opacity: .2;
+}
+.scatterplot .plot-objects-container:hover .plot-object:hover {
+  opacity: 1;
+}
+
+.scatterplot .axis-variable-name {
+  font-weight: 800;
+  font-style: italic;
 }

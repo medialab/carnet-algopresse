@@ -4,6 +4,7 @@ import cx from 'classnames';
 import ControlButton from '../ControlButton';
 import FiltersEditor from '../FiltersEditor';
 import VariablesEditor from '../VariablesEditor';
+import ColorLegend from '../ColorLegend';
 
 export default function GraphControls({
   rescale, 
@@ -22,6 +23,7 @@ export default function GraphControls({
   nodeColorVariable,
   onNodeSizeVariableChange,
   onNodeColorVariableChange,
+  colorPalette,
 }) {
   const handleSearchChange = e => onSearchStringChange(e.target.value);
   const [isMinified, setIsMinified] = useState(true)
@@ -71,6 +73,13 @@ export default function GraphControls({
             }
           />
         </li>
+        {
+            nodeColorVariable && nodeColorVariable !== 'default' ?
+            <ColorLegend
+              colorPalette={colorPalette}
+            />
+            : null
+          }
         <li className="vis-controls-item">
         <FiltersEditor
           {
