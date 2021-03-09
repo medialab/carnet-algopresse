@@ -7,7 +7,7 @@ import {repository} from '../../../package.json';
 
 import Content from '!babel-loader!mdx-loader!./contents.mdx'
 
-const URL_BASIS = `${repository}/blob/main/src/slides/DatesAnalysis`;
+const URL_BASIS = `${repository}/blob/main/src/slides/VerbsAnalysis`;
 const contentsURL = `${URL_BASIS}/contents.mdx`
 
 
