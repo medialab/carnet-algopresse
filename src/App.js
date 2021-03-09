@@ -10,6 +10,7 @@ import './App.css';
 
 import GraphCritic from './slides/GraphCritic';
 import DatesAnalysis from './slides/DatesAnalysis';
+import VerbsAnalysis from './slides/VerbsAnalysis';
 
 const Home = () => {
   return (
@@ -29,9 +30,14 @@ const routes = [
     Component: () => <GraphCritic />
   },
   {
-    title: 'Analyse des dates',
+    title: 'Analyse des dates (fichier "date_ner_tfidf_v3")',
     route: '/dates-analysis',
     Component: () => <DatesAnalysis />
+  },
+  {
+    title: 'Analyse des dates (fichier "df_AB_tfidf_verbs_freq_count.csv")',
+    route: '/verbs-analysis',
+    Component: () => <VerbsAnalysis />
   },
   
 ]

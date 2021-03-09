@@ -14,7 +14,7 @@ const contentsURL = `${URL_BASIS}/contents.mdx`
 const TestVis = () => {
   
   return (
-    <DataLoader url={`${process.env.PUBLIC_URL}/date_ner_tfidf_v3.tsv`}>
+    <DataLoader url={`${process.env.PUBLIC_URL}/df_AB_tfidf_verbs_freq_count.csv`}>
       {
         data => (
           <IceCreamAnnotation
