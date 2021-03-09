@@ -35,7 +35,7 @@ const routes = [
     Component: () => <DatesAnalysis />
   },
   {
-    title: 'Analyse des dates (fichier "df_AB_tfidf_verbs_freq_count.csv")',
+    title: 'Analyse des verbes (fichier "df_AB_tfidf_verbs_freq_count.csv")',
     route: '/verbs-analysis',
     Component: () => <VerbsAnalysis />
   },
