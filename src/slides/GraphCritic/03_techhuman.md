@@ -27,8 +27,33 @@ La catégorie “People” à partir de laquelle ont été annotés dans les ter
 L’analyse topologique des clusters faisant apparaître une opposition entre les machines ou intelligences autonomes et les environnements numériques algorithmiques, est renforcée par une analyse plus spécifique des termes les plus fréquents qui peuplent ces deux espaces. En effet, on observe dans l’espace sémantique intitulé “Robots” une forme d'abstraction et d’incarnation des agents techniques et une généricité dans la manière de désigner les agents humains qui apparaissent comme les victimes des troubles potentiels tels qu'ils sont dénoncés dans les articles critiques. À l’inverse, dans l’espace lié aux “Algorithmes”, les agents techniques sont davantage spécifiés et renvoient le plus souvent à des services ou des fonctionnalités techniques très précises qui sont mis en cause dans les articles. Les agents humains associés à ces entités techniques algorithmiques ne réfèrent pas à des catégories génériques comme l’humanité toute entière mais sont qualifiés par une variété d’attributs qui permettent de les identifier de manière beaucoup plus précise.  
 
 ---
-**Méthode : Division du corpus en suivant la topologie et tagging des entités**
+##Méthode : Division du corpus en suivant la topologie et tagging des entités
 
 **Division du corpus en suivant la topologie :**
+Pour faciliter une analyse comparative entre l'espace sémantique intérprété comme lié aux "robots" et l'espace lié aux "algorithmes" chaque cluster a été associé à l'une ou l'autre de ces catégories. Les deux sous-ensembles sont comparables en terme de volume d’articles, de clusters et de termes. 
+L'espace intitulé “robots” compte  : 
+- 9 clusters principaux (de taille supérieure à 1% du corpus d'articles)
+- 52% des articles du corpus (chaque article étant associé à un unique cluster)
+- 1790 termes au sein du réseau (chaque terme étant associé à un unique cluster). 
+L’espace intitulé “algorithmes” compte 
+- 8 clusters principaux (de taille supérieure à 1% du corpus d'articles)
+- 48% articles (chaque article étant associé à un unique cluster)
+- 1201 termes au sein du réseau (chaque terme étant associé à un unique cluster).
 
 **Tagging des entités du réseau :**
+
+Pour chacun des 2991 termes du réseau une catégorisation manuelle a été réalisée à pour différencier le type d’entités, de sorte que 66% des termes du réseaux ont été catégorisés à partir de 10 catégories distinctes : 
+- Technical (15%) : Calculateur, Machine, Fonctionnalité, Devices, Service Technique, Dispositifs techniques de startup difficiles à différencier de l'entité économique
+- Company (5%) : Entreprises, Start-up, Domaine d'entreprise
+- Fiction (1%): personnages, films, jeux vidéo
+- Person (6%) : Personnalités politique, médiatique, recherche, noms propres
+- People (8%) :  personne ou groupe de personnes non nommée
+- Institution (4%) : Agence gouvernementale, ONG, Association, Université, Textes juridiques
+- Locality (1%) : Lieux
+- Data_inout (10%) : Données, traces	
+- Topic (10%) : Domaine, Thèmes
+- Issues (7%) :  Enjeux et problèmes
+
+Une 11ème catégorie rassemble les termes difficilement interprétables et non catégorisables
+- NC terms (34%) : Termes non classés car trop ambigus ou non pertinents 
+
