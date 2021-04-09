@@ -1,6 +1,6 @@
 
 
-## Comment sont exprimés les troubles produits par les agents calculateurs
+## Comment sont exprimés les troubles produits par les agents calculateurs ?
 
 **Visualisation Verbes troubles**
 
@@ -23,31 +23,16 @@ A partir de notre corpus, nous avons extrait 500 entités nommées qui sont des 
 Du côté des articles associés au sous-ensemble “Robots” les marqueurs de temps relèvent d’une temporalité sur le long terme, qu’ils fassent référence au passé ou au futur. Ainsi la grande majorité des marqueurs se structurent autour d’expressions sur le futur qui mobilisent la figure the next associés à des temporalités qui se comptent souvent en dizaines d’années ou centaines d’années (the next 10 years, the next 30 years, the next 100 years, the next 1,000 years). D’autre part, les énoncés qui ont les plus importants scores dans cet espace ont comme particularité le plus souvent de ne pas définir précisément les échéances auxquelles ils renvoient (the next decades, coming decades, next century, this century). D’autres marqueurs également présents dans ce sous ensemble ne font pas référence au futur mais au passé et ils se caractérisent par le fait de référer également à une projection lointaine dans le temps passé (30 years ago, 150 years ago, the last 20 years, the past 25 years, the past 15 years). Les entités dans ce sous-ensembles ont donc comme particularité de majoritairement exprimer un futur lointain et souvent peu précis. Par ailleurs, lorsque les entités font référence au passé, elles sont également projetées dans une temporalité lointaine.
 Au sein du sous-ensemble d’articles associés aux "Algorithmes" les marqueurs temporels extraits ayant les scores tf-idf les plus hauts se distinguent des premiers car ils renvoient majoritairement au présent (this day, these days, that year), à un passé plus proche souvent exprimé en jour, semaine ou mois (recent days, just last week, a few weeks ago, just a month, six months ago, the end of last year), mais également à un futur très proche en comparaison du premier sous-ensemble (the next day, the next few weeks, the coming weeks, the coming months, the following two years). 
 
-
+---
 
 ## Méthode : Extraction des verbes et marqueurs de temps 
 
-
-Extraction des verbes et calcul des TF-IDF sur le graphe 
-L’analyse des verbes de troubles a été réalisée, à partir du logiciel Cortext, en effectuant une première extraction de 1000 verbes sur le texte complet des articles critiques du corpus en employant la méthode “pigeon holes”. 
-La liste de verbes ainsi produite a d’abord été manuellement annotée afin d’extraire une sous liste de 431 verbes pouvant être interprétés comme des problèmes, des difficultés ou des troubles. En effectuant plusieurs itérations de visualisation matricielle des scores de tf-idf pour chacun des verbes sur l’ensemble des articles associés aux 17 clusters principaux (supérieur à 1% d’articles du corpus) via l’outil clustergrammer  une liste plus restreinte de 66 verbes a été sélectionnée présentant une plus forte saillance dans la matrice et étant plus explicitement interprétables comme troubles.
+**Extraction des verbes et calcul des TF-IDF sur le graphe** 
+L’analyse des verbes de troubles a été réalisée, à partir du logiciel Cortext, en effectuant une première extraction de 1000 verbes sur le texte complet des articles critiques du corpus en employant la méthode “pigeon holes” via le logiciel Cortext (identique à la méthode d'extraction des termes du graphe).
+La liste de verbes ainsi produite a d’abord été manuellement annotée afin d’extraire une sous liste de 431 verbes pouvant être interprétés comme des problèmes, des difficultés ou des troubles. En effectuant plusieurs itérations de visualisation matricielle via l'outil clustergrammer https://maayanlab.cloud/clustergrammer/ des scores de tf-idf pour chacun des verbes sur l’ensemble des articles associés aux 17 clusters principaux (supérieur à 1% d’articles du corpus) via l’outil clustergrammer  une liste plus restreinte de 66 verbes a été sélectionnée présentant une plus forte saillance dans la matrice et étant plus explicitement interprétables comme troubles.
 Le calcul final du score tf-idf s'effectue en produisant une matrice du nombre d'occurrences brutes des verbes (en ligne) par documents dans chacun des 23 clusters (en colonne). On calcule la somme des occurrences suivant les deux grands sous ensembles définis en suivant la topologie sur l’axe de l’incarnation, produisant deux ensembles comparables en volume d’articles (Robots : 52% articles - 9 clusters > 1% - 1790 termes ; Algorithmes : 48% articles - 8 clusters > 1% - 1201 termes).
-La matrice finale compte 66 verbes en ligne et deux colonnes correspondant aux deux sous-ensembles algorithmes et robots. Le calcul du score tf-idf est obtenu à partir du module TfidfTransformer  en conservant les options par défaut (intégrant la fonction smooth_idf=True, la constante "1" est ajoutée au numérateur et au dénominateur de l'idf comme si l'on voyait un document supplémentaire contenant chaque terme de la collection exactement une fois, ce qui évite les divisions par zéro : idf(t) = log [ (1 + n) / (1 + df(t)) ] + 1.
+La matrice finale compte 66 verbes en ligne et deux colonnes correspondant aux deux sous-ensembles algorithmes et robots. Le calcul du score tf-idf est obtenu à partir du module TfidfTransformer https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html en conservant les options par défaut (intégrant la fonction smooth_idf=True, la constante "1" est ajoutée au numérateur et au dénominateur de l'idf comme si l'on voyait un document supplémentaire contenant chaque terme de la collection exactement une fois, ce qui évite les divisions par zéro : 
+>idf(t) = log [ (1 + n) / (1 + df(t)) ] + 1.
 
-Extraction des entités nommées “Date” et calcul des TF-IDF sur le graphe 
-En suivant la même procédure que pour le calcul des scores tf-idf sur les verbes, un travail de comparaison d’entités nommées “Date” a été réalisé. Afin de lister ces marqueurs de temps, une première extraction de 500 entités nommées via le modèle Spacy  effectuée sur Cortext  a été effectuée, puis un nettoyage de cette liste afin de conserver les entités les plus interprétables permettant de qualifier une dimension temporelle sans ambiguïté. On était supprimées les entités produisant des ambiguïtés et  moins interprétables comme les dates spécifique ou chiffrée, les durées (ex: several years, winter), les fréquences (ex : everyday, weekly), les périodes (the late 1980s) événement spécifique (ex : christmas). Pour cette liste de 112 entités “Date” un score de tf-df a été calculé en suivant la même procédure que pour les entités, soit une séparation du corpus d’articles en deux grand ensemble équivalent suivant la topologie du graphe telle que décrite précédemment et un calcul du score tf-idf pour chaque entité à partir du module TfidfTransformer.
-
-
-  https://maayanlab.cloud/clustergrammer/
-  https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html 
-  https://spacy.io/models
-  https://www.cortext.net
-
-  Extraction de 1000 verbes par la méthode pigeon_holes au niveau de la phrase au sein de chaque document via le logiciel Cortext. Sélection manuelle des verbes les plus interprétables parmi la liste initiale.
-
-  Calcul de la  fréquence d’apparition et de la spécificité d’usage d’un terme au sein du corpus
-
-
-Entités nommées intitulé “Date” dans le modèle d’extraction de terme de Spacy réalisée via le logiciel Cortext
-
-  On était supprimées les entités produisant des ambiguïtés et  moins interprétables hors de leur contexte d’énonciation comme les dates spécifiques ou chiffrées, les durées (ex: several years, winter), les fréquences (ex : everyday, weekly), les périodes (the late 1980s) événement spécifique (ex : christmas). 
+**Extraction des entités nommées “Date” et calcul des TF-IDF sur le graphe** 
+En suivant la même procédure que pour le calcul des scores tf-idf sur les verbes, un travail de comparaison d’entités nommées “Date” a été réalisé. Afin de lister ces marqueurs de temps, une première extraction de 500 entités nommées "Date" via le modèle Spacy effectuée sur Cortext a été effectuée, puis un nettoyage de cette liste afin de conserver les entités les plus interprétables permettant de qualifier une dimension temporelle sans ambiguïté. On était supprimées les entités produisant des ambiguïtés et  moins interprétables comme les dates spécifique ou chiffrée, les durées (ex: several years, winter), les fréquences (ex : everyday, weekly), les périodes (the late 1980s) événement spécifique (ex : christmas). Pour cette liste de 112 entités “Date” un score de tf-df a été calculé en suivant la même procédure que pour les entités, soit une séparation du corpus d’articles en deux grand ensemble équivalent suivant la topologie du graphe telle que décrite précédemment et un calcul du score tf-idf pour chaque entité à partir du module TfidfTransformer.
