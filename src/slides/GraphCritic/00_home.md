@@ -1,10 +1,10 @@
 
 # Critique de l'IA dans la presse
 
-**Projet** : Algoglitch - médialab Sciences Po
-**Auteurs** : Maxime Crépel, Dominique Cardon
-**Traitement de données** : Yannis Bouachera, Salomé Do, Jean-Philippe Cointet 
-**Visualisation** : Donato Ricci, Robin De Mourat 
+**Projet :** Algoglitch - médialab Sciences Po
+**Auteurs :** Maxime Crépel, Dominique Cardon
+**Traitement de données :** Yannis Bouachera, Salomé Do, Jean-Philippe Cointet 
+**Visualisation :** Donato Ricci, Robin De Mourat 
 
 **Citer cette recherche :** 
 >Site
