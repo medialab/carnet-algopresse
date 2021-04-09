@@ -38,7 +38,7 @@ Les termes relatifs aux troubles et enjeux constitutifs du sous-ensemble nommé 
 
 
 ---
-##Méthode : Division du corpus en suivant la topologie et tagging des entités
+## Méthode : Division du corpus en suivant la topologie et tagging des entités
 
 **Division du corpus en suivant la topologie :**
 Pour faciliter une analyse comparative entre l'espace sémantique intérprété comme lié aux "robots" et l'espace lié aux "algorithmes" chaque cluster a été associé à l'une ou l'autre de ces catégories. Les deux sous-ensembles sont comparables en terme de volume d’articles, de clusters et de termes. 
