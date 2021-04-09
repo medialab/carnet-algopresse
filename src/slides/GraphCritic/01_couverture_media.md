@@ -18,7 +18,7 @@ En s’appuyant sur des outils d’annotations par apprentissage supervisé, un 
 A partir de ce protocole de catégorisation, un sous corpus de 2 091 articles de presse catégorisés comme critiques a été constitué. Le taux d'articles annotés comme critiques de la base initiale est de 7,1% en moyenne sur l’ensemble du corpus et présente une assez forte stabilité durant la période (écart type de +/- 2,2%). Si le volume d’articles portant sur l’IA et les algorithmes augmente significativement, le taux d’articles détectés par le modèle comme contenant un discours critique augmente simultanément durant la période. Des travaux portant sur l’analyse de la couverture médiatique du thème de l’IA en Grande Bretagne ont montré qu’une très large majorité des publications portaient sur les avancées technologiques dans le domaine et sur les potentiels développement que ces derniers permettent dans les secteurs du commerce et de l’industrie. Les questions éthiques et les problèmes sociaux tels que les risques de discrimination associés au déploiement de ces technologies sont sous représentés au sein de l’espace médiatique (Brennen et al, 2018). 
 
 ---
-**Méthode : Extraction de corpus et Detection du discours critique par apprentissage supervisé**
+## Méthode : Extraction de corpus et Detection du discours critique par apprentissage supervisé
 
 **Requête utilisée sur Factiva** : "artificial intelligence" OR "AI" OR "algorithm*" OR "machine learning" OR "deep learning" OR "neural network*" -"amnesty international" -"weiwei" -"air india" 
 **Période d'extraction** : du 01/01/2015 au 31/12/2019 
