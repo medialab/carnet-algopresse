@@ -15,7 +15,7 @@
 
 ## IMAGE DE FOND CLUSTERS GRAPH
 
-## Quel est le discours critique de l'IA et des algorithmes développé dans la presse ? 
+## Quel est le discours critique de l'IA et des algorithmes dans la presse ? 
 
 Ce site, en articulant analyses et visualisations de données, présente les résultats de travaux réalisés dans le cadre du projet Algoglitch au médialab, portant sur un corpus d'articles de presse sur le thème de l'IA et des algorithmes couvrant une période de 5 ans aux Etats-unis et au Royaume-Uni. 
 
