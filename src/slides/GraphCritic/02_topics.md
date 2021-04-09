@@ -37,6 +37,7 @@ Un second ensemble, bien que très hétérogène du point de vue des thématique
 - “Profiling Algorthms” : *Artificial intelligence can identify 'gay faces' from a picture, study claims* - Independent Online - 08/09/17
 
 **ZOOM ou filtre cluster Carte sémantique des thématiques des articles “critiques” x 9**
+
 Enfin le graphe se compose de 9 autres clusters de taille très réduite, entre 0,8% et 0,1% des articles pour chaque cluster (58 articles au total). Les termes extraits de ces articles représentent pourtant 15,6% (466 termes au total) de la totalité des termes du graphe. Ces thématiques peuvent s’apparenter à des signaux faibles d’un discours critique sur les algorithmes et l’IA détectés par notre méthode d'extraction de termes mais pourtant sous représentés en volume d'articles. Ces clusters se centrent autour de thématiques très spécifiques, évoquant parfois des types de calculateurs mais le plus souvent des domaines d’application :
 - “Robot-Advisers” : *Mortgage algorithms found to have racial bias* - The Washington Post - 15/11/18
 - “DeepDream Nightmares” : *The AI 'nightmare machine': Spooky Google algorithm transforms famous sights into horror scenes* - Mail Online - 25/10/16
