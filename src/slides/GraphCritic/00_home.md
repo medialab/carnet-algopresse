@@ -21,7 +21,3 @@ A partir de méthode de TAL sur un large corpus de presse, nous montrons qu'il e
 L’analyse comparée de ces deux espaces sémantiques dominants rend compte de deux régimes discursifs, mobilisant des agents. D’une part, les algorithmes qui façonnent nos environnements de calcul quotidiens sont associés à un discours critique portant sur les biais, les discriminations, la surveillance, la censure et les phénomènes d’amplification dans la diffusion de contenus inappropriés. D’autre part, les robots et l’IA, qui mettent en scène des entités autonomes, incarnées et indépendantes sont associés à un discours  prophétique alertant sur notre capacité à contrôler ces agents simulant ou dépassant nos capacités physiques et cognitives et mettant ainsi en péril notre sécurité physique ou notre modèle économique.
 
 >Ces travaux de recherche ont été réalisés dans le cadre de la Chaire «Good In Tech : repenser l’innovation et les technologies comme moteurs d’un monde meilleur pour et par l’humain » placée sous l’égide de la Fondation du Risque en partenariat avec l’Institut Mines-Télécom et Sciences Po
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwMTg4MjM2NSwtMTEzNTAyNjQ1MywyMD
-Y1NDQzODg1LC01MjAxMjI5MjddfQ==
--->
