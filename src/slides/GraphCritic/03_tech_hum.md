@@ -34,10 +34,12 @@ L’analyse topologique des clusters faisant apparaître une opposition entre le
 
 **Division du corpus en suivant la topologie :**
 Pour faciliter une analyse comparative entre l'espace sémantique intérprété comme lié aux "robots" et l'espace lié aux "algorithmes" chaque cluster a été associé à l'une ou l'autre de ces catégories. Les deux sous-ensembles sont comparables en terme de volume d’articles, de clusters et de termes. 
+
 L'espace intitulé “robots” compte  : 
 - 9 clusters principaux (de taille supérieure à 1% du corpus d'articles)
 - 52% des articles du corpus (chaque article étant associé à un unique cluster)
 - 1790 termes au sein du réseau (chaque terme étant associé à un unique cluster). 
+
 L’espace intitulé “algorithmes” compte 
 - 8 clusters principaux (de taille supérieure à 1% du corpus d'articles)
 - 48% articles (chaque article étant associé à un unique cluster)
