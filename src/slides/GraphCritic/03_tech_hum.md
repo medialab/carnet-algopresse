@@ -1,7 +1,7 @@
 
 ## Qu'est-ce que la topologie du réseau nous apprend de la critique médiatique ? 
 
-**Visualisation Clusters Name BICOLOR**
+**Visualisation Clusters Name BICOLOR x4 full algo robot intermed**
 
 La dispersion des clusters dans l’espace topologique laisse apparaître une opposition entre deux principaux types de calculateurs. On observe ainsi un déplacement entre la partie droite du graphe qui comporte des articles mettant en scène des techniques de calcul algorithmique incorporées dans l'environnement de l’utilisateur pour guider, orienter ou calculer ses comportements, vers la partie gauche qui comporte des articles qui se caractérisent par la personnification de l’IA dans une entité incarnée et autonome à l’égard des humains.  
 - La première zone à droite concerne exclusivement des algorithmes, qu’ils s'agissent des algorithmes du Web comme le fil d’actualité de Facebook, la section trending topic de Twitter, les algorithmes de recherche d’images et de sites web de Google. La plupart de ces agents algorithmiques constituent les couches techniques de services largement déployés dans nos environnements numériques quotidiens. D’autres représentent des technologies plus émergentes qui font l'objet de développements et d'expérimentations plus localisées et plus régulées tels les algorithmes de police ou de justice prédictive, de détection des images dans les systèmes de reconnaissance faciale ou les deepfakes.
