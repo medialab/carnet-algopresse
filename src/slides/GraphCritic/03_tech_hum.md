@@ -17,7 +17,7 @@ Afin de différencier ces entités au sein du graphe, la plupart des termes, ne 
 
 ## Qui sont les agents calculateurs ? 
 
-**Visualisation Technical Tag BICOLOR**
+**Visualisation Technical Tag BICOLOR x3 full gauche et droite**
 
 La décomposition des qualifications des Agents de l’IA fait apparaître des entités techniques aux propriétés très différentes. Ce qui caractérise les Agents de la zone “robots” de notre cartographie est le très haut degré d’intelligence et d’autonomie des IA, ainsi que leur capacité à être incarné sous la forme de machines. Le terme de robot domine cet espace et que ce soit pour la conduite automobile, le sexe, la guerre ou la production industrielle, ces Agents sont dotés de capacité d’initiatives autonomes. Les caractéristiques qui leurs sont données contribuent à détacher leur capacité de choisir, de décider et d’agir du système socio-technique qui les a produits ou de l’environnement dans lequel ils se déploient. En revanche, les agents de la zone “algorithmes” de notre cartographie n’ont pas cette autonomie et sont plutôt définies comme des parties ou des éléments de systèmes sociotechniques distribués dans des environnements numériques.
 
@@ -25,7 +25,7 @@ Si l’on compare les termes les plus fréquents catégorisés en tant qu’enti
 
 ## Qui sont les agents humains ? 
 
-**Visualisation People Tag BICOLOR**
+**Visualisation People Tag BICOLOR x3 full gauche et droite**
 
 La catégorie “People” à partir de laquelle ont été annotés dans les termes désignant des agents humains, personnes ou groupes de personnes non nommées ou n’ayant pas d’existence institutionnelle, permet d’observer la manière dont est composé le monde social dans lequel les IA ont été introduites. Elle fait apparaître une autre différence entre les deux espaces sémantiques. Du côté de l’espace “Robots” on observe parmi les termes les plus fréquents une forte présence de références à l’humanité, telles que humans, humankind, human civilisation, human driver, human supervisor. À la lecture du contenu de certains articles associés à cet espace, on constate que face aux agents calculateurs incarnés par des machines, tels que décrits précédemment, la notion d’humanité est en fait une expression très générique de la société humaine tout entière sur laquelle ces agents font peser une menace. D’autres termes assez génériques sont également présents dans cet espace mais relèvent d’une définition plus centrée sur des domaines dans lesquels les technologies robotiques sont amenées à se déployer, tels que la finance, le marché du travail, la défense et les transports. On retrouve ainsi des termes tels que workers, customers, employees, drivers, retailers, soldiers, passengers, brokers, traders, farmers. L’espace associé aux “Algorithmes” est quant à lui peuplé de termes beaucoup moins génériques que dans l’espace sémantique des “Robots”. Les agents humains sont ici désignés de manière beaucoup plus précise et font référence à des personnes mieux identifiées. On retrouve ainsi, parmi les termes fréquents, des entités faisant référence aux plateformes numériques users, accounts, Facebook users, Youtube users. Les termes qui désignent ces agents permettent dans la grande majorité de les qualifier en fonction de propriétés comme l’âge (children, child, kids, parents), le genre (women, men) l’appartenance éthnique (black people, black patients, african-americans), l’orientation politique (white supremacists, black defendants, illuminati) ou sexuelle (gays, lesbian, trans people).
 
