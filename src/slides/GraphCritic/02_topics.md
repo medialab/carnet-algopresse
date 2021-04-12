@@ -54,12 +54,15 @@ Enfin, le graphe se compose de 9 autres clusters de taille très réduite, entre
 >Timeline clusters / nb articles 3 profils
 
 >Timeline clusters / nb articles profils n°1 stable future of ai et web algo 
+
 L’analyse de la distribution temporelle du nombre d’articles des dix plus importants clusters sur la période de 5 années que couvre le corpus critique laisse apparaître trois profils distincts. On observe une distribution assez stable sur la période de la répartition des articles des deux plus grands clusters structurants de la cartographie que sont les “Web Algortihms” et “Future of AI”. La distribution de ces deux plus grands clusters montre qu’il existe une production régulière d’articles critiques sur les troubles liés aux algorithmes du web et aux craintes relatives aux développements futurs de l’intelligence artificielle et des robots. Ces thèmes concentrent le plus grand nombre d’articles et forment deux pôles sur lesquels s'établit de façon récurrente un discours critique. 
 
 >Timeline clusters / nb articles profils n°1 hausse 2019 facial reco + Deepfake 
+
 Un second profil de distribution concerne les clusters “Facial recognition” et “Deepfake” qui connaissent une hausse importante du volume d’articles publiés sur l’année 2019. 
 
 >Timeline clusters / nb articles profils n°1 hausse 2017/18 cf texte pour exemples 
+
 Enfin le troisième profil de distribution montre une hausse du nombre d’articles qui se concentrent sur les années 2017 et 2018 et une baisse significative sur l’année 2019. Ce type de distribution concerne les clusters “Job Automation”, “Killer Robots”, “Autonomous Cars”, “Sex Robots”, “Voice Assistant”, “Predictive Algorithms”. 
 
 >Timeline Termes related non critique clusters profils identique aux variation (voir si on intégre les requêtes problème mesure cf JPC ou image dans le texte comparaison 
