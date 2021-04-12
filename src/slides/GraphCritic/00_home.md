@@ -13,7 +13,7 @@
 >Site
 >Papers
 
-## IMAGE DE FOND CLUSTERS GRAPH
+>IMAGE DE FOND CLUSTERS Graphe sémantique des thématiques des articles “critiques” full
 
 ## Quel est le discours critique de l'IA et des algorithmes dans la presse ? 
 
