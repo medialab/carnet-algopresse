@@ -1,5 +1,6 @@
 
 # Critique de l'IA dans la presse
+>IMAGE DE FOND CLUSTERS Graphe sémantique des thématiques des articles “critiques” full
 
 **Projet :** Algoglitch - médialab Sciences Po
 
@@ -12,8 +13,6 @@
 **Citer cette recherche :** 
 >Site
 >Papers
-
->IMAGE DE FOND CLUSTERS Graphe sémantique des thématiques des articles “critiques” full
 
 ## Quel est le discours critique de l'IA et des algorithmes dans la presse ? 
 
