@@ -1,6 +1,6 @@
 ## Comment est exprimée la temporalité ? 
 
-**Visualisation Temporalité**
+>Visualisation Temporalité full
 
 L'opposition entre les deux espaces sémantiques semble donc dessiner deux régimes d’énonciation distincts qui cohabitent au sein de l’espace médiatique. Le premier exprime les peurs face à des technologies autonomes focalisant la critique sur leur capacité à simuler, dépasser, remplacer ou exterminer à terme l’espèce humaine et représentant une menace qu’il serait nécessaire de contrôler. L’autre régime est davantage ancré dans le répertoire habituel de la critique sociale, mobilisant le répertoire du droit et des  injustices (censure, discrimination, surveillance) envers des populations spécifiques ou relève d’enjeux de régulation quant à la manière de gérer la diffusion de l’information (exposition, amplification).
 
@@ -9,8 +9,17 @@ Cette distinction entre l’énonciation de la peur et de la critique s’exprim
 Mais plus que cette analyse de l’adoption plus ou moins avancée de ces différentes familles de technologies de calcul, il est intéressant de comprendre la manière dont au sein du discours critique est exprimée la temporalité. Des travaux portant sur les formes argumentatives en sociologie des controverses nous invitent à nous intéresser à la manière dont sont déployées les échelles temporelles et les régimes d’énonciation du futur qui leur sont associés (Chateauraynaud, 2013, 2014 ; Chateauraynaud, Debaz, 2019). Les épreuves de cohérence et de crédibilité dans les controverses nécessitent de définir des échelles temporelles qui vont venir modifier les jugements mais aussi les logiques d’action qui y vont y être associées. C’est en mobilisant des marqueurs temporels qui articulent des références au passé et une projection à plus ou moins long terme dans le temps que les acteurs sont en mesure de constituer des prises sur le futur qui vont venir moduler le type d’action à entreprendre et l’urgence à agir pour faire face à une situation. 
 
 A partir de notre corpus, nous avons extrait 500 entités nommées qui sont des marqueurs temporels présents au sein des articles et de la même manière que pour les verbes, nous avons calculé de manière comparative leur score tf-idf sur l’ensemble des articles constituant les deux sous-ensembles intitulés “Robots” et "Algorithmes". La liste des entités extraite a été filtrer manuellement afin de ne conserver que les marqueurs temporels interprétables en dehors de leur contexte d’énonciation . L’analyse comparative de la distribution entre les deux sous-ensembles des scores tf-idf des marqueurs temporels laisse apparaître deux régimes distincts de référence au temps au sein des articles. 
+
+>Visualisation Temporalité robot
+
 Du côté des articles associés au sous-ensemble “Robots” les marqueurs de temps relèvent d’une temporalité sur le long terme, qu’ils fassent référence au passé ou au futur. Ainsi la grande majorité des marqueurs se structurent autour d’expressions sur le futur qui mobilisent la figure the next associés à des temporalités qui se comptent souvent en dizaines d’années ou centaines d’années (the next 10 years, the next 30 years, the next 100 years, the next 1,000 years). D’autre part, les énoncés qui ont les plus importants scores dans cet espace ont comme particularité le plus souvent de ne pas définir précisément les échéances auxquelles ils renvoient (the next decades, coming decades, next century, this century). D’autres marqueurs également présents dans ce sous-ensemble ne font pas référence au futur mais au passé et ils se caractérisent par le fait de référer également à une projection lointaine dans le temps passé (30 years ago, 150 years ago, the last 20 years, the past 25 years, the past 15 years). Les entités dans ce sous-ensemble ont donc comme particularité de majoritairement exprimer un futur lointain et souvent peu précis. Par ailleurs, lorsque les entités font référence au passé, elles sont également projetées dans une temporalité lointaine.
+
+>Visualisation Temporalité algo
+
 Au sein du sous-ensemble d’articles associés aux "Algorithmes" les marqueurs temporels extraits ayant les scores tf-idf les plus hauts se distinguent des premiers car ils renvoient majoritairement au présent (this day, these days, that year), à un passé plus proche souvent exprimé en jour, semaine ou mois (recent days, just last week, a few weeks ago, just a month, six months ago, the end of last year), mais également à un futur très proche en comparaison du premier sous-ensemble (the next day, the next few weeks, the coming weeks, the coming months, the following two years). 
+
+>Visualisation Temporalité full
+
 
 ---
 
