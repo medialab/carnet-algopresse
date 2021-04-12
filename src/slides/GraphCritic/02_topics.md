@@ -1,7 +1,7 @@
 
 ## Quels sont les thèmes sur lesquels porte la critique ? 
 
->Carte sémantique des thématiques des articles “critiques”
+>Graphe sémantique des thématiques des articles “critiques” full
 
 Le réseau sémantique obtenu à partir des 2 091 articles annotés comme critiques repose sur une extraction de termes les plus représentés au sein des articles. Il est constitué de 2 991 termes (ou suite de termes) reliés entre eux par 54 062 liens de cooccurrences. La spatialisation  est basée sur une variante de l’algorithme de spatialisation Fruchterman Reingold, incluant le poids des cooccurrences entre les termes du réseau ; la position est optimisée par leur appartenance aux clusters détectés automatiquement par l’algorithme de Louvain. La couleur des nœuds est relative à chacun des clusters ainsi détectés et leur taille est relative à la somme des cooccurrences. 
 
@@ -48,6 +48,8 @@ Enfin, le graphe se compose de 9 autres clusters de taille très réduite, entre
 - “Email” : *Google expands 'creepy' Gmail AI that can automatically reply to emails for you* - Mail Online - 31/08/18
 - “Music” : *Why 'random' shuffle feels far from random* - Independent Online - 24/02/15
 - “Consumer and Copyright” : *Apple is forced to change its App Store search algorithm after it emerged its own products were being ranked significantly higher* - Mail Online - 09/09/19
+
+>Graphe sémantique des thématiques des articles “critiques” full
 
 ## Comment évolue l'agenda médiatique ? 
 
