@@ -45,11 +45,8 @@ Du côté de l'espace sémantique “Robots”, c’est l’affrontement entre l
 
 Les termes relatifs aux troubles et enjeux constitutifs du sous-ensemble nommé "Algorithmes" laissent apparaître d’autres formes de discours de critique davantage imprégnées de références juridiques et légales. En effet, on trouve dans cette partie du graphe parmi les termes fréquents un champ sémantique constitué de références juridiques tels que crime, law enforcement, Human Rights, lawsuit, Civil Liberties, prejudice, fraud, public interest. Les troubles produits par les agents techniques dénoncés au sein des articles associés à cet espace concernent les discriminations (bias, biases, discrimination, antisemitic, race or gender, fair use, risk score, liberal bias), les enjeux de privacy (privacy, surveillance, Big Brother, privacy issues), les difficultés de filtrage ou d’exposition à de contenus innapropriés (violence, inappropriate content, nudity, age restriction, violent crime) et frauduleux (fake news, misinformaton, conspiracy theories, revenge porn, filter bubble), ou encore de censure et de liberté d’expression (free expression)
 
-
 ---
 ## Méthode : Tagging des entités du graphe
-
-**Tagging des entités du réseau :**
 
 Pour chacun des 2991 termes du réseau une catégorisation manuelle a été réalisée à pour différencier le type d’entités, de sorte que 66% des termes du réseaux ont été catégorisés à partir de 10 catégories distinctes : 
 - Technical (15%) : Calculateur, Machine, Fonctionnalité, Devices, Service Technique, Dispositifs techniques de startup difficiles à différencier de l'entité économique
