@@ -17,9 +17,7 @@ Dans le sous-ensemble d’articles associés aux "Algorithmes" on retrouve égal
 
 ---
 
-## Méthode : Extraction des verbes de troubles 
-
-**Extraction des verbes et calcul des TF-IDF sur le graphe** 
+## Méthode : Extraction des verbes de troubles et calcul des TF-IDF sur le corpus
 
 L’analyse des verbes de troubles a été réalisée, à partir du logiciel Cortext, en effectuant une première extraction de 1000 verbes sur le texte complet des articles critiques du corpus en employant la méthode “pigeon holes” via le logiciel Cortext (identique à la méthode d'extraction des termes du graphe).
 La liste de verbes ainsi produite a d’abord été manuellement annotée afin d’extraire une sous liste de 431 verbes pouvant être interprétés comme des problèmes, des difficultés ou des troubles. En effectuant plusieurs itérations de visualisation matricielle via l'outil clustergrammer https://maayanlab.cloud/clustergrammer/ des scores de tf-idf pour chacun des verbes sur l’ensemble des articles associés aux 17 clusters principaux (supérieur à 1% d’articles du corpus) via l’outil clustergrammer une liste plus restreinte de 66 verbes a été sélectionnée présentant une plus forte saillance dans la matrice et étant plus explicitement interprétables comme troubles.
