@@ -23,9 +23,7 @@ Au sein du sous-ensemble d’articles associés aux "Algorithmes" les marqueurs 
 
 ---
 
-## Méthode : Extraction des marqueurs de temps 
-
-**Extraction des entités nommées “Date” et calcul des TF-IDF sur le graphe** 
+## Méthode : Extraction des marqueurs de temps et calcul des TF-IDF sur le corpus
 
 En suivant la même procédure que pour le calcul des scores tf-idf sur les verbes, un travail de comparaison d’entités nommées “Date” a été réalisé. Afin de lister ces marqueurs de temps, une première extraction de 500 entités nommées "Date" via le modèle Spacy effectuée sur Cortext a été effectuée, puis un nettoyage de cette liste afin de conserver les entités les plus interprétables permettant de qualifier une dimension temporelle sans ambiguïté. On était supprimées les entités produisant des ambiguïtés et moins interprétables comme les dates spécifique ou chiffrée, les durées (ex: several years, winter), les fréquences (ex : everyday, weekly), les périodes (the late 1980s) événement spécifique (ex : Christmas). Pour cette liste de 112 entités “Date” un score de tf-df a été calculé en suivant la même procédure que pour les entités, soit une séparation du corpus d’articles en deux grand ensemble équivalent suivant la topologie du graphe telle que décrite précédemment et un calcul du score tf-idf pour chaque entité à partir du module TfidfTransformer.
 
