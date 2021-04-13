@@ -1,17 +1,5 @@
 
-## Quels sont les troubles produits par ces agents calculateurs ? 
-
->Visualisation Issue Tag BICOLOR full
-
-La catégorie intitulée “Issues” permet une lecture comparée des termes relatifs aux troubles et aux enjeux qui sont associés aux agents techniques sur lesquels porte la critique. 
-
->Visualisation Issue Tag BICOLOR gauche
-
-Du côté de l'espace sémantique “Robots”, c’est l’affrontement entre les humains et les IA qui est constamment appelé comme enjeu. On observe la présence de termes tels que attack, safety, arms race, Cold war, human extinction, extinction, natural disasters, AI-powered horror, mass extinction, physical damage, qui renvoient le plus souvent au registre de la guerre ou de destruction à l’échelle planétaire, faisant peser un risque existentiel sur l’avenir de l’humanité. Ces menaces font émerger des enjeux de contrôle de ces technologies autonomes, tels que ban, petition, human oversight, lack of accountability, superintelligence control problem, control problem. D’autres termes relèvent de troubles assez visibles dans cet espace sémantique associés au remplacement, au dépassement et à une perte de contrôle de l’homme par les machines, notamment dans le domaine de l’économie, avec des termes tels que job losses, surge pricing, pay gap.
-
->Visualisation Issue Tag BICOLOR droite
-
-Les termes relatifs aux troubles et enjeux constitutifs du sous-ensemble nommé "Algorithmes" laissent apparaître d’autres formes de discours de critique davantage imprégnées de références juridiques et légales. En effet, on trouve dans cette partie du graphe parmi les termes fréquents un champ sémantique constitué de références juridiques tels que crime, law enforcement, Human Rights, lawsuit, Civil Liberties, prejudice, fraud, public interest. Les troubles produits par les agents techniques dénoncés au sein des articles associés à cet espace concernent les discriminations (bias, biases, discrimination, antisemitic, race or gender, fair use, risk score, liberal bias), les enjeux de privacy (privacy, surveillance, Big Brother, privacy issues), les difficultés de filtrage ou d’exposition à de contenus innapropriés (violence, inappropriate content, nudity, age restriction, violent crime) et frauduleux (fake news, misinformaton, conspiracy theories, revenge porn, filter bubble), ou encore de censure et de liberté d’expression (free expression)
+## Quels sont les verbes de troubles exrpimés ? 
 
 >Visualisation Verbes troubles full
 
