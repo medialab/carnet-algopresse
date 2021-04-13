@@ -28,7 +28,6 @@ Afin de différencier ces entités au sein du graphe, la plupart des termes, ne 
 ---
 ## Méthode : Division du graphe et du corpus selon la topologie
 
-**Division du corpus en suivant la topologie :**
 Pour faciliter une analyse comparative entre l'espace sémantique interprété comme lié aux "robots" et l'espace lié aux "algorithmes" chaque cluster a été associé à l'une ou l'autre de ces catégories. Les deux sous-ensembles sont comparables en volume d’articles, de clusters et de termes. 
 
 L'espace intitulé “robots” compte : 
