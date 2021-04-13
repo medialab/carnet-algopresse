@@ -1,5 +1,5 @@
 
-## Quels sont les verbes de troubles exrpimés ? 
+## Comment sont exprimés les verbes de troubles ? 
 
 >Visualisation Verbes troubles full
 
