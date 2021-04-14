@@ -2,14 +2,44 @@
 ## Qui sont les agents calculateurs ? 
 
 >Visualisation Technical Tag BICOLOR full
+> probleme affichage label des noeuds filtrés + couleurs idem et zoom ++ je ne sais pas si interessant de conserver la topologie 2 block coloré facon tagcloud ou liste serait surement plus efficace : ideal effet de retriage du graphe en grappe ou liste (enore plus vrai pour people et issue car peu peuplé
+
+<GraphBlock 
+  x={0.5105609811492162} 
+  y={0.4526993627339648} 
+  ratio={1} 
+  filters={[{"attribute":"tag_entity","value":"Technical"}]} 
+  nodeColorVariable={'algo_robot'}
+/>
 
 La décomposition des qualifications des Agents de l’IA fait apparaître des entités techniques aux propriétés très différentes. Ce qui caractérise les Agents de la zone “robots” de notre cartographie est le très haut degré d’intelligence et d’autonomie des IA, ainsi que leur capacité à être incarné sous la forme de machines. Le terme de robot domine cet espace et que ce soit pour la conduite automobile, le sexe, la guerre ou la production industrielle, ces Agents sont dotés de capacité d’initiatives autonomes. Les caractéristiques qui leurs sont données contribuent à détacher leur capacité de choisir, de décider et d’agir du système socio-technique qui les a produits ou de l’environnement dans lequel ils se déploient. En revanche, les agents de la zone “algorithmes” de notre cartographie n’ont pas cette autonomie et sont plutôt définies comme des parties ou des éléments de systèmes sociotechniques distribués dans des environnements numériques.
 
 >Visualisation Technical Tag BICOLOR gauche
+>RQ : eviter le zoom pour evoter de perdre la topologie d'ensemble mais lecture difficile
+
+<GraphBlock 
+  x={0.5105609811492162} 
+  y={0.4526993627339648} 
+  ratio={1} 
+  filters={[{"attribute":"tag_entity","value":"Technical"},{"attribute":"algo_robot","value":"Robot"}]} 
+  nodeColorVariable={'algo_robot'} 
+  filtersModeAnd={true}
+/>
 
 Si l’on compare les termes les plus fréquents catégorisés en tant qu’entité technique, on observe que dans l’espace “Robots” les calculateurs renvoient le plus souvent à des dispositifs incarnés tels que les robots, les machines, les ordinateurs, les voitures, les armes, les drones, les weapons, les dolls. D’autres entités techniques se distinguent car elles renvoient à une définition très abstraite et générique des calculateurs qui sont désignés en tant que system, artificial intelligence ou encore comme automation ou model. 
 
 >Visualisation Technical Tag BICOLOR droite
+>RQ : idem eviter le zoom pour evoter de perdre la topologie d'ensemble mais lecture difficile
+
+<GraphBlock 
+  x={0.5105609811492162} 
+  y={0.4526993627339648} 
+  ratio={1} 
+  filters={[{"attribute":"tag_entity","value":"Technical"},{"attribute":"algo_robot","value":"Algo"}]} 
+  nodeColorVariable={'algo_robot'} 
+  filtersModeAnd={true}
+/>
+
 
 Dans l’espace sémantique intitulé “Algorithmes” les entités techniques, même sous des dénominations abstraites, ne constituent pas des objets autonomes (algorithm, devices, program, bot ou phone). La majorité des termes se distingue par le fait qu’elle relève de technologies beaucoup plus spécifiques, renvoyant le plus souvent à des dispositifs technologiques précis tels que facial recognition, deepfake, social network, chatbot, criminal justice algortihm et de manière encore plus spécifique à des fonctionnalités de certains services embarqués dans nos terminaux mobiles ou sur le web, parfois associés à des marques, tels que Siri, Search engine, Trending topics, Google assistant, Iphone, recommendation algorithm, Facebook messenger, Google images, image search. Ces qualifications n’isolent pas les IA mais les incorporent dans un environnement sociotechnique dans lequel le calcul joue un rôle de plus en plus intense pour assister, trouver de l’information, guider ou prévenir un comportement. 
 
