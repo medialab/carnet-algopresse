@@ -12,9 +12,10 @@ const contentsURL = `${URL_BASIS}/contents.mdx`
 
 
 const TestVis = () => {
+  // <DataLoader url={`${process.env.PUBLIC_URL}/Graph Critic EN layers rotation edgesunweight V2.gexf`}>
   
   return (
-    <DataLoader url={`${process.env.PUBLIC_URL}/Graph Critic EN layers rotation edgesunweight V2.gexf`}>
+    <DataLoader url={`${process.env.PUBLIC_URL}/Graph_Critic_EN_algopress_webV2.gexf`}>
       {
         gexfData => (
           <GraphAnnotation
