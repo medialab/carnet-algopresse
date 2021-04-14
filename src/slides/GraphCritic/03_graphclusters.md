@@ -2,6 +2,13 @@
 ## Quels sont les thèmes sur lesquels porte la critique ? 
 
 >Graphe sémantique des thématiques des articles “critiques” full
+>RQ afficher label cluster ++ Probleme larger page 
+
+<GraphBlock 
+  x={0.4729188654794181} 
+  y={0.5156417415932983} 
+  ratio={1}
+/>
 
 Le réseau sémantique obtenu à partir des 2 091 articles annotés comme critiques repose sur une extraction de termes les plus représentés au sein des articles. Il est constitué de 2 991 termes (ou suite de termes) reliés entre eux par 54 062 liens de cooccurrences. La spatialisation  est basée sur une variante de l’algorithme de spatialisation Fruchterman Reingold, incluant le poids des cooccurrences entre les termes du réseau ; la position est optimisée par leur appartenance aux clusters détectés automatiquement par l’algorithme de Louvain. La couleur des nœuds est relative à chacun des clusters ainsi détectés et leur taille est relative à la somme des cooccurrences. 
 
@@ -10,11 +17,26 @@ Le réseau sémantique obtenu à partir des 2 091 articles annotés comme critiq
 Le deux plus importants clusters du graphe en nombre d’articles forment deux pôles opposés. 
 
 >ZOOM ou filtre cluster Carte sémantique des thématiques des articles “critiques” - Cluster AlgoWeb & AI
+>RQ les noms des termes filtrés restent affichés 
+
+<GraphBlock 
+  x={0.5} 
+  y={0.5} 
+  ratio={1} 
+  filters={[{"attribute":"cluster_rename","value":"Web_Algorithms"},{"attribute":"cluster_rename","value":"Future_of_AI"}]}
+/>
 
  - Le plus important nommé “Web Algorithms", représentant 22% des articles du corpus critique, comporte des articles qui traitent des troubles produits par les algorithmes du web tels que par exemple les techniques de classement du newsfeed de Facebook (*Facebook accused of censoring conservatives, report says* - The Guardian - 10/05/16), les recommandations des vidéos sur Youtube (*YouTube, the Great Radicalizer* - The New York Times - 11/03/18) ou encore des moteurs de recherche comme Google (*Google results claim that the Holocaust didn't happen, and company won't change it* - Independent Online - 15/12/16). 
  - À l'extrémité opposée du graphe, on trouve le second plus important cluster nommé “Future of AI” qui représente 18% du corpus d’articles, évoquant les risques de l’émergence d’intelligences artificielles et de machines autonomes imitant ou surpassant les capacités humaines (*AI will create 'useless class' of human, predicts bestselling historian* - The Guardian - 20/05/16) ou menaçant l’humanité d'extinction (*End of Humanity ? Artificial Intelligence could destroy us ‘within decades’ warns expert* - express.co.uk - 15/04/16).
 
 >ZOOM ou filtre cluster Carte sémantique des thématiques des articles “critiques” x 3 - Cluster Jobauto / Killerrobots / Facialreco / 
+
+<GraphBlock 
+  x={0.5} 
+  y={0.5} 
+  ratio={1} 
+  filters={[{"attribute":"cluster_rename","value":"Facial_Recognition"},{"attribute":"cluster_rename","value":"Job_Automation"},{"attribute":"cluster_rename","value":"Killer_Robots"}]}
+/>
 
 Parmi les plus importants clusters on trouve trois autres thèmes largement représentés dans le corpus. 
 - Le cluster “Job automation” (14% des articles) contient des articles alertant sur les risques de mutation du marché de l’emploi face à la robotisation et au déploiement de l’IA dans le monde du travail (*Robots and AI are threatening close to a third of UK jobs, study reveals* - Independent Online - 24/03/17). 
@@ -37,6 +59,14 @@ Un second ensemble, bien que très hétérogène du point de vue des thématique
 - “Profiling Algorthms” : *Artificial intelligence can identify 'gay faces' from a picture, study claims* - Independent Online - 08/09/17
 
 >ZOOM ou filtre cluster Carte sémantique des thématiques des articles “critiques” x 9 clusters - de 1%
+>RQ probleme overlaping / et nom des clusters absents ou nom des termes absents !! 
+
+<GraphBlock 
+  x={0.5} 
+  y={0.5} 
+  ratio={1} 
+  filters={[{"attribute":"cluster_rename","value":"Autonomous_Cars"},{"attribute":"cluster_rename","value":"Voice_Assistant"},{"attribute":"cluster_rename","value":"Sex_Robots"},{"attribute":"cluster_rename","value":"Health_Algorithms"},{"attribute":"cluster_rename","value":"Deepfake"},{"attribute":"cluster_rename","value":"Predictive_Algorithms"},{"attribute":"cluster_rename","value":"Chatbot"},{"attribute":"cluster_rename","value":"Game_&_Education"},{"attribute":"cluster_rename","value":"Profiling_Algorthms"}]}
+/>
 
 Enfin, le graphe se compose de 9 autres clusters de taille très réduite, entre 0,8% et 0,1% des articles pour chaque cluster (58 articles au total). Les termes extraits de ces articles représentent pourtant 15,6% (466 termes au total) de la totalité des termes du graphe. Ces thématiques peuvent s’apparenter à des signaux faibles d’un discours critique sur les algorithmes et l’IA détectés par notre méthode d'extraction de termes mais pourtant sous représentés en volume d'articles. Ces clusters se centrent autour de thématiques très spécifiques, évoquant parfois des types de calculateurs mais le plus souvent des domaines d’application :
 - “Robot-Advisers” : *Mortgage algorithms found to have racial bias* - The Washington Post - 15/11/18
@@ -50,6 +80,14 @@ Enfin, le graphe se compose de 9 autres clusters de taille très réduite, entre
 - “Consumer and Copyright” : *Apple is forced to change its App Store search algorithm after it emerged its own products were being ranked significantly higher* - Mail Online - 09/09/19
 
 >Graphe sémantique des thématiques des articles “critiques” full
+>RQ probleme overlaping / et nom des clusters absents ou nom des termes absents !! 
+
+<GraphBlock 
+  x={0.5} 
+  y={0.5000000000000002} 
+  ratio={1} 
+  filters={[{"attribute":"cluster_rename","value":"Robo-Advisers"},{"attribute":"cluster_rename","value":"DeepDream_Nightmares"},{"attribute":"cluster_rename","value":"Deep_Voice"},{"attribute":"cluster_rename","value":"Scientific_Research"},{"attribute":"cluster_rename","value":"Market_&_Prices"},{"attribute":"cluster_rename","value":"Image_Search"},{"attribute":"cluster_rename","value":"Email"},{"attribute":"cluster_rename","value":"Music"},{"attribute":"cluster_rename","value":"Consumer_&_Copyright"}]}
+/>
 
 ---
 ## Méthode : Extraction et visualisation du graphe de termes
