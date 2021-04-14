@@ -2,22 +2,65 @@
 ## Qu'est-ce que la topologie du réseau nous apprend de la critique médiatique ? 
 
 >Visualisation Clusters Name BICOLOR full algo robot intermed
+>RQ probeme couleur choisies dans sigma ou gexf ? + Afficher label cluster (ou en surcouche plus les termes 
+
+<GraphBlock 
+  x={0.5} 
+  y={0.5000000000000002} 
+  ratio={1} 
+  nodeColorVariable={'algo_robot_intermed'}
+/>
 
 La dispersion des clusters dans l’espace topologique laisse apparaître une opposition entre deux principaux types de calculateurs. On observe ainsi un déplacement entre la partie droite du graphe qui comporte des articles mettant en scène des techniques de calcul algorithmique incorporées dans l'environnement de l’utilisateur pour guider, orienter ou calculer ses comportements, vers la partie gauche qui comporte des articles qui se caractérisent par la personnification de l’IA dans une entité incarnée et autonome à l’égard des humains.  
 
 >Visualisation Clusters Name BICOLOR droite web algo et al
+>RQ : estce qu'on zoom ou pas pour eviter de perdre la lsibilité de la topologie ? 
+
+<GraphBlock 
+  x={0.5105609811492162} 
+  y={0.4526993627339648} 
+  ratio={1} 
+  filters={[{"attribute":"algo_robot_intermed","value":"Algo"}]} 
+  nodeColorVariable={'algo_robot_intermed'}
+/>
 
 - La première zone à droite concerne exclusivement des algorithmes, qu’ils s'agissent des algorithmes du Web comme le fil d’actualité de Facebook, la section trending topic de Twitter, les algorithmes de recherche d’images et de sites web de Google. La plupart de ces agents algorithmiques constituent les couches techniques de services largement déployés dans nos environnements numériques quotidiens. D’autres représentent des technologies plus émergentes qui font l'objet de développements et d'expérimentations plus localisées et plus régulées tels les algorithmes de police ou de justice prédictive, de détection des images dans les systèmes de reconnaissance faciale ou les deepfakes.
 
 >Visualisation Clusters Name BICOLOR gauche AI robots
+>RQ : idem 
+
+<GraphBlock 
+  x={0.5105609811492162} 
+  y={0.4526993627339648} 
+  ratio={1} 
+  filters={[{"attribute":"algo_robot_intermed","value":"Robot"}]} 
+  nodeColorVariable={'algo_robot_intermed'}
+/>
 
 - Dans la partie la plus à gauche, à l’opposé du graphe, les clusters se concentrent autour d’agents calculateurs qui sont davantage incarnés sous forme de machines ou de robots. Les entités qui peuplent cette zone sont personnifiées dans des dispositifs physiques séparés de nos équipements numériques habituels que sont nos ordinateurs et nos smartphones. Ces dispositifs, en plus d’être incarnés physiquement sont équipés d’une capacité d’agir autonome via de systèmes de calcul basés sur l’IA. En simulant à la fois le corps et les capacités cognitives des humains ils sont en mesure de produire certaines actions sans intervention humaine dans différents domaines telles que le transport avec les voitures autonomes, la défense avec les “robots tueurs” et les drones, le travail avec l'automatisation des tâches professionnelles ou encore les relations physiques avec les robots sexuels.
 
->Visualisation Clusters Name BICOLOR centre zone grise ??? mettre en gris les zone intérmédiaire ??? ou possibilité d'annotation 
+>Visualisation Clusters Name BICOLOR centre zone grise ??? mettre en gris les zone intérmédiaire ??? ou possibilité d'annotation
+>RQ idem 
+
+<GraphBlock 
+  x={0.5105609811492162} 
+  y={0.4526993627339648} 
+  ratio={1} 
+  filters={[{"attribute":"algo_robot_intermed","value":"Intermed"}]} 
+  nodeColorVariable={'algo_robot_intermed'}
+/>
 
 - Entre ces deux pôles existe une zone intermédiaire plus difficilement identifiable, constituée de dispositifs à mi-chemin entre les machines autonomes et les algorithmes de nos environnements numériques quotidiens. Parmi les agents calculateurs présents dans cet espace on retrouve par exemple les assistants vocaux pouvant être embarqués dans nos smartphone ou dans des dispositifs du type enceinte connectées, les chatbots du Web, les robo-advisors qui sont les algorithmes effectuant des opérations dans le domaine de la finance ou encore des technologies de deep learning comme le dispositif Deep Dream de Google. Ces technologies bien qu’assez accessibles au grand public sont souvent encore émergentes. Elles sont en capacité de gérer un certain nombre de tâches parfois basiques de manière autonome mais ne sont pas toujours incarnées dans des dispositifs physiques, elles sont encore le plus souvent implémentées et accessibles via nos ordinateurs et smartphones.
 
 >Visualisation Clusters Name BICOLOR full
+>Probleme couleur affichage label idem et taille du graphe zoom si on enleve les slides à droite coordonnées pas bonnes 
+
+<GraphBlock 
+  x={0.5105609811492162} 
+  y={0.4526993627339648} 
+  ratio={1} 
+  nodeColorVariable={'algo_robot'}
+/>
 
 La tendance du graphe à séparer des dispositifs de calcul aux propriétés différenciées, nous amène à explorer ces dimensions de manière plus approfondie. Afin de réaliser une analyse comparative entre les deux pôles qui se dégagent de l’analyse topologique, le choix a été fait de découper le réseau en deux sous-ensembles comparables en volume d’articles, de clusters et de termes. Ainsi, l’espace intitulé “robots” compte 52% des articles du corpus, 9 clusters principaux (de taille supérieure à 1%) et 1790 termes. L’espace intitulé “algorithmes” représente quant à lui 48% articles, 8 clusters principaux et 1201 termes. Par une approche comparative, ce découpage en deux sous-ensembles équivalents permet d’explorer les différents attributs qui peuplent ces deux espaces sémantiques.
 
