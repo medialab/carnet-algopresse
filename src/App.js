@@ -14,26 +14,30 @@ import DataLoader from './components/DataLoader';
 
 import routes from './summary'
 
-const Home = () => {
-  return (
-    <div>
-      <h1>Carnet algopresse</h1>
-      <p>
-        Ce site est dédié à l'échaffaudage collectif de la publication algopresse. Il sert de point de rencontre entre l'écriture, la conception graphique et la conception interactive. Il fonctionne en tandem avec le répertoire github dont il est issu.
-      </p>
-    </div>
-  )
-}
 
 export default function App() {
+  const renderRoute = ({data, contentsURL, Content, ThatComponent}) => (
+    <DataLoader url={`${process.env.PUBLIC_URL}/data/${data}`}>
+      {
+        data => (
+          <ThatComponent
+            {
+              ...{
+                contentsURL,
+                Content,
+                data
+              }
+            }
+          />
+        )
+      }
+    </DataLoader>
+  )
   return (
     <Router>
       <div id="wrapper">
         <nav>
           <ul>
-            <li>
-              <Link to="/">Accueil</Link>
-            </li>
             {
               routes.map(({title, route}, index) => (
                 <li key={index} className="navitem-container">
@@ -55,32 +59,23 @@ export default function App() {
                 data,
                 Component: ThatComponent
               }, index) => {
-                const Content = require(`!babel-loader!mdx-loader!./slides/${contents}`).default
-                const contentsURL = `${repository}/blob/main/src/slides/${contents}`;
+                const Content = require(`!babel-loader!mdx-loader!./contents/${contents}`).default
+                const contentsURL = `${repository}/blob/main/src/contents/${contents}`;
                 return (
                 <Route key={index} path={route}>
-                  <DataLoader url={`${process.env.PUBLIC_URL}/data/${data}`}>
-                    {
-                      data => (
-                        <ThatComponent
-                          {
-                            ...{
-                              contentsURL,
-                              Content,
-                              data
-                            }
-                          }
-                        />
-                      )
-                    }
-                  </DataLoader>
+                  {renderRoute({data, contentsURL, Content, ThatComponent})}
                 </Route>
                 )
               } )
               
             }
             <Route path="/">
-              <Home />
+              {renderRoute({
+                data: routes[0].data, 
+                contentsURL: `${repository}/blob/main/src/contents/${routes[0].contents}`, 
+                Content: require(`!babel-loader!mdx-loader!./contents/${routes[0].contents}`).default, 
+                ThatComponent: routes[0].Component
+              })}
             </Route>
             
           </Switch>
