@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect} from 'react';
+import React, {useState, useMemo, useEffect, Suspense} from 'react';
 import {extent} from 'd3-array';
 
 import gexf from 'graphology-gexf';
@@ -128,7 +128,9 @@ const GraphAnnotation = ({
             </li>
           </ol>
         </div>
-        <Content />
+        <Suspense fallback={<div>Chargement</div>}>
+          <Content />
+        </Suspense>
       </section>
       <aside>
         <div className="vis">

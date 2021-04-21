@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, useMemo, Suspense} from 'react';
 import IceCreamVis from '../IceCream';
 
 import {VisualizationControlContext} from '../../contexts';
@@ -125,7 +125,9 @@ const IceCreamAnnotation = ({
             </li>
           </ol>
         </div>
+        <Suspense fallback={<div>Chargement</div>}>
         <Content />
+        </Suspense>
       </section>
       <aside>
         <div className="vis">

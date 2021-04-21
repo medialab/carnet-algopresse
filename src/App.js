@@ -17,21 +17,21 @@ import routesData from './summary'
 
 export default function App() {
   const renderRoute = ({data, contentsURL, Content, ThatComponent}) => (
-    <DataLoader url={data ? `${process.env.PUBLIC_URL}/data/${data}` : undefined}>
-      {
-        data => (
-          <ThatComponent
-            {
-              ...{
-                contentsURL,
-                Content,
-                data
+      <DataLoader url={data ? `${process.env.PUBLIC_URL}/data/${data}` : undefined}>
+        {
+          data => (
+            <ThatComponent
+              {
+                ...{
+                  contentsURL,
+                  Content,
+                  data
+                }
               }
-            }
-          />
-        )
-      }
-    </DataLoader>
+            />
+          )
+        }
+      </DataLoader>
   )
   return (
     <Router>
@@ -59,7 +59,8 @@ export default function App() {
                 data,
                 Component: ThatComponent
               }, index) => {
-                const Content = require(`!babel-loader!mdx-loader!./contents/${contents}`).default
+                const Content = React.lazy(() => import(`!babel-loader!mdx-loader!./contents/${contents}`))
+                // const Content = require(`!babel-loader!mdx-loader!./contents/${contents}`).default
                 const contentsURL = `${repository}/blob/main/src/contents/${contents}`;
                 return (
                   <Route key={index} path={route}>
@@ -73,7 +74,8 @@ export default function App() {
               {routesData && routesData.length ? renderRoute({
                 data: routesData[0].data, 
                 contentsURL: `${repository}/blob/main/src/contents/${routesData[0].contents}`, 
-                Content: require(`!babel-loader!mdx-loader!./contents/${routesData[0].contents}`).default, 
+                Content: React.lazy(() => import(`!babel-loader!mdx-loader!./contents/${routesData[0].contents}`)),
+                // Content: require(`!babel-loader!mdx-loader!./contents/${routesData[0].contents}`).default, 
                 ThatComponent: routesData[0].Component
               }) : null}
             </Route>

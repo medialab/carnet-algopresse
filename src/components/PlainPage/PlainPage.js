@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, Suspense} from 'react';
 
 
 const PlainPage = ({
@@ -33,7 +33,9 @@ const PlainPage = ({
             </li>
           </ol>
         </div>
-        <Content />
+        <Suspense fallback={<div>Chargement</div>}>
+          <Content />
+        </Suspense>
       </section>
       <aside>
       </aside>
