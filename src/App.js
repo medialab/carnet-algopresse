@@ -12,7 +12,7 @@ import {repository} from '../package.json';
 
 import DataLoader from './components/DataLoader';
 
-import routes from './summary'
+import routesData from './summary'
 
 
 export default function App() {
@@ -39,7 +39,7 @@ export default function App() {
         <nav>
           <ul>
             {
-              routes.map(({title, route}, index) => (
+              routesData.map(({title, route}, index) => (
                 <li key={index} className="navitem-container">
                   <Link to={route}>
                     {title}
@@ -52,7 +52,7 @@ export default function App() {
         <main>
           <Switch>
             {
-              routes.map(({
+              routesData.map(({
                 // title,
                 route, 
                 contents,
@@ -62,30 +62,21 @@ export default function App() {
                 const Content = require(`!babel-loader!mdx-loader!./contents/${contents}`).default
                 const contentsURL = `${repository}/blob/main/src/contents/${contents}`;
                 return (
-                <>
-                  {
-                    index === 0 ?
-                    <Route key={index} path={'/'}>
-                      {renderRoute({data, contentsURL, Content, ThatComponent})}
-                    </Route>
-                    : null
-                  }
                   <Route key={index} path={route}>
                     {renderRoute({data, contentsURL, Content, ThatComponent})}
                   </Route>
-                </>
                 )
               } )
               
             }
-            {/* <Route path="/">
-              {routes ? renderRoute({
-                data: routes[0].data, 
-                contentsURL: `${repository}/blob/main/src/contents/${routes[0].contents}`, 
-                Content: require(`!babel-loader!mdx-loader!./contents/${routes[0].contents}`).default, 
-                ThatComponent: routes[0].Component
+            <Route path="/">
+              {routesData && routesData.length ? renderRoute({
+                data: routesData[0].data, 
+                contentsURL: `${repository}/blob/main/src/contents/${routesData[0].contents}`, 
+                Content: require(`!babel-loader!mdx-loader!./contents/${routesData[0].contents}`).default, 
+                ThatComponent: routesData[0].Component
               }) : null}
-            </Route> */}
+            </Route>
             
           </Switch>
         </main>
