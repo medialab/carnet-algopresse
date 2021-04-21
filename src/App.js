@@ -17,7 +17,7 @@ import routes from './summary'
 
 export default function App() {
   const renderRoute = ({data, contentsURL, Content, ThatComponent}) => (
-    <DataLoader url={`${process.env.PUBLIC_URL}/data/${data}`}>
+    <DataLoader url={data ? `${process.env.PUBLIC_URL}/data/${data}` : undefined}>
       {
         data => (
           <ThatComponent

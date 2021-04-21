@@ -1,7 +1,14 @@
 import GraphAnnotation from './components/GraphAnnotation';
 import IceCreamAnnotation from './components/IceCreamAnnotation';
+import PlainPage from './components/PlainPage';
 
 const routes = [
+  {
+    title: 'Introduction',
+    route: '/introduction',
+    contents: '00_home.mdx',
+    Component: PlainPage
+  },
   {
     title: 'Graphe des critiques anglophones',
     route: '/graph-critic-en',

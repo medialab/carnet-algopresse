@@ -75,6 +75,10 @@ body {
   flex: 1;
   max-width: calc(60% - 5rem);
 }
+
+.slide-container.without-visualization {
+  justify-content: center;
+}
 .slide-container > aside {
   position: fixed;
   width: calc(55% - 5rem);
