@@ -33,6 +33,7 @@ export default function App() {
       }
     </DataLoader>
   )
+  console.log({routes})
   return (
     <Router>
       <div id="wrapper">
