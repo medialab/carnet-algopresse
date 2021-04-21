@@ -1,3 +1,4 @@
+import Color from 'color';
 import {scaleLinear} from 'd3-scale';
 import {evalIfNodeMatches} from '../../helpers/misc';
 
@@ -66,4 +67,43 @@ export function createNodeReducer({
   };
 
   return nodeReducer;
+}
+
+
+export function createEdgeReducer({
+  nodeColor,
+  nodeSize,
+  nodeLabel,
+  nodeSizeFactor = 1,
+  extents,
+  filters = [],
+  filtersModeAnd,
+  edgesMap
+}) {
+
+  
+  // Creating actual reducer
+  const edgeReducer = function (key, attr, el1, el2) {
+    const {
+      sourceNode, 
+      targetNode
+    } = edgesMap.get(key);
+    const renderedEdge = {
+    };
+    const biggerNode = sourceNode.size > targetNode.size ? sourceNode : targetNode;
+
+    // Color
+    if (biggerNode) {
+      if (!nodeColor) {
+        renderedEdge.color = biggerNode.color || DEFAULT_NODE_COLOR;
+      } else {
+        renderedEdge.color =
+          nodeColor.palette[biggerNode[nodeColor.name]] || DEFAULT_NODE_COLOR;
+      }
+      renderedEdge.color = Color(renderedEdge.color).lighten(0.4).rgb().string();
+    }
+    return renderedEdge;
+  };
+
+  return edgeReducer;
 }

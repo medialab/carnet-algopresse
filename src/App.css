@@ -76,7 +76,7 @@ body {
 
 .slide-container > section {
   flex: 1;
-  max-width: calc(60% - 5rem);
+  max-width: calc(55% - 5rem);
 }
 
 .slide-container.without-visualization {

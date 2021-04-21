@@ -9,7 +9,7 @@ import {
   usePrevious, 
 } from './hooks';
 import GraphControls from './GraphControls';
-import {createNodeReducer} from './reducers';
+import {createNodeReducer, createEdgeReducer} from './reducers';
 import {generatePalette} from '../../helpers/palettes';
 
 import './GraphContainer.css';
@@ -95,6 +95,15 @@ export default function GraphContainer({
     } else return undefined;
   }, [nodeColorVariable])
 
+  const edgesMap = useMemo(() => {
+    const m = new Map()
+    graph.forEach(
+      (_source, _target, sourceAttributes, targetAttributes, edge, _edgeAttributes) => {
+      m.set(edge, {sourceNode: sourceAttributes, targetNode: targetAttributes})
+    });
+    return m;
+  }, [graph])
+
   const previousNodeColor = usePrevious(nodeColor);
   const previousNodeSize = usePrevious(nodeSize);
   // const previousNodeLabel = usePrevious(nodeLabel);
@@ -109,6 +118,16 @@ export default function GraphContainer({
     extents,
     filters,
     filtersModeAnd,
+  });
+  
+  const edgeReducer = createEdgeReducer({
+    nodeColor,
+    // nodeSize,
+    // nodeLabel,
+    // extents,
+    filters,
+    filtersModeAnd,
+    edgesMap
   });
 
   const container = useRef(null);
@@ -138,6 +157,7 @@ export default function GraphContainer({
 
       // TODO: use upcoming #.setNodeReducer
       renderer.settings.nodeReducer = nodeReducer;
+      renderer.settings.edgeReducer = edgeReducer;
       needToRefresh = true;
     }
 
@@ -179,7 +199,7 @@ export default function GraphContainer({
 
       if (node && graph) {
        
-        const newRenderer = new WebGLRenderer(graph, node, {nodeReducer});
+        const newRenderer = new WebGLRenderer(graph, node, {nodeReducer, edgeReducer});
         setRenderer(newRenderer);
         const camera = newRenderer.getCamera();
         onCameraUpdate(camera.getState())
