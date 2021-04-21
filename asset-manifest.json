@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/carnet-algopresse/static/css/main.bd11d9d9.chunk.css",
+    "main.css": "/carnet-algopresse/static/css/main.11cedac4.chunk.css",
     "main.js": "/carnet-algopresse/static/js/main.5519a39c.chunk.js",
     "main.js.map": "/carnet-algopresse/static/js/main.5519a39c.chunk.js.map",
     "runtime-main.js": "/carnet-algopresse/static/js/runtime-main.ead17398.js",
@@ -10,13 +10,13 @@
     "static/js/3.5c31a5ed.chunk.js": "/carnet-algopresse/static/js/3.5c31a5ed.chunk.js",
     "static/js/3.5c31a5ed.chunk.js.map": "/carnet-algopresse/static/js/3.5c31a5ed.chunk.js.map",
     "index.html": "/carnet-algopresse/index.html",
-    "static/css/main.bd11d9d9.chunk.css.map": "/carnet-algopresse/static/css/main.bd11d9d9.chunk.css.map",
+    "static/css/main.11cedac4.chunk.css.map": "/carnet-algopresse/static/css/main.11cedac4.chunk.css.map",
     "static/js/2.f224e076.chunk.js.LICENSE.txt": "/carnet-algopresse/static/js/2.f224e076.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ead17398.js",
     "static/js/2.f224e076.chunk.js",
-    "static/css/main.bd11d9d9.chunk.css",
+    "static/css/main.11cedac4.chunk.css",
     "static/js/main.5519a39c.chunk.js"
   ]
 }
