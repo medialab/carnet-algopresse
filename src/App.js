@@ -33,7 +33,6 @@ export default function App() {
       }
     </DataLoader>
   )
-  console.log({routes})
   return (
     <Router>
       <div id="wrapper">
@@ -63,21 +62,30 @@ export default function App() {
                 const Content = require(`!babel-loader!mdx-loader!./contents/${contents}`).default
                 const contentsURL = `${repository}/blob/main/src/contents/${contents}`;
                 return (
-                <Route key={index} path={route}>
-                  {renderRoute({data, contentsURL, Content, ThatComponent})}
-                </Route>
+                <>
+                  {
+                    index === 0 ?
+                    <Route key={index} path={'/'}>
+                      {renderRoute({data, contentsURL, Content, ThatComponent})}
+                    </Route>
+                    : null
+                  }
+                  <Route key={index} path={route}>
+                    {renderRoute({data, contentsURL, Content, ThatComponent})}
+                  </Route>
+                </>
                 )
               } )
               
             }
-            <Route path="/">
+            {/* <Route path="/">
               {routes ? renderRoute({
                 data: routes[0].data, 
                 contentsURL: `${repository}/blob/main/src/contents/${routes[0].contents}`, 
                 Content: require(`!babel-loader!mdx-loader!./contents/${routes[0].contents}`).default, 
                 ThatComponent: routes[0].Component
               }) : null}
-            </Route>
+            </Route> */}
             
           </Switch>
         </main>
