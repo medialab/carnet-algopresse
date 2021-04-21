@@ -12,13 +12,13 @@ import {VisualizationControlContext} from '../../contexts';
 
 const GraphAnnotation = ({
   Content,
-  gexfData,
+  data,
   contentsURL,
 }) => {
   const graph = useMemo(() => {
-    return gexf.parse(Graph, gexfData);
-  }, [gexfData]);
-  const filtersOptions = useMemo(() => computeFiltersOptions('graph', graph, gexfData), [graph, gexfData]);
+    return gexf.parse(Graph, data);
+  }, [data]);
+  const filtersOptions = useMemo(() => computeFiltersOptions('graph', graph, data), [graph, data]);
 
   const [cameraPosition, setCameraPosition] = useState(undefined);
   const [helpVisible, setHelpVisible] = useState(false);

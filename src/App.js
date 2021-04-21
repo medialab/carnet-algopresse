@@ -8,9 +8,11 @@ import {
 
 import './App.css';
 
-import GraphCritic from './slides/GraphCritic';
-import DatesAnalysis from './slides/DatesAnalysis';
-import VerbsAnalysis from './slides/VerbsAnalysis';
+import {repository} from '../package.json';
+
+import DataLoader from './components/DataLoader';
+
+import routes from './summary'
 
 const Home = () => {
   return (
@@ -22,25 +24,6 @@ const Home = () => {
     </div>
   )
 }
-
-const routes = [
-  {
-    title: 'Graphe des critiques anglophones',
-    route: '/graph-critic-en',
-    Component: () => <GraphCritic />
-  },
-  {
-    title: 'Analyse des dates (fichier "date_ner_tfidf_v3")',
-    route: '/dates-analysis',
-    Component: () => <DatesAnalysis />
-  },
-  {
-    title: 'Analyse des verbes (fichier "df_AB_tfidf_verbs_freq_count.csv")',
-    route: '/verbs-analysis',
-    Component: () => <VerbsAnalysis />
-  },
-  
-]
 
 export default function App() {
   return (
@@ -65,11 +48,35 @@ export default function App() {
         <main>
           <Switch>
             {
-              routes.map(({route, Component: ThatComponent}, index) => (
+              routes.map(({
+                // title,
+                route, 
+                contents,
+                data,
+                Component: ThatComponent
+              }, index) => {
+                const Content = require(`!babel-loader!mdx-loader!./slides/${contents}`).default
+                const contentsURL = `${repository}/blob/main/src/slides/${contents}`;
+                return (
                 <Route key={index} path={route}>
-                  <ThatComponent />
+                  <DataLoader url={`${process.env.PUBLIC_URL}/data/${data}`}>
+                    {
+                      data => (
+                        <ThatComponent
+                          {
+                            ...{
+                              contentsURL,
+                              Content,
+                              data
+                            }
+                          }
+                        />
+                      )
+                    }
+                  </DataLoader>
                 </Route>
-              ))
+                )
+              } )
               
             }
             <Route path="/">
