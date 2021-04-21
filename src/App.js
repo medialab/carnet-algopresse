@@ -71,12 +71,12 @@ export default function App() {
               
             }
             <Route path="/">
-              {renderRoute({
+              {routes ? renderRoute({
                 data: routes[0].data, 
                 contentsURL: `${repository}/blob/main/src/contents/${routes[0].contents}`, 
                 Content: require(`!babel-loader!mdx-loader!./contents/${routes[0].contents}`).default, 
                 ThatComponent: routes[0].Component
-              })}
+              }) : null}
             </Route>
             
           </Switch>
