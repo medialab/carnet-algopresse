@@ -93,9 +93,11 @@ export function createEdgeReducer({
       sourceNode, 
       targetNode
     } = edgesMap.get(key);
-    const renderedEdge = {
-    };
-    const biggerNode = sourceNode.size > targetNode.size ? sourceNode : targetNode;
+    const renderedEdge = {};
+    // color with biggest node
+    const sourceNodeSize = nodeSize ? sourceNode[nodeSize.name] : sourceNode.size;
+    const targetNodeSize = nodeSize ? targetNode[nodeSize.name] : targetNode.size;
+    const biggerNode = sourceNodeSize > targetNodeSize ? sourceNode : targetNode;
 
     // Color
     if (biggerNode) {
