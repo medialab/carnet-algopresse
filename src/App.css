@@ -105,7 +105,7 @@ body {
   width: 100%;
   /* height: 10rem; */
   flex: 1;
-  border: 5px solid lightgrey;
+  border: 5px solid grey;
 }
 
 .slide-container aside .CodeContainer {
@@ -205,50 +205,63 @@ input, select {
   background: white;
   box-sizing: border-box;
 }
-.GraphControls {
+
+
+.VisControls {
+  z-index: 10;
+  display: flex;
+  flex-flow: column nowrap;
+  background: white;
+  padding: .5rem;
+  padding-top: 0;
   overflow: hidden;
   overflow-y: auto;
   list-style: none;
-  padding: 0;
   margin: 0;
   max-width: 15vw;
   min-width: 15vw;
   box-sizing: border-box;
   max-height: calc(100% - 5rem);
   position: absolute;
-  right: 2rem;
-  top: 1rem;
+  right: .7rem;
+  top: 1.3rem;
   transition: all .5s ease;
 }
 
-.GraphControls.is-minified {
+.VisContainer {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.VisControls.is-minified {
   right: -15vw;
 }
-.GraphControls .vis-controls-item {
+.VisControls .vis-controls-item {
   margin-bottom: .3rem;
 }
-.GraphControls .vis-controls-item.camera {
+.VisControls .vis-controls-item.camera {
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
 }
-.GraphControls .vis-controls-item.camera button:not(:first-of-type) {
+.VisControls .vis-controls-item.camera button:not(:first-of-type) {
   margin-left: .1rem;
 }
-.GraphControls .vis-controls-item.camera button:last-of-type {
+.VisControls .vis-controls-item.camera button:last-of-type {
   flex: 1;
 }
 
 .minify-button {
   position: absolute;
-  right: calc(15vw + 3rem);
-  top: 1rem;
+  right: .7rem;
+  top: 1.3rem;
   transition: right .5s ease;
-  width: 2rem;
+  /* width: 2rem; */
 }
 .minify-button.is-active {
-  transform: rotate(180deg);
-  right: 2rem;
+  /* transform: rotate(180deg); */
+  right: calc(15vw + .5rem);
 }
 
 .FiltersEditor button {
@@ -346,18 +359,6 @@ input, select {
   transition: width .2s ease;
 }
 
-
-.VisControls {
-  z-index: 10;
-  display: flex;
-  flex-flow: column nowrap;
-}
-
-.VisContainer {
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
 
 
 .tooltip {

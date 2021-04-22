@@ -61,8 +61,8 @@ export default function GraphControls({
   const [isMinified, setIsMinified] = useState(true)
   return (
     <>
-      <button onClick={() => setIsMinified(!isMinified)} className={cx('minify-button', {'is-active': isMinified})}>
-        {'>'}
+      <button onClick={() => setIsMinified(!isMinified)} className={cx('minify-button', {'is-active': !isMinified})}>
+        {'Options'}
       </button>
       <ul className={cx("VisControls GraphControls", {'is-minified': isMinified})}>
         
