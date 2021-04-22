@@ -3,7 +3,8 @@ import {
   HashRouter as Router,
   Switch,
   Route,
-  NavLink as Link
+  NavLink as Link,
+  Redirect,
 } from "react-router-dom";
 
 import './App.css';
@@ -33,7 +34,6 @@ export default function App() {
         }
       </DataLoader>
   )
-  const firstRouteContentsImport = `!babel-loader!mdx-loader!./contents/${routesData[0].contents}`;
   return (
     <Router>
       <div id="wrapper">
@@ -71,15 +71,7 @@ export default function App() {
               } )
               
             }
-            <Route path="/">
-              {routesData && routesData.length ? renderRoute({
-                data: routesData[0].data, 
-                contentsURL: `${repository}/blob/main/src/contents/${routesData[0].contents}`, 
-                Content: React.lazy(() => import(firstRouteContentsImport)),
-                ThatComponent: routesData[0].Component
-              }) : null}
-            </Route>
-            
+            <Redirect to={routesData[0].route} />
           </Switch>
         </main>
       </div>
