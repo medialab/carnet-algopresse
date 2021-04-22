@@ -38,10 +38,10 @@ export default function IceCreamControls({
   const [isMinified, setIsMinified] = useState(true)
   return (
     <>
-      <button onClick={() => setIsMinified(!isMinified)} className={cx('minify-button', {'is-active': isMinified})}>
-        {'>'}
+      <button onClick={() => setIsMinified(!isMinified)} className={cx('minify-button', {'is-active': !isMinified})}>
+        {'éditer'}
       </button>
-      <ul className={cx("GraphControls", {'is-minified': isMinified})}>
+      <ul className={cx("VisControls", {'is-minified': isMinified})}>
         
         <li className="vis-controls-item">
         <form onSubmit={e => e.preventDefault()}>
