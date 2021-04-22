@@ -33,6 +33,7 @@ export default function App() {
         }
       </DataLoader>
   )
+  const firstRouteContentsImport = `!babel-loader!mdx-loader!./contents/${routesData[0].contents}`;
   return (
     <Router>
       <div id="wrapper">
@@ -74,8 +75,7 @@ export default function App() {
               {routesData && routesData.length ? renderRoute({
                 data: routesData[0].data, 
                 contentsURL: `${repository}/blob/main/src/contents/${routesData[0].contents}`, 
-                Content: React.lazy(() => import(`!babel-loader!mdx-loader!./contents/${routesData[0].contents}`)),
-                // Content: require(`!babel-loader!mdx-loader!./contents/${routesData[0].contents}`).default, 
+                Content: React.lazy(() => import(firstRouteContentsImport)),
                 ThatComponent: routesData[0].Component
               }) : null}
             </Route>
