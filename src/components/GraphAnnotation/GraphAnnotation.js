@@ -11,6 +11,8 @@ import {computeFiltersOptions} from '../../helpers/misc';
 
 import {VisualizationControlContext} from '../../contexts';
 
+const DEFAULT_LABEL_DENSITY = 0.25;
+
 const GraphAnnotation = ({
   Content,
   data,
@@ -32,7 +34,7 @@ const GraphAnnotation = ({
   const [nodeColorVariable, setNodeColorVariable] = useState(undefined);
   const [nodeSizeVariable, setNodeSizeVariable] = useState(undefined);
   const [nodeLabelVariable, setNodeLabelVariable] = useState(undefined);
-  const [labelDensity, setLabelDensity] = useState(0.25);
+  const [labelDensity, setLabelDensity] = useState(DEFAULT_LABEL_DENSITY);
 
   const [focusedVisualizationId, setFocusedVisualizationId] = useState(null);
   const [registeredVisualizations, setRegisteredVisualizations] = useState({});
@@ -87,7 +89,7 @@ const GraphAnnotation = ({
     setNodeColorVariable(nodeColorVariable);
     setNodeSizeVariable(nodeSizeVariable);
     setNodeLabelVariable(nodeLabelVariable);
-    setLabelDensity(labelDensity);
+    setLabelDensity(labelDensity === undefined ? DEFAULT_LABEL_DENSITY : labelDensity);
   }
   const onSearchStringChange = str => {
     setSearchString(str);

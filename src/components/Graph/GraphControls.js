@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import cx from 'classnames';
 import Slider from 'rc-slider';
 import debounce from 'lodash/debounce';
@@ -14,6 +14,10 @@ const SLIDER_MARKS = {
 
 function DebouncedSlider({defaultValue, onChange}) {
   const [value, setValue] = useState(defaultValue);
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue])
 
   const onSliderChange = newValue => {
     setValue(newValue);
