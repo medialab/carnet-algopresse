@@ -32,6 +32,7 @@ const GraphAnnotation = ({
   const [nodeColorVariable, setNodeColorVariable] = useState(undefined);
   const [nodeSizeVariable, setNodeSizeVariable] = useState(undefined);
   const [nodeLabelVariable, setNodeLabelVariable] = useState(undefined);
+  const [labelDensity, setLabelDensity] = useState(0.25);
 
   const [focusedVisualizationId, setFocusedVisualizationId] = useState(null);
   const [registeredVisualizations, setRegisteredVisualizations] = useState({});
@@ -76,6 +77,7 @@ const GraphAnnotation = ({
     nodeColorVariable,
     nodeSizeVariable,
     nodeLabelVariable,
+    labelDensity,
 }) => {
     setCameraPosition({x, y, ratio});
     setUpdateTimeStamp(new Date().getTime());
@@ -85,6 +87,7 @@ const GraphAnnotation = ({
     setNodeColorVariable(nodeColorVariable);
     setNodeSizeVariable(nodeSizeVariable);
     setNodeLabelVariable(nodeLabelVariable);
+    setLabelDensity(labelDensity);
   }
   const onSearchStringChange = str => {
     setSearchString(str);
@@ -107,6 +110,7 @@ const GraphAnnotation = ({
         nodeColorVariable,
         nodeLabelVariable,
         filtersModeAnd,
+        labelDensity,
       }
     }}>
     <div className="slide-container">
@@ -160,13 +164,14 @@ const GraphAnnotation = ({
                 nodeColorVariable,
                 nodeLabelVariable,
                 filtersModeAnd,
+                labelDensity,
 
                 onSearchStringChange,
                 onToggleFiltersModeAnd: () => setFiltersModeAnd(!filtersModeAnd),
 
                 onFiltersChange: (newFilters) => setFilters(newFilters),
 
-                
+                onLabelDensityChange: val => setLabelDensity(val),
                 onNodeSizeVariableChange: (val) => setNodeSizeVariable(val),
                 onNodeColorVariableChange: (val) => setNodeColorVariable(val),
                 onNodeLabelVariableChange: (val) => setNodeLabelVariable(val),

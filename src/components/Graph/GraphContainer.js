@@ -67,6 +67,7 @@ export default function GraphContainer({
   onNodeSizeVariableChange,
   onNodeColorVariableChange,
   onNodeLabelVariableChange,
+  onLabelDensityChange,
 }) {
 
   const nodeSize = useMemo(() => {
@@ -168,7 +169,7 @@ export default function GraphContainer({
         height: CELL_HEIGHT_SCALE(labelDensity)
       };
 
-      // TODO: we can improve sigma to handle this
+      // TODO from nansi: we can improve sigma to handle this
       renderer.displayedLabels = new Set();
       needToRefresh = true;
     }
@@ -235,9 +236,11 @@ export default function GraphContainer({
               nodeSizeVariable,
               nodeColorVariable,
               nodeLabelVariable,
+              labelDensity,
               onNodeSizeVariableChange,
               onNodeColorVariableChange,
               onNodeLabelVariableChange,
+              onLabelDensityChange,
               colorPalette: nodeColor && nodeColor.palette,
             }
           }

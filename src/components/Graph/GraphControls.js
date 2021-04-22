@@ -1,10 +1,38 @@
 import React, {useState} from 'react';
 import cx from 'classnames';
+import Slider from 'rc-slider';
+import debounce from 'lodash/debounce';
 
 import ControlButton from '../ControlButton';
 import FiltersEditor from '../FiltersEditor';
 import VariablesEditor from '../VariablesEditor';
 import ColorLegend from '../ColorLegend';
+
+const SLIDER_MARKS = {
+  '0.25': 'défaut'
+};
+
+function DebouncedSlider({defaultValue, onChange}) {
+  const [value, setValue] = useState(defaultValue);
+
+  const onSliderChange = newValue => {
+    setValue(newValue);
+    onChange(newValue);
+  };
+
+  return (
+    <Slider
+      min={0}
+      max={1}
+      step={0.01}
+      defaultValue={defaultValue}
+      value={value}
+      onChange={onSliderChange}
+      marks={SLIDER_MARKS}
+    />
+  );
+}
+
 
 export default function GraphControls({
   rescale, 
@@ -14,6 +42,7 @@ export default function GraphControls({
   onSearchStringChange,
   filtersModeAnd,
   onToggleFiltersModeAnd,
+  labelDensity,
 
   filtersOptions,
   filters = [],
@@ -25,6 +54,7 @@ export default function GraphControls({
   onNodeSizeVariableChange,
   onNodeColorVariableChange,
   onNodeLabelVariableChange,
+  onLabelDensityChange,
   colorPalette,
 }) {
   const handleSearchChange = e => onSearchStringChange(e.target.value);
@@ -49,10 +79,11 @@ export default function GraphControls({
         </ControlButton>
         </li>
         <li className="vis-controls-item">
-        <form onSubmit={e => e.preventDefault()}>
-          <input type="text" onChange={handleSearchChange} placeholder="rechercher" value={searchString} />
-        </form>
+          <form onSubmit={e => e.preventDefault()}>
+            <input type="text" onChange={handleSearchChange} placeholder="rechercher" value={searchString} />
+          </form>
         </li>
+        
         <li className="vis-controls-item">
           <VariablesEditor
             {
@@ -100,6 +131,17 @@ export default function GraphControls({
             }
           }
         />
+        </li>
+        <li className="vis-controls-item slider-wrapper">
+          <form onSubmit={e => e.preventDefault()}>
+            <h5>Densité des labels</h5>
+            <div className="slider-container">
+                <DebouncedSlider
+                  defaultValue={labelDensity}
+                  onChange={debounce(onLabelDensityChange, 300)}
+                />
+              </div>
+          </form>
         </li>
       </ul>
     </>
