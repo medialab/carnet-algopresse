@@ -61,7 +61,6 @@ export default function App() {
                 Component: ThatComponent
               }, index) => {
                 const Content = React.lazy(() => import(`!babel-loader!mdx-loader!./contents/${contents}`))
-                // const Content = require(`!babel-loader!mdx-loader!./contents/${contents}`).default
                 const contentsURL = `${repository}/blob/main/src/contents/${contents}`;
                 return (
                   <Route key={index} path={route}>

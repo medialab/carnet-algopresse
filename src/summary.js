@@ -12,7 +12,7 @@ const routes = [
   {
     title: '1. Couverture médias',
     route: '/01-couverture-media',
-    contents: 'O1_couverture_media.mdx',
+    contents: '01_couverture_media.mdx',
     Component: PlainPage
   },
   {
