@@ -42,7 +42,6 @@ export default function GraphContainer({
   graph,
   // nodeColor,
   // nodeSize,
-  nodeLabel,
   labelDensity,
   extents,
 
@@ -64,8 +63,10 @@ export default function GraphContainer({
 
   nodeSizeVariable,
   nodeColorVariable,
+  nodeLabelVariable,
   onNodeSizeVariableChange,
   onNodeColorVariableChange,
+  onNodeLabelVariableChange,
 }) {
 
   const nodeSize = useMemo(() => {
@@ -106,7 +107,7 @@ export default function GraphContainer({
 
   const previousNodeColor = usePrevious(nodeColor);
   const previousNodeSize = usePrevious(nodeSize);
-  // const previousNodeLabel = usePrevious(nodeLabel);
+  const previousNodeLabelVariable = usePrevious(nodeLabelVariable);
   const previousLabelDensity = usePrevious(labelDensity);
   const previousSearchString = usePrevious(searchString);
   const previousFilters = usePrevious(filters);
@@ -114,7 +115,7 @@ export default function GraphContainer({
   const nodeReducer = createNodeReducer({
     nodeColor,
     nodeSize,
-    nodeLabel,
+    nodeLabel: nodeLabelVariable,
     extents,
     filters,
     filtersModeAnd,
@@ -149,7 +150,7 @@ export default function GraphContainer({
     if (
       previousNodeColor !== nodeColor ||
       previousNodeSize !== nodeSize ||
-      // previousNodeLabel !== nodeLabel ||
+      previousNodeLabelVariable !== nodeLabelVariable ||
       // previousSearchString !== searchString ||
       previousFilters !== filters
     ) {
@@ -233,8 +234,10 @@ export default function GraphContainer({
               onFiltersChange,
               nodeSizeVariable,
               nodeColorVariable,
+              nodeLabelVariable,
               onNodeSizeVariableChange,
               onNodeColorVariableChange,
+              onNodeLabelVariableChange,
               colorPalette: nodeColor && nodeColor.palette,
             }
           }

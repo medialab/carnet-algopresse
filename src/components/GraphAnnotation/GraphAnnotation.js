@@ -31,6 +31,7 @@ const GraphAnnotation = ({
   const [filters, setFilters] = useState([]);
   const [nodeColorVariable, setNodeColorVariable] = useState(undefined);
   const [nodeSizeVariable, setNodeSizeVariable] = useState(undefined);
+  const [nodeLabelVariable, setNodeLabelVariable] = useState(undefined);
 
   const [focusedVisualizationId, setFocusedVisualizationId] = useState(null);
   const [registeredVisualizations, setRegisteredVisualizations] = useState({});
@@ -74,6 +75,7 @@ const GraphAnnotation = ({
     filters, 
     nodeColorVariable,
     nodeSizeVariable,
+    nodeLabelVariable,
 }) => {
     setCameraPosition({x, y, ratio});
     setUpdateTimeStamp(new Date().getTime());
@@ -82,6 +84,7 @@ const GraphAnnotation = ({
     setFilters(filters);
     setNodeColorVariable(nodeColorVariable);
     setNodeSizeVariable(nodeSizeVariable);
+    setNodeLabelVariable(nodeLabelVariable);
   }
   const onSearchStringChange = str => {
     setSearchString(str);
@@ -102,6 +105,7 @@ const GraphAnnotation = ({
         // updateTimestamp,
         nodeSizeVariable,
         nodeColorVariable,
+        nodeLabelVariable,
         filtersModeAnd,
       }
     }}>
@@ -154,6 +158,7 @@ const GraphAnnotation = ({
                 updateTimestamp,
                 nodeSizeVariable,
                 nodeColorVariable,
+                nodeLabelVariable,
                 filtersModeAnd,
 
                 onSearchStringChange,
@@ -164,6 +169,7 @@ const GraphAnnotation = ({
                 
                 onNodeSizeVariableChange: (val) => setNodeSizeVariable(val),
                 onNodeColorVariableChange: (val) => setNodeColorVariable(val),
+                onNodeLabelVariableChange: (val) => setNodeLabelVariable(val),
 
                 extents: {
                   nodeSize: {

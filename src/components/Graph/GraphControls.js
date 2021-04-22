@@ -21,8 +21,10 @@ export default function GraphControls({
 
   nodeSizeVariable,
   nodeColorVariable,
+  nodeLabelVariable,
   onNodeSizeVariableChange,
   onNodeColorVariableChange,
+  onNodeLabelVariableChange,
   colorPalette,
 }) {
   const handleSearchChange = e => onSearchStringChange(e.target.value);
@@ -67,6 +69,12 @@ export default function GraphControls({
                     value: nodeColorVariable,
                     onChange: onNodeColorVariableChange,
                     type: 'color'
+                  },
+                  {
+                    title: 'Label des noeuds',
+                    value: nodeLabelVariable,
+                    onChange: onNodeLabelVariableChange,
+                    type: 'string'
                   }
                 ],
               }

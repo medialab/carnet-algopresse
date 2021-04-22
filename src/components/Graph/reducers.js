@@ -64,7 +64,7 @@ export function createNodeReducer({
       if (!nodeLabel) {
         renderedNode.label = attr.label || key;
       } else {
-        renderedNode.label = attr[nodeLabel.name] || '<no-label>';
+        renderedNode.label = nodeLabel === 'default' ? attr.label || key : attr[nodeLabel] || '';
       }
     }
 
