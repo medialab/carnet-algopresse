@@ -4,7 +4,8 @@ import {extent} from 'd3-array';
 import gexf from 'graphology-gexf';
 import Graph from 'graphology';
 
-import GraphVis from '../../components/Graph';
+import GraphVis from '../Graph';
+import FooterNav from '../FooterNav';
 // import CodeContainer from '../../components/CodeContainer';
 import {computeFiltersOptions} from '../../helpers/misc';
 
@@ -14,6 +15,8 @@ const GraphAnnotation = ({
   Content,
   data,
   contentsURL,
+  prevPage,
+  nextPage,
 }) => {
   const graph = useMemo(() => {
     return gexf.parse(Graph, data);
@@ -131,6 +134,7 @@ const GraphAnnotation = ({
         <Suspense fallback={<div>Chargement</div>}>
           <Content />
         </Suspense>
+        <FooterNav prevPage={prevPage} nextPage={nextPage} />
       </section>
       <aside>
         <div className="vis">

@@ -1,14 +1,18 @@
-import React, {useState, useEffect, useMemo, Suspense} from 'react';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
+import FooterNav from '../FooterNav';
+
 import IceCreamVis from '../IceCream';
 
-import {VisualizationControlContext} from '../../contexts';
+import { VisualizationControlContext } from '../../contexts';
 
-import {computeFiltersOptions} from '../../helpers/misc';
+import { computeFiltersOptions } from '../../helpers/misc';
 
 const IceCreamAnnotation = ({
   Content,
   data,
   contentsURL,
+  prevPage,
+  nextPage,
 }) => {
   const filtersOptions = useMemo(() => computeFiltersOptions('table', data), [data]);
   const [helpVisible, setHelpVisible] = useState(false);
@@ -18,7 +22,7 @@ const IceCreamAnnotation = ({
   const [yVariable, setYVariable] = useState(undefined);
   const [reverseX, setReverseX] = useState(false);
   const [reverseY, setReverseY] = useState(false);
-  const [sizeVariable,setSizeVariable] = useState(undefined);
+  const [sizeVariable, setSizeVariable] = useState(undefined);
   const [colorVariable, setColorVariable] = useState(undefined);
   const [labelVariable, setLabelVariable] = useState(undefined);
 
@@ -35,7 +39,7 @@ const IceCreamAnnotation = ({
   }
 
   const onUnregisterVisualization = id => {
-    const copyOfRegistered = {...registeredVisualizations};
+    const copyOfRegistered = { ...registeredVisualizations };
     delete copyOfRegistered[id]
     setRegisteredVisualizations(copyOfRegistered)
   }
@@ -53,7 +57,7 @@ const IceCreamAnnotation = ({
 
     rotateMode: thatRotateMode,
     searchString: thatSearchString,
-  } ) => {
+  }) => {
     setXVariable(thatXVariable);
     setYVariable(thatYVariable);
     setReverseX(thatReverseX);
@@ -68,20 +72,20 @@ const IceCreamAnnotation = ({
   useEffect(() => {
     if (!focusedVisualizationId && Object.keys(registeredVisualizations).length) {
       const thatId = Object.keys(registeredVisualizations)[0];
-      setFocusedVisualizationId(thatId )
+      setFocusedVisualizationId(thatId)
       onVisualizationUpdate(registeredVisualizations[thatId])
     }
   }, [registeredVisualizations, focusedVisualizationId])
 
-  
+
   const onSearchStringChange = str => {
     setSearchString(str);
   }
   return (
     <VisualizationControlContext.Provider value={{
-      onVisualizationUpdate, 
-      onRegisterVisualization, 
-      onUnregisterVisualization, 
+      onVisualizationUpdate,
+      onRegisterVisualization,
+      onUnregisterVisualization,
       focusedVisualizationId,
       setFocusedVisualizationId,
       visualizationParams: {
@@ -99,74 +103,75 @@ const IceCreamAnnotation = ({
         searchString,
       }
     }}>
-    <div className="slide-container">
-      <section>
-        <div>
-          <p>
-            <button className={helpVisible ? 'is-active': ''} onClick={() => setHelpVisible(!helpVisible)}>
-              Comment modifier cette page ?
+      <div className="slide-container">
+        <section>
+          <div>
+            <p>
+              <button className={helpVisible ? 'is-active' : ''} onClick={() => setHelpVisible(!helpVisible)}>
+                Comment modifier cette page ?
             </button>
-          </p>
-          <ol className={`edit-help ${helpVisible ? 'is-active' : ''}`}>
-            <li>
-              Préalablement se logger dans github si le répertoire est privé
+            </p>
+            <ol className={`edit-help ${helpVisible ? 'is-active' : ''}`}>
+              <li>
+                Préalablement se logger dans github si le répertoire est privé
             </li>
-            <li>
-              Se rendre sur <a target="blank" href={contentsURL}>cette page du répertoire github</a>
+              <li>
+                Se rendre sur <a target="blank" href={contentsURL}>cette page du répertoire github</a>
+              </li>
+              <li>
+                Cliquer sur le crayon en haut à droite des contenus (il affiche "edit" au survol)
             </li>
-            <li>
-              Cliquer sur le crayon en haut à droite des contenus (il affiche "edit" au survol)
+              <li>
+                Faire les modifications puis cliquer sur "Commit changes" en bas de la page
             </li>
-            <li>
-              Faire les modifications puis cliquer sur "Commit changes" en bas de la page
+              <li>
+                Attendre 2 minutes puis recharger la page pour voir la version à jour de la page
             </li>
-            <li>
-              Attendre 2 minutes puis recharger la page pour voir la version à jour de la page
-            </li>
-          </ol>
-        </div>
-        <Suspense fallback={<div>Chargement</div>}>
-        <Content />
-        </Suspense>
-      </section>
-      <aside>
-        <div className="vis">
-          <IceCreamVis
+            </ol>
+          </div>
+          <Suspense fallback={<div>Chargement</div>}>
+            <Content />
+          </Suspense>
+          <FooterNav prevPage={prevPage} nextPage={nextPage} />
+        </section>
+        <aside>
+          <div className="vis">
+            <IceCreamVis
               {
-                ...{
-                  data,
-                  filtersOptions,
+              ...{
+                data,
+                filtersOptions,
 
-                  xVariable,
-                  reverseX,
-                  yVariable,
-                  reverseY,
-                  sizeVariable,
-                  colorVariable,
-                  labelVariable,
+                xVariable,
+                reverseX,
+                yVariable,
+                reverseY,
+                sizeVariable,
+                colorVariable,
+                labelVariable,
 
-                  rotateMode,
-                  searchString,
+                rotateMode,
+                searchString,
 
-                  onSearchStringChange,
-                  onToggleRotateMode: () => setRotateMode(!rotateMode) ,
-                  
-                  onXVariableChange: (val) => setXVariable(val),
-                  onYVariableChange: (val) => setYVariable(val),
+                onSearchStringChange,
+                onToggleRotateMode: () => setRotateMode(!rotateMode),
 
-                  onToggleReverseX: () => setReverseX(!reverseX),
-                  onToggleReverseY: () => setReverseY(!reverseY),
+                onXVariableChange: (val) => setXVariable(val),
+                onYVariableChange: (val) => setYVariable(val),
 
-                  onColorVariableChange: (val) => setColorVariable(val),
-                  onSizeVariableChange: (val) => setSizeVariable(val),
-                  onLabelVariableChange: (val) => setLabelVariable(val),
-                }
+                onToggleReverseX: () => setReverseX(!reverseX),
+                onToggleReverseY: () => setReverseY(!reverseY),
+
+                onColorVariableChange: (val) => setColorVariable(val),
+                onSizeVariableChange: (val) => setSizeVariable(val),
+                onLabelVariableChange: (val) => setLabelVariable(val),
+              }
               }
             />
-        </div>
-      </aside>
-  </div>
-  </VisualizationControlContext.Provider>
+          </div>
+        </aside>
+      </div>
+    </VisualizationControlContext.Provider>
   )
 }
 

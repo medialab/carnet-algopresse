@@ -1,9 +1,11 @@
 import React, {useState, Suspense} from 'react';
-
+import FooterNav from '../FooterNav';
 
 const PlainPage = ({
   Content,
   contentsURL,
+  prevPage,
+  nextPage
 }) => {
   const [helpVisible, setHelpVisible] = useState(false);
   return (
@@ -36,6 +38,7 @@ const PlainPage = ({
         <Suspense fallback={<div>Chargement</div>}>
           <Content />
         </Suspense>
+        <FooterNav prevPage={prevPage} nextPage={nextPage} />
       </section>
       <aside>
       </aside>

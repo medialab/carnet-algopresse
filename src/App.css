@@ -82,6 +82,9 @@ body {
 .slide-container.without-visualization {
   justify-content: center;
 }
+.slide-container.without-visualization aside {
+  display: none;
+}
 .slide-container > aside {
   position: fixed;
   width: calc(55% - 5rem);
@@ -399,4 +402,46 @@ input, select {
 .scatterplot .axis-variable-name {
   font-weight: 800;
   font-style: italic;
+}
+
+.FooterNav {
+  margin-bottom: 2rem;
+}
+
+.FooterNav ul {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+}
+
+.FooterNav.start-page ul {
+  justify-content: flex-end;
+}
+
+.FooterNav ul li a {
+  margin: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  text-decoration: none;
+  color: black;
+  background: lightgrey;
+  padding: 1rem;
+  transition: all .5s ease;
+}
+.FooterNav ul li a:hover {
+  background: black;
+  color: lightgrey;
+}
+
+.FooterNav ul .previous-page .marker {
+  padding-right: 1rem;
+}
+.FooterNav ul .next-page .marker {
+  padding-left: 1rem;
+}
+
+.FooterNav ul .next-page:first-of-type:last-of-type {
+  justify-self: flex-end;
 }
