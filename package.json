@@ -20,6 +20,7 @@
     "parse-color": "^1.0.0",
     "rc-slider": "^9.6.5",
     "react": "^17.0.1",
+    "react-color": "^2.19.3",
     "react-container-dimensions": "^1.4.1",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",

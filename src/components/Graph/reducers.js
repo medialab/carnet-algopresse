@@ -14,7 +14,8 @@ export function createNodeReducer({
   nodeSizeFactor = 1,
   extents,
   filters = [],
-  filtersModeAnd
+  filtersModeAnd,
+  colorPalette,
 }) {
   let nodeSizeScale = null;
 
@@ -38,6 +39,8 @@ export function createNodeReducer({
     // Color
     if (!nodeColor) {
       renderedNode.color = attr.color || DEFAULT_NODE_COLOR;
+    } else if (colorPalette) {
+      renderedNode.color = colorPalette[attr[nodeColor.name]] || DEFAULT_NODE_COLOR;
     } else {
       renderedNode.color =
         nodeColor.palette[attr[nodeColor.name]] || DEFAULT_NODE_COLOR;
@@ -78,12 +81,13 @@ export function createNodeReducer({
 export function createEdgeReducer({
   nodeColor,
   nodeSize,
-  nodeLabel,
-  nodeSizeFactor = 1,
-  extents,
-  filters = [],
-  filtersModeAnd,
-  edgesMap
+  // nodeLabel,
+  // nodeSizeFactor = 1,
+  // extents,
+  // filters = [],
+  // filtersModeAnd,
+  edgesMap,
+  colorPalette,
 }) {
 
   
@@ -103,7 +107,9 @@ export function createEdgeReducer({
     if (biggerNode) {
       if (!nodeColor) {
         renderedEdge.color = biggerNode.color || DEFAULT_NODE_COLOR;
-      } else {
+      } else if (colorPalette) {
+        renderedEdge.color = colorPalette[biggerNode[nodeColor.name]] || DEFAULT_NODE_COLOR;
+      }  else {
         renderedEdge.color =
           nodeColor.palette[biggerNode[nodeColor.name]] || DEFAULT_NODE_COLOR;
       }

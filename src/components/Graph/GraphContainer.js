@@ -63,11 +63,13 @@ export default function GraphContainer({
 
   nodeSizeVariable,
   nodeColorVariable,
+  colorPalette,
   nodeLabelVariable,
   onNodeSizeVariableChange,
   onNodeColorVariableChange,
   onNodeLabelVariableChange,
   onLabelDensityChange,
+  onColorPaletteChange,
 }) {
 
   const nodeSize = useMemo(() => {
@@ -112,6 +114,7 @@ export default function GraphContainer({
   const previousLabelDensity = usePrevious(labelDensity);
   const previousSearchString = usePrevious(searchString);
   const previousFilters = usePrevious(filters);
+  const previousColorPalette = usePrevious(colorPalette);
 
   const nodeReducer = createNodeReducer({
     nodeColor,
@@ -120,16 +123,18 @@ export default function GraphContainer({
     extents,
     filters,
     filtersModeAnd,
+    colorPalette,
   });
   
   const edgeReducer = createEdgeReducer({
     nodeColor,
+    colorPalette,
     // nodeSize,
     // nodeLabel,
     // extents,
     filters,
     filtersModeAnd,
-    edgesMap
+    edgesMap,
   });
 
   const container = useRef(null);
@@ -152,6 +157,7 @@ export default function GraphContainer({
       previousNodeColor !== nodeColor ||
       previousNodeSize !== nodeSize ||
       previousNodeLabelVariable !== nodeLabelVariable ||
+      previousColorPalette !== colorPalette ||
       // previousSearchString !== searchString ||
       previousFilters !== filters
     ) {
@@ -214,7 +220,6 @@ export default function GraphContainer({
     },
     [graph] /* eslint react-hooks/exhaustive-deps : 0 */
   );
-
   return (
     <div className="VisContainer GraphContainer">
 
@@ -240,8 +245,9 @@ export default function GraphContainer({
               onNodeSizeVariableChange,
               onNodeColorVariableChange,
               onNodeLabelVariableChange,
+              onColorPaletteChange,
               onLabelDensityChange,
-              colorPalette: nodeColor && nodeColor.palette,
+              colorPalette: colorPalette || (nodeColor && nodeColor.palette),
             }
           }
         />

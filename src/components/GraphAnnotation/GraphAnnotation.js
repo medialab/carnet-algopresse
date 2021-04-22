@@ -1,5 +1,7 @@
 import React, {useState, useMemo, useEffect, Suspense} from 'react';
 import {extent} from 'd3-array';
+import {generatePalette} from '../../helpers/palettes';
+
 
 import gexf from 'graphology-gexf';
 import Graph from 'graphology';
@@ -32,6 +34,7 @@ const GraphAnnotation = ({
   const [updateTimestamp, setUpdateTimeStamp] = useState(new Date().getTime());
   const [filters, setFilters] = useState([]);
   const [nodeColorVariable, setNodeColorVariable] = useState(undefined);
+  const [colorPalette, setColorPalette] = useState(undefined);
   const [nodeSizeVariable, setNodeSizeVariable] = useState(undefined);
   const [nodeLabelVariable, setNodeLabelVariable] = useState(undefined);
   const [labelDensity, setLabelDensity] = useState(DEFAULT_LABEL_DENSITY);
@@ -76,24 +79,36 @@ const GraphAnnotation = ({
     searchString, 
     filtersModeAnd, 
     filters, 
-    nodeColorVariable,
+    nodeColorVariable: newNodeColorVariable,
     nodeSizeVariable,
     nodeLabelVariable,
     labelDensity,
+    colorPalette,
 }) => {
     setCameraPosition({x, y, ratio});
     setUpdateTimeStamp(new Date().getTime());
     setSearchString(searchString);
     setFiltersModeAnd(filtersModeAnd);
     setFilters(filters);
-    setNodeColorVariable(nodeColorVariable);
+    setNodeColorVariable(newNodeColorVariable);
     setNodeSizeVariable(nodeSizeVariable);
     setNodeLabelVariable(nodeLabelVariable);
+    if (colorPalette && nodeColorVariable === newNodeColorVariable) {
+      setColorPalette(colorPalette);
+    } else {
+      const colors = generatePalette(newNodeColorVariable, filtersOptions[newNodeColorVariable].options.size);
+      const palette = {};
+      let i = 0;
+      filtersOptions[newNodeColorVariable].options.forEach(option => {
+        palette[option] = colors[i];
+        i++;
+      });
+      setColorPalette(palette);
+    }
     setLabelDensity(labelDensity === undefined ? DEFAULT_LABEL_DENSITY : labelDensity);
   }
   const onSearchStringChange = str => {
     setSearchString(str);
-
   }
   return (
     <VisualizationControlContext.Provider value={{
@@ -113,6 +128,7 @@ const GraphAnnotation = ({
         nodeLabelVariable,
         filtersModeAnd,
         labelDensity,
+        colorPalette,
       }
     }}>
     <div className="slide-container">
@@ -168,6 +184,8 @@ const GraphAnnotation = ({
                 filtersModeAnd,
                 labelDensity,
 
+                colorPalette,
+
                 onSearchStringChange,
                 onToggleFiltersModeAnd: () => setFiltersModeAnd(!filtersModeAnd),
 
@@ -177,6 +195,7 @@ const GraphAnnotation = ({
                 onNodeSizeVariableChange: (val) => setNodeSizeVariable(val),
                 onNodeColorVariableChange: (val) => setNodeColorVariable(val),
                 onNodeLabelVariableChange: (val) => setNodeLabelVariable(val),
+                onColorPaletteChange: val => setColorPalette(val),
 
                 extents: {
                   nodeSize: {

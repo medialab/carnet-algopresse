@@ -48,25 +48,27 @@ export default function GraphControls({
   onToggleFiltersModeAnd,
   labelDensity,
 
-  filtersOptions,
-  filters = [],
-  onFiltersChange,
-
   nodeSizeVariable,
   nodeColorVariable,
   nodeLabelVariable,
+
+  filtersOptions,
+  filters = [],
+  colorPalette,
+
+  onFiltersChange,
   onNodeSizeVariableChange,
   onNodeColorVariableChange,
   onNodeLabelVariableChange,
   onLabelDensityChange,
-  colorPalette,
+  onColorPaletteChange,
 }) {
   const handleSearchChange = e => onSearchStringChange(e.target.value);
   const [isMinified, setIsMinified] = useState(true)
   return (
     <>
       <button onClick={() => setIsMinified(!isMinified)} className={cx('minify-button', {'is-active': !isMinified})}>
-        {'Options'}
+        {'éditer'}
       </button>
       <ul className={cx("VisControls GraphControls", {'is-minified': isMinified})}>
         
@@ -120,6 +122,7 @@ export default function GraphControls({
             nodeColorVariable && nodeColorVariable !== 'default' ?
             <ColorLegend
               colorPalette={colorPalette}
+              onChange={onColorPaletteChange}
             />
             : null
           }
