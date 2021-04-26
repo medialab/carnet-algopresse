@@ -7,6 +7,7 @@ import IceCreamControls from './IceCreamControls';
 import {generatePalette} from '../../helpers/palettes';
 
 import './IceCreamContainer.css';
+import { transformGeometry } from '../../helpers/misc';
 
 function IceCreamContainer({
 
@@ -36,12 +37,15 @@ function IceCreamContainer({
   onToggleReverseY,
   filtersOptions = {},
 }) {
+ 
   const smallestDimension = min([width, height])
-  const WIDTH = smallestDimension;
-  const HEIGHT = smallestDimension;
+  // in rotate mode width indexed on the hypothenuse
+  const WIDTH = rotateMode ? parseInt(Math.sqrt(smallestDimension * smallestDimension / 2)) : smallestDimension;
+  const HEIGHT = rotateMode ? parseInt(Math.sqrt(smallestDimension * smallestDimension / 2)) : smallestDimension;
+
   const MIN_RADIUS = smallestDimension / 100;
   const MAX_RADIUS = smallestDimension / 50;
-  const MARGIN = smallestDimension / 10;
+  const MARGIN = WIDTH / 10;
 
   let xRange = [MARGIN, WIDTH - MARGIN * 2];
   let yRange = [MARGIN, HEIGHT - MARGIN ];
@@ -52,10 +56,13 @@ function IceCreamContainer({
     yRange = yRange.reverse();
   }
 
-  const getX = xVariable && xVariable !== 'default' ?  scaleLinear().range(xRange).domain(extent(data.map(d => +d[xVariable]))) : () => 0;
-  const getY = yVariable && yVariable !== 'default' ?  scaleLinear().range(yRange).domain(extent(data.map(d => +d[yVariable]))) : () => 0;
+  // const getX = xVariable && xVariable !== 'default' ?  scaleLinear().range(xRange).domain(extent(data.map(d => +d[xVariable]))) : () => 0;
+  // const getY = yVariable && yVariable !== 'default' ?  scaleLinear().range(yRange).domain(extent(data.map(d => +d[yVariable]))) : () => 0;
+  const getX = xVariable && xVariable !== 'default' ?  scaleLinear().range(xRange).domain([0, 1]) : () => 0;
+  const getY = yVariable && yVariable !== 'default' ?  scaleLinear().range(yRange).domain([0, 1]) : () => 0;
   const getSize = sizeVariable && sizeVariable !== 'default' ?  scaleLinear().domain(extent(data.map(d => +d[sizeVariable]))).range([MIN_RADIUS, MAX_RADIUS]) : () => 0;
 
+  // manage palette
   let palette = colorVariable && colorVariable !== 'default' ? generatePalette(colorVariable, filtersOptions[colorVariable].options.length) : undefined
   let getColor = () => 'grey';
   let colorPalette;
@@ -68,6 +75,7 @@ function IceCreamContainer({
       return colorPalette[val]
     }
   }
+  // handling search
   let highlightedIndex;
   if (searchString.length && labelVariable) {
     highlightedIndex = new Set();
@@ -78,72 +86,127 @@ function IceCreamContainer({
       }
     })
   }
+  let rotateTransform = {rotate: 0};
+  if (rotateMode) {
+    rotateTransform = {
+      rotate: -45,
+      translate: {x: 0, y: smallestDimension/2}
+    }
+  }
+  // wrapping function for transforms
+  const transf = (x, y) => transformGeometry({x, y}, rotateTransform)
+  // dimensions of control background rect
+  const {x: point1X, y: point1Y} = transformGeometry({
+    x: 0,
+    y: 0
+  }, rotateTransform)
+  const {x: point2X, y: point2Y} = transformGeometry({
+    x: WIDTH,
+    y: 0
+  }, rotateTransform)
+  const {x: point3X, y: point3Y} = transformGeometry({
+    x: WIDTH,
+    y: HEIGHT
+  }, rotateTransform)
+  const {x: point4X, y: point4Y} = transformGeometry({
+    x: 0,
+    y: HEIGHT
+  }, rotateTransform)
+  
   return (
     <>
-        <svg className="scatterplot" width={WIDTH} height={HEIGHT} transform={rotateMode ? 'rotate(-45)' : ''}>
-          <g transform={`translate(${WIDTH/20}, 0)scale(.9)`}>
+        <svg className="scatterplot" width={smallestDimension} height={smallestDimension}>
+          <polygon 
+            points={`${point1X},${point1Y} ${point2X},${point2Y} ${point3X},${point3Y} ${point4X},${point4Y}`} 
+            width={WIDTH} 
+            height={HEIGHT} 
+            fill="white" 
+          />
+          <g transform={`translate(${rotateMode ? 0 : MARGIN / 2}, ${rotateMode ? -MARGIN : 0})${rotateMode ? 'scale(1.05)' : ''}`}>
             <g className="axis axis-left">
-              <line x1={MARGIN} x2={MARGIN} y1={MARGIN} y2={HEIGHT - MARGIN} stroke={'black'} />
+              <line 
+                x1={transf(MARGIN, MARGIN).x} 
+                y1={transf(MARGIN, MARGIN).y} 
+                x2={transf(MARGIN, HEIGHT - MARGIN).x} 
+                y2={transf(MARGIN, HEIGHT - MARGIN).y} 
+                stroke={'black'} 
+              />
               {
                 getY.ticks &&
                 getY.ticks()
                 .map(tick => {
-                  const y = getY(tick);
+   
+                  const {x, y} = transf(MARGIN, getY(tick))
+                  const {x: x1, y: y1} = transf(MARGIN/4, getY(tick) + MARGIN/6)
+                  const {x: x2, y: y2} = transf(MARGIN/2, getY(tick))
                   return (
-                    <g key={tick} transform={`translate(0, ${y})`}>
-                      <text transform={rotateMode ? `rotate(45)translate(${MARGIN/4}, ${-MARGIN/3})`: ''}>
+                    <g key={tick}>
+                      <text textAnchor="end" x={x1} y={y1}>
                         {tick}
                       </text>
                       <line
-                        x1={MARGIN * 0.8}
-                        x2={MARGIN}
-                        y1={0}
-                        y2={0}
+                        x1={x}
+                        y1={y}
+                        x2={x2}
+                        y2={y2}
                         stroke={'black'}
                       />
                     </g>
                   )
                 })
               }
-              <text 
-                className="axis-variable-name" 
-                x={0} 
-                y={MARGIN / 2 - 2} 
-                transform={rotateMode ? `rotate(90)translate(${(HEIGHT - MARGIN) * .5}, ${-MARGIN * .7})` : ''}
+              <g
+                transform={rotateMode ? `translate(${WIDTH/2 - MARGIN * 1.5}, ${HEIGHT + MARGIN * 2})rotate(45)` : `translate(0, ${MARGIN / 2 - 2})`}
               >
-                {yVariable}
-              </text>
+                <text 
+                  className="axis-variable-name" 
+                  textAnchor={rotateMode ? 'end' : 'start'}
+                >
+                  {yVariable}
+                </text>
+              </g>
             </g>
             <g className="axis axis-bottom">
-              <line x1={MARGIN} x2={WIDTH - MARGIN * 2} y1={HEIGHT - MARGIN} y2={HEIGHT - MARGIN} stroke={'black'} />
+              <line 
+                x1={transf(MARGIN, HEIGHT - MARGIN).x} 
+                y1={transf(MARGIN, HEIGHT - MARGIN).y} 
+                x2={transf(WIDTH - MARGIN * 2, HEIGHT - MARGIN).x} 
+                y2={transf(WIDTH - MARGIN * 2, HEIGHT - MARGIN).y} 
+                stroke={'black'} 
+              />
               {
                 getX.ticks &&
                 getX.ticks()
                 .map(tick => {
-                  const x = getX(tick);
+                  const {x, y} = transf(getX(tick), HEIGHT - MARGIN);
+                  const {x: x1, y: y1} = transf(getX(tick), HEIGHT - MARGIN * .66);
+                  const {x: x2, y: y2} = transf(getX(tick), HEIGHT - MARGIN / 4);
                   return (
-                    <g key={tick} transform={`translate(${x}, ${HEIGHT})`}>
-                      <text y={-MARGIN / 3} transform={rotateMode ? `rotate(45)translate(${-MARGIN * .4}, 0)`: ''}>
+                    <g key={tick}>
+                      <text textAnchor="center" x={x2} y={y2}>
                         {tick}
                       </text>
                       <line
-                        x1={0}
-                        x2={0}
-                        y1={-MARGIN}
-                        y2={-MARGIN * .8}
+                        x1={x}
+                        y1={y}
+                        x2={x1}
+                        y2={y1}
                         stroke={'black'}
                       />
                     </g>
                   )
                 })
               }
-              <text className="axis-variable-name" 
-                x={WIDTH - MARGIN * 1.5} 
-                y={HEIGHT - MARGIN / 3 - 2}
-                transform={rotateMode ? `translate(${-(WIDTH - MARGIN) / 2}, ${MARGIN/3})` : ''}
+              <g
+                transform={rotateMode ? `translate(${WIDTH + MARGIN * 1.5}, ${HEIGHT + MARGIN})rotate(-45)` : `translate(${WIDTH - MARGIN * 1.5}, ${HEIGHT - MARGIN / 3 - 2})`}
               >
-                {xVariable}
-              </text>
+                <text 
+                  className="axis-variable-name" 
+                  textAnchor={rotateMode ? 'end' : 'start'}
+                >
+                  {xVariable}
+                </text>
+              </g>
             </g>
             <g className={"ticks-container"}>
               {
@@ -153,10 +216,10 @@ function IceCreamContainer({
                   .map(tick => (
                     <line 
                       key={tick}
-                      x1={MARGIN}
-                      x2={WIDTH - MARGIN}
-                      y1={getY(tick)}
-                      y2={getY(tick)}
+                      x1={transf(MARGIN, getY(tick)).x}
+                      y1={transf(MARGIN, getY(tick)).y}
+                      x2={transf(WIDTH - MARGIN * 2, getY(tick)).x}
+                      y2={transf(WIDTH - MARGIN * 2, getY(tick)).y}
                       stroke="lightgrey"
                     />
                   ))
@@ -168,10 +231,10 @@ function IceCreamContainer({
                 .map(tick => (
                   <line 
                     key={tick}
-                    y1={MARGIN}
-                    y2={WIDTH - MARGIN}
-                    x1={getY(tick)}
-                    x2={getY(tick)}
+                    x1={transf(getX(tick), MARGIN).x}
+                    y1={transf(getX(tick), MARGIN).y}
+                    x2={transf(getX(tick), WIDTH - MARGIN).x}
+                    y2={transf(getX(tick), WIDTH - MARGIN).y}
                     stroke="lightgrey"
                   />
                 ))
@@ -180,21 +243,32 @@ function IceCreamContainer({
             <g className="plot-objects-container">
             {
               data.map((datum, index) => {
+                const {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
+                let labelX = x + getSize(datum[sizeVariable]) + smallestDimension / 100;
+                let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
+                
                 return (
                   <g 
                     key={index} 
                     className="plot-object"
-                    transform={`translate(${getX(datum[xVariable])}, ${getY(datum[yVariable])})`}
                     opacity={!highlightedIndex || highlightedIndex.has(index) ? 1 : .2}
                   >
                     <circle 
+                      cx={x}
+                      cy={y}
                       r={getSize(datum[sizeVariable])} 
                       fill={getColor(datum[colorVariable])} 
                       opacity={.8}
                     />
-                    <text x={getSize(datum[sizeVariable]) + smallestDimension / 100}>
-                      {datum[labelVariable]}
-                    </text>
+                    <g 
+                      transform={`translate(${labelX}, ${labelY})`}
+                    >
+                      <text
+                        transform={rotateMode ? 'rotate(-45)': ''}
+                      >
+                        {datum[labelVariable]}
+                      </text>
+                    </g>
                   </g>
                 )
               })

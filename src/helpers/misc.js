@@ -1,5 +1,5 @@
 import { uniq } from "lodash";
-import {min, max} from 'd3-array';
+import { min, max } from 'd3-array';
 
 const serializeValue = val => {
   if (typeof val === 'string')
@@ -10,15 +10,14 @@ const serializeValue = val => {
 }
 
 const buildComponentCode = (componentName, props) => `<${componentName} 
-  ${
-  Object.entries(props)
-  .filter(([_key, val]) => {
-    return !(val === undefined || val === false || val === '' || (Array.isArray(val) && !val.length))
-  })
-  .map(([key, val]) => `${key}={${serializeValue(val)}}`)
-  .join(' \n  ')
-  .trim()
-}
+  ${Object.entries(props)
+    .filter(([_key, val]) => {
+      return !(val === undefined || val === false || val === '' || (Array.isArray(val) && !val.length))
+    })
+    .map(([key, val]) => `${key}={${serializeValue(val)}}`)
+    .join(' \n  ')
+    .trim()
+  }
 />`
 
 export const buildGraphCode = props => buildComponentCode('GraphBlock', props)
@@ -26,7 +25,7 @@ export const buildGraphCode = props => buildComponentCode('GraphBlock', props)
 export const buildIceCreamScatterPlotCode = props => buildComponentCode('IceCreamBlock', props)
 
 export const computeFiltersOptions = (type, ...args) => {
-  switch(type) {
+  switch (type) {
     case 'table':
       return computeTableOptions(...args);
     case 'graph':
@@ -39,7 +38,7 @@ const computeTableOptions = data => {
   return data.columns.reduce((res, key) => {
     const options = uniq(data.map(d => d[key]))
     let type = 'string';
-    
+
     // if number
     if (!options.find(o => isNaN(+o))) {
       if (!options.find(o => !Number.isInteger(+o))) {
@@ -48,7 +47,7 @@ const computeTableOptions = data => {
         type = 'float'
       }
     }
-    const props =  {
+    const props = {
       id: key,
       title: key,
       type,
@@ -89,18 +88,54 @@ export const computeGraphFiltersOptions = (graph, gexfData) => {
   graph.forEachNode((_node, props) => {
     categories.forEach(cat => {
       if (!cat.options.has(props[cat.id]))
-      cat.options.add(props[cat.id])
+        cat.options.add(props[cat.id])
     })
   })
-  return categories.reduce((res, cat) => ({...res, [cat.id]: cat}), {});
+  return categories.reduce((res, cat) => ({ ...res, [cat.id]: cat }), {});
 }
 
 export const evalIfNodeMatches = (attributes, filters, filtersModeAnd) => {
   if (filtersModeAnd) {
-    const oneFilterDoesNotMatches = filters.find(({attribute, value}) => attributes[attribute] !== '' + value) !== undefined;
+    const oneFilterDoesNotMatches = filters.find(({ attribute, value }) => attributes[attribute] !== '' + value) !== undefined;
     return !oneFilterDoesNotMatches;
   } else {
-    const oneFilterMatches = filters.find(({attribute, value}) => attributes[attribute] === '' + value) !== undefined;
+    const oneFilterMatches = filters.find(({ attribute, value }) => attributes[attribute] === '' + value) !== undefined;
     return oneFilterMatches;
   }
+}
+
+const radiansToDegrees = radians => radians * (180 / Math.PI);
+export const degreesToRadians = degrees => degrees * (Math.PI / 180);
+
+export const cartesianToPolar = (x, y) => {
+  const distance = Math.sqrt(x * x + y * y);
+  const radians = Math.atan2(y, x);
+  const degrees = radiansToDegrees(radians);
+  return { distance, radians, degrees }
+}
+
+export const polarToCartesian = (distance, degrees) => {
+  const radians = degreesToRadians(degrees);
+  return {
+    x: distance * Math.cos(radians),
+    y: distance * Math.sin(radians)
+  }
+}
+
+export const transformGeometry = ({ x, y }, { rotate, translate }) => {
+  const { degrees, distance } = cartesianToPolar(x, y);
+  let finalDegrees = degrees;
+  if (rotate) {
+    finalDegrees += rotate;
+  }
+  let { x: newX, y: newY } = polarToCartesian(distance, finalDegrees);
+  if (translate) {
+    if (translate.x) {
+      newX += translate.x;
+    }
+    if (translate.y) {
+      newY += translate.y;
+    }
+  }
+  return { x: newX, y: newY }
 }
