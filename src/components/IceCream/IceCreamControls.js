@@ -15,6 +15,7 @@ export default function IceCreamControls({
   sizeVariable,
   colorVariable,
   labelVariable,
+  labelsOnTheSide,
 
   rotateMode,
   searchString,
@@ -27,6 +28,7 @@ export default function IceCreamControls({
   onColorVariableChange,
   onSizeVariableChange,
   onLabelVariableChange,
+  onToggleLabelsOnTheSide,
 
   onToggleReverseX,
   onToggleReverseY,
@@ -100,6 +102,12 @@ export default function IceCreamControls({
                     title: 'Tourner la visualisation à 45°',
                     onChange: onToggleRotateMode,
                     value: rotateMode,
+                    type: 'boolean'
+                  },
+                  {
+                    title: 'Afficher les labels sur le côté',
+                    onChange: onToggleLabelsOnTheSide,
+                    value: labelsOnTheSide,
                     type: 'boolean'
                   },
                   

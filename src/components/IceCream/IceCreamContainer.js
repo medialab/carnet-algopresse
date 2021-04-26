@@ -21,6 +21,7 @@ function IceCreamContainer({
   sizeVariable,
   colorVariable,
   labelVariable,
+  labelsOnTheSide = true,
 
   rotateMode,
   searchString = '',
@@ -35,6 +36,7 @@ function IceCreamContainer({
   onLabelVariableChange,
   onToggleReverseX,
   onToggleReverseY,
+  onToggleLabelsOnTheSide,
   filtersOptions = {},
 }) {
  
@@ -125,10 +127,10 @@ function IceCreamContainer({
           <g transform={`translate(${rotateMode ? 0 : MARGIN / 2}, ${rotateMode ? -MARGIN : 0})${rotateMode ? 'scale(1.05)' : ''}`}>
             <g className="axis axis-left">
               <line 
-                x1={transf(MARGIN, MARGIN).x} 
-                y1={transf(MARGIN, MARGIN).y} 
-                x2={transf(MARGIN, HEIGHT - MARGIN).x} 
-                y2={transf(MARGIN, HEIGHT - MARGIN * 2).y} 
+                x1={transf(MARGIN, MARGIN).x}
+                y1={transf(MARGIN, MARGIN).y}
+                x2={transf(MARGIN, HEIGHT - MARGIN * 2).x}
+                y2={transf(MARGIN, HEIGHT - MARGIN * 2).y}
                 stroke={'black'} 
               />
               {
@@ -168,9 +170,9 @@ function IceCreamContainer({
             </g>
             <g className="axis axis-bottom">
               <line 
-                x1={transf(MARGIN, HEIGHT - MARGIN).x} 
+                x1={transf(MARGIN, HEIGHT - MARGIN * 2).x} 
                 y1={transf(MARGIN, HEIGHT - MARGIN * 2).y} 
-                x2={transf(WIDTH - MARGIN * 2, HEIGHT - MARGIN).x} 
+                x2={transf(WIDTH - MARGIN * 2, HEIGHT - MARGIN * 2).x} 
                 y2={transf(WIDTH - MARGIN * 2, HEIGHT - MARGIN * 2).y} 
                 stroke={'black'} 
               />
@@ -233,7 +235,7 @@ function IceCreamContainer({
                     key={tick}
                     x1={transf(getX(tick), MARGIN).x}
                     y1={transf(getX(tick), MARGIN).y}
-                    x2={transf(getX(tick), WIDTH - MARGIN).x}
+                    x2={transf(getX(tick), WIDTH - MARGIN * 2).x}
                     y2={transf(getX(tick), WIDTH - MARGIN * 2).y}
                     stroke="lightgrey"
                   />
@@ -242,11 +244,29 @@ function IceCreamContainer({
             </g>
             <g className="plot-objects-container">
             {
-              data.map((datum, index) => {
-                const {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
-                let labelX = x + getSize(datum[sizeVariable]) + smallestDimension / 100;
+              data
+              .sort((a, b) => {
+                if (getY(a[yVariable]) > getY(b[yVariable])) {
+                  return 1;
+                }
+                return -1;
+              })
+              .map((datum, index) => {
+                // const {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
+                // let labelX = x + getSize(datum[sizeVariable]) + smallestDimension / 100;
+                // let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
+                let {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
+                let labelX =  x + getSize(datum[sizeVariable]) + smallestDimension / 100;
                 let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
-                
+                let pointerStartCoords = transf(getX(datum[xVariable]) + getSize(datum[sizeVariable]), getY(datum[yVariable]));
+                if (labelsOnTheSide) {
+                  let {x: newX, y: newY} = transf( WIDTH - MARGIN * 1.7, MARGIN + index * (HEIGHT - MARGIN * 3) / data.length);
+                  labelX = newX;
+                  labelY = newY;
+                }
+                // let labelX =  x + getSize(datum[sizeVariable]) + smallestDimension / 100;
+                // let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
+
                 return (
                   <g 
                     key={index} 
@@ -260,11 +280,26 @@ function IceCreamContainer({
                       fill={getColor(datum[colorVariable])} 
                       opacity={.8}
                     />
+                    {
+                      labelsOnTheSide ?
+                      <line
+                        x1={pointerStartCoords.x}
+                        y1={pointerStartCoords.y}
+                        x2={labelX}
+                        y2={labelY}
+                        stroke="lightgrey"
+                        strokeDasharray='4,4'
+                      />
+                      : null
+                    }
                     <g 
                       transform={`translate(${labelX}, ${labelY})`}
                     >
                       <text
                         transform={rotateMode ? 'rotate(-45)': ''}
+                        style={{
+                          fontSize: rotateMode && labelsOnTheSide ? HEIGHT / 70 : undefined
+                        }}
                       >
                         {datum[labelVariable]}
                       </text>
@@ -286,6 +321,7 @@ function IceCreamContainer({
               sizeVariable,
               colorVariable,
               labelVariable,
+              labelsOnTheSide,
 
               rotateMode,
               searchString,
@@ -298,6 +334,7 @@ function IceCreamContainer({
               onColorVariableChange,
               onSizeVariableChange,
               onLabelVariableChange,
+              onToggleLabelsOnTheSide,
               onToggleReverseX,
               onToggleReverseY,
 

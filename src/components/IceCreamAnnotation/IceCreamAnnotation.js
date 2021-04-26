@@ -25,6 +25,7 @@ const IceCreamAnnotation = ({
   const [sizeVariable, setSizeVariable] = useState(undefined);
   const [colorVariable, setColorVariable] = useState(undefined);
   const [labelVariable, setLabelVariable] = useState(undefined);
+  const [labelsOnTheSide, setLabelsOnTheSide] = useState(false);
 
   const [rotateMode, setRotateMode] = useState(false);
 
@@ -54,6 +55,7 @@ const IceCreamAnnotation = ({
     sizeVariable: thatSizeVariable,
     colorVariable: thatColorVariable,
     labelVariable: thatLabelVariable,
+    labelsOnTheSide: thatLabelsOnTheSide,
 
     rotateMode: thatRotateMode,
     searchString: thatSearchString,
@@ -67,6 +69,7 @@ const IceCreamAnnotation = ({
     setLabelVariable(thatLabelVariable);
     setRotateMode(thatRotateMode);
     setSearchString(thatSearchString);
+    setLabelsOnTheSide(thatLabelsOnTheSide);
   }
 
   useEffect(() => {
@@ -98,6 +101,7 @@ const IceCreamAnnotation = ({
         sizeVariable,
         colorVariable,
         labelVariable,
+        labelsOnTheSide,
 
         rotateMode,
         searchString,
@@ -149,6 +153,7 @@ const IceCreamAnnotation = ({
                 sizeVariable,
                 colorVariable,
                 labelVariable,
+                labelsOnTheSide,
 
                 rotateMode,
                 searchString,
@@ -165,6 +170,7 @@ const IceCreamAnnotation = ({
                 onColorVariableChange: (val) => setColorVariable(val),
                 onSizeVariableChange: (val) => setSizeVariable(val),
                 onLabelVariableChange: (val) => setLabelVariable(val),
+                onToggleLabelsOnTheSide: val => setLabelsOnTheSide(val),
               }
               }
             />
