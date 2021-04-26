@@ -48,7 +48,7 @@ function IceCreamContainer({
   const MARGIN = WIDTH / 10;
 
   let xRange = [MARGIN, WIDTH - MARGIN * 2];
-  let yRange = [MARGIN, HEIGHT - MARGIN ];
+  let yRange = [MARGIN, HEIGHT - MARGIN * 2];
   if (reverseX) {
     xRange = xRange.reverse();
   }
@@ -128,7 +128,7 @@ function IceCreamContainer({
                 x1={transf(MARGIN, MARGIN).x} 
                 y1={transf(MARGIN, MARGIN).y} 
                 x2={transf(MARGIN, HEIGHT - MARGIN).x} 
-                y2={transf(MARGIN, HEIGHT - MARGIN).y} 
+                y2={transf(MARGIN, HEIGHT - MARGIN * 2).y} 
                 stroke={'black'} 
               />
               {
@@ -169,18 +169,18 @@ function IceCreamContainer({
             <g className="axis axis-bottom">
               <line 
                 x1={transf(MARGIN, HEIGHT - MARGIN).x} 
-                y1={transf(MARGIN, HEIGHT - MARGIN).y} 
+                y1={transf(MARGIN, HEIGHT - MARGIN * 2).y} 
                 x2={transf(WIDTH - MARGIN * 2, HEIGHT - MARGIN).x} 
-                y2={transf(WIDTH - MARGIN * 2, HEIGHT - MARGIN).y} 
+                y2={transf(WIDTH - MARGIN * 2, HEIGHT - MARGIN * 2).y} 
                 stroke={'black'} 
               />
               {
                 getX.ticks &&
                 getX.ticks()
                 .map(tick => {
-                  const {x, y} = transf(getX(tick), HEIGHT - MARGIN);
-                  const {x: x1, y: y1} = transf(getX(tick), HEIGHT - MARGIN * .66);
-                  const {x: x2, y: y2} = transf(getX(tick), HEIGHT - MARGIN / 4);
+                  const {x, y} = transf(getX(tick), HEIGHT - MARGIN * 2);
+                  const {x: x1, y: y1} = transf(getX(tick), HEIGHT - MARGIN * 1.66);
+                  const {x: x2, y: y2} = transf(getX(tick), HEIGHT - MARGIN * 1.25);
                   return (
                     <g key={tick}>
                       <text textAnchor="center" x={x2} y={y2}>
@@ -234,7 +234,7 @@ function IceCreamContainer({
                     x1={transf(getX(tick), MARGIN).x}
                     y1={transf(getX(tick), MARGIN).y}
                     x2={transf(getX(tick), WIDTH - MARGIN).x}
-                    y2={transf(getX(tick), WIDTH - MARGIN).y}
+                    y2={transf(getX(tick), WIDTH - MARGIN * 2).y}
                     stroke="lightgrey"
                   />
                 ))
