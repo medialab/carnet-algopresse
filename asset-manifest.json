@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/carnet-algopresse/static/css/main.4c9a9f16.chunk.css",
-    "main.js": "/carnet-algopresse/static/js/main.e2584538.chunk.js",
-    "main.js.map": "/carnet-algopresse/static/js/main.e2584538.chunk.js.map",
+    "main.js": "/carnet-algopresse/static/js/main.edd18ae6.chunk.js",
+    "main.js.map": "/carnet-algopresse/static/js/main.edd18ae6.chunk.js.map",
     "runtime-main.js": "/carnet-algopresse/static/js/runtime-main.97657f5e.js",
     "runtime-main.js.map": "/carnet-algopresse/static/js/runtime-main.97657f5e.js.map",
     "static/css/2.7fe95f8e.chunk.css": "/carnet-algopresse/static/css/2.7fe95f8e.chunk.css",
@@ -44,6 +44,6 @@
     "static/css/2.7fe95f8e.chunk.css",
     "static/js/2.75bcab30.chunk.js",
     "static/css/main.4c9a9f16.chunk.css",
-    "static/js/main.e2584538.chunk.js"
+    "static/js/main.edd18ae6.chunk.js"
   ]
 }
