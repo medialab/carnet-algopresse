@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import FooterNav from '../FooterNav';
+import { generatePalette } from '../../helpers/palettes';
 
 import IceCreamVis from '../IceCream';
 
@@ -26,6 +27,8 @@ const IceCreamAnnotation = ({
   const [colorVariable, setColorVariable] = useState(undefined);
   const [labelVariable, setLabelVariable] = useState(undefined);
   const [labelsOnTheSide, setLabelsOnTheSide] = useState(false);
+  const [colorPalette, setColorPalette] = useState(undefined);
+
 
   const [rotateMode, setRotateMode] = useState(false);
 
@@ -59,6 +62,7 @@ const IceCreamAnnotation = ({
 
     rotateMode: thatRotateMode,
     searchString: thatSearchString,
+    colorPalette: thatColorPalette
   }) => {
     setXVariable(thatXVariable);
     setYVariable(thatYVariable);
@@ -70,6 +74,22 @@ const IceCreamAnnotation = ({
     setRotateMode(thatRotateMode);
     setSearchString(thatSearchString);
     setLabelsOnTheSide(thatLabelsOnTheSide);
+
+    if (thatColorPalette && colorVariable === thatColorVariable) {
+      setColorPalette(thatColorPalette);
+    } else if (thatColorVariable) {
+      let palette = colorVariable && colorVariable !== 'default' ? generatePalette(colorVariable, filtersOptions[colorVariable].options.length) : undefined
+      const colors = generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.size);
+      // const palette = {};
+      let i = 0;
+      filtersOptions[thatColorVariable].options.forEach(option => {
+        palette[option] = colors[i];
+        i++;
+      });
+      setColorPalette(palette);
+    } else if (colorPalette) {
+      setColorPalette(undefined);
+    }
   }
 
   useEffect(() => {
@@ -78,7 +98,7 @@ const IceCreamAnnotation = ({
       setFocusedVisualizationId(thatId)
       onVisualizationUpdate(registeredVisualizations[thatId])
     }
-  }, [registeredVisualizations, focusedVisualizationId])
+  }, [registeredVisualizations, focusedVisualizationId])/* eslint react-hooks/exhaustive-deps : 0 */
 
 
   const onSearchStringChange = str => {
@@ -105,6 +125,7 @@ const IceCreamAnnotation = ({
 
         rotateMode,
         searchString,
+        colorPalette,
       }
     }}>
       <div className="slide-container">
@@ -154,6 +175,7 @@ const IceCreamAnnotation = ({
                 colorVariable,
                 labelVariable,
                 labelsOnTheSide,
+                colorPalette,
 
                 rotateMode,
                 searchString,
@@ -171,6 +193,7 @@ const IceCreamAnnotation = ({
                 onSizeVariableChange: (val) => setSizeVariable(val),
                 onLabelVariableChange: (val) => setLabelVariable(val),
                 onToggleLabelsOnTheSide: val => setLabelsOnTheSide(val),
+                onColorPaletteChange: val => setColorPalette(val)
               }
               }
             />

@@ -46,6 +46,9 @@ export default function ColorLegend ({
   colorPalette,
   onChange,
 }) {
+  if (!colorPalette) {
+    return null;
+  }
   return (
     <ul className="ColorLegend">
       {

@@ -29,6 +29,7 @@ export default function IceCreamControls({
   onSizeVariableChange,
   onLabelVariableChange,
   onToggleLabelsOnTheSide,
+  onColorPaletteChange,
 
   onToggleReverseX,
   onToggleReverseY,
@@ -120,6 +121,7 @@ export default function IceCreamControls({
             colorVariable && colorVariable !== 'default' ?
             <ColorLegend
               colorPalette={colorPalette}
+              onChange={onColorPaletteChange}
             />
             : null
         }

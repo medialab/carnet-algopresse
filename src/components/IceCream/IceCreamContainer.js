@@ -22,12 +22,15 @@ function IceCreamContainer({
   colorVariable,
   labelVariable,
   labelsOnTheSide = true,
+  colorPalette: inputColorPalette,
 
   rotateMode,
   searchString = '',
 
   onSearchStringChange,
   onToggleRotateMode,
+  filtersOptions = {},
+
   
   onXVariableChange,
   onYVariableChange,
@@ -37,7 +40,7 @@ function IceCreamContainer({
   onToggleReverseX,
   onToggleReverseY,
   onToggleLabelsOnTheSide,
-  filtersOptions = {},
+  onColorPaletteChange,
 }) {
  
   const smallestDimension = min([width, height])
@@ -58,25 +61,24 @@ function IceCreamContainer({
     yRange = yRange.reverse();
   }
 
-  // const getX = xVariable && xVariable !== 'default' ?  scaleLinear().range(xRange).domain(extent(data.map(d => +d[xVariable]))) : () => 0;
-  // const getY = yVariable && yVariable !== 'default' ?  scaleLinear().range(yRange).domain(extent(data.map(d => +d[yVariable]))) : () => 0;
   const getX = xVariable && xVariable !== 'default' ?  scaleLinear().range(xRange).domain([0, 1]) : () => 0;
   const getY = yVariable && yVariable !== 'default' ?  scaleLinear().range(yRange).domain([0, 1]) : () => 0;
   const getSize = sizeVariable && sizeVariable !== 'default' ?  scaleLinear().domain(extent(data.map(d => +d[sizeVariable]))).range([MIN_RADIUS, MAX_RADIUS]) : () => 0;
 
   // manage palette
-  let palette = colorVariable && colorVariable !== 'default' ? generatePalette(colorVariable, filtersOptions[colorVariable].options.length) : undefined
-  let getColor = () => 'grey';
   let colorPalette;
-  if (palette) {
+  if (inputColorPalette) {
+    colorPalette = inputColorPalette;
+  }
+  else if (colorVariable) {
+    const palette = generatePalette(colorVariable, filtersOptions[colorVariable].options.length);
     colorPalette = filtersOptions[colorVariable].options.reduce((res, option, index) => ({
       ...res,
       [option]: palette[index]
     }), {})
-    getColor = val => {
-      return colorPalette[val]
-    }
   }
+  let getColor = (val) => colorPalette ? colorPalette[val] : 'grey';
+
   // handling search
   let highlightedIndex;
   if (searchString.length && labelVariable) {
@@ -252,9 +254,6 @@ function IceCreamContainer({
                 return -1;
               })
               .map((datum, index) => {
-                // const {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
-                // let labelX = x + getSize(datum[sizeVariable]) + smallestDimension / 100;
-                // let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
                 let {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
                 let labelX =  x + getSize(datum[sizeVariable]) + smallestDimension / 100;
                 let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
@@ -264,9 +263,7 @@ function IceCreamContainer({
                   labelX = newX;
                   labelY = newY;
                 }
-                // let labelX =  x + getSize(datum[sizeVariable]) + smallestDimension / 100;
-                // let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
-
+           
                 return (
                   <g 
                     key={index} 
@@ -337,6 +334,7 @@ function IceCreamContainer({
               onToggleLabelsOnTheSide,
               onToggleReverseX,
               onToggleReverseY,
+              onColorPaletteChange,
 
               filtersOptions,
               colorPalette,
