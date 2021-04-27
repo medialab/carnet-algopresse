@@ -427,6 +427,11 @@ input, select {
   opacity: 1;
 }
 
+.scatterplot .plot-objects-container  .plot-object:hover text {
+  font-size: 15px!important;
+  background: white;
+}
+
 .scatterplot .axis-variable-name {
   font-weight: 800;
   font-style: italic;

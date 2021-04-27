@@ -75,7 +75,7 @@ export default function IceCreamControls({
                     type: 'number'
                   },
                   {
-                    title: 'Inverser les x',
+                    title: 'Inverser les y',
                     onChange: onToggleReverseY,
                     value: reverseY,
                     type: 'boolean'
