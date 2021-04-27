@@ -35,7 +35,8 @@ let dates = firstRow.slice(1).reduce((res, item, index) => {
         monthNumeric,
         monthName,
         year,
-        fullName: `${monthName} ${year}`
+        fullName: `${monthName} ${year}`,
+        timecode: `${year}${monthNumeric}`
       }
     ],
     currentMonth: res.currentMonth < 11 ? res.currentMonth + 1 : 0,
