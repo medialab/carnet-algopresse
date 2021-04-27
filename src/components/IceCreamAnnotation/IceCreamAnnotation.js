@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import FooterNav from '../FooterNav';
 import { generatePalette } from '../../helpers/palettes';
 
-import IceCreamVis from '../IceCream';
+import IceCreamVis from './IceCreamContainer';
 
 import { VisualizationControlContext } from '../../contexts';
 

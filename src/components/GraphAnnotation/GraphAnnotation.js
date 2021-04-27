@@ -6,7 +6,7 @@ import {generatePalette} from '../../helpers/palettes';
 import gexf from 'graphology-gexf';
 import Graph from 'graphology';
 
-import GraphVis from '../Graph';
+import GraphVis from './GraphContainer';
 import FooterNav from '../FooterNav';
 // import CodeContainer from '../../components/CodeContainer';
 import {computeFiltersOptions} from '../../helpers/misc';
