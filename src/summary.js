@@ -1,5 +1,6 @@
 import GraphAnnotation from './components/GraphAnnotation';
 import IceCreamAnnotation from './components/IceCreamAnnotation';
+import LinearGraphAnnotation from './components/LinearGraphAnnotation';
 import PlainPage from './components/PlainPage';
 
 const routes = [
@@ -59,7 +60,8 @@ const routes = [
     title: '8. Temporalité',
     route: '/08-temporalite',
     contents: '08_NERdate.mdx',
-    Component: PlainPage
+    Component: LinearGraphAnnotation,
+    data: '4average_clusters_unpivoted.csv'
   },
   // {
   //   title: 'Graphe des critiques anglophones',

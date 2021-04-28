@@ -45,7 +45,7 @@ export default function FiltersEditor ({
         isOpen &&
         <div>
           <ControlButton  onClick={onToggleFiltersModeAnd}>
-            Mode des filtres: {filtersModeAnd ? 'AND' : 'OR'}
+            Mode des filtres: {filtersModeAnd ? 'AND (intersection des filtres)' : 'OR (union des filtres)'}
           </ControlButton>
           {filters.length ?
           <div>

@@ -17,11 +17,14 @@ export default function VariablesEditor ({
         (isOpen || isNotAllDefault) &&
         <div>
           {
-            variables.map(({title, value, onChange, type}, index) => {
+            variables.map(({title, value, onChange, type, localOptions}, index) => {
               const getOptions = () => {
                 switch(type) {
                   case 'color':
                   case 'string':
+                    if (localOptions) {
+                      return localOptions;
+                    }
                     return  Object.entries(options)
                   case 'boolean':
                     return [['true', {title: 'Oui'}], ['false', {title: 'Non'}]]
