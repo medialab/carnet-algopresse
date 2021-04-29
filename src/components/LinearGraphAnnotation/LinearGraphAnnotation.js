@@ -86,15 +86,15 @@ const LinearGraphAnnotation = ({
     if (thatColorPalette && colorVariable === thatColorVariable) {
       setColorPalette(thatColorPalette);
     } else if (thatColorVariable) {
-      let palette = colorVariable && colorVariable !== 'default' ? generatePalette(colorVariable, filtersOptions[colorVariable].options.length) : undefined
-      const colors = generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.size);
-      // const palette = {};
+      let colors = thatColorVariable && thatColorVariable !== 'default' ? generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.length) : undefined
+      // const colors = generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.size);
+      const finalPalette = {};
       let i = 0;
       filtersOptions[thatColorVariable].options.forEach(option => {
-        palette[option] = colors[i];
+        finalPalette[option] = colors[i];
         i++;
       });
-      setColorPalette(palette);
+      setColorPalette(finalPalette);
     } else if (colorPalette) {
       setColorPalette(undefined);
     }
