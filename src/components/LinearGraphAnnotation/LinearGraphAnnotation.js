@@ -20,6 +20,7 @@ const LinearGraphAnnotation = ({
   const [searchString, setSearchString] = useState('');
 
   const [xVariable, setXVariable] = useState(undefined);
+  const [xLabelVariable, setXLabelVariable] = useState(undefined);
   const [yVariable, setYVariable] = useState(undefined);
   const [reverseX, setReverseX] = useState(false);
   const [reverseY, setReverseY] = useState(false);
@@ -51,6 +52,7 @@ const LinearGraphAnnotation = ({
 
   const onVisualizationUpdate = ({
     xVariable: thatXVariable,
+    xLabelVariable: thatXLabelVariable,
     yVariable: thatYVariable,
 
     reverseX: thatReverseX,
@@ -70,6 +72,7 @@ const LinearGraphAnnotation = ({
     filtersModeAnd: theseFiltersModeAnd
   }) => {
     setXVariable(thatXVariable);
+    setXLabelVariable(thatXLabelVariable);
     setYVariable(thatYVariable);
     setReverseX(thatReverseX);
     setReverseY(thatReverseY);
@@ -124,6 +127,7 @@ const LinearGraphAnnotation = ({
         useRelativeScale,
 
         xVariable,
+        xLabelVariable,
         yVariable,
 
         reverseX,
@@ -179,6 +183,7 @@ const LinearGraphAnnotation = ({
                 filtersOptions,
 
                 xVariable,
+                xLabelVariable,
                 reverseX,
                 yVariable,
                 reverseY,
@@ -199,6 +204,7 @@ const LinearGraphAnnotation = ({
                 onFiltersChange: (newFilters) => setFilters(newFilters),
 
                 onXVariableChange: (val) => setXVariable(val),
+                onXLabelVariableChange: (val) => setXLabelVariable(val),
                 onYVariableChange: (val) => setYVariable(val),
 
                 onToggleReverseX: () => setReverseX(!reverseX),

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import {scaleLinear} from 'd3-scale';
 import {extent, group} from 'd3-array';
@@ -14,10 +14,12 @@ import { max, uniqBy } from 'lodash';
 
 function LinearGraphContainer({
 
-  width, height,
+  width, 
+  height,
   data,
 
   xVariable,
+  xLabelVariable,
   reverseX,
   yVariable,
   reverseY,
@@ -41,6 +43,7 @@ function LinearGraphContainer({
 
   
   onXVariableChange,
+  onXLabelVariableChange,
   onYVariableChange,
   onColorVariableChange,
   onSizeVariableChange,
@@ -61,6 +64,17 @@ function LinearGraphContainer({
 
   let xRange = [MARGIN, WIDTH - MARGIN / 2];
   let yRange = [HEIGHT - MARGIN, MARGIN];
+
+  const xLabelMap = useMemo(() => {
+    return data.reduce((dict, datum) => {
+      const labelVariable = xLabelVariable === 'default' ? xVariable : xLabelVariable;
+      return {
+        ...dict,
+        [datum[xVariable]]: datum[labelVariable]
+      }
+    }, {})
+
+  }, [data, xVariable, xLabelVariable])
   
   // build visualization groups
   let dataGroups = [[undefined, data]]
@@ -338,7 +352,7 @@ function LinearGraphContainer({
                 getX.ticks &&
                 getX.ticks()
                 .map(tick => {
-                  const y = HEIGHT - MARGIN / 2
+                  const y = HEIGHT - MARGIN * .75
                   return (
                     <g key={tick}>
                       <g transform={`translate(${getX(tick)} ${y})`}>
@@ -346,13 +360,13 @@ function LinearGraphContainer({
                           <text 
                             textAnchor="end"
                           >
-                            {tick}
+                            {xLabelMap[tick]}
                           </text>
                         </g>
                       </g>
                       <line
                         y1={HEIGHT - MARGIN}
-                        y2={y - MARGIN / 4}
+                        y2={y - MARGIN * .1}
                         x1={getX(tick)}
                         x2={getX(tick)}
                         stroke={'black'}
@@ -368,6 +382,7 @@ function LinearGraphContainer({
           {
             ...{
               xVariable,
+              xLabelVariable,
               yVariable,
               reverseX,
               reverseY,
@@ -382,6 +397,7 @@ function LinearGraphContainer({
               onSearchStringChange,
               
               onXVariableChange,
+              onXLabelVariableChange,
               onYVariableChange,
               onColorVariableChange,
               onSizeVariableChange,

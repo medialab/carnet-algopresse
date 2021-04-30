@@ -9,11 +9,11 @@ import FiltersEditor from '../FiltersEditor';
 
 export default function LinearGraphControls({
   xVariable,
-  reverseX,
+  xLabelVariable,
+  // reverseX,
   graphType,
-
   yVariable,
-  reverseY,
+  // reverseY,
 
   colorVariable,
   // searchString,
@@ -29,13 +29,14 @@ export default function LinearGraphControls({
   onGraphTypeChange,
   
   onXVariableChange,
+  onXLabelVariableChange,
   onYVariableChange,
   onColorVariableChange,
 
   onColorPaletteChange,
 
-  onToggleReverseX,
-  onToggleReverseY,
+  // onToggleReverseX,
+  // onToggleReverseY,
   
   filtersOptions,
   colorPalette,
@@ -74,10 +75,16 @@ export default function LinearGraphControls({
                     type: 'string'
                   },
                   {
-                    title: 'X des points',
+                    title: 'Variable des X',
                     onChange: onXVariableChange,
                     value: xVariable,
                     type: 'number'
+                  },
+                  {
+                    title: 'Label des X',
+                    onChange: onXLabelVariableChange,
+                    value: xLabelVariable,
+                    type: 'string'
                   },
                   // {
                   //   title: 'Inverser les x',
@@ -86,7 +93,7 @@ export default function LinearGraphControls({
                   //   type: 'boolean'
                   // },
                   {
-                    title: 'Y des points',
+                    title: 'Label des Y',
                     onChange: onYVariableChange,
                     value: yVariable,
                     type: 'number'
