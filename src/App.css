@@ -62,22 +62,27 @@ body {
   text-decoration: none;
   padding: 1rem;
   padding-top: 4rem;
+  padding-left: 0;
+  padding-right: 0;
   display: flex;
   flex-flow: column nowrap;
   align-items: stretch;
   justify-content: stretch;
+  max-width: 100%;
 }
 
 .slide-container {
   display: flex;
   flex-flow: row nowrap;
-  width: 90vw;
+  width: 100%;
   flex: 1;
 }
 
 .slide-container > section {
   flex: 1;
-  max-width: calc(55% - 5rem);
+  max-width: calc(45% - 5rem);
+  padding: 0 1rem 0 1rem;
+  box-sizing: border-box;
 }
 
 .slide-container.without-visualization {
@@ -88,13 +93,13 @@ body {
 }
 .slide-container > aside {
   position: fixed;
-  width: calc(55% - 5rem);
-  left: calc(45% + 5rem);
+  width: calc(65% - 5rem);
+  left: calc(35% + 5rem);
   top: 4rem;
   max-height: calc(100% - 4rem);
+  height: calc(100% - 4rem);
   padding: 1rem;
   box-sizing: border-box;
-  height: 100%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: stretch;
@@ -106,6 +111,7 @@ body {
   /* height: 10rem; */
   flex: 1;
   border: 5px solid grey;
+  max-height: 100%;
 }
 
 .slide-container aside .CodeContainer {
@@ -235,7 +241,7 @@ input, select {
 }
 
 .VisControls.is-minified {
-  right: -15vw;
+  right: -16vw;
 }
 .VisControls .vis-controls-item {
   margin-bottom: .3rem;

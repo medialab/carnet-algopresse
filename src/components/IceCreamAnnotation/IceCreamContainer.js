@@ -50,7 +50,7 @@ function IceCreamContainer({
 
   const MIN_AREA = smallestDimension / 50;
   const MAX_AREA = smallestDimension / 2;
-  const MARGIN = WIDTH / 10;
+  const MARGIN = WIDTH / 15;
 
   let xRange = [MARGIN, WIDTH - MARGIN * 2];
   let yRange = [MARGIN, HEIGHT - MARGIN * 2];
@@ -119,7 +119,12 @@ function IceCreamContainer({
   
   return (
     <>
-        <svg className="scatterplot" width={smallestDimension} height={smallestDimension}>
+        <svg 
+          className="scatterplot" 
+          width={smallestDimension} 
+          height={smallestDimension}
+          transform={`translate(${(width - smallestDimension) / 2}, 0)`}
+        >
           <polygon 
             points={`${point1X},${point1Y} ${point2X},${point2Y} ${point3X},${point3Y} ${point4X},${point4Y}`} 
             width={WIDTH} 
@@ -160,7 +165,7 @@ function IceCreamContainer({
                 })
               }
               <g
-                transform={rotateMode ? `translate(${WIDTH/2 - MARGIN * 1.5}, ${HEIGHT + MARGIN * 2})rotate(45)` : `translate(0, ${MARGIN / 2 - 2})`}
+                transform={rotateMode ? `translate(${WIDTH/2 - MARGIN * 1.5}, ${HEIGHT + MARGIN * 2.5})rotate(45)` : `translate(0, ${MARGIN / 2 - 2})`}
               >
                 <text 
                   className="axis-variable-name" 
@@ -202,7 +207,7 @@ function IceCreamContainer({
                 })
               }
               <g
-                transform={rotateMode ? `translate(${WIDTH}, ${HEIGHT + MARGIN})rotate(-45)` : `translate(${WIDTH - MARGIN * 1.5}, ${HEIGHT - MARGIN / 3 - 2})`}
+                transform={rotateMode ? `translate(${WIDTH}, ${HEIGHT + MARGIN * 1.5})rotate(-45)` : `translate(${WIDTH - MARGIN * 1.5}, ${HEIGHT - MARGIN / 3 - 2})`}
               >
                 <text 
                   className="axis-variable-name" 

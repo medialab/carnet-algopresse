@@ -52,14 +52,14 @@ function LinearGraphContainer({
   onToggleUseRelativeScale,
 }) {
  
-  const smallestDimension = min([width, height])
-  const WIDTH = smallestDimension;
-  const HEIGHT = smallestDimension * .9;
+  // const smallestDimension = min([width, height])
+  const WIDTH = width;
+  const HEIGHT = height;
 
   // set scales dimensions and scale
   const MARGIN = WIDTH / 10;
 
-  let xRange = [MARGIN, WIDTH - MARGIN];
+  let xRange = [MARGIN, WIDTH - MARGIN / 2];
   let yRange = [HEIGHT - MARGIN, MARGIN];
   
   // build visualization groups
@@ -332,7 +332,7 @@ function LinearGraphContainer({
                   y1={HEIGHT - MARGIN}
                   y2={HEIGHT - MARGIN}
                   x1={MARGIN}
-                  x2={WIDTH - MARGIN}
+                  x2={WIDTH - MARGIN / 2}
                 />
                 {
                 getX.ticks &&
