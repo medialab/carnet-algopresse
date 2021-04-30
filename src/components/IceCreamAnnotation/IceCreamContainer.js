@@ -262,8 +262,8 @@ function IceCreamContainer({
                 const radius = Math.sqrt(getSize(datum[sizeVariable]) / Math.PI);
                 let {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
 
-                let {x: xForXAxis, y: yForXAxis} = transf(getX(datum[xVariable]), getY.range()[0]);
-                let {x: xForYAxis, y: yForYAxis} = transf(getX.range()[0], getY(datum[yVariable]));
+                let {x: xForXAxis, y: yForXAxis} = transf(getX(datum[xVariable]), getY.range ? getY.range()[0] : 0);
+                let {x: xForYAxis, y: yForYAxis} = transf(getX.range ? getX.range()[0] : 0, getY(datum[yVariable]));
                 let labelX =  x + radius + smallestDimension / 100;
                 let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
                 let pointerStartCoords = transf(getX(datum[xVariable]) + radius, getY(datum[yVariable]));
