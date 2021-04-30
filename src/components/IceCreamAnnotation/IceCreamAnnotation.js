@@ -87,13 +87,18 @@ const IceCreamAnnotation = ({
       setColorPalette(thatColorPalette);
     } else if (thatColorVariable || colorScaleType !== thatColorScaleType) {
       let palette = colorVariable && colorVariable !== 'default' ? generatePalette(colorVariable, filtersOptions[colorVariable].options.length) : undefined
-      const colors = generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.size);
-      // const palette = {};
-      let i = 0;
-      filtersOptions[thatColorVariable].options.forEach(option => {
-        palette[option] = colors[i];
-        i++;
-      });
+      if (palette) {
+        const colors = generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.size);
+        // const palette = {};
+        let i = 0;
+        filtersOptions[thatColorVariable].options.forEach(option => {
+          palette[option] = colors[i];
+          i++;
+        });
+      } else {
+        setColorPalette(undefined);
+      }
+      
       setColorPalette(palette);
     } else if (colorPalette) {
       setColorPalette(undefined);
