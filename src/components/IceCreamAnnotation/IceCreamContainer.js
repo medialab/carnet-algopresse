@@ -48,8 +48,8 @@ function IceCreamContainer({
   const WIDTH = rotateMode ? parseInt(Math.sqrt(smallestDimension * smallestDimension / 2)) : smallestDimension;
   const HEIGHT = rotateMode ? parseInt(Math.sqrt(smallestDimension * smallestDimension / 2)) : smallestDimension;
 
-  const MIN_RADIUS = smallestDimension / 500;
-  const MAX_RADIUS = smallestDimension / 50;
+  const MIN_AREA = smallestDimension / 50;
+  const MAX_AREA = smallestDimension / 2;
   const MARGIN = WIDTH / 10;
 
   let xRange = [MARGIN, WIDTH - MARGIN * 2];
@@ -63,7 +63,7 @@ function IceCreamContainer({
 
   const getX = xVariable && xVariable !== 'default' ?  scaleLinear().range(xRange).domain([0, 1]) : () => 0;
   const getY = yVariable && yVariable !== 'default' ?  scaleLinear().range(yRange).domain([0, 1]) : () => 0;
-  const getSize = sizeVariable && sizeVariable !== 'default' ?  scaleLinear().domain(extent(data.map(d => +d[sizeVariable]))).range([MIN_RADIUS, MAX_RADIUS]) : () => 0;
+  const getSize = sizeVariable && sizeVariable !== 'default' ?  scaleLinear().domain(extent(data.map(d => +d[sizeVariable]))).range([MIN_AREA, MAX_AREA]) : () => 0;
 
   // manage palette
   let colorPalette;
@@ -254,10 +254,11 @@ function IceCreamContainer({
                 return -1;
               })
               .map((datum, index) => {
+                const radius = Math.sqrt(getSize(datum[sizeVariable]) / Math.PI);
                 let {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
-                let labelX =  x + getSize(datum[sizeVariable]) + smallestDimension / 100;
+                let labelX =  x + radius + smallestDimension / 100;
                 let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
-                let pointerStartCoords = transf(getX(datum[xVariable]) + getSize(datum[sizeVariable]), getY(datum[yVariable]));
+                let pointerStartCoords = transf(getX(datum[xVariable]) + radius, getY(datum[yVariable]));
                 if (labelsOnTheSide) {
                   let {x: newX, y: newY} = transf( WIDTH - MARGIN * 1.7, MARGIN + index * (HEIGHT - MARGIN * 3) / data.length);
                   labelX = newX;
@@ -273,7 +274,7 @@ function IceCreamContainer({
                     <circle 
                       cx={x}
                       cy={y}
-                      r={getSize(datum[sizeVariable])} 
+                      r={radius} 
                       fill={getColor(datum[colorVariable])} 
                       opacity={.8}
                     />
