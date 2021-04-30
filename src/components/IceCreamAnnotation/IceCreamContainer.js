@@ -261,6 +261,9 @@ function IceCreamContainer({
               .map((datum, index) => {
                 const radius = Math.sqrt(getSize(datum[sizeVariable]) / Math.PI);
                 let {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
+
+                let {x: xForXAxis, y: yForXAxis} = transf(getX(datum[xVariable]), getY.range()[0]);
+                let {x: xForYAxis, y: yForYAxis} = transf(getX.range()[0], getY(datum[yVariable]));
                 let labelX =  x + radius + smallestDimension / 100;
                 let labelY = rotateMode ? y - smallestDimension / 200 : y + smallestDimension / 200;
                 let pointerStartCoords = transf(getX(datum[xVariable]) + radius, getY(datum[yVariable]));
@@ -276,6 +279,24 @@ function IceCreamContainer({
                     className="plot-object"
                     opacity={!highlightedIndex || highlightedIndex.has(index) ? 1 : .2}
                   >
+                    <line
+                      className="axis-line"
+                      stroke="lightgrey"
+                      strokeDasharray='2,2'
+                      x1={x}
+                      y1={y}
+                      x2={xForYAxis}
+                      y2={yForYAxis}
+                    />
+                    <line
+                      className="axis-line"
+                      stroke="lightgrey"
+                      strokeDasharray='2,2'
+                      x1={x}
+                      y1={y}
+                      x2={xForXAxis}
+                      y2={yForXAxis}
+                    />
                     <circle 
                       cx={x}
                       cy={y}

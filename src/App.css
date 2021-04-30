@@ -429,6 +429,7 @@ input, select {
 
 .scatterplot .plot-objects-container:hover .plot-object {
   opacity: .2;
+  transition: all .2s ease;
 }
 .scatterplot .plot-objects-container:hover .plot-object:hover {
   opacity: 1;
@@ -437,6 +438,14 @@ input, select {
 .scatterplot .plot-objects-container  .plot-object:hover text {
   font-size: 15px!important;
   background: white;
+}
+
+.scatterplot .plot-object .axis-line {
+  opacity: 0;
+  transition: all .2s ease;
+}
+.scatterplot .plot-object:hover .axis-line {
+  opacity: 1;
 }
 
 .scatterplot .axis-variable-name {
