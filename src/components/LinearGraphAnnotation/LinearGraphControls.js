@@ -16,7 +16,7 @@ export default function LinearGraphControls({
   reverseY,
 
   colorVariable,
-  searchString,
+  // searchString,
   useRelativeScale,
 
   onToggleFiltersModeAnd,
@@ -24,7 +24,7 @@ export default function LinearGraphControls({
   onFiltersChange,
   filters,
 
-  onSearchStringChange,
+  // onSearchStringChange,
   onToggleUseRelativeScale,
   onGraphTypeChange,
   
@@ -40,7 +40,7 @@ export default function LinearGraphControls({
   filtersOptions,
   colorPalette,
 }) {
-  const handleSearchChange = e => onSearchStringChange(e.target.value);
+  // const handleSearchChange = e => onSearchStringChange(e.target.value);
   const [isMinified, setIsMinified] = useState(true)
   return (
     <>
@@ -49,11 +49,11 @@ export default function LinearGraphControls({
       </button>
       <ul className={cx("VisControls", {'is-minified': isMinified})}>
         
-        <li className="vis-controls-item">
+        {/* <li className="vis-controls-item">
         <form onSubmit={e => e.preventDefault()}>
           <input type="text" onChange={handleSearchChange} placeholder="rechercher" value={searchString} />
         </form>
-        </li>
+        </li> */}
         <li className="vis-controls-item">
           <VariablesEditor
             {
@@ -79,24 +79,24 @@ export default function LinearGraphControls({
                     value: xVariable,
                     type: 'number'
                   },
-                  {
-                    title: 'Inverser les x',
-                    onChange: onToggleReverseX,
-                    value: reverseX,
-                    type: 'boolean'
-                  },
+                  // {
+                  //   title: 'Inverser les x',
+                  //   onChange: onToggleReverseX,
+                  //   value: reverseX,
+                  //   type: 'boolean'
+                  // },
                   {
                     title: 'Y des points',
                     onChange: onYVariableChange,
                     value: yVariable,
                     type: 'number'
                   },
-                  {
-                    title: 'Inverser les y',
-                    onChange: onToggleReverseY,
-                    value: reverseY,
-                    type: 'boolean'
-                  },
+                  // {
+                  //   title: 'Inverser les y',
+                  //   onChange: onToggleReverseY,
+                  //   value: reverseY,
+                  //   type: 'boolean'
+                  // },
                   {
                     title: 'Utiliser une échelle relative pour les Y quand filtré',
                     onChange: onToggleUseRelativeScale,
