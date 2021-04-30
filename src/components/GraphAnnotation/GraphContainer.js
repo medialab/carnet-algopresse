@@ -4,6 +4,8 @@ import {WebGLRenderer} from 'sigma';
 import {scaleLinear} from 'd3-scale';
 // import colorParse from 'parse-color';
 import {min, max} from 'd3-array';
+import ContainerDimensions from 'react-container-dimensions';
+
 
 import {
   usePrevious, 
@@ -15,11 +17,6 @@ import {generatePalette} from '../../helpers/palettes';
 import './GraphContainer.css';
 
 
-// Defaults
-const CELL_HEIGHT_RANGE = [200, 10];
-const CELL_WIDTH_RANGE = [300, 30];
-const CELL_HEIGHT_SCALE = scaleLinear().domain([0, 1]).range(CELL_HEIGHT_RANGE);
-const CELL_WIDTH_SCALE = scaleLinear().domain([0, 1]).range(CELL_WIDTH_RANGE);
 
 // Camera controls
 function rescale(renderer) {
@@ -38,8 +35,10 @@ function zoomOut(renderer) {
 }
 
 
-export default function GraphContainer({
+function GraphContainer({
   graph,
+  width,
+  height,
   // nodeColor,
   // nodeSize,
   labelDensity,
@@ -71,6 +70,11 @@ export default function GraphContainer({
   onLabelDensityChange,
   onColorPaletteChange,
 }) {
+  const CELL_HEIGHT_RANGE = [height / 5, height / 1000];
+  const CELL_WIDTH_RANGE = [width / 5, width / 1000];
+  const cellHeightScale = scaleLinear().domain([0, 1]).range(CELL_HEIGHT_RANGE);
+  const cellWidthScale = scaleLinear().domain([0, 1]).range(CELL_WIDTH_RANGE);
+
 
   const nodeSize = useMemo(() => {
     if (nodeSizeVariable && nodeSizeVariable !== 'default' && filtersOptions[nodeSizeVariable]) {
@@ -171,8 +175,8 @@ export default function GraphContainer({
 
     if (previousLabelDensity !== labelDensity) {
       renderer.settings.labelGrid.cell = {
-        width: CELL_WIDTH_SCALE(labelDensity),
-        height: CELL_HEIGHT_SCALE(labelDensity)
+        width: cellWidthScale(labelDensity),
+        height: cellHeightScale(labelDensity)
       };
 
       // TODO from nansi: we can improve sigma to handle this
@@ -254,4 +258,17 @@ export default function GraphContainer({
       )}
     </div>
   );
+}
+
+export default function GraphContainerWithDimensions(props) {
+  return (
+    <div className="VisContainer IcecreamContainer">
+
+    <ContainerDimensions>
+      {
+        dimensions => <GraphContainer {...{...props, ...dimensions}} />
+      }
+    </ContainerDimensions>
+    </div>
+  )
 }
