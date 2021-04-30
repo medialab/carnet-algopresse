@@ -6,6 +6,7 @@ import ColorLegend from '../ColorLegend';
 import FiltersEditor from '../FiltersEditor';
 
 
+
 export default function LinearGraphControls({
   xVariable,
   reverseX,

@@ -48,7 +48,7 @@ function IceCreamContainer({
   const WIDTH = rotateMode ? parseInt(Math.sqrt(smallestDimension * smallestDimension / 2)) : smallestDimension;
   const HEIGHT = rotateMode ? parseInt(Math.sqrt(smallestDimension * smallestDimension / 2)) : smallestDimension;
 
-  const MIN_RADIUS = smallestDimension / 100;
+  const MIN_RADIUS = smallestDimension / 500;
   const MAX_RADIUS = smallestDimension / 50;
   const MARGIN = WIDTH / 10;
 
@@ -202,7 +202,7 @@ function IceCreamContainer({
                 })
               }
               <g
-                transform={rotateMode ? `translate(${WIDTH + MARGIN * 1.5}, ${HEIGHT + MARGIN})rotate(-45)` : `translate(${WIDTH - MARGIN * 1.5}, ${HEIGHT - MARGIN / 3 - 2})`}
+                transform={rotateMode ? `translate(${WIDTH}, ${HEIGHT + MARGIN})rotate(-45)` : `translate(${WIDTH - MARGIN * 1.5}, ${HEIGHT - MARGIN / 3 - 2})`}
               >
                 <text 
                   className="axis-variable-name" 

@@ -4,6 +4,7 @@ import {scaleLinear} from 'd3-scale';
 import {min, extent, group} from 'd3-array';
 
 
+
 import LinearGraphControls from './LinearGraphControls';
 import {generatePalette} from '../../helpers/palettes';
 import {evalIfNodeMatches} from '../../helpers/misc';
@@ -53,7 +54,7 @@ function LinearGraphContainer({
  
   const smallestDimension = min([width, height])
   const WIDTH = smallestDimension;
-  const HEIGHT = smallestDimension;
+  const HEIGHT = smallestDimension * .9;
 
   // set scales dimensions and scale
   const MARGIN = WIDTH / 10;
@@ -103,13 +104,13 @@ function LinearGraphContainer({
     // handling relative or global filter
     const xExtent = extent(dataGroups.reduce((res, [_id, values]) => [...res, ...values.map(v => v.x)] , []));
     getX = scaleLinear().range(xRange).domain(xExtent);
-    getY = scaleLinear().range(yRange).domain([0, max(dataGroups.map(([_id, values]) => max(values.map(v => v[yPropToFilter]))))]);
+    getY = scaleLinear().range(yRange).domain([0, max(dataGroups.map(([_id, values]) => max(values.map(v => v[yPropToFilter]))))]).nice();
   } else if (graphType === 'histogram') {
     const xExtent = extent(dataGroups.map(([x]) => +x));
     getX = scaleLinear().range(xRange).domain(xExtent);
     xValues = uniqBy(dataGroups, d => d[0])
     // y scale domain is the biggest sum for each x modality
-    getY = scaleLinear().range(yRange).domain([0, max(dataGroups.map(([_x, list]) => list.reduce((sum, item) => sum + item[yPropToFilter] , 0)))]);
+    getY = scaleLinear().range(yRange).domain([0, max(dataGroups.map(([_x, list]) => list.reduce((sum, item) => sum + item[yPropToFilter] , 0)))]).nice();
   }
 
    // apply filter
@@ -225,9 +226,9 @@ function LinearGraphContainer({
     });
     getYHisto = scaleLinear()
     .range([MARGIN, HEIGHT - MARGIN * 2])
-    .domain([0, max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))])
+    .domain([0, max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))]).nice()
     getY
-    .domain([0, max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))])
+    .domain([0, max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))]).nice()
   }
   
   
@@ -267,7 +268,7 @@ function LinearGraphContainer({
                   </>
                 })
                 : 
-                <>
+                <g className="histogram-objects">
                   {
                     dataGroups.map(([xValue, values], index) => {
                       return (
@@ -292,7 +293,7 @@ function LinearGraphContainer({
                      
                     })
                   }
-                </>
+                </g>
               }
               <g className="left-axis">
               {
