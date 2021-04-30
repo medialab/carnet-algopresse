@@ -1,7 +1,7 @@
 import React from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import {scaleLinear} from 'd3-scale';
-import {min, extent, group} from 'd3-array';
+import {extent, group} from 'd3-array';
 
 
 
