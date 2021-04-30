@@ -28,6 +28,8 @@ const IceCreamAnnotation = ({
   const [labelVariable, setLabelVariable] = useState(undefined);
   const [labelsOnTheSide, setLabelsOnTheSide] = useState(false);
   const [colorPalette, setColorPalette] = useState(undefined);
+  const [filtersModeAnd, setFiltersModeAnd] = useState(false);
+  const [filters, setFilters] = useState([]);
 
 
   const [rotateMode, setRotateMode] = useState(false);
@@ -62,7 +64,9 @@ const IceCreamAnnotation = ({
 
     rotateMode: thatRotateMode,
     searchString: thatSearchString,
-    colorPalette: thatColorPalette
+    colorPalette: thatColorPalette,
+    filters: theseFilters = [],
+    filtersModeAnd: theseFiltersModeAnd,
   }) => {
     setXVariable(thatXVariable);
     setYVariable(thatYVariable);
@@ -74,6 +78,8 @@ const IceCreamAnnotation = ({
     setRotateMode(thatRotateMode);
     setSearchString(thatSearchString);
     setLabelsOnTheSide(thatLabelsOnTheSide);
+    setFilters(theseFilters);
+    setFiltersModeAnd(theseFiltersModeAnd);
 
     if (thatColorPalette && colorVariable === thatColorVariable) {
       setColorPalette(thatColorPalette);
@@ -126,6 +132,9 @@ const IceCreamAnnotation = ({
         rotateMode,
         searchString,
         colorPalette,
+
+        filters,
+        filtersModeAnd,
       }
     }}>
       <div className="slide-container">
@@ -179,6 +188,12 @@ const IceCreamAnnotation = ({
 
                 rotateMode,
                 searchString,
+
+                filtersModeAnd,
+                filters,
+
+                onToggleFiltersModeAnd: () => setFiltersModeAnd(!filtersModeAnd),
+                onFiltersChange: (newFilters) => setFilters(newFilters),
 
                 onSearchStringChange,
                 onToggleRotateMode: () => setRotateMode(!rotateMode),

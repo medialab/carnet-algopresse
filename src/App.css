@@ -435,15 +435,15 @@ input, select {
    font-size: .8rem;
  }
 
-.scatterplot .plot-objects-container:hover .plot-object {
+.scatterplot .plot-objects-container:hover .plot-object.is-matching {
   opacity: .2;
   transition: all .2s ease;
 }
-.scatterplot .plot-objects-container:hover .plot-object:hover {
+.scatterplot .plot-objects-container:hover .plot-object.is-matching:hover {
   opacity: 1;
 }
 
-.scatterplot .plot-objects-container  .plot-object:hover text {
+.scatterplot .plot-objects-container  .plot-object.is-matching:hover text {
   font-size: 15px!important;
   background: white;
 }
@@ -452,7 +452,7 @@ input, select {
   opacity: 0;
   transition: all .2s ease;
 }
-.scatterplot .plot-object:hover .axis-line {
+.scatterplot .plot-object.is-matching:hover .axis-line {
   opacity: 1;
 }
 

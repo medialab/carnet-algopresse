@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import VariablesEditor from '../VariablesEditor';
 import ColorLegend from '../ColorLegend';
-
+import FiltersEditor from '../FiltersEditor';
 
 export default function IceCreamControls({
   xVariable,
@@ -16,6 +16,11 @@ export default function IceCreamControls({
   colorVariable,
   labelVariable,
   labelsOnTheSide,
+
+  onToggleFiltersModeAnd,
+  filtersModeAnd,
+  onFiltersChange,
+  filters,
 
   rotateMode,
   searchString,
@@ -113,6 +118,19 @@ export default function IceCreamControls({
                   },
                   
                 ],
+              }
+            }
+          />
+        </li>
+        <li className="vis-controls-item">
+          <FiltersEditor
+            {
+              ...{
+                onToggleFiltersModeAnd,
+                filtersModeAnd,
+                filtersOptions,
+                onFiltersChange,
+                filters
               }
             }
           />

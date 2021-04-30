@@ -2,12 +2,13 @@ import React from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import {scaleLinear} from 'd3-scale';
 import {min, extent} from 'd3-array';
+import cx from 'classnames';
 
 import IceCreamControls from './IceCreamControls';
 import {generatePalette} from '../../helpers/palettes';
 
 import './IceCreamContainer.css';
-import { transformGeometry } from '../../helpers/misc';
+import { evalIfNodeMatches, transformGeometry } from '../../helpers/misc';
 
 function IceCreamContainer({
 
@@ -30,6 +31,11 @@ function IceCreamContainer({
   onSearchStringChange,
   onToggleRotateMode,
   filtersOptions = {},
+
+  onToggleFiltersModeAnd,
+  filtersModeAnd,
+  onFiltersChange,
+  filters,
 
   
   onXVariableChange,
@@ -272,12 +278,24 @@ function IceCreamContainer({
                   labelX = newX;
                   labelY = newY;
                 }
+
+                let opacity =  1;
+                const isMatching = !filters.length || evalIfNodeMatches(datum, filters, filtersModeAnd);
+                if (filters.length) {
+                  if (isMatching && (!highlightedIndex || highlightedIndex.has(index))) {
+                    opacity = 1;
+                  } else {
+                    opacity = .05;
+                  }
+                } else if (highlightedIndex && !highlightedIndex.has(index)) {
+                  opacity = .2;
+                }
            
                 return (
                   <g 
                     key={index} 
-                    className="plot-object"
-                    opacity={!highlightedIndex || highlightedIndex.has(index) ? 1 : .2}
+                    className={cx("plot-object", {'is-matching': isMatching})}
+                    opacity={opacity}
                   >
                     <line
                       className="axis-line"
@@ -362,6 +380,11 @@ function IceCreamContainer({
               onToggleReverseX,
               onToggleReverseY,
               onColorPaletteChange,
+
+              onToggleFiltersModeAnd,
+              filtersModeAnd,
+              onFiltersChange,
+              filters,
 
               filtersOptions,
               colorPalette,

@@ -91,7 +91,14 @@ export default function FiltersEditor ({
               newFilterAttribute !== undefined ?
               <select value={''} onChange={handleNewFilterSubmit}>
                 {
-                  newFilterOptions.map((id, index) => {
+                  newFilterOptions
+                  .sort((a, b) => {
+                    if (a > b) {
+                      return 1;
+                    }
+                    return -1;
+                  })
+                  .map((id, index) => {
                     return (
                       <option value={id} key={index}>{id}</option>
                     )
