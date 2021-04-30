@@ -12,7 +12,7 @@ const SINGLE_COLOR_PALETTE = ['#999'];
 export function generatePalette(name, count) {
   if (count === 1 || !count) return SINGLE_COLOR_PALETTE;
   else if (count === 2) {
-    return ['red', 'blue']
+    return ['#D77186', '#61A2DA']
   }
 
   return iwanthue(count, {
