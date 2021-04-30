@@ -328,6 +328,7 @@ input, select {
 .ColorLegend li .legend-color{
   width: 1rem;
   height: 1rem;
+  min-width: 1rem;
   margin-right: .5rem;
   cursor: pointer;
 }
