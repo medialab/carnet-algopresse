@@ -248,7 +248,7 @@ function LinearGraphContainer({
   
   return (
     <>
-        <svg className="linear-graph" width={WIDTH} height={HEIGHT}>
+        <svg transform={`translate(0, ${-MARGIN/2})`} className="LinearGraph" width={WIDTH} height={HEIGHT + MARGIN/2}>
             <g>
               {
                 graphType === 'linegraph' ?
@@ -314,15 +314,15 @@ function LinearGraphContainer({
                 getY.ticks &&
                 getY.ticks()
                 .map(tick => {
-                  const x = MARGIN / 2;
+                  const x = MARGIN * .7;
                   return (
-                    <g key={tick}>
+                    <g className="axis-element" key={tick}>
                       <text textAnchor="end" x={x} y={getY(tick)}>
                         {tick}
                       </text>
                       
                       <line
-                        x1={x  + MARGIN / 4}
+                        x1={x  + MARGIN * .1}
                         y1={getY(tick)}
                         x2={MARGIN}
                         y2={getY(tick)}
@@ -354,7 +354,7 @@ function LinearGraphContainer({
                 .map(tick => {
                   const y = HEIGHT - MARGIN * .75
                   return (
-                    <g key={tick}>
+                    <g className="axis-element" key={tick}>
                       <g transform={`translate(${getX(tick)} ${y})`}>
                         <g transform={'rotate(-45)'}>
                           <text 

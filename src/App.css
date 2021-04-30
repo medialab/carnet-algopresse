@@ -509,3 +509,8 @@ input, select {
   min-height: 2rem;
   padding-bottom: .5rem;
 }
+
+
+.LinearGraph .bottom-axis .axis-element text {
+  font-size: .9rem;
+}
