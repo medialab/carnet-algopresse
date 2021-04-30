@@ -10,7 +10,10 @@ const DEFAULT_COLOR_SPACE = {
 const SINGLE_COLOR_PALETTE = ['#999'];
 
 export function generatePalette(name, count) {
-  if (count === 1) return SINGLE_COLOR_PALETTE;
+  if (count === 1 || !count) return SINGLE_COLOR_PALETTE;
+  else if (count === 2) {
+    return ['red', 'blue']
+  }
 
   return iwanthue(count, {
     colorSpace: DEFAULT_COLOR_SPACE,

@@ -9,7 +9,7 @@ import {generatePalette} from '../../helpers/palettes';
 import {evalIfNodeMatches} from '../../helpers/misc';
 
 import './LinearGraphContainer.css';
-import { max } from 'lodash';
+import { max, uniqBy } from 'lodash';
 
 function LinearGraphContainer({
 
@@ -55,14 +55,6 @@ function LinearGraphContainer({
   const WIDTH = smallestDimension;
   const HEIGHT = smallestDimension;
 
-  // filter data
-  // const data = useMemo(() => {
-  //   if (filters.length) {
-  //     return inputData.filter(datum => evalIfNodeMatches(datum, filters, filtersModeAnd))
-  //   } else {
-  //     return inputData;
-  //   }
-  // }, [inputData, filters, filtersModeAnd]);
   // set scales dimensions and scale
   const MARGIN = WIDTH / 10;
 
@@ -71,7 +63,7 @@ function LinearGraphContainer({
   
   // build visualization groups
   let dataGroups = [[undefined, data]]
-  if (colorVariable && graphType === 'linegraph') {
+  if (colorVariable) {
     dataGroups = Array.from(group(data, d => d[colorVariable]));
   } 
 
@@ -88,33 +80,82 @@ function LinearGraphContainer({
     })
     return [_id, xGroups]
   })
-  // handling relative or global filter
-  const yPropToFilter = useRelativeScale ? 'filteredY' : 'y';
-  const xExtent = extent(dataGroups.reduce((res, [_id, values]) => [...res, ...values.map(v => v.x)] , []));
-  let getX = scaleLinear().range(xRange).domain(xExtent);
-  let getY = scaleLinear().range(yRange).domain([0, max(dataGroups.map(([_id, values]) => max(values.map(v => v[yPropToFilter]))))]);
-  if (filters.length && colorVariable) {
-    dataGroups = dataGroups.filter(([colorValue, values]) => {
-      const filtersAffectingColor = filters.filter(f => f.attribute === colorVariable);
-      if (filtersAffectingColor) {
-        if (filtersModeAnd) {
-          const oneFilterDoesNotMatches = filtersAffectingColor.find(({ attribute, value }) => colorValue !== '' + value) !== undefined;
-          return !oneFilterDoesNotMatches;
-        } else {
-          const oneFilterMatches = filtersAffectingColor.find(({ attribute, value }) => colorValue === '' + value) !== undefined;
-          return oneFilterMatches;
+ 
+  // refactorize by x for stacked barchart
+  if (graphType === 'histogram') {
+    const xMap = dataGroups.reduce((res, [color, values]) => {
+      return values.reduce((res2, value) => {
+        const x = value.x;
+        const transformedValue = {...value, color};
+        return {
+          ...res2,
+          [x]: res2[x] ? [...res2[x], transformedValue] : [transformedValue]
         }
-      } else {
-        return true;
-      }
-    })
+      }, res)
+    }, {})
+    // turn datagroup to an array of [x, list of related objects]
+    dataGroups = Object.entries(xMap);
   }
-  if (reverseX) {
-    xRange = xRange.reverse();
+  let getX, getY;
+  const yPropToFilter = useRelativeScale ? 'filteredY' : 'y';
+  let xValues;
+  if (graphType === 'linegraph') {
+    // handling relative or global filter
+    const xExtent = extent(dataGroups.reduce((res, [_id, values]) => [...res, ...values.map(v => v.x)] , []));
+    getX = scaleLinear().range(xRange).domain(xExtent);
+    getY = scaleLinear().range(yRange).domain([0, max(dataGroups.map(([_id, values]) => max(values.map(v => v[yPropToFilter]))))]);
+  } else if (graphType === 'histogram') {
+    const xExtent = extent(dataGroups.map(([x]) => +x));
+    getX = scaleLinear().range(xRange).domain(xExtent);
+    xValues = uniqBy(dataGroups, d => d[0])
+    // y scale domain is the biggest sum for each x modality
+    getY = scaleLinear().range(yRange).domain([0, max(dataGroups.map(([_x, list]) => list.reduce((sum, item) => sum + item[yPropToFilter] , 0)))]);
   }
-  if (reverseY) {
-    yRange = yRange.reverse();
+
+   // apply filter
+   if (filters.length && colorVariable) {
+    const filtersAffectingColor = filters.filter(f => f.attribute === colorVariable);
+    if (graphType === 'linegraph') {
+      dataGroups = dataGroups.filter(([colorValue, values]) => {
+        if (filtersAffectingColor) {
+          if (filtersModeAnd) {
+            const oneFilterDoesNotMatches = filtersAffectingColor.find(({ attribute, value }) => colorValue !== '' + value) !== undefined;
+            return !oneFilterDoesNotMatches;
+          } else {
+            const oneFilterMatches = filtersAffectingColor.find(({ attribute, value }) => colorValue === '' + value) !== undefined;
+            return oneFilterMatches;
+          }
+        } else {
+          return true;
+        }
+      })
+     } else if (graphType === 'histogram') {
+       // filtering groups
+      dataGroups = dataGroups.reduce((res, [xValue, values]) => {
+        if (filtersAffectingColor) {
+          const newValues = values.filter(value => {
+            if (filtersModeAnd) {
+              const oneFilterDoesNotMatches = filtersAffectingColor.find(({ attribute, value }) => value.color !== '' + value) !== undefined;
+              return !oneFilterDoesNotMatches;
+            } else {
+              const oneFilterMatches = filtersAffectingColor.find(({ attribute, value }) => value.color === '' + value) !== undefined;
+              return oneFilterMatches;
+            }
+          })
+          if (newValues.length) {
+            return [...res, [xValue, newValues]]
+          // all items filtered out -> do not include the group
+          } else return res;
+        // no filters, return as is
+        } else {
+          return [...res, [xValue, values]];
+        }
+      }, [])
+     }
+    
   }
+    
+  
   // manage palette
   let colorPalette;
   if (inputColorPalette) {
@@ -142,14 +183,60 @@ function LinearGraphContainer({
       }
     })
   }
+
+  if (reverseX) {
+    xRange = xRange.reverse();
+  }
+  if (reverseY) {
+    yRange = yRange.reverse();
+  }
+  let getYHisto
+  // preparing histogram stacking
+  if (graphType === 'histogram') {
+    dataGroups = dataGroups.map(([xValue, values]) => {
+      // let sum = 0;
+      const newValues = values
+      .sort((a, b) => {
+        if (a.color > b.color) {
+          return 1;
+        } else return -1;
+      })
+      .reduce((total, value, index) => {
+        const prev = index > 0 ? total[index - 1] : undefined;
+        const yDisplace = prev ? +prev.y + (prev.yDisplace || 0) : 0;
+
+        const newValue = {
+          ...value,
+          yDisplace,
+          y: +value.y,
+          x: +value.x
+        }
+        return [...total, newValue]
+      }, [])
+
+      return [xValue, newValues];
+    }, []);
+
+    dataGroups = dataGroups.sort((a, b) => {
+      if (+a[0] > +b[0]) {
+        return 1;
+      }
+      return -1;
+    });
+    getYHisto = scaleLinear()
+    .range([MARGIN, HEIGHT - MARGIN * 2])
+    .domain([0, max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))])
+    getY
+    .domain([0, max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))])
+  }
+  
   
   return (
     <>
         <svg className="linear-graph" width={WIDTH} height={HEIGHT}>
-          {
-            graphType === 'linegraph' ?
             <g>
               {
+                graphType === 'linegraph' ?
                 dataGroups.map(([colorValue, values]) => {
                   const firstX = getX(values[0].x);
                   const firstY = getY(values[0].y);
@@ -164,6 +251,7 @@ function LinearGraphContainer({
                     <path d={path} 
                       fill="transparent" 
                       stroke={ colorVariable ? color : 'grey'}
+                      key={colorValue}
                     />
                     {
                       values.map(({x, y}, index) => (
@@ -178,6 +266,33 @@ function LinearGraphContainer({
                     }
                   </>
                 })
+                : 
+                <>
+                  {
+                    dataGroups.map(([xValue, values], index) => {
+                      return (
+                        <g key={index} className="x-group">
+                          {
+                            values.map(({x, y, yDisplace, color}, index2) => {
+                             
+                              return (
+                                <rect
+                                  key={index2}
+                                  x={getX(x)}
+                                  y={HEIGHT - getYHisto(yDisplace) - getYHisto(y)}
+                                  width={ (WIDTH - MARGIN * 4) / xValues.length}
+                                  height={getYHisto(y)}
+                                  fill={getColor(color)}
+                                />
+                              )
+                            })
+                          }
+                        </g>
+                      )
+                     
+                    })
+                  }
+                </>
               }
               <g className="left-axis">
               {
@@ -247,8 +362,6 @@ function LinearGraphContainer({
                 }
               </g>
             </g>
-            : null
-          }
         </svg>
         <LinearGraphControls
           {
