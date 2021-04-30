@@ -28,6 +28,7 @@ const IceCreamAnnotation = ({
   const [labelVariable, setLabelVariable] = useState(undefined);
   const [labelsOnTheSide, setLabelsOnTheSide] = useState(false);
   const [colorPalette, setColorPalette] = useState(undefined);
+  const [colorScaleType, setColorScaleType] = useState(undefined);
   const [filtersModeAnd, setFiltersModeAnd] = useState(false);
   const [filters, setFilters] = useState([]);
 
@@ -61,6 +62,7 @@ const IceCreamAnnotation = ({
     colorVariable: thatColorVariable,
     labelVariable: thatLabelVariable,
     labelsOnTheSide: thatLabelsOnTheSide,
+    colorScaleType: thatColorScaleType,
 
     rotateMode: thatRotateMode,
     searchString: thatSearchString,
@@ -74,16 +76,16 @@ const IceCreamAnnotation = ({
     setReverseY(thatReverseY);
     setSizeVariable(thatSizeVariable);
     setColorVariable(thatColorVariable);
+    setColorScaleType(thatColorScaleType);
     setLabelVariable(thatLabelVariable);
     setRotateMode(thatRotateMode);
     setSearchString(thatSearchString);
     setLabelsOnTheSide(thatLabelsOnTheSide);
     setFilters(theseFilters);
     setFiltersModeAnd(theseFiltersModeAnd);
-
     if (thatColorPalette && colorVariable === thatColorVariable) {
       setColorPalette(thatColorPalette);
-    } else if (thatColorVariable) {
+    } else if (thatColorVariable || colorScaleType !== thatColorScaleType) {
       let palette = colorVariable && colorVariable !== 'default' ? generatePalette(colorVariable, filtersOptions[colorVariable].options.length) : undefined
       const colors = generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.size);
       // const palette = {};
@@ -132,6 +134,7 @@ const IceCreamAnnotation = ({
         rotateMode,
         searchString,
         colorPalette,
+        colorScaleType,
 
         filters,
         filtersModeAnd,
@@ -185,6 +188,7 @@ const IceCreamAnnotation = ({
                 labelVariable,
                 labelsOnTheSide,
                 colorPalette,
+                colorScaleType,
 
                 rotateMode,
                 searchString,
@@ -208,7 +212,8 @@ const IceCreamAnnotation = ({
                 onSizeVariableChange: (val) => setSizeVariable(val),
                 onLabelVariableChange: (val) => setLabelVariable(val),
                 onToggleLabelsOnTheSide: val => setLabelsOnTheSide(val),
-                onColorPaletteChange: val => setColorPalette(val)
+                onColorPaletteChange: val => setColorPalette(val),
+                onColorScaleTypeChange: val => setColorScaleType(val)
               }
               }
             />

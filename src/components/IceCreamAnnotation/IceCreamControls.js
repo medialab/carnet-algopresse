@@ -16,6 +16,7 @@ export default function IceCreamControls({
   colorVariable,
   labelVariable,
   labelsOnTheSide,
+  colorScaleType,
 
   onToggleFiltersModeAnd,
   filtersModeAnd,
@@ -38,6 +39,7 @@ export default function IceCreamControls({
 
   onToggleReverseX,
   onToggleReverseY,
+  onColorScaleTypeChange,
   
   filtersOptions,
   colorPalette,
@@ -97,6 +99,19 @@ export default function IceCreamControls({
                     onChange: onColorVariableChange,
                     value: colorVariable,
                     type: 'color'
+                  },
+                  {
+                    title: 'Type d\'échelle pour la couleur',
+                    onChange: onColorScaleTypeChange,
+                    localOptions: [[
+                      'discrete',
+                      {title: 'discrète'}
+                    ], [
+                      'continuous',
+                      {title: 'continue'}
+                    ]],
+                    value: colorScaleType,
+                    type: 'string'
                   },
                   {
                     title: 'Labels des points',

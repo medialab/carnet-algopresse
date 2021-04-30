@@ -24,6 +24,7 @@ function IceCreamContainer({
   labelVariable,
   labelsOnTheSide = true,
   colorPalette: inputColorPalette,
+  colorScaleType,
 
   rotateMode,
   searchString = '',
@@ -47,6 +48,7 @@ function IceCreamContainer({
   onToggleReverseY,
   onToggleLabelsOnTheSide,
   onColorPaletteChange,
+  onColorScaleTypeChange,
 }) {
  
   const smallestDimension = min([width, height])
@@ -83,7 +85,24 @@ function IceCreamContainer({
       [option]: palette[index]
     }), {})
   }
-  let getColor = (val) => colorPalette ? colorPalette[val] : 'grey';
+  let continuousColorScale;
+  if (colorScaleType === 'continuous') {
+    let colorRange = ['#D77186', '#61A2DA'];
+    if (colorPalette && colorPalette['from'] && colorPalette['to']) {
+      colorRange = [colorPalette['from'], colorPalette['to']]
+    } else {
+      colorPalette = {
+        from: '#D77186',
+        to: '#61A2DA'
+      }
+    }
+    continuousColorScale = scaleLinear().domain(extent(data.map(d => +d[colorVariable]))).range(colorRange)
+  }
+  let getColor = (val) => {
+    if (colorScaleType === 'continuous') {
+      return continuousColorScale(+val);
+    } else return colorPalette ? colorPalette[val] : 'grey';
+  }
 
   // handling search
   let highlightedIndex;
@@ -299,8 +318,8 @@ function IceCreamContainer({
                   >
                     <line
                       className="axis-line"
-                      stroke="lightgrey"
-                      strokeDasharray='2,2'
+                      stroke="grey"
+                      strokeDasharray='1,1'
                       x1={x}
                       y1={y}
                       x2={xForYAxis}
@@ -308,8 +327,8 @@ function IceCreamContainer({
                     />
                     <line
                       className="axis-line"
-                      stroke="lightgrey"
-                      strokeDasharray='2,2'
+                      stroke="grey"
+                      strokeDasharray='1,1'
                       x1={x}
                       y1={y}
                       x2={xForXAxis}
@@ -367,6 +386,7 @@ function IceCreamContainer({
 
               rotateMode,
               searchString,
+              colorScaleType,
 
               onSearchStringChange,
               onToggleRotateMode,
@@ -380,6 +400,7 @@ function IceCreamContainer({
               onToggleReverseX,
               onToggleReverseY,
               onColorPaletteChange,
+              onColorScaleTypeChange,
 
               onToggleFiltersModeAnd,
               filtersModeAnd,
