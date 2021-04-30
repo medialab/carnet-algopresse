@@ -118,14 +118,7 @@ export default function GraphControls({
             }
           />
         </li>
-        {
-            nodeColorVariable && nodeColorVariable !== 'default' ?
-            <ColorLegend
-              colorPalette={colorPalette}
-              onChange={onColorPaletteChange}
-            />
-            : null
-          }
+        
         <li className="vis-controls-item">
         <FiltersEditor
           {
@@ -150,6 +143,14 @@ export default function GraphControls({
               </div>
           </form>
         </li>
+        {
+            nodeColorVariable && nodeColorVariable !== 'default' ?
+            <ColorLegend
+              colorPalette={colorPalette}
+              onChange={onColorPaletteChange}
+            />
+            : null
+          }
       </ul>
     </>
   );

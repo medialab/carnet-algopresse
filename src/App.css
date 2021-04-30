@@ -317,11 +317,19 @@ input, select {
 }
 
 .ColorLegend {
-  padding: .5rem;
-  list-style: none;
   /* overflow: auto; */
   max-height: 15rem;
   background: white;
+}
+
+.ColorLegend h6{
+  margin: 0;
+  padding-left: .5rem;
+}
+
+.ColorLegend ul {
+  padding: .5rem;
+  list-style: none;
 }
 
 .ColorLegend li {

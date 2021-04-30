@@ -50,21 +50,24 @@ export default function ColorLegend ({
     return null;
   }
   return (
-    <ul className="ColorLegend">
-      {
-        Object.entries(colorPalette)
-        .map(([modality, color]) => {
-          const handleChange = newColor => {
-            onChange({
-              ...colorPalette,
-              [modality] : newColor
-            })
-          }
-          return (
-            <ColorItemHandler onChange={handleChange} key={modality} {...{modality, color}} />
-          )
-        })
-      }
-    </ul>
+    <div className="ColorLegend" >
+      <h6>Légende</h6>
+      <ul>
+        {
+          Object.entries(colorPalette)
+          .map(([modality, color]) => {
+            const handleChange = newColor => {
+              onChange({
+                ...colorPalette,
+                [modality] : newColor
+              })
+            }
+            return (
+              <ColorItemHandler onChange={handleChange} key={modality} {...{modality, color}} />
+            )
+          })
+        }
+      </ul>
+    </div>
   );
 }
