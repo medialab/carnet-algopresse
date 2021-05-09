@@ -6,9 +6,10 @@ import GraphBlock from '../components/GraphBlock';
 >RQ afficher label cluster ++ Probleme larger page 
 
 <GraphBlock 
-  x={0.4729188654794181} 
-  y={0.5156417415932983} 
-  ratio={1}
+  x={0.49378030782205395} 
+  y={0.5092768290111745} 
+  ratio={0.80} 
+  labelDensity={0.25}
 />
 
 Le réseau sémantique obtenu à partir des 2 091 articles annotés comme critiques repose sur une extraction de termes les plus représentés au sein des articles. Il est constitué de 2 991 termes (ou suite de termes) reliés entre eux par 54 062 liens de cooccurrences. La spatialisation  est basée sur une variante de l’algorithme de spatialisation Fruchterman Reingold, incluant le poids des cooccurrences entre les termes du réseau ; la position est optimisée par leur appartenance aux clusters détectés automatiquement par l’algorithme de Louvain. La couleur des nœuds est relative à chacun des clusters ainsi détectés et leur taille est relative à la somme des cooccurrences. 
