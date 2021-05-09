@@ -6,10 +6,13 @@ import GraphBlock from '../components/GraphBlock';
 >RQ afficher label cluster ++ Probleme larger page 
 
 <GraphBlock 
-  x={0.49378030782205395} 
-  y={0.5092768290111745} 
+  x={0.4588867805186573} 
+  y={0.5190807505798019}
   ratio={0.80} 
-  labelDensity={0.25}
+  nodeColorVariable={'cluster_rename'} 
+  nodeLabelVariable={'cluster_label'} 
+  labelDensity={1.5} 
+  colorPalette={{"Future_of_AI":"#e97f3e","Profiling_Algorthms":"#53cb7b","Job_Automation":"#eb102b","Market_&_Prices":"#d08be8","Predictive_Algorithms":"#a3bf28","Web_Algorithms":"#e7eb2a","Facial_Recognition":"#54a5e8","Voice_Assistant":"#108cac","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#d3a715","Game_&_Education":"#a1943c","Chatbot":"#1b90be","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#00c8cc","Sex_Robots":"#db7187","Deepfake":"#4f990f","Image_Search":"#6deeff","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}}
 />
 
 Le réseau sémantique obtenu à partir des 2 091 articles annotés comme critiques repose sur une extraction de termes les plus représentés au sein des articles. Il est constitué de 2 991 termes (ou suite de termes) reliés entre eux par 54 062 liens de cooccurrences. La spatialisation  est basée sur une variante de l’algorithme de spatialisation Fruchterman Reingold, incluant le poids des cooccurrences entre les termes du réseau ; la position est optimisée par leur appartenance aux clusters détectés automatiquement par l’algorithme de Louvain. La couleur des nœuds est relative à chacun des clusters ainsi détectés et leur taille est relative à la somme des cooccurrences. 
@@ -22,9 +25,13 @@ Le deux plus importants clusters du graphe en nombre d’articles forment deux p
 >RQ les noms des termes filtrés restent affichés 
 
 <GraphBlock 
-  x={0.5} 
-  y={0.5} 
-  ratio={1} 
+  x={0.4588867805186573} 
+  y={0.5190807505798019}
+  ratio={0.80} 
+  nodeColorVariable={'cluster_rename'} 
+  nodeLabelVariable={'cluster_label'} 
+  labelDensity={1.5} 
+  colorPalette={{"Future_of_AI":"#e97f3e","Profiling_Algorthms":"#53cb7b","Job_Automation":"#eb102b","Market_&_Prices":"#d08be8","Predictive_Algorithms":"#a3bf28","Web_Algorithms":"#e7eb2a","Facial_Recognition":"#54a5e8","Voice_Assistant":"#108cac","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#d3a715","Game_&_Education":"#a1943c","Chatbot":"#1b90be","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#00c8cc","Sex_Robots":"#db7187","Deepfake":"#4f990f","Image_Search":"#6deeff","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}}
   filters={[{"attribute":"cluster_rename","value":"Web_Algorithms"},{"attribute":"cluster_rename","value":"Future_of_AI"}]}
 />
 
@@ -34,10 +41,14 @@ Le deux plus importants clusters du graphe en nombre d’articles forment deux p
 >ZOOM ou filtre cluster Carte sémantique des thématiques des articles “critiques” x 3 - Cluster Jobauto / Killerrobots / Facialreco / 
 
 <GraphBlock 
-  x={0.5} 
-  y={0.5} 
-  ratio={1} 
-  filters={[{"attribute":"cluster_rename","value":"Facial_Recognition"},{"attribute":"cluster_rename","value":"Job_Automation"},{"attribute":"cluster_rename","value":"Killer_Robots"}]}
+  x={0.4588867805186573} 
+  y={0.5190807505798019}
+  ratio={0.80} 
+  nodeColorVariable={'cluster_rename'} 
+  nodeLabelVariable={'cluster_label'} 
+  labelDensity={1.5} 
+  colorPalette={{"Future_of_AI":"#e97f3e","Profiling_Algorthms":"#53cb7b","Job_Automation":"#eb102b","Market_&_Prices":"#d08be8","Predictive_Algorithms":"#a3bf28","Web_Algorithms":"#e7eb2a","Facial_Recognition":"#54a5e8","Voice_Assistant":"#108cac","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#d3a715","Game_&_Education":"#a1943c","Chatbot":"#1b90be","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#00c8cc","Sex_Robots":"#db7187","Deepfake":"#4f990f","Image_Search":"#6deeff","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}}
+filters={[{"attribute":"cluster_rename","value":"Facial_Recognition"},{"attribute":"cluster_rename","value":"Job_Automation"},{"attribute":"cluster_rename","value":"Killer_Robots"}]}
 />
 
 Parmi les plus importants clusters on trouve trois autres thèmes largement représentés dans le corpus. 
@@ -47,7 +58,23 @@ Parmi les plus importants clusters on trouve trois autres thèmes largement repr
 
 L’ensemble de ces 5 plus grands clusters thématiques domine largement l’espace médiatique car ces derniers ne constituent pas moins de 75,6% du total des articles du corpus critique (1581 articles) et représentent sur le graphe 46,4% du réseau de termes extraits (1389 termes).
 
->ZOOM ou filtre cluster Carte sémantique des thématiques des articles “critiques” x 9 clusters up to 1%
+>ZOOM ou filtre cluster Carte sémantique des thématiques des articles “critiques” x 9 clusters + de 1%
+>RQ probleme overlaping / et nom des clusters absents ou nom des termes absents !! 
+
+<GraphBlock 
+  x={0.4588867805186573} 
+  y={0.5190807505798019} 
+  ratio={0.80} 
+  nodeColorVariable={'cluster_rename'} 
+  nodeLabelVariable={'cluster_label'} 
+  labelDensity={1.5} 
+  colorPalette={{"Future_of_AI":"#e97f3e","Profiling_Algorthms":"#53cb7b","Job_Automation":"#eb102b","Market_&_Prices":"#d08be8","Predictive_Algorithms":"#a3bf28","Web_Algorithms":"#e7eb2a","Facial_Recognition":"#54a5e8","Voice_Assistant":"#108cac","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#d3a715","Game_&_Education":"#a1943c","Chatbot":"#1b90be","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#00c8cc","Sex_Robots":"#db7187","Deepfake":"#4f990f","Image_Search":"#6deeff","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}}
+  filters={[{"attribute":"cluster_rename","value":"Autonomous_Cars"},{"attribute":"cluster_rename","value":"Voice_Assistant"},{"attribute":"cluster_rename","value":"Sex_Robots"},{"attribute":"cluster_rename","value":"Health_Algorithms"},{"attribute":"cluster_rename","value":"Deepfake"},{"attribute":"cluster_rename","value":"Predictive_Algorithms"},{"attribute":"cluster_rename","value":"Chatbot"},{"attribute":"cluster_rename","value":"Game_&_Education"},{"attribute":"cluster_rename","value":"Profiling_Algorthms"}]}
+  
+
+>ZOOM ou filtre cluster Carte sémantique des thématiques des articles “critiques” x 9 clusters - de 1%
+>RQ probleme overlaping / et nom des clusters absents ou nom des termes absents !! 
+
 
 Un second ensemble, bien que très hétérogène du point de vue des thématiques déployées et de leur position au sein du graphe, est constitué de 9 clusters qui représentent respectivement entre 1% et 4% du nombre d’articles du corpus. L’ensemble de ces thèmes représente 21,6% des articles du corpus (452 articles) et 38 % des termes du graphe (1136 termes). Dans ce sous-ensemble se trouvent les clusters :
 - “Voice Assistant” : *Google's Nest microphone intensifies privacy concerns* -  _The Washington Post_ - 25/02/19
@@ -60,14 +87,15 @@ Un second ensemble, bien que très hétérogène du point de vue des thématique
 - “Game and Education” : *Korean Go master quits the game because AI 'cannot be defeated* - CNN Wire - 28/11/19
 - “Profiling Algorthms” : *Artificial intelligence can identify 'gay faces' from a picture, study claims* - Independent Online - 08/09/17
 
->ZOOM ou filtre cluster Carte sémantique des thématiques des articles “critiques” x 9 clusters - de 1%
->RQ probleme overlaping / et nom des clusters absents ou nom des termes absents !! 
-
 <GraphBlock 
-  x={0.5} 
-  y={0.5} 
-  ratio={1} 
-  filters={[{"attribute":"cluster_rename","value":"Autonomous_Cars"},{"attribute":"cluster_rename","value":"Voice_Assistant"},{"attribute":"cluster_rename","value":"Sex_Robots"},{"attribute":"cluster_rename","value":"Health_Algorithms"},{"attribute":"cluster_rename","value":"Deepfake"},{"attribute":"cluster_rename","value":"Predictive_Algorithms"},{"attribute":"cluster_rename","value":"Chatbot"},{"attribute":"cluster_rename","value":"Game_&_Education"},{"attribute":"cluster_rename","value":"Profiling_Algorthms"}]}
+  x={0.4588867805186573} 
+  y={0.5190807505798019}
+  ratio={0.80} 
+  nodeColorVariable={'cluster_rename'} 
+  nodeLabelVariable={'cluster_label'} 
+  labelDensity={1.5} 
+  colorPalette={{"Future_of_AI":"#e97f3e","Profiling_Algorthms":"#53cb7b","Job_Automation":"#eb102b","Market_&_Prices":"#d08be8","Predictive_Algorithms":"#a3bf28","Web_Algorithms":"#e7eb2a","Facial_Recognition":"#54a5e8","Voice_Assistant":"#108cac","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#d3a715","Game_&_Education":"#a1943c","Chatbot":"#1b90be","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#00c8cc","Sex_Robots":"#db7187","Deepfake":"#4f990f","Image_Search":"#6deeff","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}}
+  filters={[{"attribute":"cluster_rename","value":"Robo-Advisers"},{"attribute":"cluster_rename","value":"DeepDream_Nightmares"},{"attribute":"cluster_rename","value":"Deep_Voice"},{"attribute":"cluster_rename","value":"Scientific_Research"},{"attribute":"cluster_rename","value":"Market_&_Prices"},{"attribute":"cluster_rename","value":"Image_Search"},{"attribute":"cluster_rename","value":"Email"},{"attribute":"cluster_rename","value":"Music"},{"attribute":"cluster_rename","value":"Consumer_&_Copyright"}]}
 />
 
 Enfin, le graphe se compose de 9 autres clusters de taille très réduite, entre 0,8% et 0,1% des articles pour chaque cluster (58 articles au total). Les termes extraits de ces articles représentent pourtant 15,6% (466 termes au total) de la totalité des termes du graphe. Ces thématiques peuvent s’apparenter à des signaux faibles d’un discours critique sur les algorithmes et l’IA détectés par notre méthode d'extraction de termes mais pourtant sous représentés en volume d'articles. Ces clusters se centrent autour de thématiques très spécifiques, évoquant parfois des types de calculateurs mais le plus souvent des domaines d’application :
@@ -84,12 +112,6 @@ Enfin, le graphe se compose de 9 autres clusters de taille très réduite, entre
 >Graphe sémantique des thématiques des articles “critiques” full
 >RQ probleme overlaping / et nom des clusters absents ou nom des termes absents !! 
 
-<GraphBlock 
-  x={0.5} 
-  y={0.5000000000000002} 
-  ratio={1} 
-  filters={[{"attribute":"cluster_rename","value":"Robo-Advisers"},{"attribute":"cluster_rename","value":"DeepDream_Nightmares"},{"attribute":"cluster_rename","value":"Deep_Voice"},{"attribute":"cluster_rename","value":"Scientific_Research"},{"attribute":"cluster_rename","value":"Market_&_Prices"},{"attribute":"cluster_rename","value":"Image_Search"},{"attribute":"cluster_rename","value":"Email"},{"attribute":"cluster_rename","value":"Music"},{"attribute":"cluster_rename","value":"Consumer_&_Copyright"}]}
-/>
 
 ---
 ## Méthode : Extraction et visualisation du graphe de termes
