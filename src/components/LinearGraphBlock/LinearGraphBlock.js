@@ -47,6 +47,11 @@ const LinearGraphBlock = (inputProps) => {
   }
   return (
     <div onClick={handleClick} className={cx("VisualizationBlock LinearGraphBlock", {'is-focused': isFocused})}>
+      {
+        props.title ?
+        <h2 className="block-title">{props.title}</h2>
+        : null
+      }
       <pre>
         <code>
           {buildLinearGraphCode(props)}

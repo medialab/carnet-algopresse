@@ -30,6 +30,8 @@ const IceCreamAnnotation = ({
   const [colorPalette, setColorPalette] = useState(undefined);
   const [colorScaleType, setColorScaleType] = useState(undefined);
   const [filtersModeAnd, setFiltersModeAnd] = useState(false);
+  const [title, setTitle] = useState('');
+  const [legend, setLegend] = useState('');
   const [filters, setFilters] = useState([]);
 
 
@@ -69,6 +71,8 @@ const IceCreamAnnotation = ({
     colorPalette: thatColorPalette,
     filters: theseFilters = [],
     filtersModeAnd: theseFiltersModeAnd,
+    title: thisTitle,
+    legend: thisLegend,
   }) => {
     setXVariable(thatXVariable);
     setYVariable(thatYVariable);
@@ -83,6 +87,8 @@ const IceCreamAnnotation = ({
     setLabelsOnTheSide(thatLabelsOnTheSide);
     setFilters(theseFilters);
     setFiltersModeAnd(theseFiltersModeAnd);
+    setTitle(thisTitle);
+    setLegend(thisLegend);
     if (thatColorPalette && colorVariable === thatColorVariable) {
       setColorPalette(thatColorPalette);
     } else if (thatColorVariable || colorScaleType !== thatColorScaleType) {
@@ -143,6 +149,9 @@ const IceCreamAnnotation = ({
 
         filters,
         filtersModeAnd,
+
+        title,
+        legend,
       }
     }}>
       <div className="slide-container">
@@ -200,6 +209,8 @@ const IceCreamAnnotation = ({
 
                 filtersModeAnd,
                 filters,
+                title,
+                legend,
 
                 onToggleFiltersModeAnd: () => setFiltersModeAnd(!filtersModeAnd),
                 onFiltersChange: (newFilters) => setFilters(newFilters),
@@ -218,7 +229,9 @@ const IceCreamAnnotation = ({
                 onLabelVariableChange: (val) => setLabelVariable(val),
                 onToggleLabelsOnTheSide: val => setLabelsOnTheSide(val),
                 onColorPaletteChange: val => setColorPalette(val),
-                onColorScaleTypeChange: val => setColorScaleType(val)
+                onColorScaleTypeChange: val => setColorScaleType(val),
+                onTitleChange: val => setTitle(val),
+                onLegendChange: val => setLegend(val),
               }
               }
             />

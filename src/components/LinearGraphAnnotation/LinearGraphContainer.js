@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import {scaleLinear} from 'd3-scale';
 import {extent, group} from 'd3-array';
-
+import Input from '../DebouncedInput';
 
 
 import LinearGraphControls from './LinearGraphControls';
@@ -27,6 +27,9 @@ function LinearGraphContainer({
   colorVariable,
   labelVariable,
   colorPalette: inputColorPalette,
+
+  title,
+  legend,
 
   searchString = '',
 
@@ -53,6 +56,9 @@ function LinearGraphContainer({
   onColorPaletteChange,
   onGraphTypeChange,
   onToggleUseRelativeScale,
+
+  onTitleChange,
+  onLegendChange,
 }) {
  
   // const smallestDimension = min([width, height])
@@ -418,6 +424,22 @@ function LinearGraphContainer({
             }
           }
         />
+        <form onSubmit={e => {e.preventDefault()}} className="caption-editor-container">
+            <h1 className="caption-title-container">
+              <Input
+                value={title || ''}
+                onChange={val => onTitleChange(val)}
+                placeholder="Titre de la visualisation"
+              />
+            </h1>
+            <div className="caption-legend-container">
+              <Input
+                value={legend || ''}
+                onChange={val => onLegendChange(val)}
+                placeholder="Légende de la visualisation"
+              />
+            </div>
+          </form>
     </>
   );
 }

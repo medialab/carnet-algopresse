@@ -13,6 +13,7 @@ import {
 import GraphControls from './GraphControls';
 import {createNodeReducer, createEdgeReducer} from './reducers';
 import {generatePalette} from '../../helpers/palettes';
+import Input from '../DebouncedInput';
 
 import './GraphContainer.css';
 
@@ -59,6 +60,8 @@ function GraphContainer({
   cameraPosition,
 
   updateTimestamp,
+  title,
+  legend,
 
   nodeSizeVariable,
   nodeColorVariable,
@@ -69,6 +72,8 @@ function GraphContainer({
   onNodeLabelVariableChange,
   onLabelDensityChange,
   onColorPaletteChange,
+  onTitleChange,
+  onLegendChange
 }) {
   const CELL_HEIGHT_RANGE = [height / 5, height / 1000];
   const CELL_WIDTH_RANGE = [width / 5, width / 1000];
@@ -229,32 +234,50 @@ function GraphContainer({
 
       <div ref={setContainer} style={{width: '100%', height: '100%'}}></div>
       {renderer && (
-        <GraphControls
-          rescale={rescale.bind(null, renderer)}
-          zoomIn={zoomIn.bind(null, renderer)}
-          zoomOut={zoomOut.bind(null, renderer)}
-          {
-            ...{
-              searchString,
-              onSearchStringChange,
-              filtersModeAnd,
-              onToggleFiltersModeAnd,
-              filtersOptions,
-              filters,
-              onFiltersChange,
-              nodeSizeVariable,
-              nodeColorVariable,
-              nodeLabelVariable,
-              labelDensity,
-              onNodeSizeVariableChange,
-              onNodeColorVariableChange,
-              onNodeLabelVariableChange,
-              onColorPaletteChange,
-              onLabelDensityChange,
-              colorPalette: colorPalette || (nodeColor && nodeColor.palette),
+        <>
+          <GraphControls
+            rescale={rescale.bind(null, renderer)}
+            zoomIn={zoomIn.bind(null, renderer)}
+            zoomOut={zoomOut.bind(null, renderer)}
+            {
+              ...{
+                searchString,
+                onSearchStringChange,
+                filtersModeAnd,
+                onToggleFiltersModeAnd,
+                filtersOptions,
+                filters,
+                onFiltersChange,
+                nodeSizeVariable,
+                nodeColorVariable,
+                nodeLabelVariable,
+                labelDensity,
+                onNodeSizeVariableChange,
+                onNodeColorVariableChange,
+                onNodeLabelVariableChange,
+                onColorPaletteChange,
+                onLabelDensityChange,
+                colorPalette: colorPalette || (nodeColor && nodeColor.palette),
+              }
             }
-          }
-        />
+          />
+          <form onSubmit={e => {e.preventDefault()}} className="caption-editor-container">
+            <h1 className="caption-title-container">
+              <Input
+                value={title || ''}
+                onChange={val => onTitleChange(val)}
+                placeholder="Titre de la visualisation"
+              />
+            </h1>
+            <div className="caption-legend-container">
+              <Input
+                value={legend || ''}
+                onChange={val => onLegendChange(val)}
+                placeholder="Légende de la visualisation"
+              />
+            </div>
+          </form>
+        </>
       )}
     </div>
   );

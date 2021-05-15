@@ -32,6 +32,8 @@ const LinearGraphAnnotation = ({
   const [useRelativeScale, setUseRelativeScale] = useState(undefined);
   const [filtersModeAnd, setFiltersModeAnd] = useState(false);
   const [filters, setFilters] = useState([]);
+  const [title, setTitle] = useState('');
+  const [legend, setLegend] = useState('');
 
 
   const [focusedVisualizationId, setFocusedVisualizationId] = useState(null);
@@ -69,7 +71,9 @@ const LinearGraphAnnotation = ({
     useRelativeScale: thatUseRelativeScale,
 
     filters: theseFilters = [],
-    filtersModeAnd: theseFiltersModeAnd
+    filtersModeAnd: theseFiltersModeAnd,
+    title: thisTitle,
+    legend: thisLegend,
   }) => {
     setXVariable(thatXVariable);
     setXLabelVariable(thatXLabelVariable);
@@ -84,9 +88,11 @@ const LinearGraphAnnotation = ({
     setUseRelativeScale(thatUseRelativeScale);
     setFilters(theseFilters);
     setFiltersModeAnd(theseFiltersModeAnd);
+    setTitle(thisTitle);
+    setLegend(thisLegend);
 
 
-    if (thatColorPalette && colorVariable === thatColorVariable) {
+    if (thatColorPalette && ((!colorVariable && thatColorVariable) || colorVariable === thatColorVariable)) {
       setColorPalette(thatColorPalette);
     } else if (thatColorVariable) {
       let colors = thatColorVariable && thatColorVariable !== 'default' ? generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.length) : undefined
@@ -140,7 +146,10 @@ const LinearGraphAnnotation = ({
         colorPalette,
 
         filters,
-        filtersModeAnd
+        filtersModeAnd,
+        
+        title,
+        legend
       }
     }}>
       <div className="slide-container">
@@ -200,6 +209,9 @@ const LinearGraphAnnotation = ({
                 filtersModeAnd,
                 filters,
 
+                title,
+                legend,
+
                 onToggleFiltersModeAnd: () => setFiltersModeAnd(!filtersModeAnd),
                 onFiltersChange: (newFilters) => setFilters(newFilters),
 
@@ -214,7 +226,11 @@ const LinearGraphAnnotation = ({
                 onColorPaletteChange: val => setColorPalette(val),
 
                 onGraphTypeChange: val => setGraphType(val),
-                onToggleUseRelativeScale: () => setUseRelativeScale(!useRelativeScale)
+                onToggleUseRelativeScale: () => setUseRelativeScale(!useRelativeScale),
+
+                onTitleChange: val => setTitle(val),
+                onLegendChange: val => setLegend(val),
+
               }
               }
             />

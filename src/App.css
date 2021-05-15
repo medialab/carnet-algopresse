@@ -62,7 +62,7 @@ body {
   flex: 1;
   text-decoration: none;
   padding: 1rem;
-  padding-top: 4rem;
+  padding-top: 5rem;
   padding-left: 0;
   padding-right: 0;
   display: flex;
@@ -96,9 +96,9 @@ body {
   position: fixed;
   width: calc(65% - 5rem);
   left: calc(35% + 5rem);
-  top: 4rem;
-  max-height: calc(100% - 4rem);
-  height: calc(100% - 4rem);
+  top: 5rem;
+  max-height: calc(100% - 5rem);
+  height: calc(100% - 5rem);
   padding: 1rem;
   box-sizing: border-box;
   display: flex;
@@ -157,6 +157,11 @@ body {
 .VisualizationBlock.is-focused {
   background: rgba(50,50,50,1);
   color: white;
+}
+
+.VisualizationBlock .block-title {
+  margin: 0;
+  font-size: 1rem;
 }
 
 .VisualizationBlock pre {
@@ -529,4 +534,26 @@ input, select {
 
 .lang-toggle button.is-active {
   font-weight: 800;
+}
+
+
+.caption-editor-container {
+  position: absolute;
+  top: 0;
+  left: .5rem;
+}
+.caption-editor-container input {
+  font-size: inherit;
+  border: 0;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+.caption-editor-container .caption-title-container {
+  margin: 0;
+}
+.caption-editor-container .caption-legend-container {
+  margin: 0;
+  font-size: .7rem;
 }

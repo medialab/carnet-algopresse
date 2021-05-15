@@ -38,6 +38,8 @@ const GraphAnnotation = ({
   const [nodeSizeVariable, setNodeSizeVariable] = useState(undefined);
   const [nodeLabelVariable, setNodeLabelVariable] = useState(undefined);
   const [labelDensity, setLabelDensity] = useState(DEFAULT_LABEL_DENSITY);
+  const [title, setTitle] = useState('');
+  const [legend, setLegend] = useState('');
 
   const [focusedVisualizationId, setFocusedVisualizationId] = useState(null);
   const [registeredVisualizations, setRegisteredVisualizations] = useState({});
@@ -67,6 +69,8 @@ const GraphAnnotation = ({
     nodeLabelVariable,
     labelDensity,
     colorPalette,
+    title: newTitle,
+    legend: newLegend
 }) => {
     setCameraPosition({x, y, ratio});
     setUpdateTimeStamp(new Date().getTime());
@@ -76,6 +80,8 @@ const GraphAnnotation = ({
     setNodeColorVariable(newNodeColorVariable);
     setNodeSizeVariable(nodeSizeVariable);
     setNodeLabelVariable(nodeLabelVariable);
+    setTitle(newTitle);
+    setLegend(newLegend);
     if (colorPalette && nodeColorVariable === newNodeColorVariable) {
       setColorPalette(colorPalette);
     } else {
@@ -132,6 +138,8 @@ const GraphAnnotation = ({
         filtersModeAnd,
         labelDensity,
         colorPalette,
+        title,
+        legend,
       }
     }}>
     <div className="slide-container">
@@ -186,6 +194,8 @@ const GraphAnnotation = ({
                 nodeLabelVariable,
                 filtersModeAnd,
                 labelDensity,
+                title,
+                legend,
 
                 colorPalette,
 
@@ -199,6 +209,8 @@ const GraphAnnotation = ({
                 onNodeColorVariableChange: (val) => setNodeColorVariable(val),
                 onNodeLabelVariableChange: (val) => setNodeLabelVariable(val),
                 onColorPaletteChange: val => setColorPalette(val),
+                onTitleChange: val => setTitle(val),
+                onLegendChange: val => setLegend(val),
 
                 extents: {
                   nodeSize: {

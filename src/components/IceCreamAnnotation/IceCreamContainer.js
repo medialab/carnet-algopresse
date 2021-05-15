@@ -6,6 +6,7 @@ import cx from 'classnames';
 
 import IceCreamControls from './IceCreamControls';
 import {generatePalette} from '../../helpers/palettes';
+import Input from '../DebouncedInput';
 
 import './IceCreamContainer.css';
 import { evalIfNodeMatches, transformGeometry } from '../../helpers/misc';
@@ -37,6 +38,8 @@ function IceCreamContainer({
   filtersModeAnd,
   onFiltersChange,
   filters,
+  title,
+  legend,
 
   
   onXVariableChange,
@@ -49,6 +52,8 @@ function IceCreamContainer({
   onToggleLabelsOnTheSide,
   onColorPaletteChange,
   onColorScaleTypeChange,
+  onTitleChange,
+  onLegendChange,
 }) {
  
   const smallestDimension = min([width, height])
@@ -412,6 +417,22 @@ function IceCreamContainer({
             }
           }
         />
+        <form onSubmit={e => {e.preventDefault()}} className="caption-editor-container">
+            <h1 className="caption-title-container">
+              <Input
+                value={title || ''}
+                onChange={val => onTitleChange(val)}
+                placeholder="Titre de la visualisation"
+              />
+            </h1>
+            <div className="caption-legend-container">
+              <Input
+                value={legend || ''}
+                onChange={val => onLegendChange(val)}
+                placeholder="Légende de la visualisation"
+              />
+            </div>
+          </form>
     </>
   );
 }

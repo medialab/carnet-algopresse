@@ -47,6 +47,11 @@ const GraphBlock = (inputProps) => {
   }
   return (
     <div onClick={handleClick} className={cx("VisualizationBlock GraphBlock", {'is-focused': isFocused})}>
+      {
+        props.title ?
+        <h2 className="block-title">{props.title}</h2>
+        : null
+      }
       <pre>
         <code>
           {buildGraphCode(props)}
