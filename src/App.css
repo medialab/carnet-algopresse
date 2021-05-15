@@ -439,6 +439,10 @@ input, select {
  */
  .scatterplot .plot-object text {
    font-size: .8rem;
+   transition: .1s ease-in all;
+ }
+ .scatterplot .plot-object circle {
+  transition: .1s ease all;
  }
 
 .scatterplot .plot-objects-container:hover .plot-object.is-matching {
@@ -449,7 +453,20 @@ input, select {
   opacity: 1;
 }
 
-.scatterplot .plot-objects-container  .plot-object.is-matching:hover text {
+.scatterplot .plot-objects-container  .plot-object.is-matching:hover text
+ {
+  font-size: 15px!important;
+  background: white;
+}
+
+.scatterplot.zoom-mode .plot-objects-container:not(:hover) .plot-object.is-matching:not(.is-zoomed) text {
+  opacity: .4;
+}
+.scatterplot.zoom-mode .plot-objects-container:not(:hover) .plot-object.is-matching:not(.is-zoomed) circle {
+  opacity: .6;
+}
+
+.scatterplot.zoom-mode .plot-objects-container .plot-object.is-zoomed text {
   font-size: 15px!important;
   background: white;
 }

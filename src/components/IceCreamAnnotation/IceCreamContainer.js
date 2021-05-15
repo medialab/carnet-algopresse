@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import {scaleLinear} from 'd3-scale';
 import {min, extent} from 'd3-array';
@@ -11,9 +11,12 @@ import Input from '../DebouncedInput';
 import './IceCreamContainer.css';
 import { evalIfNodeMatches, transformGeometry } from '../../helpers/misc';
 
+const GIF_TIME = 500;
+
 function IceCreamContainer({
 
-  width, height,
+  width, 
+  height,
   data,
 
   xVariable,
@@ -55,8 +58,50 @@ function IceCreamContainer({
   onTitleChange,
   onLegendChange,
 }) {
+
+  const [zoomedIndex, setZoomedIndex] = useState(null);
+  const [enableZoom, setEnableZoom] = useState(true);
+
+  const updateActive = () => {
+    if (filters && filters.length) {
+      const existing = zoomedIndex === null ? -1 : zoomedIndex;
+      let found = false;
+      for (let i = existing + 1 ; i < data.length ; i++) {
+        if (evalIfNodeMatches(data[i], filters, filtersModeAnd)) {
+          setZoomedIndex(i);
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        for (let i = 0 ; i < data.length ; i++) {
+          if (evalIfNodeMatches(data[i], filters, filtersModeAnd)) {
+            setZoomedIndex(i);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (filters && filters.length) {
+      if (zoomedIndex === null) {
+        updateActive();
+      }
+      setTimeout(updateActive, GIF_TIME);
+    } else {
+      setZoomedIndex(null);
+    }
+  /* eslint react-hooks/exhaustive-deps : 0 */
+  }, [
+    filters,
+    filtersModeAnd,
+    data,
+    zoomedIndex
+  ])
  
-  const smallestDimension = min([width, height])
+  const smallestDimension = min([width, height]);
   // in rotate mode width indexed on the hypothenuse
   const WIDTH = rotateMode ? parseInt(Math.sqrt(smallestDimension * smallestDimension / 2)) : smallestDimension;
   const HEIGHT = rotateMode ? parseInt(Math.sqrt(smallestDimension * smallestDimension / 2)) : smallestDimension;
@@ -150,7 +195,7 @@ function IceCreamContainer({
   return (
     <>
         <svg 
-          className="scatterplot" 
+          className={cx("scatterplot", {'zoom-mode': zoomedIndex !== null && enableZoom})}
           width={smallestDimension} 
           height={smallestDimension}
           transform={`translate(${(width - smallestDimension) / 2}, 0)`}
@@ -279,7 +324,11 @@ function IceCreamContainer({
                 ))
             }
             </g>
-            <g className="plot-objects-container">
+            <g 
+              className="plot-objects-container"
+              onMouseEnter={() => setEnableZoom(false)}
+              onMouseLeave={() => setEnableZoom(true)}
+            >
             {
               data
               .sort((a, b) => {
@@ -314,11 +363,13 @@ function IceCreamContainer({
                 } else if (highlightedIndex && !highlightedIndex.has(index)) {
                   opacity = .2;
                 }
+
+                const isZoomed = index === zoomedIndex && enableZoom === true;
            
                 return (
                   <g 
                     key={index} 
-                    className={cx("plot-object", {'is-matching': isMatching})}
+                    className={cx("plot-object", {'is-matching': isMatching, 'is-zoomed': isZoomed})}
                     opacity={opacity}
                   >
                     <line
