@@ -108,8 +108,8 @@ const IceCreamAnnotation = ({
   useEffect(() => {
     if (!focusedVisualizationId && Object.keys(registeredVisualizations).length) {
       const thatId = Object.keys(registeredVisualizations)[0];
-      setFocusedVisualizationId(thatId)
-      onVisualizationUpdate(registeredVisualizations[thatId])
+      setFocusedVisualizationId(thatId);
+      onVisualizationUpdate(registeredVisualizations[thatId]);
     }
   }, [registeredVisualizations, focusedVisualizationId])/* eslint react-hooks/exhaustive-deps : 0 */
 

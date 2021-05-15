@@ -27,7 +27,7 @@ const GraphBlock = (inputProps) => {
     setId(newId);
     return onUnregisterVisualization(id);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, ['id', 'inputProps', 'onRegisterVisualization', 'onUnregisterVisualization'])
+  }, [/*id, inputProps, onRegisterVisualization, onUnregisterVisualization*/])
 
   const isFocused = focusedVisualizationId === id;
 

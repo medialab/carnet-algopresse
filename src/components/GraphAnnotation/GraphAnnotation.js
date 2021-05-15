@@ -55,23 +55,6 @@ const GraphAnnotation = ({
     setRegisteredVisualizations(copyOfRegistered)
   }
 
-  useEffect(() => {
-    if (!focusedVisualizationId && Object.keys(registeredVisualizations).length) {
-      const thatId = Object.keys(registeredVisualizations)[0];
-      setFocusedVisualizationId(thatId )
-    }
-  }, [registeredVisualizations, focusedVisualizationId])
-
-  let sizes = [];
-  graph.forEachNode((node, attributes) => {
-    sizes.push(attributes.size);
-  })
-  const sizeExtent = extent(sizes);
-
-  const onCameraUpdate = state => {
-    const {x, y, ratio} = state;
-    setCameraPosition({x, y, ratio});
-  }
   const onVisualizationUpdate = ({
     x, 
     y, 
@@ -107,6 +90,26 @@ const GraphAnnotation = ({
     }
     setLabelDensity(labelDensity === undefined ? DEFAULT_LABEL_DENSITY : labelDensity);
   }
+
+  useEffect(() => {
+    if (!focusedVisualizationId && Object.keys(registeredVisualizations).length) {
+      const thatId = Object.keys(registeredVisualizations)[0];
+      setFocusedVisualizationId(thatId );
+      onVisualizationUpdate(registeredVisualizations[thatId])
+    }
+  }, [registeredVisualizations, focusedVisualizationId]);/* eslint react-hooks/exhaustive-deps : 0 */
+
+  let sizes = [];
+  graph.forEachNode((node, attributes) => {
+    sizes.push(attributes.size);
+  })
+  const sizeExtent = extent(sizes);
+
+  const onCameraUpdate = state => {
+    const {x, y, ratio} = state;
+    setCameraPosition({x, y, ratio});
+  }
+  
   const onSearchStringChange = str => {
     setSearchString(str);
   }
