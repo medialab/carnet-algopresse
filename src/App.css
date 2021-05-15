@@ -28,6 +28,7 @@ body {
   width: 100%;
   overflow: auto;
   background: white;
+  z-index: 2;
   /* background: rgba(240,240,240,1); */
 }
 #wrapper > nav ul{
@@ -513,4 +514,19 @@ input, select {
 
 .LinearGraph .bottom-axis .axis-element text {
   font-size: .9rem;
+}
+
+.lang-toggle {
+  display: flex;
+  flex-flow: column nowrap;
+  border-left: 1px solid black;
+  padding-left: .5rem;
+}
+
+.lang-toggle button:not(.is-active) {
+  cursor: pointer;
+}
+
+.lang-toggle button.is-active {
+  font-weight: 800;
 }
