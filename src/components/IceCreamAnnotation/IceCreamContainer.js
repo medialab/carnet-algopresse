@@ -78,7 +78,7 @@ function IceCreamContainer({
   if (inputColorPalette) {
     colorPalette = inputColorPalette;
   }
-  else if (colorVariable && colorVariable !== 'default') {
+  else if (colorVariable && colorVariable !== 'default' && filtersOptions[colorVariable]) {
     const palette = generatePalette(colorVariable, filtersOptions[colorVariable].options.length);
     colorPalette = filtersOptions[colorVariable].options.reduce((res, option, index) => ({
       ...res,

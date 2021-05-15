@@ -14,13 +14,15 @@ const routes = [
     title: '1. Couverture médias',
     route: '/01-couverture-media',
     contents: '01_couverture_media.mdx',
-    Component: PlainPage
+    Component: LinearGraphAnnotation,
+    data: '4average_clusters_unpivoted.csv'
   },
   {
     title: '2. Détecter les critiques',
     route: '/02-detect-critic',
     contents: '02_detectcritic.mdx',
-    Component: PlainPage
+    Component: LinearGraphAnnotation,
+    data: 'critic_notcritic_unpivoted.csv',
   },
   {
     title: '3. Graphe clusters',
@@ -33,7 +35,8 @@ const routes = [
     title: '4. Évolution de l\'agenda médiatique',
     route: '/04-timeline-clusters',
     contents: '04_timelineclusters.mdx',
-    Component: PlainPage
+    Component: LinearGraphAnnotation,
+    data: '4average_clusters_unpivoted.csv',
   },
   {
     title: '5. Topologie du réseau',
@@ -60,8 +63,8 @@ const routes = [
     title: '8. Temporalité',
     route: '/08-temporalite',
     contents: '08_NERdate.mdx',
-    Component: LinearGraphAnnotation,
-    data: '4average_clusters_unpivoted.csv'
+    Component: IceCreamAnnotation,
+    data: 'date_ner_tfidf_v3.csv'
   },
   // {
   //   title: 'Graphe des critiques anglophones',

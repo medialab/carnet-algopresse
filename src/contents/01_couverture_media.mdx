@@ -1,4 +1,6 @@
 
+import LinearGraphBlock from '../components/LinearGraphBlock';
+
 ## Quelle est la couverture médiatique de l'IA ?
 
 Notre recherche a consisté à extraire un large corpus de 29342 d'articles de presse portant sur  l’IA et les algorithmes sur une période de 5 années, réalisée sur l'agrégateur de presse Factiva sur un ensemble de 47 sources de presse généraliste aux États unis et au Royaume Uni (27 sources pour USA et 20 sources pour UK).
@@ -6,9 +8,8 @@ Notre recherche a consisté à extraire un large corpus de 29342 d'articles de p
 Les données récoltées font apparaître une augmentation du volume d’articles portant sur l’IA - telle que définie par notre requête - sur la période d’observation. Cette augmentation atteste de la place de plus en plus importante du thème des algorithmes et de l’IA dans l’espace médiatique ces dernières années. Afin de contrôler cette augmentation au sein de notre corpus, nous avons comparé avec d’autres requêtes effectuées sur la même période et des sources identiques, pour lesquelles on attend une distribution stable. L’observation du volume d’articles extraits à partir de notre requête montre une augmentation significative de 163% entre 2015 et 2019 des publications portant sur l’IA et les algorithmes alors que les articles consacrés à l’art (-9%), la culture (+2%), l'économie (+0%) ou la technologie (+14%) restent relativement stables. 
 
 >Visuel Comparatif volume articles Les statistiques comparées des différentes requêtes intègrent les doublons présents dans la base Factiva
->
+
 <LinearGraphBlock 
-  graphType={'histogram'} 
   xVariable={'month'} 
   xLabelVariable={'fullName'} 
   yVariable={'value'}
