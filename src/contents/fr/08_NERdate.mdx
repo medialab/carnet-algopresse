@@ -12,10 +12,10 @@ import IceCreamBlock from '../../components/IceCreamBlock';
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"from":"#eb2941","to":"#9e41f0"}} 
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   colorScaleType={'continuous'}
+  title={'TF-IDF scores for named entities Date'} 
 />
-
 
 L'opposition entre les deux espaces sémantiques semble donc dessiner deux régimes d’énonciation distincts qui cohabitent au sein de l’espace médiatique. Le premier exprime les peurs face à des technologies autonomes focalisant la critique sur leur capacité à simuler, dépasser, remplacer ou exterminer à terme l’espèce humaine et représentant une menace qu’il serait nécessaire de contrôler. L’autre régime est davantage ancré dans le répertoire habituel de la critique sociale, mobilisant le répertoire du droit et des  injustices (censure, discrimination, surveillance) envers des populations spécifiques ou relève d’enjeux de régulation quant à la manière de gérer la diffusion de l’information (exposition, amplification).
 
@@ -25,8 +25,6 @@ Mais plus que cette analyse de l’adoption plus ou moins avancée de ces diffé
 
 A partir de notre corpus, nous avons extrait 500 entités nommées qui sont des marqueurs temporels présents au sein des articles et de la même manière que pour les verbes, nous avons calculé de manière comparative leur score tf-idf sur l’ensemble des articles constituant les deux sous-ensembles intitulés “Robots” et "Algorithmes". La liste des entités extraite a été filtrer manuellement afin de ne conserver que les marqueurs temporels interprétables en dehors de leur contexte d’énonciation . L’analyse comparative de la distribution entre les deux sous-ensembles des scores tf-idf des marqueurs temporels laisse apparaître deux régimes distincts de référence au temps au sein des articles. 
 
->Visualisation Temporalité robot
-
 <IceCreamBlock 
   xVariable={'algorithms'} 
   yVariable={'robots'} 
@@ -35,14 +33,15 @@ A partir de notre corpus, nous avons extrait 500 entités nommées qui sont des 
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   colorScaleType={'continuous'} 
   filters={[{"attribute":"algo_robot","value":"robot"}]}
+  title={'TF-IDF scores for named entities Date'} 
+  legend={'filtering articles annotated as robots'}
 />
 
 Du côté des articles associés au sous-ensemble “Robots” les marqueurs de temps relèvent d’une temporalité sur le long terme, qu’ils fassent référence au passé ou au futur. Ainsi la grande majorité des marqueurs se structurent autour d’expressions sur le futur qui mobilisent la figure the next associés à des temporalités qui se comptent souvent en dizaines d’années ou centaines d’années (the next 10 years, the next 30 years, the next 100 years, the next 1,000 years). D’autre part, les énoncés qui ont les plus importants scores dans cet espace ont comme particularité le plus souvent de ne pas définir précisément les échéances auxquelles ils renvoient (the next decades, coming decades, next century, this century). D’autres marqueurs également présents dans ce sous-ensemble ne font pas référence au futur mais au passé et ils se caractérisent par le fait de référer également à une projection lointaine dans le temps passé (30 years ago, 150 years ago, the last 20 years, the past 25 years, the past 15 years). Les entités dans ce sous-ensemble ont donc comme particularité de majoritairement exprimer un futur lointain et souvent peu précis. Par ailleurs, lorsque les entités font référence au passé, elles sont également projetées dans une temporalité lointaine.
 
->Visualisation Temporalité algo
-
 <IceCreamBlock 
   xVariable={'algorithms'} 
   yVariable={'robots'} 
@@ -51,14 +50,15 @@ Du côté des articles associés au sous-ensemble “Robots” les marqueurs de 
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   colorScaleType={'continuous'} 
   filters={[{"attribute":"algo_robot","value":"algo"}]}
+  title={'TF-IDF scores for named entities Date'} 
+  legend={'filtering articles annotated as algorithms'}
 />
 
 Au sein du sous-ensemble d’articles associés aux "Algorithmes" les marqueurs temporels extraits ayant les scores tf-idf les plus hauts se distinguent des premiers car ils renvoient majoritairement au présent (this day, these days, that year), à un passé plus proche souvent exprimé en jour, semaine ou mois (recent days, just last week, a few weeks ago, just a month, six months ago, the end of last year), mais également à un futur très proche en comparaison du premier sous-ensemble (the next day, the next few weeks, the coming weeks, the coming months, the following two years). 
 
->Visualisation Temporalité full
-
 <IceCreamBlock 
   xVariable={'algorithms'} 
   yVariable={'robots'} 
@@ -67,8 +67,9 @@ Au sein du sous-ensemble d’articles associés aux "Algorithmes" les marqueurs 
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"from":"#eb2941","to":"#9e41f0"}} 
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   colorScaleType={'continuous'}
+  title={'TF-IDF scores for named entities Date'} 
 />
 
 
