@@ -2,8 +2,6 @@ import IceCreamBlock from '../../components/IceCreamBlock';
 
 ## Comment sont exprimés les verbes de troubles ? 
 
->Visualisation Verbes troubles full
-
 <IceCreamBlock 
   xVariable={'algorithms'} 
   yVariable={'robots'} 
@@ -12,14 +10,12 @@ import IceCreamBlock from '../../components/IceCreamBlock';
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"from":"#eb2941","to":"#9e41f0"}} 
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   colorScaleType={'continuous'}
 />
 
 Une autre manière de poursuivre cette analyse comparative des troubles et formes d’agentivité associés aux calculateurs consiste en l’exploration d’une autre entité sémantique au sein du corpus d’articles que sont les verbes mais absente du réseau du fait de la procédure d’extraction. Après avoir réalisé une extraction d’une liste de verbes interprétables comme étant potentiellement de bons candidats aux troubles produits par les dispositifs techniques, nous avons calculé et comparé leur score tf-idf  au sein des deux sous-ensemble d’articles constitutifs du réseau.
 
->Visualisation Verbes troubles robot
-
 <IceCreamBlock 
   xVariable={'algorithms'} 
   yVariable={'robots'} 
@@ -28,14 +24,13 @@ Une autre manière de poursuivre cette analyse comparative des troubles et forme
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   colorScaleType={'continuous'} 
   filters={[{"attribute":"algo_robot","value":"robot"}]}
 />
 
 Les verbes dont les scores tf-idf sont les plus importants dans les articles qui composent l’espace sémantique “Robots” viennent conforter l’analyse des troubles effectuée à partir des termes catégorisés comme “Issues” au sein du graphe. En effet, on observe une plus forte représentation de verbes exprimant une menace de la part des machines et intelligences autonomes relevant d’un discours prophétique, voire apocalyptique. Parmi les verbes sélectionnés comme bons candidats à l’expression de troubles ayant les plus importants scores, on trouve des verbes qui expriment des notions de destruction (doom, destroy, eradicate, kill, eliminate) et de domination des machines sur l'homme (enslave, dominate), mais également de  dépassement ou de remplacement des hommes par les ces agents techniques (overtake, surpass, replace, defeat). D’autres verbes davantage représentés dans le sous ensemble “robots” renvoient à des notions de transformation et de changement (reshape, transform, disrupt) ou aux capacités de ces agents techniques à imiter ou simuler les comportements humains (ressemble, simulate, reproduce, mimic).
 
->Visualisation Verbes troubles algos
-
 <IceCreamBlock 
   xVariable={'algorithms'} 
   yVariable={'robots'} 
@@ -44,6 +39,7 @@ Les verbes dont les scores tf-idf sont les plus importants dans les articles qui
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   colorScaleType={'continuous'} 
   filters={[{"attribute":"algo_robot","value":"algo"}]}
 />
@@ -60,7 +56,7 @@ Dans le sous-ensemble d’articles associés aux "Algorithmes" on retrouve égal
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"from":"#eb2941","to":"#9e41f0"}} 
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   colorScaleType={'continuous'}
 />
 
