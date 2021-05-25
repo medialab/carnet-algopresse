@@ -9,7 +9,7 @@ import GraphBlock from '../../components/GraphBlock';
   ratio={0.8} 
   filters={[{"attribute":"tag_entity","value":"Technical"}]}
   nodeColorVariable={'algo_robot'} 
-  nodeLabelVariable={'label_copy'} 
+  nodeLabelVariable={'label_copy'}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Semantic network annotated by type of technology related to robots and algorithms'} 
@@ -24,7 +24,8 @@ La décomposition des qualifications des Agents de l’IA fait apparaître des e
   ratio={0.8} 
   filters={[{"attribute":"tag_entity","value":"Technical"},{"attribute":"algo_robot","value":"Robot"}]} 
   nodeColorVariable={'algo_robot'} 
-  nodeLabelVariable={'label_copy'} 
+  nodeLabelVariable={'label_copy'}  
+  filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Semantic network annotated by type of technology related to robots and algorithms'} 
@@ -39,7 +40,8 @@ Si l’on compare les termes les plus fréquents catégorisés en tant qu’enti
   ratio={0.8} 
   filters={[{"attribute":"tag_entity","value":"Technical"},{"attribute":"algo_robot","value":"Algo"}]} 
   nodeColorVariable={'algo_robot'} 
-  nodeLabelVariable={'label_copy'} 
+  nodeLabelVariable={'label_copy'}
+  filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Semantic network annotated by type of technology related to robots and algorithms'} 
@@ -72,7 +74,8 @@ La catégorie “People” à partir de laquelle ont été annotés dans les ter
   ratio={0.8} 
   filters={[{"attribute":"tag_entity","value":"People"},{"attribute":"algo_robot","value":"Robot"}]} 
   nodeColorVariable={'algo_robot'} 
-  nodeLabelVariable={'label_copy'} 
+  nodeLabelVariable={'label_copy'}
+  filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Semantic network annotated by type of technology related to robots and algorithms'} 
@@ -87,7 +90,8 @@ Du côté de l’espace “Robots” on observe parmi les termes les plus fréqu
   ratio={0.8} 
   filters={[{"attribute":"tag_entity","value":"People"},{"attribute":"algo_robot","value":"Algo"}]} 
   nodeColorVariable={'algo_robot'} 
-  nodeLabelVariable={'label_copy'} 
+  nodeLabelVariable={'label_copy'}
+  filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Semantic network annotated by type of technology related to robots and algorithms'} 
@@ -122,6 +126,7 @@ La catégorie intitulée “Issues” permet une lecture comparée des termes re
   filters={[{"attribute":"tag_entity","value":"Issue"},{"attribute":"algo_robot","value":"Robot"}]} 
   nodeColorVariable={'algo_robot'} 
   nodeLabelVariable={'label_copy'} 
+  filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Semantic network annotated by type of technology related to robots and algorithms'} 
@@ -136,7 +141,8 @@ Du côté de l'espace sémantique “Robots”, c’est l’affrontement entre l
   ratio={0.8} 
   filters={[{"attribute":"tag_entity","value":"Issue"},{"attribute":"algo_robot","value":"Algo"}]} 
   nodeColorVariable={'algo_robot'} 
-  nodeLabelVariable={'label_copy'} 
+  nodeLabelVariable={'label_copy'}
+  filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Semantic network annotated by type of technology related to robots and algorithms'} 
