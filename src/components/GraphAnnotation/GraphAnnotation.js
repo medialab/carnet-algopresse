@@ -40,6 +40,7 @@ const GraphAnnotation = ({
   const [labelDensity, setLabelDensity] = useState(DEFAULT_LABEL_DENSITY);
   const [title, setTitle] = useState('');
   const [legend, setLegend] = useState('');
+  const [displayAllLabels, setDisplayAllLabels] = useState(false);
   const [hasLoadedFirstVis, setHasLoadedFirstVis] = useState(false);
 
   const [focusedVisualizationId, setFocusedVisualizationId] = useState(null);
@@ -71,7 +72,8 @@ const GraphAnnotation = ({
     labelDensity,
     colorPalette: newColorPalette,
     title: newTitle,
-    legend: newLegend
+    legend: newLegend,
+    displayAllLabels: newDisplayAllLabels
 }) => {
     setCameraPosition({x, y, ratio});
     setUpdateTimeStamp(new Date().getTime());
@@ -81,6 +83,7 @@ const GraphAnnotation = ({
     setNodeColorVariable(newNodeColorVariable);
     setNodeSizeVariable(nodeSizeVariable);
     setNodeLabelVariable(nodeLabelVariable);
+    setDisplayAllLabels(newDisplayAllLabels);
     setTitle(newTitle);
     setLegend(newLegend);
     if (newColorPalette && (nodeColorVariable === newNodeColorVariable || !nodeColorVariable)) {
@@ -134,6 +137,7 @@ const GraphAnnotation = ({
         // filtersOptions,
         filters,
         // updateTimestamp,
+        displayAllLabels,
         nodeSizeVariable,
         nodeColorVariable,
         nodeLabelVariable,
@@ -197,6 +201,7 @@ const GraphAnnotation = ({
                 nodeLabelVariable,
                 filtersModeAnd,
                 labelDensity,
+                displayAllLabels,
                 title,
                 legend,
 
@@ -208,6 +213,7 @@ const GraphAnnotation = ({
                 onFiltersChange: (newFilters) => setFilters(newFilters),
 
                 onLabelDensityChange: val => setLabelDensity(val),
+                onDisplayAllLabelsChange: val => setDisplayAllLabels(val),
                 onNodeSizeVariableChange: (val) => setNodeSizeVariable(val),
                 onNodeColorVariableChange: (val) => setNodeColorVariable(val),
                 onNodeLabelVariableChange: (val) => setNodeLabelVariable(val),

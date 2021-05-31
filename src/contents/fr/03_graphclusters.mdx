@@ -8,7 +8,8 @@ import GraphBlock from '../../components/GraphBlock';
   ratio={0.8} 
   nodeColorVariable={'cluster_rename'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
+  labelDensity={1} 
+  displayAllLabels={true}
   colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
   title={'Semantic network of critic articles about AI'} 
   legend={'2991 nodes, 54062 links of cooccurrences, cluster colors related to modularity , node size related to term frequency '}
@@ -27,7 +28,7 @@ Le deux plus importants clusters du graphe en nombre d’articles forment deux p
   filters={[{"attribute":"cluster_rename","value":"Web_Algorithms"},{"attribute":"cluster_rename","value":"Future_of_AI"}]}
   nodeColorVariable={'cluster_rename'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
+  displayAllLabels={true}
   colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
   title={'Filtering of the clusters Future_of_AI and Web_Algorithms'} 
   legend={'cluster colors related to modularity , node size related to term frequency '}
@@ -43,7 +44,7 @@ Le deux plus importants clusters du graphe en nombre d’articles forment deux p
   filters={[{"attribute":"cluster_rename","value":"Facial_Recognition"},{"attribute":"cluster_rename","value":"Job_Automation"},{"attribute":"cluster_rename","value":"Killer_Robots"}]}
   nodeColorVariable={'cluster_rename'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
+  displayAllLabels={true}
   colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
   title={'Filtering of the clusters Job_Automation, Killer_Robots, Facial_Recognition'} 
   legend={'cluster colors related to modularity , node size related to term frequency '}
@@ -63,7 +64,8 @@ L’ensemble de ces 5 plus grands clusters thématiques domine largement l’esp
   filters={[{"attribute":"cluster_rename","value":"Autonomous_Cars"},{"attribute":"cluster_rename","value":"Voice_Assistant"},{"attribute":"cluster_rename","value":"Sex_Robots"},{"attribute":"cluster_rename","value":"Health_Algorithms"},{"attribute":"cluster_rename","value":"Deepfake"},{"attribute":"cluster_rename","value":"Predictive_Algorithms"},{"attribute":"cluster_rename","value":"Chatbot"},{"attribute":"cluster_rename","value":"Game_&_Education"},{"attribute":"cluster_rename","value":"Profiling_Algorthms"}]}
   nodeColorVariable={'cluster_rename'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
+  labelDensity={1} 
+  displayAllLabels={true}
   colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
   title={'Filtering of 9 other clusters containing more than 1% of articles in the dataset'} 
   legend={'cluster colors related to modularity , node size related to term frequency '}
@@ -87,7 +89,8 @@ Un second ensemble, bien que très hétérogène du point de vue des thématique
   filters={[{"attribute":"cluster_rename","value":"Robo-Advisers"},{"attribute":"cluster_rename","value":"DeepDream_Nightmares"},{"attribute":"cluster_rename","value":"Deep_Voice"},{"attribute":"cluster_rename","value":"Scientific_Research"},{"attribute":"cluster_rename","value":"Market_&_Prices"},{"attribute":"cluster_rename","value":"Image_Search"},{"attribute":"cluster_rename","value":"Email"},{"attribute":"cluster_rename","value":"Music"},{"attribute":"cluster_rename","value":"Consumer_&_Copyright"}]}
   nodeColorVariable={'cluster_rename'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
+  labelDensity={1} 
+  displayAllLabels={true}
   colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
   title={'Filtering of 9 other clusters containing less than 1% of articles in the dataset'} 
   legend={'cluster colors related to modularity , node size related to term frequency '}
@@ -110,7 +113,8 @@ Enfin, le graphe se compose de 9 autres clusters de taille très réduite, entre
   ratio={0.8} 
   nodeColorVariable={'cluster_rename'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
+  labelDensity={1} 
+  displayAllLabels={true}
   colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
   title={'Semantic network of critic articles about AI'} 
   legend={'2991 nodes, 54062 links of cooccurrences, cluster colors related to modularity , node size related to term frequency '}

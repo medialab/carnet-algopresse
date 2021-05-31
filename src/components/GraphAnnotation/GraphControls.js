@@ -47,6 +47,7 @@ export default function GraphControls({
   filtersModeAnd,
   onToggleFiltersModeAnd,
   labelDensity,
+  displayAllLabels,
 
   nodeSizeVariable,
   nodeColorVariable,
@@ -62,6 +63,7 @@ export default function GraphControls({
   onNodeLabelVariableChange,
   onLabelDensityChange,
   onColorPaletteChange,
+  onDisplayAllLabelsChange,
 }) {
   const handleSearchChange = e => onSearchStringChange(e.target.value);
   const [isMinified, setIsMinified] = useState(true)
@@ -112,7 +114,20 @@ export default function GraphControls({
                     value: nodeLabelVariable,
                     onChange: onNodeLabelVariableChange,
                     type: 'string'
-                  }
+                  },
+                  {
+                    title: 'Afficher tous les labels',
+                    onChange: () => onDisplayAllLabelsChange(!displayAllLabels),
+                    localOptions: [[
+                      false,
+                      {title: 'non'}
+                    ], [
+                      true,
+                      {title: 'oui'}
+                    ]],
+                    value: displayAllLabels,
+                    type: 'boolean'
+                  },
                 ],
               }
             }

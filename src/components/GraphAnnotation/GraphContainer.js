@@ -15,7 +15,7 @@ import {generatePalette} from '../../helpers/palettes';
 import Input from '../DebouncedInput';
 
 import './GraphContainer.css';
-// import { evalIfNodeMatches } from '../../helpers/misc';
+import { evalIfNodeMatches } from '../../helpers/misc';
 
 
 
@@ -43,6 +43,7 @@ function GraphContainer({
   // nodeColor,
   // nodeSize,
   labelDensity,
+  displayAllLabels,
   extents,
 
   searchString = '',
@@ -73,10 +74,15 @@ function GraphContainer({
   onLabelDensityChange,
   onColorPaletteChange,
   onTitleChange,
-  onLegendChange
+  onLegendChange,
+  onDisplayAllLabelsChange,
 }) {
   const CELL_HEIGHT_RANGE = [height / 5, 1];
   const CELL_WIDTH_RANGE = [width / 5, 1];
+
+  // const CELL_HEIGHT_RANGE = [200, 10];
+  // const CELL_WIDTH_RANGE = [300, 30];
+
   const cellHeightScale = scaleLinear().domain([0, 1]).range(CELL_HEIGHT_RANGE);
   const cellWidthScale = scaleLinear().domain([0, 1]).range(CELL_WIDTH_RANGE);
 
@@ -125,6 +131,7 @@ function GraphContainer({
   const previousFilters = usePrevious(filters);
   const previousColorPalette = usePrevious(colorPalette);
   const previousFiltersModeAnd = usePrevious(filtersModeAnd);
+  const previousDisplayAllLabels = usePrevious(displayAllLabels);
 
   const nodeReducer = createNodeReducer({
     nodeColor,
@@ -181,9 +188,12 @@ function GraphContainer({
     }
 
     if (previousLabelDensity !== labelDensity) {
+      let actualLabelDensity = labelDensity > 1 ? 1 : labelDensity;
+      const cellWidth = cellWidthScale(actualLabelDensity);
+      const cellHeight = cellHeightScale(actualLabelDensity);
       renderer.settings.labelGrid.cell = {
-        width: cellWidthScale(labelDensity),
-        height: cellHeightScale(labelDensity)
+        width: cellWidth,
+        height: cellHeight
       };
 
       // TODO from nansi: we can improve sigma to handle this
@@ -193,22 +203,25 @@ function GraphContainer({
 
     // workaround for clusters titles display
     // @todo replace this with a cleaner solution at some point
-    // if (previousLabelDensity !== labelDensity && labelDensity > 1) {
-    //   graph.forEachNode((id, attributes) => {
-    //     const {label} = attributes;
+    if ((
+      previousDisplayAllLabels !== displayAllLabels || !previousDisplayAllLabels || renderer.displayedLabels.size === 0
+      || previousNodeLabelVariable !== nodeLabelVariable || previousFilters !== filters
+      ) && displayAllLabels) {
+      graph.forEachNode((id, attributes) => {
+        const {label} = attributes;
         
-    //     const displayedLabel = nodeLabelVariable && nodeLabelVariable !== 'default' ? attributes[nodeLabelVariable] : label;
-    //     if (evalIfNodeMatches(attributes, filters, filtersModeAnd) && displayedLabel && displayedLabel.trim().length > 0) {
-    //       renderer.highlightNode(id)
-    //     } else {
-    //       renderer.unhighlightNode(id);
-    //     }
-    //   })
-    //   needToRefresh = true;
-    // } else if (previousLabelDensity !== labelDensity && previousLabelDensity >= 1 && labelDensity <= 1) {
-    //   renderer.highlightedNodes = new Set();
-    //   needToRefresh = true;
-    // }
+        const displayedLabel = nodeLabelVariable && nodeLabelVariable !== 'default' ? attributes[nodeLabelVariable] : label;
+        if (evalIfNodeMatches(attributes, filters, filtersModeAnd) && displayedLabel && displayedLabel.trim().length > 0) {
+          renderer.highlightNode(id)
+        } else {
+          renderer.unhighlightNode(id);
+        }
+      })
+      needToRefresh = true;
+    } else if (previousDisplayAllLabels !== displayAllLabels && !displayAllLabels) {
+      renderer.highlightedNodes = new Set();
+      needToRefresh = true;
+    }
 
     if (previousSearchString !== searchString) {
       if (searchString.length >= 3) {
@@ -239,6 +252,15 @@ function GraphContainer({
       if (node && graph) {
        
         const newRenderer = new WebGLRenderer(graph, node, {nodeReducer, edgeReducer});
+        let actualLabelDensity = labelDensity > 1 ? 1 : labelDensity;
+        const cellWidth = cellWidthScale(actualLabelDensity);
+        const cellHeight = cellHeightScale(actualLabelDensity);
+        newRenderer.settings.labelGrid.cell = {
+          width: cellWidth,
+          height: cellHeight
+        };
+        newRenderer.displayedLabels = new Set();
+        newRenderer.refresh();
         setRenderer(newRenderer);
         const camera = newRenderer.getCamera();
         onCameraUpdate(camera.getState())
@@ -274,11 +296,13 @@ function GraphContainer({
                 nodeColorVariable,
                 nodeLabelVariable,
                 labelDensity,
+                displayAllLabels,
                 onNodeSizeVariableChange,
                 onNodeColorVariableChange,
                 onNodeLabelVariableChange,
                 onColorPaletteChange,
                 onLabelDensityChange,
+                onDisplayAllLabelsChange,
                 colorPalette: colorPalette,
               }
             }

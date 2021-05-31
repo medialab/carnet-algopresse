@@ -63,8 +63,9 @@ export function createNodeReducer({
     } else {
       renderedNode.label = nodeLabel === 'default' ? attr.label || key : attr[nodeLabel] || '';
     }
+    // renderedNode.label = renderedNode.label === '' ? 'coucou': renderedNode.label;
 
-    // hidden
+    // // hidden
     if (filters.length && evalIfNodeMatches(attr, filters, filtersModeAnd) === false) {
       renderedNode.hidden = true;
       renderedNode.label = '';
