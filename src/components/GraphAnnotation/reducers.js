@@ -57,18 +57,19 @@ export function createNodeReducer({
 
     renderedNode.size *= nodeSizeFactor;
 
+    // Label
+    if (!nodeLabel) {
+      renderedNode.label = attr.label || key;
+    } else {
+      renderedNode.label = nodeLabel === 'default' ? attr.label || key : attr[nodeLabel] || '';
+    }
+
     // hidden
     if (filters.length && evalIfNodeMatches(attr, filters, filtersModeAnd) === false) {
       renderedNode.hidden = true;
       renderedNode.label = '';
     } else {
       renderedNode.hidden = false;
-      // Label
-      if (!nodeLabel) {
-        renderedNode.label = attr.label || key;
-      } else {
-        renderedNode.label = nodeLabel === 'default' ? attr.label || key : attr[nodeLabel] || '';
-      }
     }
 
     return renderedNode;

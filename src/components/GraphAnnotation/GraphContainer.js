@@ -16,6 +16,7 @@ import {generatePalette} from '../../helpers/palettes';
 import Input from '../DebouncedInput';
 
 import './GraphContainer.css';
+import { evalIfNodeMatches } from '../../helpers/misc';
 
 
 
@@ -182,8 +183,8 @@ function GraphContainer({
 
     if (previousLabelDensity !== labelDensity) {
       renderer.settings.labelGrid.cell = {
-        width: cellWidthScale(labelDensity),
-        height: cellHeightScale(labelDensity)
+        width: labelDensity < 1 ? cellWidthScale(labelDensity) : 1,
+        height: labelDensity < 1 ?  cellHeightScale(labelDensity) : 1
       };
 
       // TODO from nansi: we can improve sigma to handle this
@@ -202,6 +203,22 @@ function GraphContainer({
       } else if (renderer.highlightedNodes.size > 0) {
         renderer.highlightedNodes = new Set();
       }
+      needToRefresh = true;
+    }
+    // workaround for clusters titles display
+    // @todo replace this with a cleaner solution at some point
+    if (labelDensity >= 1) {
+      graph.forEachNode((id, attributes) => {
+        const {label} = attributes;
+        
+        const displayedLabel = nodeLabelVariable && nodeLabelVariable !== 'default' ? attributes[nodeLabelVariable] : label;
+        if (evalIfNodeMatches(attributes, filters, filtersModeAnd) && displayedLabel && displayedLabel.trim().length > 0) {
+          renderer.highlightNode(id)
+        } else {
+          renderer.unhighlightNode(id);
+        }
+      })
+      needToRefresh = true;
     }
 
     if (needToRefresh) {
@@ -232,7 +249,7 @@ function GraphContainer({
     [graph] /* eslint react-hooks/exhaustive-deps : 0 */
   );
   return (
-    <div className="VisContainer GraphContainer">
+    <>
 
       <div ref={setContainer} style={{width: '100%', height: '100%'}}></div>
       {renderer && (
@@ -282,13 +299,13 @@ function GraphContainer({
           </form>
         </>
       )}
-    </div>
+    </>
   );
 }
 
 export default function GraphContainerWithDimensions(props) {
   return (
-    <div className="VisContainer IcecreamContainer">
+    <div className="VisContainer GraphContainer">
 
     <ContainerDimensions>
       {
