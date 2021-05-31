@@ -17,7 +17,7 @@ const MONTH_NAMES = [
   'Décembre'
 ]
 
-const matrix = fs.readFileSync(fileName, 'utf8').split('\n').map(l => l.split(','))
+const matrix = fs.readFileSync(fileName, 'utf8').split('\n').map(l => l.split(','));
 
 const prepareMonth = month => {
   let str = '' + month;
@@ -41,8 +41,9 @@ let dates = firstRow.slice(1).reduce((res, item, index) => {
         index,
         monthNumeric,
         monthName,
+        month: index + 301,
         year,
-        fullName: `${monthName} ${year}`,
+        fullName: `${prepareMonth(monthNumeric + 1)}/${year}`,
         timecode: new Date(year, +monthNumeric, 1).getTime() + 24 * 3600000 // `${year}${prepareMonth(monthNumeric)}`
       }
     ],

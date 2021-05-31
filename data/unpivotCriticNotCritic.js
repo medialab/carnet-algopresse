@@ -42,7 +42,7 @@ let dates = firstRow.slice(1).reduce((res, item, index) => {
         monthNumeric,
         monthName,
         year,
-        fullName: `${monthName} ${year}`,
+        fullName: `${prepareMonth(monthNumeric + 1)}/${year}`,
         timecode: new Date(year, +monthNumeric, 1).getTime() + 24 * 3600000 // `${year}${prepareMonth(monthNumeric)}`
       }
     ],
@@ -61,6 +61,9 @@ const unpivoted = matrix.slice(1).reduce((res, row) => {
     type = 'critic';
   } else if (type === 'False') {
     type = 'not critic';
+    // trash total
+  } else if (type === 'Total') {
+    return res;
   }
   for (let i = 1 ; i < row.length ; i++) {
     const month = firstRow[i].trim();
