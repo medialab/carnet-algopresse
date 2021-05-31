@@ -6,7 +6,6 @@ import {scaleLinear} from 'd3-scale';
 import {min, max} from 'd3-array';
 import ContainerDimensions from 'react-container-dimensions';
 
-
 import {
   usePrevious, 
 } from './hooks';
@@ -76,8 +75,8 @@ function GraphContainer({
   onTitleChange,
   onLegendChange
 }) {
-  const CELL_HEIGHT_RANGE = [height / 5, height / 1000];
-  const CELL_WIDTH_RANGE = [width / 5, width / 1000];
+  const CELL_HEIGHT_RANGE = [height / 5, 1];
+  const CELL_WIDTH_RANGE = [width / 5, 1];
   const cellHeightScale = scaleLinear().domain([0, 1]).range(CELL_HEIGHT_RANGE);
   const cellWidthScale = scaleLinear().domain([0, 1]).range(CELL_WIDTH_RANGE);
 
@@ -183,12 +182,31 @@ function GraphContainer({
 
     if (previousLabelDensity !== labelDensity) {
       renderer.settings.labelGrid.cell = {
-        width: labelDensity < 1 ? cellWidthScale(labelDensity) : 1,
-        height: labelDensity < 1 ?  cellHeightScale(labelDensity) : 1
+        width: cellWidthScale(labelDensity),
+        height: cellHeightScale(labelDensity)
       };
 
       // TODO from nansi: we can improve sigma to handle this
       renderer.displayedLabels = new Set();
+      needToRefresh = true;
+    }
+
+    // workaround for clusters titles display
+    // @todo replace this with a cleaner solution at some point
+    if (previousLabelDensity !== labelDensity && labelDensity > 1) {
+      graph.forEachNode((id, attributes) => {
+        const {label} = attributes;
+        
+        const displayedLabel = nodeLabelVariable && nodeLabelVariable !== 'default' ? attributes[nodeLabelVariable] : label;
+        if (evalIfNodeMatches(attributes, filters, filtersModeAnd) && displayedLabel && displayedLabel.trim().length > 0) {
+          renderer.highlightNode(id)
+        } else {
+          renderer.unhighlightNode(id);
+        }
+      })
+      needToRefresh = true;
+    } else if (previousLabelDensity !== labelDensity && previousLabelDensity >= 1 && labelDensity <= 1) {
+      renderer.highlightedNodes = new Set();
       needToRefresh = true;
     }
 
@@ -203,21 +221,6 @@ function GraphContainer({
       } else if (renderer.highlightedNodes.size > 0) {
         renderer.highlightedNodes = new Set();
       }
-      needToRefresh = true;
-    }
-    // workaround for clusters titles display
-    // @todo replace this with a cleaner solution at some point
-    if (labelDensity >= 1) {
-      graph.forEachNode((id, attributes) => {
-        const {label} = attributes;
-        
-        const displayedLabel = nodeLabelVariable && nodeLabelVariable !== 'default' ? attributes[nodeLabelVariable] : label;
-        if (evalIfNodeMatches(attributes, filters, filtersModeAnd) && displayedLabel && displayedLabel.trim().length > 0) {
-          renderer.highlightNode(id)
-        } else {
-          renderer.unhighlightNode(id);
-        }
-      })
       needToRefresh = true;
     }
 
