@@ -42,7 +42,7 @@ let dates = firstRow.slice(1).reduce((res, item, index) => {
         monthNumeric,
         monthName,
         year,
-        fullName: `${monthName} ${year}`,
+        fullName: `${prepareMonth(monthNumeric + 1)}/${year}`,
         timecode: new Date(year, +monthNumeric, 1).getTime() + 24 * 3600000 // `${year}${prepareMonth(monthNumeric)}`
       }
     ],
