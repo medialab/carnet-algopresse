@@ -71,6 +71,7 @@ function LinearGraphContainer({
   let xRange = [MARGIN, WIDTH - MARGIN / 2];
   let yRange = [HEIGHT - MARGIN, MARGIN];
 
+
   const xLabelMap = useMemo(() => {
     return data.reduce((dict, datum) => {
       const labelVariable = xLabelVariable === 'default' ? xVariable : xLabelVariable;
@@ -100,7 +101,7 @@ function LinearGraphContainer({
       }
     })
     return [_id, xGroups]
-  })
+  });
  
   // refactorize by x for stacked barchart
   if (graphType === 'histogram') {
