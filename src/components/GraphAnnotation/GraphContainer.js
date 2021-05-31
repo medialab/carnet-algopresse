@@ -193,22 +193,22 @@ function GraphContainer({
 
     // workaround for clusters titles display
     // @todo replace this with a cleaner solution at some point
-    if (previousLabelDensity !== labelDensity && labelDensity > 1) {
-      graph.forEachNode((id, attributes) => {
-        const {label} = attributes;
+    // if (previousLabelDensity !== labelDensity && labelDensity > 1) {
+    //   graph.forEachNode((id, attributes) => {
+    //     const {label} = attributes;
         
-        const displayedLabel = nodeLabelVariable && nodeLabelVariable !== 'default' ? attributes[nodeLabelVariable] : label;
-        if (evalIfNodeMatches(attributes, filters, filtersModeAnd) && displayedLabel && displayedLabel.trim().length > 0) {
-          renderer.highlightNode(id)
-        } else {
-          renderer.unhighlightNode(id);
-        }
-      })
-      needToRefresh = true;
-    } else if (previousLabelDensity !== labelDensity && previousLabelDensity >= 1 && labelDensity <= 1) {
-      renderer.highlightedNodes = new Set();
-      needToRefresh = true;
-    }
+    //     const displayedLabel = nodeLabelVariable && nodeLabelVariable !== 'default' ? attributes[nodeLabelVariable] : label;
+    //     if (evalIfNodeMatches(attributes, filters, filtersModeAnd) && displayedLabel && displayedLabel.trim().length > 0) {
+    //       renderer.highlightNode(id)
+    //     } else {
+    //       renderer.unhighlightNode(id);
+    //     }
+    //   })
+    //   needToRefresh = true;
+    // } else if (previousLabelDensity !== labelDensity && previousLabelDensity >= 1 && labelDensity <= 1) {
+    //   renderer.highlightedNodes = new Set();
+    //   needToRefresh = true;
+    // }
 
     if (previousSearchString !== searchString) {
       if (searchString.length >= 3) {
