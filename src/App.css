@@ -556,19 +556,23 @@ input, select {
 
 .caption-editor-container {
   position: absolute;
-  top: 0;
-  left: .5rem;
+  top: 1rem;
+  left: 5rem;
 }
-.caption-editor-container input {
+.caption-editor-container input,
+.caption-editor-container textarea {
   font-size: inherit;
   border: 0;
   outline: none;
   margin: 0;
   padding: 0;
+  resize: none;
+  width: 100%;
 }
 
 .caption-editor-container .caption-title-container {
   margin: 0;
+  font-size: 1rem;
 }
 .caption-editor-container .caption-legend-container {
   margin: 0;

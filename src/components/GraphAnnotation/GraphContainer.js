@@ -272,6 +272,7 @@ function GraphContainer({
             <div className="caption-legend-container">
               <Input
                 value={legend || ''}
+                type="textarea"
                 onChange={val => onLegendChange(val)}
                 placeholder="Légende de la visualisation"
               />

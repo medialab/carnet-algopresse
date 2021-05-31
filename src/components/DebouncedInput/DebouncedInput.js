@@ -2,10 +2,12 @@
 
 import debounce from 'lodash/debounce';
 import {useState, useEffect, useMemo} from 'react';
+import Textarea from 'react-textarea-autosize';
 
 export default function DebouncedInput({
   value: propsValue,
   onChange: propsOnChange,
+  type = 'input',
   ...rest
 }) {
   const [value, setValue] = useState(propsValue);
@@ -20,11 +22,20 @@ export default function DebouncedInput({
     setValue(e.target.value);
     propagateChange(e.target.value);
   }
+  if (type === 'input') {
+    return (
+      <input
+        value={value}
+        onChange={handleChange}
+        {...rest}
+      />
+    );
+  }
   return (
-    <input
+    <Textarea
       value={value}
       onChange={handleChange}
       {...rest}
     />
-  )
+  );
 }

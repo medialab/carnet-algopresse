@@ -437,6 +437,7 @@ function LinearGraphContainer({
                 value={legend || ''}
                 onChange={val => onLegendChange(val)}
                 placeholder="Légende de la visualisation"
+                type="textarea"
               />
             </div>
           </form>
