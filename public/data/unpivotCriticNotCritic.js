@@ -61,6 +61,9 @@ const unpivoted = matrix.slice(1).reduce((res, row) => {
     type = 'critic';
   } else if (type === 'False') {
     type = 'not critic';
+    // trash total
+  } else if (type === 'Total') {
+    return res;
   }
   for (let i = 1 ; i < row.length ; i++) {
     const month = firstRow[i].trim();
