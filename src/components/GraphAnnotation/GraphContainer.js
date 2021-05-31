@@ -15,7 +15,7 @@ import {generatePalette} from '../../helpers/palettes';
 import Input from '../DebouncedInput';
 
 import './GraphContainer.css';
-import { evalIfNodeMatches } from '../../helpers/misc';
+// import { evalIfNodeMatches } from '../../helpers/misc';
 
 
 
