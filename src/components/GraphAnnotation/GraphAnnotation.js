@@ -69,7 +69,7 @@ const GraphAnnotation = ({
     nodeSizeVariable,
     nodeLabelVariable,
     labelDensity,
-    colorPalette,
+    colorPalette: newColorPalette,
     title: newTitle,
     legend: newLegend
 }) => {
@@ -83,8 +83,8 @@ const GraphAnnotation = ({
     setNodeLabelVariable(nodeLabelVariable);
     setTitle(newTitle);
     setLegend(newLegend);
-    if (colorPalette && nodeColorVariable === newNodeColorVariable) {
-      setColorPalette(colorPalette);
+    if (newColorPalette && (nodeColorVariable === newNodeColorVariable || !nodeColorVariable)) {
+      setColorPalette(newColorPalette);
     } else {
       const colors = generatePalette(newNodeColorVariable, filtersOptions[newNodeColorVariable].options.size);
       const palette = {};

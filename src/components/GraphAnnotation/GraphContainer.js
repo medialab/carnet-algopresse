@@ -279,7 +279,7 @@ function GraphContainer({
                 onNodeLabelVariableChange,
                 onColorPaletteChange,
                 onLabelDensityChange,
-                colorPalette: colorPalette || (nodeColor && nodeColor.palette),
+                colorPalette: colorPalette,
               }
             }
           />
