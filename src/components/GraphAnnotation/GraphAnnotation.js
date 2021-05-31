@@ -40,6 +40,7 @@ const GraphAnnotation = ({
   const [labelDensity, setLabelDensity] = useState(DEFAULT_LABEL_DENSITY);
   const [title, setTitle] = useState('');
   const [legend, setLegend] = useState('');
+  const [hasLoadedFirstVis, setHasLoadedFirstVis] = useState(false);
 
   const [focusedVisualizationId, setFocusedVisualizationId] = useState(null);
   const [registeredVisualizations, setRegisteredVisualizations] = useState({});
@@ -101,7 +102,8 @@ const GraphAnnotation = ({
     if (!focusedVisualizationId && Object.keys(registeredVisualizations).length) {
       const thatId = Object.keys(registeredVisualizations)[0];
       setFocusedVisualizationId(thatId );
-      onVisualizationUpdate(registeredVisualizations[thatId])
+      onVisualizationUpdate(registeredVisualizations[thatId]);
+      setHasLoadedFirstVis(true);
     }
   }, [registeredVisualizations, focusedVisualizationId]);/* eslint react-hooks/exhaustive-deps : 0 */
 
@@ -173,6 +175,7 @@ const GraphAnnotation = ({
         </Suspense>
         <FooterNav prevPage={prevPage} nextPage={nextPage} />
       </section>
+      {hasLoadedFirstVis &&
       <aside>
         <div className="vis">
           <GraphVis
@@ -225,6 +228,7 @@ const GraphAnnotation = ({
         </div>
         {/* <CodeContainer code={currentCode} /> */}
       </aside>
+      }
   </div>
   </VisualizationControlContext.Provider>
   )
