@@ -97,8 +97,8 @@ export const computeGraphFiltersOptions = (graph, gexfData) => {
 
 export const evalIfNodeMatches = (attributes, filters, filtersModeAnd) => {
   if (filtersModeAnd) {
-    const oneFilterDoesNotMatches = filters.find(({ attribute, value }) => attributes[attribute] !== '' + value) !== undefined;
-    return !oneFilterDoesNotMatches;
+    const oneFilterDoesNotMatch = filters.find(({ attribute, value }) => attributes[attribute] !== '' + value) !== undefined;
+    return !oneFilterDoesNotMatch;
   } else {
     const oneFilterMatches = filters.find(({ attribute, value }) => attributes[attribute] === '' + value) !== undefined;
     return oneFilterMatches;

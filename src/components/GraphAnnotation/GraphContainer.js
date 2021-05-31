@@ -124,6 +124,7 @@ function GraphContainer({
   const previousSearchString = usePrevious(searchString);
   const previousFilters = usePrevious(filters);
   const previousColorPalette = usePrevious(colorPalette);
+  const previousFiltersModeAnd = usePrevious(filtersModeAnd);
 
   const nodeReducer = createNodeReducer({
     nodeColor,
@@ -168,7 +169,8 @@ function GraphContainer({
       previousNodeLabelVariable !== nodeLabelVariable ||
       previousColorPalette !== colorPalette ||
       // previousSearchString !== searchString ||
-      previousFilters !== filters
+      previousFilters !== filters ||
+      previousFiltersModeAnd !== filtersModeAnd
     ) {
       // console.log('Refreshing sigma');
 
