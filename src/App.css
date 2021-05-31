@@ -559,6 +559,9 @@ input, select {
   top: 1rem;
   left: 5rem;
 }
+.GraphContainer .caption-editor-container {
+  left: 1rem;
+}
 .caption-editor-container input,
 .caption-editor-container textarea {
   font-size: inherit;
