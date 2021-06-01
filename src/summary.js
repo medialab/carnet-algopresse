@@ -81,7 +81,7 @@ const routes = [
       en: '04_timelineclusters.mdx',
     },
     Component: LinearGraphAnnotation,
-    data: '4average_clusters_unpivoted.csv',
+    data: '5average_clusters_unpivoted.csv',
   },
   {
     title: {
