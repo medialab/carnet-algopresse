@@ -176,7 +176,7 @@ function GraphContainer({
       previousNodeLabelVariable !== nodeLabelVariable ||
       previousColorPalette !== colorPalette ||
       // previousSearchString !== searchString ||
-      previousFilters !== filters ||
+      JSON.stringify(previousFilters) !== JSON.stringify(filters) ||
       previousFiltersModeAnd !== filtersModeAnd
     ) {
       // console.log('Refreshing sigma');
@@ -205,7 +205,7 @@ function GraphContainer({
     // @todo replace this with a cleaner solution at some point
     if ((
       previousDisplayAllLabels !== displayAllLabels || !previousDisplayAllLabels || renderer.displayedLabels.size === 0
-      || previousNodeLabelVariable !== nodeLabelVariable || previousFilters !== filters
+      || previousNodeLabelVariable !== nodeLabelVariable || JSON.stringify(previousFilters) !== JSON.stringify(filters)
       ) && displayAllLabels) {
       graph.forEachNode((id, attributes) => {
         const {label} = attributes;

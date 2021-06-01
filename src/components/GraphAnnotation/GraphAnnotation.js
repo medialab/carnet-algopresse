@@ -15,6 +15,16 @@ import {VisualizationControlContext} from '../../contexts';
 
 const DEFAULT_LABEL_DENSITY = 0.25;
 
+const Loader = ({percentsLoaded = 0}) =>{
+  return  (
+    <div className="loader-container">
+      <div className="loader">
+        <div className="loading-bar" style={{width: percentsLoaded + '%'}} />
+      </div>
+   </div>
+)
+}
+
 const GraphAnnotation = ({
   Content,
   data,
@@ -63,9 +73,9 @@ const GraphAnnotation = ({
     x, 
     y, 
     ratio, 
-    searchString, 
-    filtersModeAnd, 
-    filters, 
+    searchString: newSearchString, 
+    filtersModeAnd: newFiltersModeAnd, 
+    filters: newFilters, 
     nodeColorVariable: newNodeColorVariable,
     nodeSizeVariable,
     nodeLabelVariable,
@@ -77,9 +87,9 @@ const GraphAnnotation = ({
 }) => {
     setCameraPosition({x, y, ratio});
     setUpdateTimeStamp(new Date().getTime());
-    setSearchString(searchString);
-    setFiltersModeAnd(filtersModeAnd);
-    setFilters(filters);
+    setSearchString(newSearchString);
+    setFiltersModeAnd(newFiltersModeAnd);
+    setFilters(newFilters);
     setNodeColorVariable(newNodeColorVariable);
     setNodeSizeVariable(nodeSizeVariable);
     setNodeLabelVariable(nodeLabelVariable);
@@ -179,8 +189,9 @@ const GraphAnnotation = ({
         </Suspense>
         <FooterNav prevPage={prevPage} nextPage={nextPage} />
       </section>
-      {hasLoadedFirstVis &&
+      
       <aside>
+        {hasLoadedFirstVis ?
         <div className="vis">
           <GraphVis
             {
@@ -232,9 +243,9 @@ const GraphAnnotation = ({
           />
           
         </div>
+        : <Loader percentsLoaded={50} /> }
         {/* <CodeContainer code={currentCode} /> */}
       </aside>
-      }
   </div>
   </VisualizationControlContext.Provider>
   )
