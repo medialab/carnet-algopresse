@@ -89,7 +89,7 @@ const IceCreamAnnotation = ({
     setFiltersModeAnd(theseFiltersModeAnd);
     setTitle(thisTitle);
     setLegend(thisLegend);
-    if (thatColorPalette && colorVariable === thatColorVariable) {
+    if (thatColorPalette && (colorVariable === thatColorVariable || (!colorVariable && thatColorVariable))) {
       setColorPalette(thatColorPalette);
     } else if (thatColorVariable || colorScaleType !== thatColorScaleType) {
       let palette = colorVariable && colorVariable !== 'default' ? generatePalette(colorVariable, filtersOptions[colorVariable].options.length) : undefined
