@@ -263,7 +263,14 @@ function GraphContainer({
         newRenderer.refresh();
         setRenderer(newRenderer);
         const camera = newRenderer.getCamera();
-        onCameraUpdate(camera.getState())
+        if (cameraPosition) {
+          onCameraUpdate({
+            ...camera.getState(),
+            ...cameraPosition
+          })
+        } else {
+          onCameraUpdate(camera.getState())
+        }
         camera.on('updated', state => {
           onCameraUpdate(state);
         })
