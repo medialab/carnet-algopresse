@@ -259,6 +259,7 @@ function GraphContainer({
           width: cellWidth,
           height: cellHeight
         };
+        newRenderer.settings.labelSize = 12;
         newRenderer.displayedLabels = new Set();
         newRenderer.refresh();
         setRenderer(newRenderer);
