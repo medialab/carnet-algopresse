@@ -198,7 +198,7 @@ function IceCreamContainer({
           className={cx("scatterplot", {'zoom-mode': zoomedIndex !== null && enableZoom})}
           width={smallestDimension} 
           height={smallestDimension}
-          transform={`translate(${(width - smallestDimension) / 2}, 0)`}
+          transform={`translate(${WIDTH < width ? (width - smallestDimension) / 2 : 0}, ${HEIGHT < height ? (height - smallestDimension) / 2 : 0})`}
         >
           <polygon 
             points={`${point1X},${point1Y} ${point2X},${point2Y} ${point3X},${point3Y} ${point4X},${point4Y}`} 
@@ -338,9 +338,8 @@ function IceCreamContainer({
                 return -1;
               })
               .map((datum, index) => {
-                const radius = Math.sqrt(getSize(datum[sizeVariable]) / Math.PI);
-                let {x, y} = transf(getX(datum[xVariable]), getY(datum[yVariable]));
-
+                const radius = Math.sqrt(getSize(+datum[sizeVariable]) / Math.PI);
+                let {x, y} = transf(getX(+datum[xVariable]), getY(+datum[yVariable]));
                 let {x: xForXAxis, y: yForXAxis} = transf(getX(datum[xVariable]), getY.range ? getY.range()[0] : 0);
                 let {x: xForYAxis, y: yForYAxis} = transf(getX.range ? getX.range()[0] : 0, getY(datum[yVariable]));
                 let labelX =  x + radius + smallestDimension / 100;
