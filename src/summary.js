@@ -128,7 +128,7 @@ const routes = [
       fr: '07_IssueVERB.mdx',
       en: '07_IssueVERB.mdx',
     },
-    data: 'df_AB_tfidf_verbs_freq_count.csv',
+    data: 'verbs_bin_normalise.csv',
     Component: IceCreamAnnotation
   },
   {
