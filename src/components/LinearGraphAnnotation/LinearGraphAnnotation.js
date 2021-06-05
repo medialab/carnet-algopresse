@@ -34,6 +34,7 @@ const LinearGraphAnnotation = ({
   const [filters, setFilters] = useState([]);
   const [title, setTitle] = useState('');
   const [legend, setLegend] = useState('');
+  const [normalizeY, setNormalizeY] = useState(false);
 
 
   const [focusedVisualizationId, setFocusedVisualizationId] = useState(null);
@@ -74,6 +75,7 @@ const LinearGraphAnnotation = ({
     filtersModeAnd: theseFiltersModeAnd,
     title: thisTitle,
     legend: thisLegend,
+    normalizeY: thatNormalizeY
   }) => {
     setXVariable(thatXVariable);
     setXLabelVariable(thatXLabelVariable);
@@ -90,6 +92,7 @@ const LinearGraphAnnotation = ({
     setFiltersModeAnd(theseFiltersModeAnd);
     setTitle(thisTitle);
     setLegend(thisLegend);
+    setNormalizeY(thatNormalizeY);
 
 
     if (thatColorPalette && ((!colorVariable && thatColorVariable) || colorVariable === thatColorVariable)) {
@@ -149,7 +152,8 @@ const LinearGraphAnnotation = ({
         filtersModeAnd,
         
         title,
-        legend
+        legend,
+        normalizeY
       }
     }}>
       <div className="slide-container">
@@ -211,6 +215,7 @@ const LinearGraphAnnotation = ({
 
                 title,
                 legend,
+                normalizeY,
 
                 onToggleFiltersModeAnd: () => setFiltersModeAnd(!filtersModeAnd),
                 onFiltersChange: (newFilters) => setFilters(newFilters),
@@ -230,6 +235,7 @@ const LinearGraphAnnotation = ({
 
                 onTitleChange: val => setTitle(val),
                 onLegendChange: val => setLegend(val),
+                onNormalizeYChange: val => setNormalizeY(val),
 
               }
               }

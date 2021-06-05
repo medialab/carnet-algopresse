@@ -27,6 +27,7 @@ function LinearGraphContainer({
   colorVariable,
   labelVariable,
   colorPalette: inputColorPalette,
+  normalizeY,
 
   title,
   legend,
@@ -56,6 +57,7 @@ function LinearGraphContainer({
   onColorPaletteChange,
   onGraphTypeChange,
   onToggleUseRelativeScale,
+  onNormalizeYChange,
 
   onTitleChange,
   onLegendChange,
@@ -245,11 +247,28 @@ function LinearGraphContainer({
       }
       return -1;
     });
+    if (normalizeY) {
+      dataGroups = dataGroups.map(([xValue, values]) => {
+        const sum = values.reduce((sum, v) => sum + v.y, 0);
+        const sumFiltered = values.reduce((sum, v) => sum + v.filteredY, 0);
+        return [
+          xValue,
+          values.map(v => {
+            return {
+              ...v,
+              yDisplace: v.yDisplace / sum,
+              y: v.y / sum,
+              filteredY: v.filteredY / sumFiltered,
+            }
+          })
+        ]
+      })
+    }
     getYHisto = scaleLinear()
     .range([MARGIN, HEIGHT - MARGIN * 2])
-    .domain([0, max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))]).nice()
+    .domain([0, normalizeY ? 1 : max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))]).nice()
     getY
-    .domain([0, max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))]).nice()
+    .domain([0, normalizeY ? 1 : max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))]).nice()
   }
   
   
@@ -398,6 +417,7 @@ function LinearGraphContainer({
               labelVariable,
               graphType,
               useRelativeScale,
+              normalizeY,
 
               searchString,
 
@@ -414,6 +434,7 @@ function LinearGraphContainer({
               onColorPaletteChange,
               onToggleUseRelativeScale,
               onGraphTypeChange,
+              onNormalizeYChange,
 
               onToggleFiltersModeAnd,
               filtersModeAnd,

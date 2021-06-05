@@ -23,6 +23,7 @@ export default function LinearGraphControls({
   filtersModeAnd,
   onFiltersChange,
   filters,
+  normalizeY,
 
   // onSearchStringChange,
   onToggleUseRelativeScale,
@@ -34,6 +35,7 @@ export default function LinearGraphControls({
   onColorVariableChange,
 
   onColorPaletteChange,
+  onNormalizeYChange,
 
   // onToggleReverseX,
   // onToggleReverseY,
@@ -115,6 +117,12 @@ export default function LinearGraphControls({
                     onChange: onColorVariableChange,
                     value: colorVariable,
                     type: 'color'
+                  },
+                  {
+                    title: 'Normaliser les Y',
+                    onChange: onNormalizeYChange,
+                    value: normalizeY,
+                    type: 'boolean'
                   },
                   // {
                   //   title: 'Labels des points',
