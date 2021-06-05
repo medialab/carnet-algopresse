@@ -43,6 +43,7 @@ function IceCreamContainer({
   filters,
   title,
   legend,
+  reverseFlickering,
 
   
   onXVariableChange,
@@ -57,6 +58,7 @@ function IceCreamContainer({
   onColorScaleTypeChange,
   onTitleChange,
   onLegendChange,
+  onReverseFlickeringChange,
 }) {
 
   const [zoomedIndex, setZoomedIndex] = useState(null);
@@ -66,21 +68,40 @@ function IceCreamContainer({
     if (filters && filters.length) {
       const existing = zoomedIndex === null ? -1 : zoomedIndex;
       let found = false;
-      for (let i = existing + 1 ; i < data.length ; i++) {
-        if (evalIfNodeMatches(data[i], filters, filtersModeAnd)) {
-          setZoomedIndex(i);
-          found = true;
-          break;
-        }
-      }
-      if (!found) {
-        for (let i = 0 ; i < data.length ; i++) {
+      if (reverseFlickering) {
+        for (let i = existing - 1 ; i >= 0 ; i--) {
           if (evalIfNodeMatches(data[i], filters, filtersModeAnd)) {
             setZoomedIndex(i);
+            found = true;
             break;
           }
         }
+        if (!found) {
+          for (let i = data.length - 1 ; i >= 0 ; i--) {
+            if (evalIfNodeMatches(data[i], filters, filtersModeAnd)) {
+              setZoomedIndex(i);
+              break;
+            }
+          }
+        }
+      } else {
+        for (let i = existing + 1 ; i < data.length ; i++) {
+          if (evalIfNodeMatches(data[i], filters, filtersModeAnd)) {
+            setZoomedIndex(i);
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          for (let i = 0 ; i < data.length ; i++) {
+            if (evalIfNodeMatches(data[i], filters, filtersModeAnd)) {
+              setZoomedIndex(i);
+              break;
+            }
+          }
+        }
       }
+      
     }
   }
 
@@ -442,6 +463,7 @@ function IceCreamContainer({
               rotateMode,
               searchString,
               colorScaleType,
+              reverseFlickering,
 
               onSearchStringChange,
               onToggleRotateMode,
@@ -456,6 +478,7 @@ function IceCreamContainer({
               onToggleReverseY,
               onColorPaletteChange,
               onColorScaleTypeChange,
+              onReverseFlickeringChange,
 
               onToggleFiltersModeAnd,
               filtersModeAnd,

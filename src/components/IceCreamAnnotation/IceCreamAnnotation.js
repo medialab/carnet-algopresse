@@ -33,6 +33,7 @@ const IceCreamAnnotation = ({
   const [title, setTitle] = useState('');
   const [legend, setLegend] = useState('');
   const [filters, setFilters] = useState([]);
+  const [reverseFlickering, setReverseFlickering] = useState(false);
 
 
   const [rotateMode, setRotateMode] = useState(false);
@@ -73,6 +74,7 @@ const IceCreamAnnotation = ({
     filtersModeAnd: theseFiltersModeAnd,
     title: thisTitle,
     legend: thisLegend,
+    reverseFlickering: thatReverseFlickering,
   }) => {
     setXVariable(thatXVariable);
     setYVariable(thatYVariable);
@@ -89,6 +91,7 @@ const IceCreamAnnotation = ({
     setFiltersModeAnd(theseFiltersModeAnd);
     setTitle(thisTitle);
     setLegend(thisLegend);
+    setReverseFlickering(thatReverseFlickering);
     if (thatColorPalette && (colorVariable === thatColorVariable || (!colorVariable && thatColorVariable))) {
       setColorPalette(thatColorPalette);
     } else if (thatColorVariable || colorScaleType !== thatColorScaleType) {
@@ -152,6 +155,7 @@ const IceCreamAnnotation = ({
 
         title,
         legend,
+        reverseFlickering,
       }
     }}>
       <div className="slide-container">
@@ -211,6 +215,7 @@ const IceCreamAnnotation = ({
                 filters,
                 title,
                 legend,
+                reverseFlickering,
 
                 onToggleFiltersModeAnd: () => setFiltersModeAnd(!filtersModeAnd),
                 onFiltersChange: (newFilters) => setFilters(newFilters),
@@ -232,6 +237,7 @@ const IceCreamAnnotation = ({
                 onColorScaleTypeChange: val => setColorScaleType(val),
                 onTitleChange: val => setTitle(val),
                 onLegendChange: val => setLegend(val),
+                onReverseFlickeringChange: val => setReverseFlickering(val),
               }
               }
             />

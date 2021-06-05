@@ -42,11 +42,12 @@ Les verbes dont les scores tf-idf sont les plus importants dans les articles qui
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}} 
   colorScaleType={'continuous'} 
-  filters={[{"attribute":"algo_robot","value":"algo"}]}
+  filters={[{"attribute":"algo_robot","value":"algo"}]} 
   title={'TF-IDF scores for issue-related verbs'} 
-  legend={'filtering articles annotated as algorithms'}
+  legend={'filtering articles annotated as algorithms'} 
+  reverseFlickering={true}
 />
 
 Dans le sous-ensemble d’articles associés aux "Algorithmes" on retrouve également des verbes qui viennent conforter les analyses précédentes réalisées à partir de la catégories “Issues”. En effet, les verbes qui présentent les plus hauts scores de tf-idf renvoient aux questions de filtrage et de censure de l’information (filter, delete, supress, censor), aux problèmes de surveillance et de privacy (profile, suspect, spy, target, track), à la dénoncitation des formes de discrimination (bias, discriminate) ou encore aux phénomènes de propagation et d’amplification de contenus frauduleux (promote, amplify, spread). 

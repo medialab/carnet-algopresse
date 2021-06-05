@@ -25,6 +25,7 @@ export default function IceCreamControls({
 
   rotateMode,
   searchString,
+  reverseFlickering,
 
   onSearchStringChange,
   onToggleRotateMode,
@@ -40,6 +41,7 @@ export default function IceCreamControls({
   onToggleReverseX,
   onToggleReverseY,
   onColorScaleTypeChange,
+  onReverseFlickeringChange,
   
   filtersOptions,
   colorPalette,
@@ -129,6 +131,12 @@ export default function IceCreamControls({
                     title: 'Afficher les labels sur le côté',
                     onChange: onToggleLabelsOnTheSide,
                     value: labelsOnTheSide,
+                    type: 'boolean'
+                  },
+                  {
+                    title: 'Inverser le clignotement quand filtré',
+                    onChange: onReverseFlickeringChange,
+                    value: reverseFlickering,
                     type: 'boolean'
                   },
                   
