@@ -264,77 +264,22 @@ function LinearGraphContainer({
         ]
       })
     }
+    const maxStacked = max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)));
     getYHisto = scaleLinear()
-    .range([MARGIN, HEIGHT - MARGIN * 2])
-    .domain([0, normalizeY ? 1 : max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))]).nice()
+    // .range([MARGIN, HEIGHT - MARGIN])
+    .range([0, HEIGHT - MARGIN * 2])
+    .domain([0, normalizeY ? 1 : maxStacked]).nice()
+
     getY
-    .domain([0, normalizeY ? 1 : max(dataGroups.map(([_xValue, values]) => values.reduce((sum, v) => sum + v.y, 0)))]).nice()
+    .domain([0, normalizeY ? 1 : maxStacked]).nice()
+
   }
-  
-  
+    
   return (
     <>
         <svg transform={`translate(0, ${-MARGIN/2})`} className="LinearGraph" width={WIDTH} height={HEIGHT + MARGIN/2}>
             <g>
-              {
-                graphType === 'linegraph' ?
-                dataGroups.map(([colorValue, values]) => {
-                  const firstX = getX(values[0].x);
-                  const firstY = getY(values[0].y);
-                  const color = colorVariable ? getColor(colorValue) : 'grey';
-                  const path = `M ${firstX} ${firstY} ${
-                    values
-                    .reduce((res, {x, y}) => {
-                      return `${res} L ${getX(x)} ${getY(y)}`
-                    }, '')
-                  }`
-                  return <>
-                    <path d={path} 
-                      fill="transparent" 
-                      stroke={ colorVariable ? color : 'grey'}
-                      key={colorValue}
-                    />
-                    {
-                      values.map(({x, y}, index) => (
-                        <circle
-                          key={index}
-                          cx={getX(x)}
-                          cy={getY(y)}
-                          fill={ color }
-                          r={2}
-                        />
-                      ))
-                    }
-                  </>
-                })
-                : 
-                <g className="histogram-objects">
-                  {
-                    dataGroups.map(([xValue, values], index) => {
-                      return (
-                        <g key={index} className="x-group">
-                          {
-                            values.map(({x, y, yDisplace, color}, index2) => {
-                             
-                              return (
-                                <rect
-                                  key={index2}
-                                  x={getX(x)}
-                                  y={HEIGHT - getYHisto(yDisplace) - getYHisto(y)}
-                                  width={ (WIDTH - MARGIN * 4) / xValues.length}
-                                  height={getYHisto(y)}
-                                  fill={getColor(color)}
-                                />
-                              )
-                            })
-                          }
-                        </g>
-                      )
-                     
-                    })
-                  }
-                </g>
-              }
+              
               <g className="left-axis">
               {
                 getY.ticks &&
@@ -353,6 +298,14 @@ function LinearGraphContainer({
                         x2={MARGIN}
                         y2={getY(tick)}
                         stroke={'black'}
+                      />
+                      <line
+                        x1={MARGIN}
+                        y1={getY(tick)}
+                        x2={WIDTH - MARGIN / 2}
+                        y2={getY(tick)}
+                        stroke={'lightgrey'}
+                        strokeDasharray={'1, 2'}
                       />
                     </g>
                   )
@@ -402,6 +355,64 @@ function LinearGraphContainer({
                 })
                 }
               </g>
+              {
+                graphType === 'linegraph' ?
+                dataGroups.map(([colorValue, values]) => {
+                  const firstX = getX(values[0].x);
+                  const firstY = getY(values[0].y);
+                  const color = colorVariable ? getColor(colorValue) : 'grey';
+                  const path = `M ${firstX} ${firstY} ${
+                    values
+                    .reduce((res, {x, y}) => {
+                      return `${res} L ${getX(x)} ${getY(y)}`
+                    }, '')
+                  }`
+                  return <>
+                    <path d={path} 
+                      fill="transparent" 
+                      stroke={ colorVariable ? color : 'grey'}
+                      key={colorValue}
+                    />
+                    {
+                      values.map(({x, y}, index) => (
+                        <circle
+                          key={index}
+                          cx={getX(x)}
+                          cy={getY(y)}
+                          fill={ color }
+                          r={2}
+                        />
+                      ))
+                    }
+                  </>
+                })
+                : 
+                <g className="histogram-objects">
+                  {
+                    dataGroups.map(([xValue, values], index) => {
+                      return (
+                        <g key={index} className="x-group">
+                          {
+                            values.map(({x, y, yDisplace, color}, index2) => {
+                              return (
+                                <rect
+                                  key={index2}
+                                  x={getX(x)}
+                                  y={HEIGHT - MARGIN - getYHisto(y) - getYHisto(yDisplace)}
+                                  height={getYHisto(y)}
+                                  width={ (WIDTH - MARGIN * 4) / xValues.length}
+                                  fill={getColor(color)}
+                                />
+                              )
+                            })
+                          }
+                        </g>
+                      )
+                     
+                    })
+                  }
+                </g>
+              }
             </g>
         </svg>
         <LinearGraphControls
