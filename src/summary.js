@@ -21,7 +21,7 @@ const routes = [
   },
   {
     title: {
-      fr: '1. Couverture médias',
+      fr: 'Quelle est la couverture médiatique de l\'IA ?',
       en: '1. Media coverage',
     },
     route: {
@@ -37,7 +37,7 @@ const routes = [
   },
   {
     title: {
-      fr: '2. Détecter les critiques',
+      fr: 'Quelle est la couverture médiatique de l\'IA ?',
       en: '2. Detecting critiques',
     },
     route: {
@@ -53,7 +53,7 @@ const routes = [
   },
   {
     title: {
-      fr: '3. Groupes et clusters',
+      fr: 'Quels sont les thèmes sur lesquels porte la critique ?',
       en: '3. Graph clusters',
     },
     route: {
@@ -69,7 +69,7 @@ const routes = [
   },
   {
     title: {
-      fr: '4. Évolution de l\'agenda médiatique',
+      fr: 'Comment évolue l’agenda médiatique ?',
       en: '4. Evolution of the mediatic agenda',
     },
     route: {
@@ -85,7 +85,7 @@ const routes = [
   },
   {
     title: {
-      fr: '5. Topologie du réseau',
+      fr: 'Qu’est-ce que la topologie du réseau nous apprend de la critique médiatique ?',
       en: '5. Network topology',
     },
     route: {
@@ -101,7 +101,7 @@ const routes = [
   },
   {
     title: {
-      fr: '6. Agents calculateurs',
+      fr: 'Qui sont les agents calculateurs ?',
       en: '6. Calculating agents',
     },
     route: {
@@ -117,7 +117,7 @@ const routes = [
   },
   {
     title: {
-      fr: '7. Verbes de troubles',
+      fr: 'Comment sont exprimés les verbes de troubles ?',
       en: '7. Trouble verbs',
     },
     route: {
@@ -133,7 +133,7 @@ const routes = [
   },
   {
     title: {
-      fr: '8. Temporalité',
+      fr: 'Comment est exprimée la temporalité ?',
       en: '8. Temporality',
     },
     route: {

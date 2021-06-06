@@ -81,7 +81,7 @@ function App() {
                 return (
                   <li key={index} className="navitem-container">
                     <Link to={route}>
-                      {title[lang]}
+                      {index}. {title[lang]}
                     </Link>
                   </li>
                 )

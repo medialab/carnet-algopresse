@@ -29,6 +29,7 @@ body {
   overflow: auto;
   background: white;
   z-index: 2;
+  font-size: .8rem;
   /* background: rgba(240,240,240,1); */
 }
 #wrapper > nav ul{
