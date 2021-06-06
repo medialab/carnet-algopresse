@@ -582,3 +582,8 @@ input, select {
   margin: 0;
   font-size: .7rem;
 }
+
+.methodo-container {
+  background: lightgrey;
+  padding: 1rem;
+}
