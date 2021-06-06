@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   HashRouter as Router,
   Switch,
@@ -8,14 +8,16 @@ import {
   useHistory,
 } from "react-router-dom";
 
-import './App.css';
+import './Edition.scss';
+import './Presentation.scss';
 
 import { LanguageContext } from './contexts';
 
 
-import {repository} from '../package.json';
+import { repository } from '../package.json';
 
 import DataLoader from './components/DataLoader';
+import PresentationContainer from './components/PresentationWrapper';
 
 import routes from './summary'
 
@@ -29,30 +31,30 @@ function App() {
   const [lang, setLang] = useState('fr');
 
   const renderRoute = ({
-    data, 
-    contentsURL, 
-    Content, 
+    data,
+    contentsURL,
+    Content,
     ThatComponent,
     prevPage,
     nextPage
   }) => (
-      <DataLoader url={data ? `${process.env.PUBLIC_URL}/data/${data}` : undefined}>
-        {
-          data => (
-            <ThatComponent
-              {
-                ...{
-                  contentsURL,
-                  Content,
-                  prevPage,
-                  nextPage,
-                  data
-                }
-              }
-            />
-          )
-        }
-      </DataLoader>
+    <DataLoader url={data ? `${process.env.PUBLIC_URL}/data/${data}` : undefined}>
+      {
+        data => (
+          <ThatComponent
+            {
+            ...{
+              contentsURL,
+              Content,
+              prevPage,
+              nextPage,
+              data
+            }
+            }
+          />
+        )
+      }
+    </DataLoader>
   );
 
   const onLangChange = (ln) => {
@@ -68,65 +70,75 @@ function App() {
 
       }
     }
-    
+
+  }
+
+  const Edition = ({match}) => {
+    return (
+      <div id="edition-wrapper">
+      <nav>
+            <ul>
+              {
+                routes.map(({ title, route: inputRoute }, index) => {
+                  const route = `${match.path}/${lang}/${inputRoute[lang]}`
+                  return (
+                    <li key={index} className="navitem-container">
+                      <Link to={route}>
+                        {index}. {title[lang]}
+                      </Link>
+                    </li>
+                  )
+                })
+              }
+              <li className="lang-toggle">
+                <button
+                  className={lang === 'fr' ? 'is-active' : ''}
+                  onClick={() => onLangChange('fr')}
+                >fr</button>
+                <button
+                  className={lang === 'en' ? 'is-active' : ''}
+                  onClick={() => onLangChange('en')}
+                >en</button>
+              </li>
+            </ul>
+          </nav>
+          <main>
+            <Switch>
+              {
+                LANGUAGES.map(lang => {
+                  return routes.map(({
+                    // title,
+                    route: inputRoute,
+                    contents,
+                    data,
+                    Component: ThatComponent
+                  }, index) => {
+                    const route = `${match.path}/${lang}/${inputRoute[lang]}`;
+                    const prevPage = index > 0 ? routes[index - 1] : undefined;
+                    const nextPage = index < routes.length - 1 ? routes[index + 1] : undefined;
+                    const Content = React.lazy(() => import(`!babel-loader!mdx-loader!./contents/${lang}/${contents[lang]}`))
+                    const contentsURL = `${repository}/blob/main/src/contents/${lang}/${contents[lang]}`;
+                    return (
+                      <Route key={index} path={route}>
+                        {renderRoute({ data, contentsURL, Content, ThatComponent, prevPage, nextPage })}
+                      </Route>
+                    )
+                  })
+                })
+              }
+              <Redirect to={`${match.path}/fr/${routes[0].route['fr']}`} />
+            </Switch>
+          </main>
+      </div>
+    )
   }
   return (
-    <LanguageContext.Provider value={{lang}}>
-      <div id="wrapper">
-        <nav>
-          <ul>
-            {
-              routes.map(({title, route: inputRoute}, index) => {
-                const route = `/edition/${lang}/${inputRoute[lang]}`
-                return (
-                  <li key={index} className="navitem-container">
-                    <Link to={route}>
-                      {index}. {title[lang]}
-                    </Link>
-                  </li>
-                )
-                })
-            }
-            <li className="lang-toggle">
-              <button 
-                className={lang === 'fr' ? 'is-active': ''}
-                onClick={() => onLangChange('fr')}
-              >fr</button>
-              <button
-                className={lang === 'en' ? 'is-active': ''}
-                onClick={() => onLangChange('en')}
-              >en</button>
-            </li>
-          </ul>
-        </nav>
-        <main>
-          <Switch>
-            {
-              LANGUAGES.map(lang => {
-                return routes.map(({
-                  // title,
-                  route: inputRoute, 
-                  contents,
-                  data,
-                  Component: ThatComponent
-                }, index) => {
-                  const route = `/edition/${lang}/${inputRoute[lang]}`
-                  const prevPage = index > 0 ? routes[index - 1] : undefined;
-                  const nextPage = index < routes.length - 1 ? routes[index + 1] : undefined;
-                  const Content = React.lazy(() => import(`!babel-loader!mdx-loader!./contents/${lang}/${contents[lang]}`))
-                  const contentsURL = `${repository}/blob/main/src/contents/${lang}/${contents[lang]}`;
-                  return (
-                    <Route key={index} path={route}>
-                      {renderRoute({data, contentsURL, Content, ThatComponent, prevPage, nextPage})}
-                    </Route>
-                  )
-                } )
-              })
-            }
-            <Redirect to={`/edition/fr/${routes[0].route['fr']}`} />
-          </Switch>
-        </main>
-      </div>
+    <LanguageContext.Provider value={{ lang }}>
+        <Route path="/edition" component={Edition} />
+        <Route path="/" exact>
+          <PresentationContainer />
+        </Route>
+        <Redirect to={`/`} />
     </LanguageContext.Provider>
   );
 }
