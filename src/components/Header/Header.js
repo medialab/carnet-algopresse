@@ -4,8 +4,8 @@ import Helmet from 'react-helmet';
 
 import Nav from '../Nav';
 
-import frMetadata from '../../contents/fr/metadata.json';
-import enMetadata from '../../contents/en/metadata.json';
+import frMetadata from '../../contents/fr/metadata';
+import enMetadata from '../../contents/en/metadata';
 import {homepage} from '../../../package.json';
 
 const LanguageToggler = ({lang}) => {

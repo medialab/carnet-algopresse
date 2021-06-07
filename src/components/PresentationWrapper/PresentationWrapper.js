@@ -236,7 +236,7 @@ const PresentationWrapper = ({ match: { params } }) => {
                   value={{
                     // onVisualizationUpdate: console.log,
                     onRegisterVisualization,
-                    // onUnregisterVisualization: console.log,
+                    onUnregisterVisualization: console.log,
                     // focusedVisualizationId: console.log,
                     // setFocusedVisualizationId: console.log,
                     // visualizationParams: {

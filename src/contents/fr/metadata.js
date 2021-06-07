@@ -1,4 +1,4 @@
-{
+const metadata = {
   "generalAuthor": "médialab Sciences Po | algoglitch",
   "title": "Critique de l’IA dans la presse",
   "description": "Une publication numérique sur les critiques de l'IA dans la presse anglophone",
@@ -18,3 +18,5 @@
     }
   ]
 }
+
+export default metadata;
