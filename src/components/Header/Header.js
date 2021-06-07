@@ -25,7 +25,11 @@ const LanguageToggler = ({lang}) => {
   )
 }
 
-const Header = ({lang, routes}) => {
+const Header = ({
+  lang, 
+  routes,
+  onRouteNav
+}) => {
   const meta = lang === 'fr' ? frMetadata : enMetadata;
   const {
     title,
@@ -184,7 +188,7 @@ const Header = ({lang, routes}) => {
       </div>
       <div className="header-secondary">
         {/* Summary */}
-        <Nav lang={lang} routes={routes} deployed />
+        <Nav lang={lang} onRouteNav={onRouteNav} routes={routes} deployed />
         {/* réseau */}
       </div>
     </header>

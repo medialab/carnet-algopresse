@@ -185,6 +185,21 @@ const PresentationWrapper = ({ match: { params } }) => {
 
   }, [visualizations, lang, activeVisualizationIndex, activeSection, history])
 
+  const handleRouteNav = index => {
+    const el = sectionsRef.current[index];
+    if (el.current) {
+      const y = el.current.getBoundingClientRect().y;
+      const bodyRect = document.body.getBoundingClientRect();
+      const sectionY = y - bodyRect.top;
+      window.scrollTo({
+        left: 0, 
+        top: sectionY, // - window.innerHeight / 2,
+        behavior: 'smooth'
+      })
+    }
+
+  }
+
   return (
     <PresentationContext.Provider
       value={{
@@ -193,7 +208,7 @@ const PresentationWrapper = ({ match: { params } }) => {
       }}
     >
       <div ref={scrollRef} id="presentation-wrapper">
-        <Header lang={lang} routes={routes} />
+        <Header lang={lang} routes={routes} onRouteNav={handleRouteNav} />
         <main>
           {
             routes.map((route, index) => {
@@ -219,35 +234,35 @@ const PresentationWrapper = ({ match: { params } }) => {
                 <VisualizationControlContext.Provider
                   key={index}
                   value={{
-                    onVisualizationUpdate: console.log,
+                    // onVisualizationUpdate: console.log,
                     onRegisterVisualization,
-                    onUnregisterVisualization: console.log,
-                    focusedVisualizationId: console.log,
-                    setFocusedVisualizationId: console.log,
-                    visualizationParams: {
-                      // graphType,
-                      // useRelativeScale,
+                    // onUnregisterVisualization: console.log,
+                    // focusedVisualizationId: console.log,
+                    // setFocusedVisualizationId: console.log,
+                    // visualizationParams: {
+                    //   // graphType,
+                    //   // useRelativeScale,
 
-                      // xVariable,
-                      // xLabelVariable,
-                      // yVariable,
+                    //   // xVariable,
+                    //   // xLabelVariable,
+                    //   // yVariable,
 
-                      // reverseX,
-                      // reverseY,
+                    //   // reverseX,
+                    //   // reverseY,
 
-                      // sizeVariable,
-                      // colorVariable,
+                    //   // sizeVariable,
+                    //   // colorVariable,
 
-                      // searchString,
-                      // colorPalette,
+                    //   // searchString,
+                    //   // colorPalette,
 
-                      // filters,
-                      // filtersModeAnd,
+                    //   // filters,
+                    //   // filtersModeAnd,
 
-                      // title,
-                      // legend,
-                      // normalizeY
-                    }
+                    //   // title,
+                    //   // legend,
+                    //   // normalizeY
+                    // }
                   }}
                 >
                   <section className="section-container" style={{ background: id === activeSection ? 'pink' : undefined }} ref={sectionsRef.current[index]}>

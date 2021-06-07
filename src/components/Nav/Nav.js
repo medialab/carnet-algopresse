@@ -1,14 +1,21 @@
 
 
 
-const Nav = ({lang, routes}) => {
+const Nav = ({
+  lang, 
+  routes,
+  onRouteNav
+}) => {
   return (
     <nav>
       <ul>
         {
           routes.map((route, routeIndex) => {
+            const handleClick = () => {
+              onRouteNav(routeIndex);
+            }
             return (
-              <li key={routeIndex}>
+              <li onClick={handleClick} key={routeIndex}>
                 <span className="number-marker">{routeIndex}</span> {route.title[lang]}
               </li>
             )
