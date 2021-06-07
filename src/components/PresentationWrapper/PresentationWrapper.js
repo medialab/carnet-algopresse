@@ -187,17 +187,18 @@ const PresentationWrapper = ({ match: { params } }) => {
         }
         if (activeSection === undefined || activeSection === '' || activeSection !== id) {
           history.push({
-            pathname: `/${lang}/${id}${activeVisualizationIndex !== undefined ? '/' + newActiveVisualizationIndex : ''}`
+            pathname: `/publication/${lang}/${id}${activeVisualizationIndex !== undefined ? '/' + newActiveVisualizationIndex : ''}`
           })
         } else if (activeSection && +activeVisualizationIndex !== +newActiveVisualizationIndex && newActiveVisualizationIndex !== undefined) {
           history.push({
-            pathname: `/${lang}/${id}${newActiveVisualizationIndex !== undefined ? '/' + newActiveVisualizationIndex : ''}`
+            pathname: `/publication/${lang}/${id}${newActiveVisualizationIndex !== undefined ? '/' + newActiveVisualizationIndex : ''}`
           })
         }
       } else {
         history.push({
-          pathname: `/${lang}`
+          pathname: `/publication/${lang}`
         })
+        setActiveVisualization(undefined);
       }
     };
     listener = debounce(listener, 100);
