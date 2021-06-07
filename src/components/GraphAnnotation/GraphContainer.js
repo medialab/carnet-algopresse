@@ -36,7 +36,7 @@ function zoomOut(renderer) {
 }
 
 
-function GraphContainer({
+export function GraphContainer({
   graph,
   width,
   height,
@@ -57,6 +57,7 @@ function GraphContainer({
   onFiltersChange,
 
   onCameraUpdate,
+  presentationMode,
 
   cameraPosition,
 
@@ -285,7 +286,7 @@ function GraphContainer({
     <>
 
       <div ref={setContainer} style={{width: '100%', height: '100%'}}></div>
-      {renderer && (
+      {renderer && !presentationMode && (
         <>
           <GraphControls
             rescale={rescale.bind(null, renderer)}

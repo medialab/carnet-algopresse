@@ -17,4 +17,104 @@
     left: 0;
     bottom: 0;
   }
+
+  .section-container {
+    max-width: 50%;
+  }
+
+  .visualization-container {
+    position: fixed;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    top: 0;
+  }
+
+  /**
+   * Loader
+   */
+   .loader-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loader{
+    background: lightgrey;
+    height: 10px;
+    width: 50%;
+    position: relative;
+  }
+  .loader .loading-bar {
+    background: turquoise;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    transition: width .2s ease;
+  }
+  .VisualizationController {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  /**
+   * ICECREAM GRAPH
+   */
+   /**
+  * Scatterplot scaling
+  */
+  .scatterplot .plot-object text {
+    font-size: .8rem;
+    transition: .1s ease-in all;
+  }
+  .scatterplot .plot-object circle {
+    transition: .1s ease all;
+  }
+
+  .scatterplot .plot-objects-container:hover .plot-object.is-matching {
+    opacity: .2;
+    transition: all .2s ease;
+  }
+  .scatterplot .plot-objects-container:hover .plot-object.is-matching:hover {
+    opacity: 1;
+  }
+
+  .scatterplot .plot-objects-container  .plot-object.is-matching:hover text
+  {
+    font-size: 15px!important;
+    background: white;
+  }
+
+  .scatterplot.zoom-mode .plot-objects-container:not(:hover) .plot-object.is-matching:not(.is-zoomed) text {
+    opacity: .4;
+  }
+  .scatterplot.zoom-mode .plot-objects-container:not(:hover) .plot-object.is-matching:not(.is-zoomed) circle {
+    opacity: .6;
+  }
+
+  .scatterplot.zoom-mode .plot-objects-container .plot-object.is-zoomed text {
+    font-size: 15px!important;
+    background: white;
+  }
+
+  .scatterplot .plot-object .axis-line {
+    opacity: 0;
+    transition: all .2s ease;
+  }
+  .scatterplot .plot-object.is-matching:hover .axis-line {
+    opacity: 1;
+  }
+
+  .scatterplot .axis-variable-name {
+    font-weight: 800;
+    font-style: italic;
+  }
 }

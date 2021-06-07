@@ -12,7 +12,7 @@ import {evalIfNodeMatches} from '../../helpers/misc';
 import './LinearGraphContainer.css';
 import { max, uniqBy } from 'lodash';
 
-function LinearGraphContainer({
+export function LinearGraphContainer({
 
   width, 
   height,
@@ -40,12 +40,13 @@ function LinearGraphContainer({
   onSearchStringChange,
   filtersOptions = {},
 
-  onToggleFiltersModeAnd,
   filtersModeAnd,
-  onFiltersChange,
-  filters,
+  filters = [],
+  presentationMode,
 
   
+  onToggleFiltersModeAnd,
+  onFiltersChange,
   onXVariableChange,
   onXLabelVariableChange,
   onYVariableChange,
@@ -415,7 +416,10 @@ function LinearGraphContainer({
               }
             </g>
         </svg>
-        <LinearGraphControls
+        {
+          presentationMode ? null :
+          <>
+            <LinearGraphControls
           {
             ...{
               xVariable,
@@ -474,6 +478,9 @@ function LinearGraphContainer({
               />
             </div>
           </form>
+          </>
+        }
+        
     </>
   );
 }

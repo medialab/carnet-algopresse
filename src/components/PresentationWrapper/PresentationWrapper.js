@@ -1,9 +1,13 @@
 import React, { useRef, useEffect, useState, createRef, useReducer } from 'react';
-
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { csvParse, tsvParse } from 'd3-dsv';
 
 import Header from '../Header';
 import Footer from '../Footer';
+import Loader from '../Loader';
+import VisualizationController from '../VisualizationController';
+
 
 import { VisualizationControlContext, PresentationContext } from '../../contexts'
 // import {parseQuery} from '../../helpers/misc';
@@ -16,10 +20,12 @@ const PresentationWrapper = ({ match: { params } }) => {
   const { lang, section: activeSection, activeVisualizationIndex } = params;
   const sectionsRef = useRef(routes.map(() => createRef()));
   const [activeVisualization, setActiveVisualization] = useState(null);
+  const [datasets, setDatasets] = useState({})
+  const [loadingFraction, setLoadingFraction] = useState(0)
   const history = useHistory();
 
   const [visualizations, setVisualizations] = useReducer(
-    (state, newState) => ({...state, ...newState}),
+    (state, newState) => ({ ...state, ...newState }),
     {}
   )
   // let {search} = location;
@@ -27,6 +33,46 @@ const PresentationWrapper = ({ match: { params } }) => {
   // const {activeSection} = search;
 
   const scrollRef = useRef(null);
+
+  /**
+   * loading all datasets
+   */
+  useEffect(() => {
+    routes.reduce((cur, route, routeIndex) => {
+      return cur.then((res) => new Promise((resolve, reject) => {
+
+        const { data } = route;
+        const url = data ? `${process.env.PUBLIC_URL}/data/${data}` : undefined;
+        if (url) {
+          axios.get(url, {
+            onDownloadProgress: progressEvent => {
+              const status = progressEvent.loaded / progressEvent.total;
+              const globalFraction = routeIndex / routes.length;
+              setLoadingFraction(globalFraction + status / routes.length);
+            }
+          })
+            .then(({ data: inputData }) => {
+              setTimeout(() => {
+                let loadedData = inputData;
+                if (url.split('.').pop() === 'csv') {
+                  loadedData = csvParse(inputData);
+                } else if (url.split('.').pop() === 'tsv') {
+                  loadedData = tsvParse(inputData);
+                }
+                resolve({...res, [data]: loadedData})
+              })
+            })
+            .catch(reject)
+        } else return resolve(res);
+
+      }))
+    }, Promise.resolve({}))
+    .then(newDatasets => {
+      setLoadingFraction(1);
+      setDatasets(newDatasets)
+    })
+    .catch(console.log)
+  }, [])
 
   /**
    * Scroll on coumponent mount
@@ -46,9 +92,9 @@ const PresentationWrapper = ({ match: { params } }) => {
         let relevantVisualization;
         if (activeVisualizationIndex) {
           const relevantVisualizations = Object.entries(visualizations)
-          .filter(([id, params]) => params.sectionIndex === activeSectionIndex)
-          .map(t => t[1]);
-          const relevantVisualization = +activeSectionIndex < relevantVisualizations.length ? relevantVisualizations[activeSectionIndex]: undefined;
+            .filter(([id, params]) => params.sectionIndex === activeSectionIndex)
+            .map(t => t[1]);
+          const relevantVisualization = +activeSectionIndex < relevantVisualizations.length ? relevantVisualizations[activeSectionIndex] : undefined;
           if (relevantVisualization) {
             const y = relevantVisualization.ref.current.getBoundingClientRect().y;
             const bodyRect = document.body.getBoundingClientRect();
@@ -65,18 +111,18 @@ const PresentationWrapper = ({ match: { params } }) => {
             window.scrollTo(0, sectionY - window.innerHeight / 2)
           }
         }
-        
+
       }
     }
   }, [])/* eslint react-hooks/exhaustive-deps : 0 */
-  
+
   /**
    * Scrollytelling managmeent
    */
   useEffect(() => {
     const listener = e => {
       const bodyPos = document.body.getBoundingClientRect();
-      const y = Math.abs(bodyPos.top) + window.innerHeight / 2;
+      const y = Math.abs(bodyPos.top) + window.innerHeight * .6;
       let activeRouteIndex;
       let newActiveVisualizationIndex;
 
@@ -99,14 +145,14 @@ const PresentationWrapper = ({ match: { params } }) => {
         // find active visualization
         if (activeRouteIndex !== undefined) {
           const relevantVisualizations = Object.entries(visualizations)
-          .filter(([id, params]) => params.sectionIndex === activeRouteIndex)
-          .map(t => t[1])
+            .filter(([id, params]) => params.sectionIndex === activeRouteIndex)
+            .map(t => t[1])
           let activeVisualization;
-          for (let index = relevantVisualizations.length - 1 ; index >= 0 ; index--) {
+          for (let index = relevantVisualizations.length - 1; index >= 0; index--) {
             const params = relevantVisualizations[index];
-            const {ref} = params;
+            const { ref } = params;
             if (ref.current) {
-              const { y: initialVisY } = ref.current.getBoundingClientRect();                        
+              const { y: initialVisY } = ref.current.getBoundingClientRect();
               const visY = initialVisY + window.scrollY;
               if (y > visY) {
                 activeVisualization = params;
@@ -167,7 +213,7 @@ const PresentationWrapper = ({ match: { params } }) => {
                   sectionIndex: index,
                   data
                 }
-                setVisualizations({...visualizations, [id]: finalParams});
+                setVisualizations({ ...visualizations, [id]: finalParams });
               }
               return (
                 <VisualizationControlContext.Provider
@@ -204,7 +250,7 @@ const PresentationWrapper = ({ match: { params } }) => {
                     }
                   }}
                 >
-                  <section style={{ background: id === activeSection ? 'pink' : undefined }} ref={sectionsRef.current[index]}>
+                  <section className="section-container" style={{ background: id === activeSection ? 'pink' : undefined }} ref={sectionsRef.current[index]}>
                     <Content />
                   </section>
                 </VisualizationControlContext.Provider>
@@ -212,8 +258,16 @@ const PresentationWrapper = ({ match: { params } }) => {
             })
           }
         </main>
-        <aside>
-          visualisation
+        <aside className={'visualization-container'}>
+          {
+            datasets ?
+            <VisualizationController
+              datasets={datasets}
+              activeVisualization={activeVisualization}
+            />
+            :
+            <Loader percentsLoaded={loadingFraction * 100} />
+          }
         </aside>
         <Footer />
       </div>

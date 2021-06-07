@@ -1,16 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { csvParse, tsvParse } from 'd3-dsv';
-
-const Loader = ({percentsLoaded = 0}) =>{
-  return  (
-    <div className="loader-container">
-      <div className="loader">
-        <div className="loading-bar" style={{width: percentsLoaded + '%'}} />
-      </div>
-   </div>
-)
-}
+import Loader from '../Loader';
 
 const DataLoader = ({url, children}) => {
   const [data, setData] = useState(null);
