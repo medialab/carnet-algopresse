@@ -1,10 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useRef} from 'react';
 import cx from 'classnames';
 import {v4 as genId} from 'uuid';
-import {VisualizationControlContext} from '../../contexts'
-import {buildLinearGraphCode} from '../../helpers/misc';
+
+import VisBlock from '../VisBlock';
+
+
+import { VisualizationControlContext, PresentationContext } from '../../contexts';
+import {buildLinearGraphCode} from '../../helpers/misc';;
 
 const LinearGraphBlock = (inputProps) => {
+  const ref = useRef(null);
   const {
     onVisualizationUpdate, 
     focusedVisualizationId, 
@@ -13,6 +18,9 @@ const LinearGraphBlock = (inputProps) => {
     setFocusedVisualizationId,
     visualizationParams
   } = useContext(VisualizationControlContext);
+  const {
+    presentationMode
+  } = useContext(PresentationContext);
   const [id, setId] = useState(null);
   const [copied, setCopied] = useState(false);
 
@@ -23,7 +31,18 @@ const LinearGraphBlock = (inputProps) => {
 
   useEffect(() => {
     const newId = genId();
-    setTimeout(() => onRegisterVisualization(newId, {...inputProps}))
+    setTimeout(() => {
+      let payload = {...inputProps};
+      if (presentationMode) {
+        payload = {
+          ...payload,
+          visType: 'linearGraph',
+          ref,
+          id: newId
+        }
+      }
+      onRegisterVisualization(newId, {...payload})
+    })
     setId(newId);
     return onUnregisterVisualization(id);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,8 +64,11 @@ const LinearGraphBlock = (inputProps) => {
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }
-  return (
-    <div onClick={handleClick} className={cx("VisualizationBlock LinearGraphBlock", {'is-focused': isFocused})}>
+  return presentationMode ? (
+    <VisBlock ref={ref} {...props} id={id} />
+  )
+  : (
+    <div id={id} ref={ref} onClick={handleClick} className={cx("VisualizationBlock LinearGraphBlock", {'is-focused': isFocused})}>
       {
         props.title ?
         <h2 className="block-title">{props.title}</h2>

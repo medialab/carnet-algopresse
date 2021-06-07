@@ -1,10 +1,13 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useRef} from 'react';
 import cx from 'classnames';
 import {v4 as genId} from 'uuid';
-import {VisualizationControlContext} from '../../contexts'
+import {VisualizationControlContext, PresentationContext} from '../../contexts'
 import {buildIceCreamScatterPlotCode} from '../../helpers/misc';
 
+import VisBlock from '../VisBlock';
+
 const IceCreamBlock = (inputProps) => {
+  const ref = useRef(null);
   const {
     onVisualizationUpdate, 
     focusedVisualizationId, 
@@ -13,6 +16,9 @@ const IceCreamBlock = (inputProps) => {
     setFocusedVisualizationId,
     visualizationParams
   } = useContext(VisualizationControlContext);
+  const {
+    presentationMode
+  } = useContext(PresentationContext);
   const [id, setId] = useState(null);
   const [copied, setCopied] = useState(false);
 
@@ -23,7 +29,18 @@ const IceCreamBlock = (inputProps) => {
 
   useEffect(() => {
     const newId = genId();
-    setTimeout(() => onRegisterVisualization(newId, {...inputProps}))
+    setTimeout(() => {
+      let payload = {...inputProps};
+      if (presentationMode) {
+        payload = {
+          ...payload,
+          visType: 'icecreamGraph',
+          ref,
+          id: newId
+        }
+      }
+      onRegisterVisualization(newId, {...payload})
+    })
     setId(newId);
     return onUnregisterVisualization(id);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,8 +62,11 @@ const IceCreamBlock = (inputProps) => {
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }
-  return (
-    <div onClick={handleClick} className={cx("VisualizationBlock IcecreamBlock", {'is-focused': isFocused})}>
+  return presentationMode ? (
+    <VisBlock ref={ref} {...props} id={id} />
+  )
+  : (
+    <div ref={ref} id={id} onClick={handleClick} className={cx("VisualizationBlock IcecreamBlock", {'is-focused': isFocused})}>
       {
         props.title ?
         <h2 className="block-title">{props.title}</h2>

@@ -143,3 +143,15 @@ export const transformGeometry = ({ x, y }, { rotate, translate }) => {
   }
   return { x: newX, y: newY }
 }
+
+export function parseQuery(queryString) {
+  const pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+  return pairs.filter((k) => k.length)
+  .reduce((res, input) => {
+    const pair = input.split('=');
+    return {
+      ...res,
+      [decodeURIComponent(pair[0])]: decodeURIComponent(pair[1] || '')
+    };
+  }, {})
+}
