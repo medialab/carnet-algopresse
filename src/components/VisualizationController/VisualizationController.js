@@ -23,7 +23,7 @@ const GraphWrapper = ({data, ...props}) => {
   }, [data]);
 
   const onCameraUpdate = (pos) => {
-    setCameraPosition(pos);
+    // setCameraPosition(pos);
   }
   let sizes = [];
   graph.forEachNode((node, attributes) => {
