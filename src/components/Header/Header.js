@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useMemo, useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import Helmet from 'react-helmet';
-import {useMemo, useState, useEffect} from 'react';
 import Graph from 'graphology';
 import gexf from 'graphology-gexf';
 import {extent} from 'd3-array';
+import cx from 'classnames';
 
+import Loader from '../Loader';
 import Nav from '../Nav';
 
 import frMetadata from '../../contents/fr/metadata';
@@ -16,7 +17,6 @@ import {GraphContainer} from '../GraphAnnotation/GraphContainer'
 
 const GraphWrapper = ({data, ...props}) => {
   const [cameraPosition, setCameraPosition] = useState({x: props.x, y: props.y, ratio: props.ratio})
-
   useEffect(() => {
     setCameraPosition({
       x: props.x, y: props.y, ratio: props.ratio
@@ -35,6 +35,7 @@ const GraphWrapper = ({data, ...props}) => {
   })
   const sizeExtent = extent(sizes);
   return (
+    <div style={{width: props.width, height: props.height}}>
     <GraphContainer
       {...{
         ...props,
@@ -50,6 +51,7 @@ const GraphWrapper = ({data, ...props}) => {
       }
       }
     />
+    </div>
   );
 }
 
@@ -77,6 +79,8 @@ const Header = ({
   isVisible,
   activeSectionIndex,
   graphData,
+  loadingFraction,
+  onScrollToTop,
 }) => {
   const meta = lang === 'fr' ? frMetadata : enMetadata;
   const {
@@ -86,8 +90,13 @@ const Header = ({
     generalAuthor,
     publicationDate
   } = meta;
+  const preventScroll = e => {
+    e.preventScroll();
+    e.stopPropagation();
+    e.preventDefault();
+  }
   return (
-    <header className="Header">
+    <header className={cx("Header", {'is-visible': isVisible})}>
       <Helmet>
         <html lang={lang} />
         <meta charSet={ 'UTF-8' } />
@@ -210,13 +219,18 @@ const Header = ({
         />
       </Helmet>
       <LanguageToggler lang={lang} />
+      <div onClick={onScrollToTop} className="running-title">
+        <h1>{title}</h1>
+      </div>
       <div className="header-main">
            <h2 className="general-author">
              {generalAuthor}
            </h2>
-           <h1 className="main-title">
-             {title}
-           </h1>
+           <div className="main-title-container">
+            <h1 className="main-title">
+              {title}
+            </h1>
+           </div>
            <ul className="creators">
              {
                creators.map(({role, people}) => (
@@ -244,29 +258,31 @@ const Header = ({
           activeSectionIndex={activeSectionIndex}
         />
         {/* réseau */}
-        {
-          graphData &&
-          <div
-            style={{
-              width: 500,
-              height: 500
-            }}
-          >
-          <GraphWrapper
-            data={graphData}
-            width={500}
-            height={500}
-            presentationMode={true}
-            x={0.4588867805186573} 
-            y={0.5190807505798019}
-            ratio={0.80}
-            nodeColorVariable={'cluster_rename'} 
-            nodeLabelVariable={'cluster_label'} 
-            labelDensity={1.5} 
-            colorPalette={{"Future_of_AI":"#e97f3e","Profiling_Algorthms":"#53cb7b","Job_Automation":"#eb102b","Market_&_Prices":"#d08be8","Predictive_Algorithms":"#a3bf28","Web_Algorithms":"#e7eb2a","Facial_Recognition":"#54a5e8","Voice_Assistant":"#108cac","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#d3a715","Game_&_Education":"#a1943c","Chatbot":"#1b90be","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#00c8cc","Sex_Robots":"#db7187","Deepfake":"#4f990f","Image_Search":"#6deeff","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}}
-          />
-          </div>
-        }
+        <div
+          onScroll={preventScroll}
+          className={cx("GraphWrapperContainer", {'has-visualization': graphData !== undefined})}
+        >
+          {
+            graphData ?
+            <GraphWrapper
+              data={graphData}
+              presentationMode={true}
+              width={500}
+              height={500}
+              x={0.5} 
+              y={0.5} 
+              ratio={0.8} 
+              displayAllLabels={true}
+              nodeColorVariable={'cluster_rename'} 
+              nodeLabelVariable={'cluster_label'} 
+              labelDensity={1} 
+              colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
+            />
+            :
+            <Loader percentsLoaded={loadingFraction * 100} />
+          }
+        
+        </div>
         
       </div>
     </header>

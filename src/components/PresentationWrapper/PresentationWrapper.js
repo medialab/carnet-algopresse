@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { csvParse, tsvParse } from 'd3-dsv';
 import cx from 'classnames';
-
+import debounce from 'lodash/debounce';
 import Header from '../Header';
 import Footer from '../Footer';
 import Loader from '../Loader';
@@ -25,6 +25,7 @@ const PresentationWrapper = ({ match: { params } }) => {
   const [loadingFraction, setLoadingFraction] = useState(0);
   const history = useHistory();
   const [inHeader, setInHeader] = useState(true);
+  const [inFooter, setInFooter] = useState(false);
 
   const [visualizations, setVisualizations] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -126,9 +127,9 @@ const PresentationWrapper = ({ match: { params } }) => {
    * Scrollytelling managmeent
    */
   useEffect(() => {
-    const listener = e => {
+    let listener = e => {
       const bodyPos = document.body.getBoundingClientRect();
-      const DISPLACE_Y = window.innerHeight * .6;
+      const DISPLACE_Y = window.innerHeight * .5;
       const y = Math.abs(bodyPos.top) + DISPLACE_Y;
       let activeRouteIndex;
       let newActiveVisualizationIndex;
@@ -143,6 +144,11 @@ const PresentationWrapper = ({ match: { params } }) => {
             setInHeader(false);
           } else if (index === 0 && y < sectionY && !inHeader) {
             setInHeader(true);
+          }
+          if (index === sectionsRef.current.length - 1 && y > sectionY + height && !inFooter) {
+            setInFooter(true);
+          } else if (inFooter) {
+            setInFooter(false);
           }
           if (y > sectionY && y < sectionY + height) {
             activeRouteIndex = index;
@@ -159,7 +165,7 @@ const PresentationWrapper = ({ match: { params } }) => {
           const relevantVisualizations = Object.entries(visualizations)
             .filter(([id, params]) => params.sectionIndex === activeRouteIndex)
             .map(t => t[1])
-          let activeVisualization;
+          let newActiveVisualization;
           for (let index = relevantVisualizations.length - 1; index >= 0; index--) {
             const params = relevantVisualizations[index];
             const { ref } = params;
@@ -167,13 +173,17 @@ const PresentationWrapper = ({ match: { params } }) => {
               const { y: initialVisY } = ref.current.getBoundingClientRect();
               const visY = initialVisY + window.scrollY;
               if (y > visY) {
-                activeVisualization = params;
+                newActiveVisualization = params;
                 newActiveVisualizationIndex = index;
                 break;
               }
             }
+          } 
+          if (relevantVisualizations.length && !newActiveVisualization) {
+            newActiveVisualization = relevantVisualizations[0];
+            newActiveVisualizationIndex = 0;
           }
-          setActiveVisualization(activeVisualization);
+          setActiveVisualization(newActiveVisualization);
         }
         if (activeSection === undefined || activeSection === '' || activeSection !== id) {
           history.push({
@@ -190,6 +200,7 @@ const PresentationWrapper = ({ match: { params } }) => {
         })
       }
     };
+    listener = debounce(listener, 100);
     window.addEventListener("scroll", listener);
     return () => {
       window.removeEventListener("scroll", listener);
@@ -197,6 +208,12 @@ const PresentationWrapper = ({ match: { params } }) => {
 
   }, [visualizations, lang, activeVisualizationIndex, activeSection, history, inHeader])
 
+  const preventScroll = e => {
+    console.log('scroll', e);
+    e.preventScroll();
+    e.stopPropagation();
+    e.preventDefault();
+  }
   const handleRouteNav = index => {
     const el = sectionsRef.current[index];
     if (el.current) {
@@ -209,14 +226,33 @@ const PresentationWrapper = ({ match: { params } }) => {
         behavior: 'smooth'
       })
     }
-
+  }
+  const handleBlockClick = (id, ref) => {
+    if (ref.current) {
+      const y = ref.current.getBoundingClientRect().y;
+      const bodyRect = document.body.getBoundingClientRect();
+      const sectionY = y - bodyRect.top;
+      window.scrollTo({
+        left: 0, 
+        top: sectionY - window.innerHeight / 2 + 5,
+        behavior: 'smooth'
+      })
+    }
+  }
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      left: 0, 
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 
   return (
     <PresentationContext.Provider
       value={{
         presentationMode: true,
-        activeVisualization
+        activeVisualization,
+        onBlockClick: handleBlockClick
       }}
     >
       <div ref={scrollRef} id="presentation-wrapper">
@@ -226,7 +262,9 @@ const PresentationWrapper = ({ match: { params } }) => {
           onRouteNav={handleRouteNav} 
           isVisible={inHeader}
           activeSectionIndex={activeSectionIndex}
+          loadingFraction={loadingFraction}
           graphData={datasets && datasets['Graph_Critic_EN_algopress_webV2.gexf']}
+          onScrollToTop={handleScrollToTop}
         />
         <main>
           {
@@ -247,7 +285,7 @@ const PresentationWrapper = ({ match: { params } }) => {
                   sectionIndex: index,
                   data
                 }
-                setVisualizations({ ...visualizations, [id]: finalParams });
+                setTimeout(() => setVisualizations({ ...visualizations, [id]: finalParams }));
               }
               return (
                 <VisualizationControlContext.Provider
@@ -292,7 +330,7 @@ const PresentationWrapper = ({ match: { params } }) => {
             })
           }
         </main>
-        <aside className={'visualization-container'}>
+        <aside onScroll={preventScroll} className={cx('visualization-container', {'is-visible': !inHeader && !inFooter})}>
           {
             datasets ?
             <VisualizationController

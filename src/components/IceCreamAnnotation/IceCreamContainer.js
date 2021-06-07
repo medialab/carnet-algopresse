@@ -217,7 +217,7 @@ export function IceCreamContainer({
     <>
       <svg
         className={cx("scatterplot", { 'zoom-mode': zoomedIndex !== null && enableZoom })}
-        width={smallestDimension}
+        width={width}
         height={height}
       >
         <g

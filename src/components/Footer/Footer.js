@@ -10,7 +10,7 @@ const Footer = () => {
   //   return  React.lazy(() => import(`!babel-loader!mdx-loader!../../contents/${lang}/footer.mdx`));
   // }, [lang])
   return (
-    <footer>
+    <footer className="Footer">
       {
         lang === 'fr' ? <Fr /> : <En />
       }

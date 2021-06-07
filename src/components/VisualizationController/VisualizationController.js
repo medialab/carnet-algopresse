@@ -3,6 +3,7 @@ import Graph from 'graphology';
 import gexf from 'graphology-gexf';
 import {extent} from 'd3-array';
 import ContainerDimensions from 'react-container-dimensions';
+import cx from 'classnames';
 
 import {LinearGraphContainer} from '../LinearGraphAnnotation/LinearGraphContainer'
 import {GraphContainer} from '../GraphAnnotation/GraphContainer'
@@ -76,7 +77,7 @@ const VisualizationController = ({
           {...{
             ...activeVisualization,
             data: datasets[activeVisualization.data],
-            width,
+            width: width - 5,
             height,
             presentationMode: true
           }}
@@ -101,7 +102,7 @@ const VisualizationController = ({
 
 export default function VisualizationControllerWithDimensions(props) {
   return (
-    <div className="VisualizationController">
+    <div className={cx("VisualizationController", props.activeVisualization && props.activeVisualization.visType)}>
 
     <ContainerDimensions>
       {

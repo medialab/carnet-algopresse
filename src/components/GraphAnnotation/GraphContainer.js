@@ -38,8 +38,8 @@ function zoomOut(renderer) {
 
 export function GraphContainer({
   graph,
-  width,
-  height,
+  width = 500,
+  height = 500,
   // nodeColor,
   // nodeSize,
   labelDensity,
@@ -251,34 +251,38 @@ export function GraphContainer({
       }
 
       if (node && graph) {
-       
-        const newRenderer = new WebGLRenderer(graph, node, {nodeReducer, edgeReducer});
-        let actualLabelDensity = labelDensity > 1 ? 1 : labelDensity;
-        const cellWidth = cellWidthScale(actualLabelDensity);
-        const cellHeight = cellHeightScale(actualLabelDensity);
-        newRenderer.settings.labelGrid.cell = {
-          width: cellWidth,
-          height: cellHeight
-        };
-        newRenderer.settings.labelSize = 12;
-        newRenderer.displayedLabels = new Set();
-        newRenderer.refresh();
-        setRenderer(newRenderer);
-        const camera = newRenderer.getCamera();
-        if (cameraPosition) {
-          onCameraUpdate({
-            ...camera.getState(),
-            ...cameraPosition
+        setTimeout(() => {
+          const newRenderer = new WebGLRenderer(graph, node, {nodeReducer, edgeReducer});
+          let actualLabelDensity = labelDensity > 1 ? 1 : labelDensity;
+          const cellWidth = cellWidthScale(actualLabelDensity);
+          const cellHeight = cellHeightScale(actualLabelDensity);
+          newRenderer.settings.labelGrid.cell = {
+            width: cellWidth,
+            height: cellHeight
+          };
+          newRenderer.settings.labelSize = 12;
+          newRenderer.settings.labelFont = 'Fira Sans';
+          newRenderer.displayedLabels = new Set();
+          newRenderer.refresh();
+          setRenderer(newRenderer);
+          const camera = newRenderer.getCamera();
+          if (cameraPosition) {
+            onCameraUpdate({
+              ...camera.getState(),
+              ...cameraPosition
+            })
+          } else {
+            onCameraUpdate(camera.getState())
+          }
+          camera.on('updated', state => {
+            onCameraUpdate(state);
           })
-        } else {
-          onCameraUpdate(camera.getState())
-        }
-        camera.on('updated', state => {
-          onCameraUpdate(state);
         })
-      }
+       
+          
+        }
 
-      container.current = node;
+        container.current = node;
     },
     [graph] /* eslint react-hooks/exhaustive-deps : 0 */
   );

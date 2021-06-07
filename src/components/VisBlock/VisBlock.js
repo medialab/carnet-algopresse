@@ -6,13 +6,19 @@ import { PresentationContext} from '../../contexts'
 
 const VisBlock = React.forwardRef(({title, legend, id}, ref) => {
   const {
-    activeVisualization
+    activeVisualization,
+    onBlockClick
   } = useContext(PresentationContext);
+  const onClick = e => {
+    if (typeof onBlockClick === 'function') {
+      onBlockClick(id, ref);
+    }
+  }
   return (
-    <div ref={ref} id={id} className={cx("VisualizationBlock LinearGraphBlock", {'is-active': activeVisualization && activeVisualization.id === id})}>
+    <div onClick={onClick} ref={ref} id={id} className={cx("VisualizationBlock LinearGraphBlock", {'is-active': activeVisualization && activeVisualization.id === id})}>
       {
         title ?
-        <h2 className="block-title">{title}</h2>
+        <h5 className="block-title">{title}</h5>
         : null
       }
       {
