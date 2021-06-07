@@ -1,6 +1,6 @@
-import React, { Suspense, useRef, useEffect, useState, createRef, useMemo, useReducer } from 'react';
+import React, { useRef, useEffect, useState, createRef, useReducer } from 'react';
 
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -28,51 +28,75 @@ const PresentationWrapper = ({ match: { params } }) => {
 
   const scrollRef = useRef(null);
 
-  // useEffect(() => {
-  //   if (activeSection) {
-  //     let activeSectionIndex;
-  //     const thatSection = routes.find((route, index) => {
-  //       const id = buildRouteId(index, route, lang);
-  //       if (id === activeSection) {
-  //         activeSectionIndex = index;
-  //         return true;
-  //       }
-  //     });
-  //     if (activeSectionIndex) {
-  //       const el = sectionsRef.current[activeSectionIndex];
-  //       if (el.current) {
-  //         const y = el.current.getBoundingClientRect().y;
-  //         setTimeout(() => {
-  //           window.scrollTo(0, y - window.innerHeight / 2)
-  //         }, 3000)
-  //       }
-  //     }
-  //   }
-  // }, [])
+  /**
+   * Scroll on coumponent mount
+   */
+  useEffect(() => {
+    if (activeSection) {
+      let activeSectionIndex;
+      routes.find((route, index) => {
+        const id = buildRouteId(index, route, lang);
+        if (id === activeSection) {
+          activeSectionIndex = index;
+          return true;
+        }
+        return false;
+      });
+      if (activeSectionIndex) {
+        let relevantVisualization;
+        if (activeVisualizationIndex) {
+          const relevantVisualizations = Object.entries(visualizations)
+          .filter(([id, params]) => params.sectionIndex === activeSectionIndex)
+          .map(t => t[1]);
+          const relevantVisualization = +activeSectionIndex < relevantVisualizations.length ? relevantVisualizations[activeSectionIndex]: undefined;
+          if (relevantVisualization) {
+            const y = relevantVisualization.ref.current.getBoundingClientRect().y;
+            const bodyRect = document.body.getBoundingClientRect();
+            const visY = y - bodyRect.top;
+            window.scrollTo(0, visY - window.innerHeight / 2)
+          }
+        }
+        if (!relevantVisualization) {
+          const el = sectionsRef.current[activeSectionIndex];
+          if (el.current) {
+            const y = el.current.getBoundingClientRect().y;
+            const bodyRect = document.body.getBoundingClientRect();
+            const sectionY = y - bodyRect.top;
+            window.scrollTo(0, sectionY - window.innerHeight / 2)
+          }
+        }
+        
+      }
+    }
+  }, [])/* eslint react-hooks/exhaustive-deps : 0 */
   
+  /**
+   * Scrollytelling managmeent
+   */
   useEffect(() => {
     const listener = e => {
       const bodyPos = document.body.getBoundingClientRect();
       const y = Math.abs(bodyPos.top) + window.innerHeight / 2;
       let activeRouteIndex;
-      let activeRouteY;
+      let newActiveVisualizationIndex;
 
-      const activeRouteMarker = sectionsRef.current.find((ref, index) => {
+      // find active section
+      sectionsRef.current.find((ref, index) => {
         if (ref.current) {
           const { y: initialSectionY, height } = ref.current.getBoundingClientRect();
           const bodyRect = document.body.getBoundingClientRect();
           const sectionY = initialSectionY - bodyRect.top;
           if (y > sectionY && y < sectionY + height) {
             activeRouteIndex = index;
-            activeRouteY = initialSectionY;
             return true;
           }
         }
+        return false;
       });
       if (activeRouteIndex !== undefined) {
         const newRoute = routes[activeRouteIndex];
         const id = buildRouteId(activeRouteIndex, newRoute, lang);
-        let activeVisualizationIndex;
+        // find active visualization
         if (activeRouteIndex !== undefined) {
           const relevantVisualizations = Object.entries(visualizations)
           .filter(([id, params]) => params.sectionIndex === activeRouteIndex)
@@ -82,13 +106,11 @@ const PresentationWrapper = ({ match: { params } }) => {
             const params = relevantVisualizations[index];
             const {ref} = params;
             if (ref.current) {
-              const { y: initialVisY } = ref.current.getBoundingClientRect();          
-              const bodyRect = document.body.getBoundingClientRect();
-              
-              const visY = initialVisY + window.scrollY 
+              const { y: initialVisY } = ref.current.getBoundingClientRect();                        
+              const visY = initialVisY + window.scrollY;
               if (y > visY) {
                 activeVisualization = params;
-                activeVisualizationIndex = index;
+                newActiveVisualizationIndex = index;
                 break;
               }
             }
@@ -97,12 +119,14 @@ const PresentationWrapper = ({ match: { params } }) => {
         }
         if (activeSection === undefined || activeSection === '' || activeSection !== id) {
           history.push({
-            pathname: `/${lang}/${id}`
+            pathname: `/${lang}/${id}${activeVisualizationIndex !== undefined ? '/' + newActiveVisualizationIndex : ''}`
+          })
+        } else if (activeSection && +activeVisualizationIndex !== +newActiveVisualizationIndex && newActiveVisualizationIndex !== undefined) {
+          history.push({
+            pathname: `/${lang}/${id}${newActiveVisualizationIndex !== undefined ? '/' + newActiveVisualizationIndex : ''}`
           })
         }
-      } else if (activeSection) {
-        // const newParams = new URLSearchParams({...search, activeSection: ''}).toString();
-        // history.push({search: newParams})
+      } else if (!activeSection) {
         history.push({
           pathname: `/${lang}`
         })
@@ -113,7 +137,7 @@ const PresentationWrapper = ({ match: { params } }) => {
       window.removeEventListener("scroll", listener);
     };
 
-  }, [visualizations])
+  }, [visualizations, lang, activeVisualizationIndex, activeSection, history])
 
   return (
     <PresentationContext.Provider
@@ -129,8 +153,8 @@ const PresentationWrapper = ({ match: { params } }) => {
             routes.map((route, index) => {
               const {
                 // title,
-                route: inputRoute,
-                contents,
+                // route: inputRoute,
+                // contents,
                 data,
                 // Component: ThatComponent,
                 contentsCompiled
@@ -138,21 +162,16 @@ const PresentationWrapper = ({ match: { params } }) => {
               const id = buildRouteId(index, route, lang);
               const Content = contentsCompiled[lang];
               const onRegisterVisualization = (id, params) => {
-                // const currentVisualizations = [...visualizations];
-                // currentVisualizations[index] = Array.isArray(currentVisualizations[index]) ?
-                // [
-                //   ...currentVisualizations[index],
-                //   params
-                // ]
-                // : [params];
                 const finalParams = {
                   ...params,
-                  sectionIndex: index
+                  sectionIndex: index,
+                  data
                 }
                 setVisualizations({...visualizations, [id]: finalParams});
               }
               return (
                 <VisualizationControlContext.Provider
+                  key={index}
                   value={{
                     onVisualizationUpdate: console.log,
                     onRegisterVisualization,
@@ -185,7 +204,7 @@ const PresentationWrapper = ({ match: { params } }) => {
                     }
                   }}
                 >
-                  <section style={{ background: id === activeSection ? 'pink' : undefined }} ref={sectionsRef.current[index]} key={index}>
+                  <section style={{ background: id === activeSection ? 'pink' : undefined }} ref={sectionsRef.current[index]}>
                     <Content />
                   </section>
                 </VisualizationControlContext.Provider>
