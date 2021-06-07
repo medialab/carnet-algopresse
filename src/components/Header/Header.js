@@ -59,12 +59,12 @@ const LanguageToggler = ({lang}) => {
   return (
     <ul className="LanguageToggler">
       <li>
-        <NavLink to="/fr">
+        <NavLink to="/publication/fr">
           fr
         </NavLink>
       </li>
       <li>
-        <NavLink to="/en">
+        <NavLink to="/publication/en">
           en
         </NavLink>
       </li>
