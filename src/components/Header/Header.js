@@ -1,12 +1,57 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import Helmet from 'react-helmet';
+import {useMemo, useState, useEffect} from 'react';
+import Graph from 'graphology';
+import gexf from 'graphology-gexf';
+import {extent} from 'd3-array';
 
 import Nav from '../Nav';
 
 import frMetadata from '../../contents/fr/metadata';
 import enMetadata from '../../contents/en/metadata';
 import {homepage} from '../../../package.json';
+
+import {GraphContainer} from '../GraphAnnotation/GraphContainer'
+
+const GraphWrapper = ({data, ...props}) => {
+  const [cameraPosition, setCameraPosition] = useState({x: props.x, y: props.y, ratio: props.ratio})
+
+  useEffect(() => {
+    setCameraPosition({
+      x: props.x, y: props.y, ratio: props.ratio
+    })
+  }, [props.x, props.y, props.ratio])
+  const graph = useMemo(() => {
+    return gexf.parse(Graph, data);
+  }, [data]);
+
+  const onCameraUpdate = (pos) => {
+    setCameraPosition(pos);
+  }
+  let sizes = [];
+  graph.forEachNode((node, attributes) => {
+    sizes.push(attributes.size);
+  })
+  const sizeExtent = extent(sizes);
+  return (
+    <GraphContainer
+      {...{
+        ...props,
+        graph,
+        extents: {
+          nodeSize: {
+            min: sizeExtent[0],
+            max: sizeExtent[1]
+          }
+        },
+        onCameraUpdate,
+        cameraPosition,
+      }
+      }
+    />
+  );
+}
 
 const LanguageToggler = ({lang}) => {
   return (
@@ -28,7 +73,10 @@ const LanguageToggler = ({lang}) => {
 const Header = ({
   lang, 
   routes,
-  onRouteNav
+  onRouteNav,
+  isVisible,
+  activeSectionIndex,
+  graphData,
 }) => {
   const meta = lang === 'fr' ? frMetadata : enMetadata;
   const {
@@ -39,7 +87,7 @@ const Header = ({
     publicationDate
   } = meta;
   return (
-    <header>
+    <header className="Header">
       <Helmet>
         <html lang={lang} />
         <meta charSet={ 'UTF-8' } />
@@ -188,8 +236,38 @@ const Header = ({
       </div>
       <div className="header-secondary">
         {/* Summary */}
-        <Nav lang={lang} onRouteNav={onRouteNav} routes={routes} deployed />
+        <Nav 
+          lang={lang} 
+          onRouteNav={onRouteNav} 
+          routes={routes} 
+          isDeployed={isVisible}
+          activeSectionIndex={activeSectionIndex}
+        />
         {/* réseau */}
+        {
+          graphData &&
+          <div
+            style={{
+              width: 500,
+              height: 500
+            }}
+          >
+          <GraphWrapper
+            data={graphData}
+            width={500}
+            height={500}
+            presentationMode={true}
+            x={0.4588867805186573} 
+            y={0.5190807505798019}
+            ratio={0.80}
+            nodeColorVariable={'cluster_rename'} 
+            nodeLabelVariable={'cluster_label'} 
+            labelDensity={1.5} 
+            colorPalette={{"Future_of_AI":"#e97f3e","Profiling_Algorthms":"#53cb7b","Job_Automation":"#eb102b","Market_&_Prices":"#d08be8","Predictive_Algorithms":"#a3bf28","Web_Algorithms":"#e7eb2a","Facial_Recognition":"#54a5e8","Voice_Assistant":"#108cac","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#d3a715","Game_&_Education":"#a1943c","Chatbot":"#1b90be","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#00c8cc","Sex_Robots":"#db7187","Deepfake":"#4f990f","Image_Search":"#6deeff","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}}
+          />
+          </div>
+        }
+        
       </div>
     </header>
   )

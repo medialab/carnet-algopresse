@@ -65,7 +65,7 @@ const routes = [
   },
   {
     title: {
-      fr: 'Quelle est la couverture médiatique de l\'IA ?',
+      fr: 'Comment détecter le discours critique dans les médias ?',
       en: '2. Detecting critiques',
     },
     route: {

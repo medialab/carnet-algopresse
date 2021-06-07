@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState, createRef, useReducer } from 'react
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { csvParse, tsvParse } from 'd3-dsv';
+import cx from 'classnames';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -21,8 +22,9 @@ const PresentationWrapper = ({ match: { params } }) => {
   const sectionsRef = useRef(routes.map(() => createRef()));
   const [activeVisualization, setActiveVisualization] = useState(null);
   const [datasets, setDatasets] = useState({})
-  const [loadingFraction, setLoadingFraction] = useState(0)
+  const [loadingFraction, setLoadingFraction] = useState(0);
   const history = useHistory();
+  const [inHeader, setInHeader] = useState(true);
 
   const [visualizations, setVisualizations] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -74,12 +76,8 @@ const PresentationWrapper = ({ match: { params } }) => {
     .catch(console.log)
   }, [])
 
-  /**
-   * Scroll on coumponent mount
-   */
-  useEffect(() => {
-    if (activeSection) {
-      let activeSectionIndex;
+  let activeSectionIndex;
+  if (activeSection) {
       routes.find((route, index) => {
         const id = buildRouteId(index, route, lang);
         if (id === activeSection) {
@@ -88,7 +86,15 @@ const PresentationWrapper = ({ match: { params } }) => {
         }
         return false;
       });
+  }
+
+  /**
+   * Scroll on coumponent mount
+   */
+  useEffect(() => {
+    if (activeSection) {
       if (activeSectionIndex) {
+        setInHeader(false);
         let relevantVisualization;
         if (activeVisualizationIndex) {
           const relevantVisualizations = Object.entries(visualizations)
@@ -122,7 +128,8 @@ const PresentationWrapper = ({ match: { params } }) => {
   useEffect(() => {
     const listener = e => {
       const bodyPos = document.body.getBoundingClientRect();
-      const y = Math.abs(bodyPos.top) + window.innerHeight * .6;
+      const DISPLACE_Y = window.innerHeight * .6;
+      const y = Math.abs(bodyPos.top) + DISPLACE_Y;
       let activeRouteIndex;
       let newActiveVisualizationIndex;
 
@@ -132,6 +139,11 @@ const PresentationWrapper = ({ match: { params } }) => {
           const { y: initialSectionY, height } = ref.current.getBoundingClientRect();
           const bodyRect = document.body.getBoundingClientRect();
           const sectionY = initialSectionY - bodyRect.top;
+          if (index === 0 && y > sectionY && inHeader) {
+            setInHeader(false);
+          } else if (index === 0 && y < sectionY && !inHeader) {
+            setInHeader(true);
+          }
           if (y > sectionY && y < sectionY + height) {
             activeRouteIndex = index;
             return true;
@@ -172,7 +184,7 @@ const PresentationWrapper = ({ match: { params } }) => {
             pathname: `/${lang}/${id}${newActiveVisualizationIndex !== undefined ? '/' + newActiveVisualizationIndex : ''}`
           })
         }
-      } else if (!activeSection) {
+      } else {
         history.push({
           pathname: `/${lang}`
         })
@@ -183,7 +195,7 @@ const PresentationWrapper = ({ match: { params } }) => {
       window.removeEventListener("scroll", listener);
     };
 
-  }, [visualizations, lang, activeVisualizationIndex, activeSection, history])
+  }, [visualizations, lang, activeVisualizationIndex, activeSection, history, inHeader])
 
   const handleRouteNav = index => {
     const el = sectionsRef.current[index];
@@ -208,7 +220,14 @@ const PresentationWrapper = ({ match: { params } }) => {
       }}
     >
       <div ref={scrollRef} id="presentation-wrapper">
-        <Header lang={lang} routes={routes} onRouteNav={handleRouteNav} />
+        <Header 
+          lang={lang} 
+          routes={routes} 
+          onRouteNav={handleRouteNav} 
+          isVisible={inHeader}
+          activeSectionIndex={activeSectionIndex}
+          graphData={datasets && datasets['Graph_Critic_EN_algopress_webV2.gexf']}
+        />
         <main>
           {
             routes.map((route, index) => {
@@ -265,7 +284,7 @@ const PresentationWrapper = ({ match: { params } }) => {
                     // }
                   }}
                 >
-                  <section className="section-container" style={{ background: id === activeSection ? 'pink' : undefined }} ref={sectionsRef.current[index]}>
+                  <section className={cx("section-container", {'is-active': id === activeSection, 'has-visualization': data !== undefined})} ref={sectionsRef.current[index]}>
                     <Content />
                   </section>
                 </VisualizationControlContext.Provider>

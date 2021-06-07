@@ -1,13 +1,15 @@
-
+import cx from 'classnames';
 
 
 const Nav = ({
   lang, 
   routes,
-  onRouteNav
+  onRouteNav,
+  isDeployed,
+  activeSectionIndex
 }) => {
   return (
-    <nav>
+    <nav className={cx('Nav', {'is-deployed': isDeployed})}>
       <ul>
         {
           routes.map((route, routeIndex) => {
@@ -15,8 +17,11 @@ const Nav = ({
               onRouteNav(routeIndex);
             }
             return (
-              <li onClick={handleClick} key={routeIndex}>
-                <span className="number-marker">{routeIndex}</span> {route.title[lang]}
+              <li className={cx({'is-active': activeSectionIndex === routeIndex})} onClick={handleClick} key={routeIndex}>
+                <span className="item-number">{routeIndex}</span>
+                <span className="item-label">
+                  <span>{route.title[lang]}</span>
+                </span>
               </li>
             )
           })
