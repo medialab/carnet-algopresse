@@ -58,6 +58,7 @@ const VisualizationController = ({
   if (!datasets || !activeVisualization || (activeVisualization && !datasets[activeVisualization.data])) {
     return null;
   }
+  // return null;
   switch(activeVisualization.visType) {
     case 'linearGraph':
       return (

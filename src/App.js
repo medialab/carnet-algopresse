@@ -135,7 +135,7 @@ function App() {
   return (
     <LanguageContext.Provider value={{ lang, onLangChange }}>
         <Route path="/edition" component={Edition} />
-        <Route path="/publication/:lang/:section?/:activeVisualizationIndex?" component={PresentationContainer} />
+        <Route path="/publication/:lang/:sectionId?/:visualizationIndex?" component={PresentationContainer} />
         <Redirect to={`/publication/fr/`} />
     </LanguageContext.Provider>
   );

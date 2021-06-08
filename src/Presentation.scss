@@ -57,9 +57,9 @@ $fontsize_footer: .8rem;
   }
 
   .section-container {
-    &:not(.is-active) {
-      opacity: .5;
-    }
+    // &:not(.is-active) {
+    //   opacity: .5;
+    // }
     padding-left: $screen_gutter_large;
     padding-right: $screen_gutter_large;
     margin-top: $screen_gutter_large / 2;
@@ -533,11 +533,9 @@ $fontsize_footer: .8rem;
       max-height: 0;
       overflow: hidden;
     }
-    &.is-active {
-      // color: white;
-      // background: $red;
-      background: white;
-      border: $line_border solid $red;
+    // &.is-active {
+
+     
       .block-title {
         font-size: $fontsize_secondarytitle;
       }
@@ -550,6 +548,10 @@ $fontsize_footer: .8rem;
         max-height: 100vh;
         margin-top: $padding_medium;
       }
+    // }
+    &.is-active {
+      background: white;
+      border: $line_border solid $red;
     }
 
     
