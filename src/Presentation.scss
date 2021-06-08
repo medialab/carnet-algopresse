@@ -110,6 +110,9 @@ $vis_width: 70%;
    */
    .Header {
      min-height: 100vh;
+     display: flex;
+     flex-flow: column nowrap;
+     justify-content: center;
 
      .running-title {
        background: white;
@@ -223,6 +226,22 @@ $vis_width: 70%;
         transition: .5s ease all;
         position: relative;
       }
+    }
+
+    .starter-button {
+      position: absolute;
+      bottom: 2rem;
+      left: calc(50vw - 2rem);
+      background: inherit;
+      border: none;
+      outline: none;
+      color: $red;
+      font-weight: 800;
+      font-size: 4rem;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      font-family: 'Fira Sans', sans-serif;
     }
 
    }

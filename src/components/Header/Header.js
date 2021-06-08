@@ -81,6 +81,7 @@ const Header = ({
   graphData,
   loadingFraction,
   onScrollToTop,
+  onScrollToFirstSection
 }) => {
   const meta = lang === 'fr' ? frMetadata : enMetadata;
   const {
@@ -285,6 +286,9 @@ const Header = ({
         </div>
         
       </div>
+      <button onClick={onScrollToFirstSection} className="starter-button">
+      ⌄
+      </button>
     </header>
   )
 }

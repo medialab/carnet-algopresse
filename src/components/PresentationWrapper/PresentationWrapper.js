@@ -228,7 +228,8 @@ const PresentationWrapper = ({ match: { params } }) => {
       })
     }
   }
-  const handleBlockClick = (id, ref) => {
+  const handleScrollToFirstSection = () => handleRouteNav(0);
+  const handleBlockClick = (_id, ref) => {
     if (ref.current) {
       const y = ref.current.getBoundingClientRect().y;
       const bodyRect = document.body.getBoundingClientRect();
@@ -266,6 +267,7 @@ const PresentationWrapper = ({ match: { params } }) => {
           loadingFraction={loadingFraction}
           graphData={datasets && datasets['Graph_Critic_EN_algopress_webV2.gexf']}
           onScrollToTop={handleScrollToTop}
+          onScrollToFirstSection={handleScrollToFirstSection}
         />
         <main>
           {
