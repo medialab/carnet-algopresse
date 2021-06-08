@@ -201,7 +201,7 @@ const PresentationWrapper = ({ match: { params } }) => {
         setActiveVisualization(undefined);
       }
     };
-    listener = debounce(listener, 100);
+    listener = debounce(listener, 100, {leading: true});
     window.addEventListener("scroll", listener);
     return () => {
       window.removeEventListener("scroll", listener);

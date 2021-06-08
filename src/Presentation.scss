@@ -5,12 +5,28 @@ $red: #E6142D;
 $grey: #E5E5E5;
 $grey_dark: #333;
 
+$font_sans: 'Fira Sans', sans-serif;
+$font_serif: 'Noto Serif', serif;
+
 $padding_small: .5rem;
 $padding_medium: 1rem;
 
 $screen_gutter_small: 10vw;
 $screen_gutter_large: 15vw;
 $vis_width: 70%;
+
+$line_border: 2px;
+
+$fontsize_general_author: 1rem;
+$fontsize_main_title: 4rem;
+$fontsize_creators: .65rem;
+$fontsize_toc: .8rem;
+$fontsize_title: 2rem;
+$fontsize_secondarytitle: 1.2rem;
+$fontsize_legend: .9rem;
+$fontsize_methodo_title: 1.5rem;
+$fontsize_running_title: 1rem;
+$fontsize_footer: .8rem;
 
 #presentation-wrapper {
   max-width: 100vw;
@@ -26,7 +42,7 @@ $vis_width: 70%;
   }
   svg {
     text {
-      font-family: 'Fira Sans', sans-serif;
+      font-family: $font_sans;
       font-weight: 300;
     }
   }
@@ -48,13 +64,13 @@ $vis_width: 70%;
     padding-right: $screen_gutter_large;
     margin-top: $screen_gutter_large / 2;
     h1, h2 {
-      font-family: 'Fira Sans', sans-serif;
+      font-family: $font_sans;
       font-weight: 300;
       background: $red;
       display: inline-block;
       padding: $padding_small;
       color: white;
-      font-size: 2rem;
+      font-size: $fontsize_title;
 
     }
     &.has-visualization {
@@ -66,10 +82,10 @@ $vis_width: 70%;
         margin-bottom: $padding_medium;
       }
     }
-    font-family: 'Noto Serif', serif;
+    font-family: $font_serif;
     .methodo-container {
-      font-family: 'Fira Sans', sans-serif;
-      border: 2px solid $red;
+      font-family: $font_sans;
+      border: $line_border solid $red;
       padding: $padding_medium;
       margin-top: $padding_medium;
       h1, h2 {
@@ -78,7 +94,7 @@ $vis_width: 70%;
         padding-left: 0;
         font-weight: 800;
         margin: 0;
-        font-size: 1.5rem;
+        font-size: $fontsize_methodo_title;
       }
     }
     &:last-of-type {
@@ -126,7 +142,7 @@ $vis_width: 70%;
        opacity: 1;
          pointer-events: all;
        h1{
-        font-size: 1rem;
+        font-size: $fontsize_running_title;
         margin: 0;
         font-weight: 300;
        }
@@ -139,7 +155,7 @@ $vis_width: 70%;
      }
 
     .LanguageToggler {
-      font-family: 'Fira Sans', sans-serif;
+      font-family: $font_sans;
       list-style: none;
       margin: 0;
       display: flex;
@@ -168,7 +184,7 @@ $vis_width: 70%;
       .general-author {
         margin: 0;
         font-weight: 500;
-        font-size: 1rem;
+        font-size: $fontsize_general_author;
         margin-bottom: $padding_small / 2;
         margin-left: $padding_medium;
       }
@@ -180,14 +196,14 @@ $vis_width: 70%;
         padding-top: 0;
         padding-bottom: 0;
         margin: 0;
-        font-size: 4rem;
+        font-size: $fontsize_main_title;
         font-weight: 300;
       }
       .creators {
         list-style: none;
         padding: 0;
         font-weight: 300;
-        font-size: .65rem;
+        font-size: $fontsize_creators;
         // max-width: 80vw - $screen_gutter_large * 1.6;
         li, div {
           display: inline;
@@ -230,7 +246,7 @@ $vis_width: 70%;
 
     .starter-button {
       position: absolute;
-      bottom: 2rem;
+      bottom: 1rem;
       left: calc(50vw - 2rem);
       background: inherit;
       border: none;
@@ -241,7 +257,7 @@ $vis_width: 70%;
       padding: 0;
       margin: 0;
       cursor: pointer;
-      font-family: 'Fira Sans', sans-serif;
+      font-family: $font_sans;
     }
 
    }
@@ -318,7 +334,7 @@ $vis_width: 70%;
           align-items: center;
           pointer-events: none;
           .item-label {
-          transition: .5s ease all;
+            transition: .5s ease all;
             position: absolute;
             left: 2rem;
             top: 0;
@@ -327,10 +343,10 @@ $vis_width: 70%;
             display:flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Fira Sans', sans-serif;
+            font-family: $font_sans;
             font-weight: 300;
             box-sizing: border-box;
-            font-size: .8rem;
+            font-size: $fontsize_toc;
             height: 1.5rem;
 
             opacity: 0;
@@ -357,6 +373,7 @@ $vis_width: 70%;
             &.is-active{
               .item-number {
                 color: white;
+                background: $red;
               }
               .item-label {
                 background: $red;
@@ -473,7 +490,7 @@ $vis_width: 70%;
     min-width: 3rem;
     box-sizing: border-box;
     display: inline-block;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: $font_sans;
     padding: $padding_medium;
     transition: .5s ease all;
     cursor: pointer;
@@ -487,7 +504,7 @@ $vis_width: 70%;
       overflow: hidden;
       margin: 0;
       margin-top: $padding_small;
-      font-size: .9rem;
+      font-size: $fontsize_legend;
     }
     .ColorLegend {
       list-style: none;
@@ -511,7 +528,7 @@ $vis_width: 70%;
         }
         .label {
           padding-left: .2rem;
-          font-size: .8rem;
+          font-size: $fontsize_legend;
         }
       }
       transition: .5s ease all;
@@ -522,9 +539,9 @@ $vis_width: 70%;
       // color: white;
       // background: $red;
       background: white;
-      border: 2px solid $red;
+      border: $line_border solid $red;
       .block-title {
-        font-size: 1.2rem;
+        font-size: $fontsize_secondarytitle;
       }
       .block-legend {
         max-height: 100vh;
@@ -542,11 +559,11 @@ $vis_width: 70%;
    * FOOTER
    */ 
   .Footer {
-    font-size: .8rem;
+    font-size: $fontsize_footer;
     padding: $padding_medium * 2;
     padding-left: $screen_gutter_large;
     padding-right: $screen_gutter_large;
-    border-top: 2px solid $red;
+    border-top: $line_border solid $red;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1rem;
