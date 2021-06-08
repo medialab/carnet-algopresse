@@ -208,7 +208,7 @@ $fontsize_footer: .8rem;
         li, div {
           display: inline;
         }
-        li :not(:first-of-type) .role {
+        li:not(:first-of-type) .role {
           padding-left: $padding_small /2;
         }
         ul {
@@ -491,7 +491,7 @@ $fontsize_footer: .8rem;
     display: inline-block;
     font-family: $font_sans;
     padding: $padding_medium;
-    transition: .5s ease all;
+    // transition: .5s ease all;
     cursor: pointer;
     width: 100%;
     .block-title {
@@ -572,8 +572,8 @@ $fontsize_footer: .8rem;
     grid-auto-rows: minmax(100px, auto);
     .column {
       max-width: calc(50vw - #{$screen_gutter_large});
-      p:first-of-type {
-        margin-top: 0;
+      p {
+        margin: 0;
       }
     }
     .logos-container {

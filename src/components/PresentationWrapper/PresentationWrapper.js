@@ -20,10 +20,10 @@ const PresentationWrapper = ({ match: { params } }) => {
   const { lang, sectionId, visualizationIndex } = params;
   const sectionsRef = useRef(routes.map(() => createRef()));
 
-  const [activeVisualization, setActiveVisualization] = useState(null);
-  const [activeVisualizationIndex, setActiveVisualizationIndex] = useState(null);
-  const [activeSection, setActiveSection] = useState(null);
-  const [activeSectionIndex, setActiveSectionIndex] = useState(null);
+  const [activeVisualization, setActiveVisualization] = useState(undefined);
+  const [activeVisualizationIndex, setActiveVisualizationIndex] = useState(undefined);
+  const [activeSection, setActiveSection] = useState(undefined);
+  const [activeSectionIndex, setActiveSectionIndex] = useState(undefined);
 
   const [datasets, setDatasets] = useState({})
   const [loadingFraction, setLoadingFraction] = useState(0);
@@ -42,6 +42,8 @@ const PresentationWrapper = ({ match: { params } }) => {
    * Scroll on coumponent mount
    */
   useEffect(() => {
+    // waiting for visualizations
+    setTimeout(() => {
       if (sectionId !== undefined) {
         let newSection;
         let newSectionIndex;
@@ -60,16 +62,22 @@ const PresentationWrapper = ({ match: { params } }) => {
         let relevantVisualization;
         if (visualizationIndex !== undefined) {
           const relevantVisualizations = Object.entries(visualizations)
-            .filter(([id, params]) => params.sectionIndex === newSectionIndex)
+            .filter(([id, params]) => params.sectionIndex === +newSectionIndex)
             .map(t => t[1]);
           relevantVisualization = +visualizationIndex < relevantVisualizations.length ? relevantVisualizations[+visualizationIndex] : undefined;
+          console.log('vis index',visualizationIndex, 'section index', newSectionIndex, visualizations)
           if (relevantVisualization) {
+            console.log('scroll to', relevantVisualization)
             setActiveVisualizationIndex(+visualizationIndex);
             setActiveVisualization(relevantVisualization);
             const y = relevantVisualization.ref.current.getBoundingClientRect().y;
             const bodyRect = document.body.getBoundingClientRect();
             const visY = y - bodyRect.top;
-            window.scrollTo(0, visY - window.innerHeight / 2);
+            window.scrollTo({
+              left: 0, 
+              top: visY - window.innerHeight / 2 + 10,
+              behavior: 'smooth'
+            });
           }
         }
         if (!relevantVisualization) {
@@ -78,11 +86,16 @@ const PresentationWrapper = ({ match: { params } }) => {
             const y = el.current.getBoundingClientRect().y;
             const bodyRect = document.body.getBoundingClientRect();
             const sectionY = y - bodyRect.top;
-            window.scrollTo(0, sectionY - window.innerHeight / 2)
+            window.scrollTo({
+              left: 0, 
+              top: sectionY - window.innerHeight / 2 + 10,
+              behavior: 'smooth'
+            })
           }
         }
 
       }
+    }, 1000);
   }, [])/* eslint react-hooks/exhaustive-deps : 0 */
   /**
    * Route update
@@ -180,7 +193,6 @@ const PresentationWrapper = ({ match: { params } }) => {
         setActiveSection(newActiveRoute);
       }
       if (newActiveRouteIndex !== undefined) {
-        const newRoute = routes[newActiveRouteIndex];
         // const id = buildRouteId(newActiveRouteIndex, newRoute, lang);
         // find active visualization
         const relevantVisualizations = Object.entries(visualizations)
@@ -229,6 +241,14 @@ const PresentationWrapper = ({ match: { params } }) => {
     e.preventDefault();
   }
   const handleRouteNav = index => {
+    setActiveSectionIndex(index);
+    setActiveSection(routes[index]);
+    let relevantVisualizations = Object.entries(visualizations)
+    .filter(([id, params]) => params.sectionIndex === index)
+    .map(t => t[1]);
+    setActiveVisualization(relevantVisualizations.length ? relevantVisualizations[0] : undefined);
+    setActiveVisualizationIndex(relevantVisualizations.length ? 0 : undefined);
+
     const el = sectionsRef.current[index];
     if (el.current) {
       const y = el.current.getBoundingClientRect().y;
@@ -255,6 +275,10 @@ const PresentationWrapper = ({ match: { params } }) => {
     }
   }
   const handleScrollToTop = () => {
+    setActiveVisualization(undefined);
+    setActiveVisualizationIndex(undefined);
+    setActiveSection(undefined);
+    setActiveSectionIndex(undefined);
     window.scrollTo({
       left: 0, 
       top: 0,
@@ -293,7 +317,6 @@ const PresentationWrapper = ({ match: { params } }) => {
                 // Component: ThatComponent,
                 contentsCompiled
               } = route;
-              const id = buildRouteId(index, route, lang);
               const Content = contentsCompiled[lang];
               const onRegisterVisualization = (id, params) => {
                 const finalParams = {

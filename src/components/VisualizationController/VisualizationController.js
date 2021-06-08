@@ -51,10 +51,17 @@ const GraphWrapper = ({data, ...props}) => {
 
 const VisualizationController = ({
   datasets,
-  activeVisualization,
+  activeVisualization: inputActiveVisualization,
   width,
   height,
 }) => {
+  // @todo clean this trick that improves performance
+  const [activeVisualization, setActiveVisualization] = useState(undefined);
+  useEffect(() => {
+    setTimeout(() => {
+      setActiveVisualization(inputActiveVisualization);
+    })
+  }, [inputActiveVisualization])
   if (!datasets || !activeVisualization || (activeVisualization && !datasets[activeVisualization.data])) {
     return null;
   }
