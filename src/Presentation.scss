@@ -25,7 +25,7 @@ $fontsize_title: 2rem;
 $fontsize_secondarytitle: 1.2rem;
 $fontsize_legend: .9rem;
 $fontsize_methodo_title: 1.5rem;
-$fontsize_running_title: 1rem;
+$fontsize_running_title: .8rem;
 $fontsize_footer: .8rem;
 
 #presentation-wrapper {
@@ -287,7 +287,6 @@ $fontsize_footer: .8rem;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        transition: .5s ease all;
       }
       .item-label {
         color: $grey_dark;
@@ -494,6 +493,7 @@ $fontsize_footer: .8rem;
     padding: $padding_medium;
     transition: .5s ease all;
     cursor: pointer;
+    width: 100%;
     .block-title {
       margin: 0;
       transition: .5s ease all;
@@ -503,14 +503,12 @@ $fontsize_footer: .8rem;
       max-height: 0;
       overflow: hidden;
       margin: 0;
-      margin-top: $padding_small;
       font-size: $fontsize_legend;
     }
     .ColorLegend {
       list-style: none;
       padding: 0;
       margin: 0;
-      margin-top: $padding_medium;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: .2rem;
@@ -545,10 +543,12 @@ $fontsize_footer: .8rem;
       }
       .block-legend {
         max-height: 100vh;
+        margin-top: $padding_small;
       }
 
       .ColorLegend {
         max-height: 100vh;
+        margin-top: $padding_medium;
       }
     }
 
