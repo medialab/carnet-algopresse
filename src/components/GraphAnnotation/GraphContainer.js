@@ -112,6 +112,11 @@ export function GraphContainer({
         palette,
         name: nodeColorVariable
       }
+    } else if(nodeColorVariable && nodeColorVariable !== 'default' && colorPalette) {
+      return {
+        palette: colorPalette,
+        name: nodeColorVariable
+      }
     } else return undefined;
   }, [nodeColorVariable])
 

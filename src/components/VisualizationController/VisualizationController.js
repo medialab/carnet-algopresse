@@ -8,6 +8,7 @@ import cx from 'classnames';
 import {LinearGraphContainer} from '../LinearGraphAnnotation/LinearGraphContainer'
 import {GraphContainer} from '../GraphAnnotation/GraphContainer'
 import {IceCreamContainer} from '../IceCreamAnnotation/IceCreamContainer'
+import { groupBy } from 'lodash-es';
 
 
 const GraphWrapper = ({data, ...props}) => {
@@ -48,64 +49,98 @@ const GraphWrapper = ({data, ...props}) => {
     />
   );
 }
+const buildImprint = d => /*d[1].data + '-' +*/ d.visType;
 
 const VisualizationController = ({
   datasets,
-  activeVisualization: inputActiveVisualization,
+  visualizations,
+  activeVisualization,
   width,
   height,
 }) => {
-  // @todo clean this trick that improves performance
-  const [activeVisualization, setActiveVisualization] = useState(undefined);
-  useEffect(() => {
-    setTimeout(() => {
-      setActiveVisualization(inputActiveVisualization);
-    })
-  }, [inputActiveVisualization])
-  if (!datasets || !activeVisualization || (activeVisualization && !datasets[activeVisualization.data])) {
-    return null;
+  const firstInstanceOfEachVisualization = useMemo(() => {
+    return Object.entries(
+      groupBy(
+        Object.entries(visualizations || {}),
+        d => buildImprint(d[1])
+      )
+    )
+    .reduce((res, [imprint, [firstInstance]]) => ({
+      ...res, 
+      [imprint]: firstInstance[1]
+    }), {})
+  }, [visualizations, datasets]);
+
+  let activeImprint;
+  if (activeVisualization) {
+    activeImprint = buildImprint(activeVisualization);
   }
+
+  const renderVisualization = vis => {
+    if (!datasets[vis.data]) {
+      return null;
+    }
+    switch(vis.visType) {
+      case 'linearGraph':
+        return (
+          <LinearGraphContainer
+            {...{
+              ...vis,
+              data: datasets[vis.data],
+              width,
+              height,
+              presentationMode: true
+            }}
+          />
+        );
+      case 'networkGraph':
+        return (
+          <GraphWrapper
+            {...{
+              ...vis,
+              data: datasets[vis.data],
+              width: width - 5,
+              height,
+              presentationMode: true
+            }}
+          />
+        );
+      case 'icecreamGraph':
+        return (
+          <IceCreamContainer
+            {...{
+              ...vis,
+              data: datasets[vis.data],
+              width,
+              height,
+              presentationMode: true
+            }}
+          />
+        );
+      default:
+        return vis.visType;
+    }
+  }
+  return (
+    <div className="VisualizationController">
+      {
+        Object.entries(firstInstanceOfEachVisualization)
+        .map(([imprint, defaultVisualization]) => {
+          return (
+            <div className={cx('visualization-item', {'is-visible': imprint === activeImprint})}>
+              {
+                imprint === activeImprint ?
+                renderVisualization(activeVisualization)
+                :
+                renderVisualization(defaultVisualization)
+              }
+            </div>
+          )
+        })
+      }
+    </div>
+  )
   // return null;
-  switch(activeVisualization.visType) {
-    case 'linearGraph':
-      return (
-        <LinearGraphContainer
-          {...{
-            ...activeVisualization,
-            data: datasets[activeVisualization.data],
-            width,
-            height,
-            presentationMode: true
-          }}
-        />
-      );
-    case 'networkGraph':
-      return (
-        <GraphWrapper
-          {...{
-            ...activeVisualization,
-            data: datasets[activeVisualization.data],
-            width: width - 5,
-            height,
-            presentationMode: true
-          }}
-        />
-      );
-    case 'icecreamGraph':
-      return (
-        <IceCreamContainer
-          {...{
-            ...activeVisualization,
-            data: datasets[activeVisualization.data],
-            width,
-            height,
-            presentationMode: true
-          }}
-        />
-      );
-    default:
-      return activeVisualization.visType;
-  }
 }
 
 export default function VisualizationControllerWithDimensions(props) {

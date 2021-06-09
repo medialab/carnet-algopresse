@@ -282,6 +282,7 @@ const PresentationWrapper = ({ match: { params } }) => {
     e.preventDefault();
   }
   const handleRouteNav = index => {
+    setActiveVisualization(undefined);
     setActiveSectionIndex(index);
     setActiveSection(routes[index]);
     let relevantVisualizations = Object.entries(visualizations)
@@ -365,6 +366,7 @@ const PresentationWrapper = ({ match: { params } }) => {
             <VisualizationController
               datasets={datasets}
               activeVisualization={activeVisualization}
+              visualizations={visualizations}
             />
             :
             <Loader percentsLoaded={loadingFraction * 100} />

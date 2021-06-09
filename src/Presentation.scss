@@ -443,9 +443,23 @@ $fontsize_footer: .8rem;
     // padding-left: 3rem;
     // padding-right: 5rem;
     box-sizing: content-box;
+    .visualization-item {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+      pointer-events: none;
+      &.is-visible {
+        opacity: 1;
+        z-index: 1;
+        pointer-events: all;
+      }
+    }
     &.networkGraph {
       padding-left: 3rem;
     }
+    
   }
 
   /**
