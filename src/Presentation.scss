@@ -599,11 +599,6 @@ $fontsize_footer: .8rem;
     }
     .logos-container {
       margin-top: $padding_medium;
-      // display: grid;
-      // grid-template-columns: repeat(3, 1fr);
-      // grid-gap: 1rem;
-      // grid-auto-rows: minmax(100px, auto);
-      // max-width: 100%;
       display: flex;
       flex-flow: row nowrap;
       justify-content: center;

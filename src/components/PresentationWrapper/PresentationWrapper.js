@@ -15,8 +15,56 @@ import { VisualizationControlContext, PresentationContext } from '../../contexts
 // import {useDebouncedEffect} from '../../helpers/hooks';
 
 import routes from '../../summary'
+import { omit } from 'lodash-es';
 
 const buildRouteId = (_index, route, lang) => `${encodeURIComponent(route.route[lang].toLowerCase())}`;
+
+const Sections = ({
+  routes,
+  lang,
+  setVisualizations,
+  visualizations,
+  activeSectionIndex,
+  sectionsRef
+}) => {
+  return (
+    <main>
+          {
+            routes.map((route, index) => {
+              const {
+                data,
+                contentsCompiled
+              } = route;
+              const Content = contentsCompiled[lang];
+              const onRegisterVisualization = (id, params) => {
+                const finalParams = {
+                  ...params,
+                  sectionIndex: index,
+                  data
+                }
+                setTimeout(() => setVisualizations({ ...visualizations, [id]: finalParams }));
+              }
+              const onUnregisterVisualization = id => {
+                setVisualizations(omit(visualizations, [id]))
+              }
+              return (
+                <VisualizationControlContext.Provider
+                  key={index}
+                  value={{
+                    onRegisterVisualization,
+                    onUnregisterVisualization,
+                  }}
+                >
+                  <section className={cx("section-container", {'is-active': index === activeSectionIndex, 'has-visualization': data !== undefined})} ref={sectionsRef.current[index]}>
+                    <Content />
+                  </section>
+                </VisualizationControlContext.Provider>
+              )
+            })
+          }
+        </main>
+  )
+}
 
 const PresentationWrapper = ({ match: { params } }) => {
   const { lang, sectionId, visualizationIndex } = params;
@@ -68,9 +116,9 @@ const PresentationWrapper = ({ match: { params } }) => {
             .filter(([id, params]) => params.sectionIndex === +newSectionIndex)
             .map(t => t[1]);
           relevantVisualization = +visualizationIndex < relevantVisualizations.length ? relevantVisualizations[+visualizationIndex] : undefined;
-          console.log('vis index',visualizationIndex, 'section index', newSectionIndex, visualizations)
+          // console.log('vis index',visualizationIndex, 'section index', newSectionIndex, visualizations)
           if (relevantVisualization) {
-            console.log('scroll to', relevantVisualization)
+            // console.log('scroll to', relevantVisualization)
             setActiveVisualizationIndex(+visualizationIndex);
             setActiveVisualization(relevantVisualization);
             const y = relevantVisualization.ref.current.getBoundingClientRect().y;
@@ -299,70 +347,19 @@ const PresentationWrapper = ({ match: { params } }) => {
           onScrollToTop={handleScrollToTop}
           onScrollToFirstSection={handleScrollToFirstSection}
         />
-        <main>
+        <Sections
           {
-            routes.map((route, index) => {
-              const {
-                // title,
-                // route: inputRoute,
-                // contents,
-                data,
-                // Component: ThatComponent,
-                contentsCompiled
-              } = route;
-              const Content = contentsCompiled[lang];
-              const onRegisterVisualization = (id, params) => {
-                const finalParams = {
-                  ...params,
-                  sectionIndex: index,
-                  data
-                }
-                setTimeout(() => setVisualizations({ ...visualizations, [id]: finalParams }));
-              }
-              return (
-                <VisualizationControlContext.Provider
-                  key={index}
-                  value={{
-                    // onVisualizationUpdate: console.log,
-                    onRegisterVisualization,
-                    onUnregisterVisualization: console.log,
-                    // focusedVisualizationId: console.log,
-                    // setFocusedVisualizationId: console.log,
-                    // visualizationParams: {
-                    //   // graphType,
-                    //   // useRelativeScale,
-
-                    //   // xVariable,
-                    //   // xLabelVariable,
-                    //   // yVariable,
-
-                    //   // reverseX,
-                    //   // reverseY,
-
-                    //   // sizeVariable,
-                    //   // colorVariable,
-
-                    //   // searchString,
-                    //   // colorPalette,
-
-                    //   // filters,
-                    //   // filtersModeAnd,
-
-                    //   // title,
-                    //   // legend,
-                    //   // normalizeY
-                    // }
-                  }}
-                >
-                  <section className={cx("section-container", {'is-active': index === activeSectionIndex, 'has-visualization': data !== undefined})} ref={sectionsRef.current[index]}>
-                    <Content />
-                  </section>
-                </VisualizationControlContext.Provider>
-              )
-            })
+            ...{
+              routes,
+              lang,
+              setVisualizations,
+              visualizations,
+              activeSectionIndex,
+              sectionsRef
+            }
           }
-        </main>
-        <aside onScroll={preventScroll} className={cx('visualization-container', {'is-visible': !inHeader && !inFooter})}>
+        />
+        <aside onScroll={preventScroll} className={cx('visualization-container', {'is-visible': !(inHeader || inFooter)})}>
           {
             datasets ?
             <VisualizationController
