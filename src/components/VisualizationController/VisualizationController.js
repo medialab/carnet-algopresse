@@ -49,7 +49,7 @@ const GraphWrapper = ({data, ...props}) => {
     />
   );
 }
-const buildImprint = d => /*d[1].data + '-' +*/ d.visType;
+const buildImprint = d => /*d.data + '-' +*/ d.visType;
 
 const VisualizationController = ({
   datasets,
@@ -69,7 +69,7 @@ const VisualizationController = ({
       ...res, 
       [imprint]: firstInstance[1]
     }), {})
-  }, [visualizations, datasets]);
+  }, [visualizations]);
 
   let activeImprint;
   if (activeVisualization) {
