@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { csvParse, tsvParse } from 'd3-dsv';
 import cx from 'classnames';
-import debounce from 'lodash/debounce';
+import { useScrollYPosition } from 'react-use-scroll-position';
+
 import Header from '../Header';
 import Footer from '../Footer';
 import Loader from '../Loader';
@@ -11,6 +12,7 @@ import VisualizationController from '../VisualizationController';
 
 
 import { VisualizationControlContext, PresentationContext } from '../../contexts'
+// import {useDebouncedEffect} from '../../helpers/hooks';
 
 import routes from '../../summary'
 
@@ -37,6 +39,7 @@ const PresentationWrapper = ({ match: { params } }) => {
   )
 
   const scrollRef = useRef(null);
+  const scrollY = useScrollYPosition();
   
   /**
    * Scroll on coumponent mount
@@ -154,11 +157,9 @@ const PresentationWrapper = ({ match: { params } }) => {
   /**
    * Scrollytelling managmeent
    */
-  useEffect(() => {
-    let listener = e => {
-      const bodyPos = document.body.getBoundingClientRect();
-      const DISPLACE_Y = window.innerHeight * .5;
-      const y = Math.abs(bodyPos.top) + DISPLACE_Y;
+   useEffect(() => {
+    const DISPLACE_Y = window.innerHeight * .5;
+      const y = scrollY + DISPLACE_Y;
       let newActiveRouteIndex;
       let newActiveVisualizationIndex;
       let newActiveRoute;
@@ -225,16 +226,8 @@ const PresentationWrapper = ({ match: { params } }) => {
             setActiveVisualizationIndex(undefined);
           }
         }
-    };
-
-    listener = debounce(listener, 50);
-    window.addEventListener("scroll", listener);
-    return () => {
-      window.removeEventListener("scroll", listener);
-    };
-
-  }, [visualizations, lang, activeVisualizationIndex, activeSection, history, inHeader, activeSectionIndex, activeVisualization])
-
+  }, [scrollY])
+  
   const preventScroll = e => {
     e.preventScroll();
     e.stopPropagation();
