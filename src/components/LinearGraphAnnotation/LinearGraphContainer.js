@@ -285,10 +285,10 @@ export function LinearGraphContainer({
               {
                 getY.ticks &&
                 getY.ticks()
-                .map(tick => {
+                .map((tick, index) => {
                   const x = MARGIN * .7;
                   return (
-                    <g className="axis-element" key={tick}>
+                    <g className="axis-element" key={index}>
                       <text textAnchor="end" x={x} y={getY(tick)}>
                         {tick}
                       </text>
@@ -331,10 +331,10 @@ export function LinearGraphContainer({
                 {
                 getX.ticks &&
                 getX.ticks()
-                .map(tick => {
+                .map((tick, index) => {
                   const y = HEIGHT - MARGIN * .75
                   return (
-                    <g className="axis-element" key={tick}>
+                    <g className="axis-element" key={index}>
                       <g transform={`translate(${getX(tick)} ${y})`}>
                         <g transform={'rotate(-45)'}>
                           <text 
@@ -358,7 +358,7 @@ export function LinearGraphContainer({
               </g>
               {
                 graphType === 'linegraph' ?
-                dataGroups.map(([colorValue, values]) => {
+                dataGroups.map(([colorValue, values], index) => {
                   const firstX = getX(values[0].x);
                   const firstY = getY(values[0].y);
                   const color = colorVariable ? getColor(colorValue) : 'grey';
