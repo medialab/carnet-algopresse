@@ -8,6 +8,7 @@ import cx from 'classnames';
 import {LinearGraphContainer} from '../LinearGraphAnnotation/LinearGraphContainer'
 import {GraphContainer} from '../GraphAnnotation/GraphContainer'
 import {IceCreamContainer} from '../IceCreamAnnotation/IceCreamContainer'
+import Loader from '../Loader'
 import { groupBy } from 'lodash-es';
 
 
@@ -57,6 +58,7 @@ const VisualizationController = ({
   activeVisualization,
   width,
   height,
+  loadingFraction,
 }) => {
   const firstInstanceOfEachVisualization = useMemo(() => {
     return Object.entries(
@@ -120,6 +122,9 @@ const VisualizationController = ({
       default:
         return vis.visType;
     }
+  }
+  if (loadingFraction < 1) {
+    return <Loader percentsLoaded={loadingFraction * 100} />
   }
   return (
     <div className="VisualizationController">

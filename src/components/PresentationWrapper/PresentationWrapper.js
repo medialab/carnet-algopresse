@@ -367,6 +367,7 @@ const PresentationWrapper = ({ match: { params } }) => {
               datasets={datasets}
               activeVisualization={activeVisualization}
               visualizations={visualizations}
+              loadingFraction={loadingFraction}
             />
             :
             <Loader percentsLoaded={loadingFraction * 100} />
