@@ -116,9 +116,7 @@ const PresentationWrapper = ({ match: { params } }) => {
             .filter(([id, params]) => params.sectionIndex === +newSectionIndex)
             .map(t => t[1]);
           relevantVisualization = +visualizationIndex < relevantVisualizations.length ? relevantVisualizations[+visualizationIndex] : undefined;
-          // console.log('vis index',visualizationIndex, 'section index', newSectionIndex, visualizations)
           if (relevantVisualization) {
-            // console.log('scroll to', relevantVisualization)
             setActiveVisualizationIndex(+visualizationIndex);
             setActiveVisualization(relevantVisualization);
             const y = relevantVisualization.ref.current.getBoundingClientRect().y;
@@ -127,7 +125,6 @@ const PresentationWrapper = ({ match: { params } }) => {
             window.scrollTo({
               left: 0, 
               top: visY - window.innerHeight / 2 + 10,
-              behavior: 'smooth'
             });
           }
         }
@@ -139,8 +136,7 @@ const PresentationWrapper = ({ match: { params } }) => {
             const sectionY = y - bodyRect.top;
             window.scrollTo({
               left: 0, 
-              top: sectionY - window.innerHeight / 2 + 10,
-              behavior: 'smooth'
+              top: sectionY,
             })
           }
         }
