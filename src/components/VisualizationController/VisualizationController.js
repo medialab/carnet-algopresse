@@ -90,7 +90,7 @@ const VisualizationController = ({
               ...vis,
               data: datasets[vis.data],
               width,
-              height,
+              height: height * .66,
               presentationMode: true
             }}
           />
