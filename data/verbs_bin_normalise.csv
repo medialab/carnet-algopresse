@@ -1,4 +1,4 @@
-entity,robots,algorithms,nope,Robot norm,Algo norm,diff norm,diff,count_distinct,frequency,algo_robot
+entity,robots_not_normed,algorithms_not_normed,nope,robots,algorithms,diff norm,diff,count_distinct,frequency,algo_robot
 conquer,1,0,1,1,0,-1,-1,13,13,robot
 enslave,1,0,1,1,0,-1,-1,16,22,robot
 doom,0.9983658522,0.0571456488,1.055511501,0.9458597573,0.05414024267,-0.8917195147,-0.9412202034,18,19,robot
