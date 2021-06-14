@@ -3,6 +3,10 @@ import IceCreamAnnotation from './components/IceCreamAnnotation';
 import LinearGraphAnnotation from './components/LinearGraphAnnotation';
 import PlainPage from './components/PlainPage';
 
+import ChapoFr from '!babel-loader!mdx-loader!./contents/fr/chapo.mdx'
+import ChapoEn from '!babel-loader!mdx-loader!./contents/en/headline.mdx'
+
+
 import IntroFr from '!babel-loader!mdx-loader!./contents/fr/00_home.mdx'
 import Part1Fr from '!babel-loader!mdx-loader!./contents/fr/01_couverture_media.mdx'
 import Part2Fr from '!babel-loader!mdx-loader!./contents/fr/02_detectcritic.mdx'
@@ -24,6 +28,25 @@ import Part7En from '!babel-loader!mdx-loader!./contents/en/07_IssueVERB.mdx'
 import Part8En from '!babel-loader!mdx-loader!./contents/en/08_NERdate.mdx'
 
 const routes = [
+  {
+    title: {
+      fr: 'Chapô',
+      en: 'Headline',
+    },
+    route: {
+      fr: 'chapo',
+      en: 'headline',
+    },
+    contents: {
+      fr: 'chapo.mdx',
+      en: 'headline.mdx',
+    },
+    contentsCompiled: {
+      fr: () => <ChapoFr />,
+      en: () => <ChapoEn />
+    },
+    Component: PlainPage
+  },
   {
     title: {
       fr: 'Introduction',
