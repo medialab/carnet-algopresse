@@ -24,6 +24,12 @@ const ColorLegend = ({colorPalette = []}) => {
     <ul className="ColorLegend">
       {
         colorPalette
+        .sort(([labelA], [labelB]) => {
+          if (labelA > labelB) {
+            return 1;
+          }
+          return -1;
+        })
         .map(([label, color]) => (
           <li>
             <span className="color" style={{background: color}} />
