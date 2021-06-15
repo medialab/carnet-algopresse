@@ -96,6 +96,7 @@ const Header = ({
     e.stopPropagation();
     e.preventDefault();
   }
+  const Chapo = routes[0].contentsCompiled[lang];
   return (
     <header className={cx("Header", {'is-visible': isVisible})}>
       <Helmet>
@@ -248,6 +249,9 @@ const Header = ({
                ))
              }
            </ul>
+           <div className="chapo">
+             <Chapo />
+           </div>
       </div>
       <div className="header-secondary">
         {/* Summary */}

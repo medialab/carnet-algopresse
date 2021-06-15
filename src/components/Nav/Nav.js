@@ -13,6 +13,9 @@ const Nav = ({
       <ul>
         {
           routes.map((route, routeIndex) => {
+            if (routeIndex === 0) {
+              return null;
+            }
             const handleClick = () => {
               onRouteNav(routeIndex);
             }
