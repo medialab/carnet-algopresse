@@ -2,6 +2,19 @@ import GraphBlock from '../../components/GraphBlock';
 
 ## Quelles entités peuplent le réseau sémantique ?
 
+<GraphBlock 
+  x={0.4588867805186573} 
+  y={0.5190807505798019} 
+  ratio={0.8} 
+  displayAllLabels={true} 
+  nodeColorVariable={'algo_robot'} 
+  nodeLabelVariable={'cluster_label'} 
+  labelDensity={1} 
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}} 
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'2991 noeuds, 54062 liens de cooccurrences, couleurs relatives aux meta-clusters, taille des relative fréquence des termes dans le corpus '}
+/>
+
 Pour mettre en évidence les caractéristiques de ces deux espaces de critique, nous avons entrepris d’identifier systématiquement la manière dont sont désignées les entités techniques, la société qui les abrite et la façon dont les premiers ont des effets sur la seconde. Tous ces discours critiques cherchent à qualifier la manière dont des Agents produisent des Victimes en exerçant un type particulier d’opération, ces dernières sont constitutives d’un ensemble de troubles révélant autant de défis ou d’enjeux produits par le déploiement des techniques d’IA dans nos sociétés (Cardon, Crépel, 2019).
 
 Afin de différencier ces entités au sein du réseau, la plupart des termes, ne souffrants pas trop d'ambiguïté (66% des termes du graphe), ont été annotés manuellement en dix catégories distinctes. Parmi ces catégories, notre analyse consiste à comparer trois d’entre elles qui apparaissent particulièrement pertinentes pour différencier les deux espaces. La catégorie “Technical” renvoie à ce que nous avons désigné comme agents calculateurs, elle concerne tous les termes relatifs aux entités techniques tels que les algorithmes, les machines, les fonctionnalités ou services techniques, les terminaux mais également les technologies issues de startup, parfois difficiles à différencier des entités économiques. La seconde catégorie relative aux agents humains, nommée “People”, concerne tous les termes désignant des personnes ou groupes de personnes non nominatives (à la différence des catégories “Person” pour les noms propres et “Institutions” pour les groupes ou structures ayant une existence juridique). Enfin, la troisième catégorie, nommée “Issues”, permet d’identifier les termes qui désignent des enjeux, des difficultés ou des problèmes extraits au sein des articles. 
@@ -15,8 +28,8 @@ Afin de différencier ces entités au sein du réseau, la plupart des termes, ne
   nodeLabelVariable={'label_copy'}
   labelDensity={1} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
-  title={'Semantic network annotated by type of technology related to robots and algorithms'} 
-  legend={'filtering of tag technical entities'}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'filtrage par tag "techinal"'}
 />
 
 ## Quelles sont les entités techniques ?
@@ -31,8 +44,8 @@ Afin de différencier ces entités au sein du réseau, la plupart des termes, ne
   filtersModeAnd={true}
   labelDensity={1} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
-  title={'Semantic network annotated by type of technology related to robots and algorithms'} 
-  legend={'filtering of tag technical entities clusters annotated as robots'}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'filtrage par tag "techinal" et meta-cluster "robots"'}
 />
 
 Si l’on compare les termes les plus fréquents catégorisés en tant qu’entité technique, ce qui caractérise la zone « Robots » de notre cartographie est le très haut degré d’intelligence et d’autonomie des IA, ainsi que leur capacité à être incarnées sous la forme de machines. Que ce soit pour la conduite automobile, le sexe, la guerre ou la production industrielle, ces entités techniques sont dotées de capacité d’initiatives autonomes. On observe que dans l’espace « Robots » les calculateurs renvoient le plus souvent à des dispositifs incarnés tels que les *robots*, *machines*, *computers*, *cars*, *weapons*, *drones* ou *dolls*. D’autres entités techniques se distinguent car elles renvoient à une définition très abstraite et générique des calculateurs qui sont désignés en tant que *system*, *artificial intelligence* ou encore comme *automation* ou *model*.
@@ -47,8 +60,8 @@ Si l’on compare les termes les plus fréquents catégorisés en tant qu’enti
   filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
-  title={'Semantic network annotated by type of technology related to robots and algorithms'} 
-  legend={'filtering of tag technical entities clusters annotated as algorithms'}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'filtrage par tag "techinal" et meta-cluster "algortihmes"'}
 />
 
 
@@ -65,8 +78,8 @@ En revanche, les entités techniques de la zone « Algorithmes » de notre carto
   nodeLabelVariable={'label_copy'} 
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
-  title={'Semantic network annotated by type of technology related to robots and algorithms'} 
-  legend={'filtering of tag people entities'}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'filtrage par tag "people"'}
 />
 
 La catégorie “People” à partir de laquelle ont été annotés les termes désignant des agents humains, personnes ou groupes de personnes permet d’observer la manière dont est composé le monde social dans lequel les IA ont été introduites. Elle fait apparaître une autre différence entre les deux espaces sémantiques. 
@@ -81,8 +94,8 @@ La catégorie “People” à partir de laquelle ont été annotés les termes d
   filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
-  title={'Semantic network annotated by type of technology related to robots and algorithms'} 
-  legend={'filtering of tag people entities clusters annotated as robots'}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'filtrage par tag "people" et meta-cluster "robots"'}
 />
 
 Du côté de l’espace « Robots » on observe parmi les termes les plus fréquents une forte présence de références à l’humanité, telles que *humans*, *humankind*, *human civilisation*, *human driver*, *human supervisor*. À la lecture du contenu de certains articles associés à cet espace, on constate que face aux agents calculateurs incarnés par des machines, la notion d’humanité est en fait une expression très générique de la société humaine tout entière sur laquelle ces agents font peser une menace. D’autres termes assez génériques sont également présents dans cet espace mais relèvent d’une définition plus centrée sur des domaines dans lesquels les technologies robotiques sont amenées à se déployer, tels que la finance, le marché du travail, la défense et les transports. On retrouve ainsi des termes tels que *workers*, *customers*, *employees*, *drivers*, *retailers*, *soldiers*, *passengers*, *brokers*, *traders*, *farmers*.
@@ -97,8 +110,8 @@ Du côté de l’espace « Robots » on observe parmi les termes les plus fréqu
   filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
-  title={'Semantic network annotated by type of technology related to robots and algorithms'} 
-  legend={'filtering of tag people entities clusters annotated as algorithms'}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'filtrage par tag "people" et meta-cluster "algorithmes"'}
 />
 
 L’espace associé aux « Algorithmes » est quant à lui peuplé de termes beaucoup moins génériques que dans l’espace « Robots ». Les agents humains sont ici désignés de manière beaucoup plus précise et font référence à des personnes mieux identifiées. On retrouve ainsi, parmi les termes fréquents, des entités faisant référence aux plateformes numériques *users*, *accounts*, *Facebook users*, *Youtube users*. Les termes qui désignent ces entités humaines permettent dans la grande majorité des cas de les qualifier en fonction de propriétés comme l’âge (*children, child, kids, parents*), le genre (*women, men*) l’appartenance éthique (*black people, black patients, african-americans*), l’orientation politique (*white supremacists, black defendants, illuminati*) ou sexuelle (*gays, lesbian, trans people*).
@@ -116,8 +129,8 @@ L’analyse topologique des clusters faisant apparaître une opposition entre le
   nodeLabelVariable={'label_copy'} 
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
-  title={'Semantic network annotated by type of technology related to robots and algorithms'} 
-  legend={'filtering of tag issues entities'}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'filtrage par tag "issues"'}
 />
 
 La catégorie intitulée “Issues” permet une lecture comparée des termes relatifs aux troubles et aux enjeux qui sont associés aux agents techniques sur lesquels porte la critique. 
@@ -132,8 +145,8 @@ La catégorie intitulée “Issues” permet une lecture comparée des termes re
   filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
-  title={'Semantic network annotated by type of technology related to robots and algorithms'} 
-  legend={'filtering of tag issues entities clusters annotated as robots'}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'filtrage par tag "issues" et meta-cluster "robots"'}
 />
 
 Du côté de l'espace sémantique « Robots », c’est l’affrontement entre les humains et les IA qui est constamment appelé comme enjeu. On observe la présence de termes tels que *attack*, *safety*, *arms race*, *Cold war*, *human extinction*, *extinction*, *natural disasters*, *AI-powered horror*, *mass extinction*, *physical damage*, qui renvoient le plus souvent au registre de la guerre ou de la destruction à l’échelle planétaire, faisant peser un risque existentiel sur l’avenir de l’humanité. Ces menaces font émerger des enjeux de contrôle de ces technologies autonomes, tels que *ban*, *petition*, *human oversight*, *lack of accountability*, *superintelligence control problem*, *control problem*. D’autres termes relèvent de troubles assez visibles dans cet espace sémantique associés au remplacement, au dépassement et à une perte de contrôle de l’homme par les machines, notamment dans le domaine de l’économie, avec des termes tels que *job losses*, *surge pricing*, *pay gap*.
@@ -148,8 +161,8 @@ Du côté de l'espace sémantique « Robots », c’est l’affrontement entre l
   filtersModeAnd={true}
   labelDensity={1.5} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
-  title={'Semantic network annotated by type of technology related to robots and algorithms'} 
-  legend={'filtering of tag issues entities clusters annotated as algorithms'}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'filtrage par tag "issues" et meta-cluster "algorithmes"'}
 />
 
 Les termes relatifs aux troubles et enjeux constitutifs du sous-ensemble nommé « Algorithmes » laissent apparaître d’autres formes de discours de critique davantage imprégnées de références juridiques et légales. En effet, on trouve dans cette partie du réseau parmi les termes fréquents un champ sémantique constitué de références juridiques telles que *crime*, *law enforcement*, *Human Rights*, *lawsuit*, *Civil Liberties*, *prejudice*, *fraud*, *public interest*. Les troubles produits par les agents techniques dénoncés au sein des articles associés à cet espace concernent les discriminations (*bias*, *biases*, *discrimination*, *antisemitic*, *race or gender*, *fair use*, *risk score*, *liberal bias*), les enjeux de privacy (*privacy*, *surveillance*, *Big Brother*, *privacy issues*), les difficultés de filtrage ou d’exposition à de contenus inappropriés (*violence*, *inappropriate content*, *nudity*, *age restriction*, *violent crime*) et frauduleux (*fake news*, *misinformaton*, *conspiracy theories*, *revenge porn*, *filter bubble*), ou encore de censure et de liberté d’expression (*free expression*)
