@@ -124,10 +124,10 @@ Enfin, le graphe se compose de 9 autres clusters de taille très réduite, entre
 
 <div className="methodo-container">
   <h2 id="m-thode-extraction-et-visualisation-du-graphe-de-termes">Méthode : Extraction et visualisation du graphe de termes</h2>
-<p><strong>Extraction de termes du corpus :</strong>
+<p><strong>Extraction de termes du corpus : </strong>
 L’analyse sémantique du corpus critique a été réalisée à partir du logiciel Cortext - <a href="https://www.cortext.net">https://www.cortext.net</a> en effectuant une extraction de termes sur le texte complet des articles (titre, lead paragraph et texte) puis un nettoyage des listes de termes extraites par suppression de stopwords (balises des fichiers vidéo ou éléments de timecode non nettoyés dans Factiva). 
 L’extraction de termes a été réalisée à partir de la méthode “pigeon holes” (favorisant la spécificité des termes et leur occurrence par document) au niveau des phrases. 6000 termes incluant des monogrammes ainsi que les bigrammes et trigrammes ont été extraits. S'il peut paraitre étrange que certains termes assez proches ont été conservés, par exemple toutes les variantes de facial recognition, nous avons fait le choix de conserver cette hétérogénéité afin de rendre compte de la diversité des manières de définir les agents calculateurs au sein des articles.
 </p>
-<p><strong>Spatialisation du réseau sémantique et clustering :</strong>
+<p><strong>Spatialisation du réseau sémantique et clustering : </strong>
 A partir d’une extraction des termes les plus représentés au sein du contenu des 2 091 articles annotés comme critiques, on produit un réseau sémantique constitué de 2 991 termes (ou suites de termes) reliés entre eux par 54 062 liens de cooccurrences. La spatialisation est basée sur une variante de l’algorithme Fruchterman Reingold. La position des nœuds est optimisée par leur appartenance aux clusters détectés automatiquement par l’algorithme de Louvain. La couleur des nœuds est relative à chacun des clusters ainsi détectés et leur taille est relative à leur fréquence dans le corpus.</p>
 </div>
