@@ -10,9 +10,9 @@ import IceCreamBlock from '../../components/IceCreamBlock';
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
   colorScaleType={'continuous'}
-  title={'TF-IDF scores for issue-related verbs'} 
+  title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'} 
 />
 
 Une autre manière de poursuivre cette analyse comparative des troubles et des formes d’agentivité associés aux calculateurs consiste en l’exploration d’une autre entité sémantique au sein du corpus d’articles que sont les verbes. Après avoir réalisé une extraction d’une liste de verbes interprétables comme étant potentiellement de bons candidats aux troubles produits par les dispositifs techniques, nous avons calculé et comparé leur score tf-idf au sein des deux sous-ensembles d’articles constitutifs des deux pôles mis en évidence par la topologie du réseau.
@@ -25,11 +25,11 @@ Une autre manière de poursuivre cette analyse comparative des troubles et des f
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
   colorScaleType={'continuous'} 
   filters={[{"attribute":"algo_robot","value":"robot"}]}
-  title={'TF-IDF scores for issue-related verbs'} 
-  legend={'filtering articles annotated as robots'}
+  title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'} 
+  legend={'Filtrage du meta-cluster "robots"'}
 />
 
 Les verbes dont les scores tf-idf sont les plus importants dans les articles qui composent l’espace sémantique « Robots » viennent conforter l’analyse des troubles effectuée à partir des termes catégorisés comme “Issues” au sein du graphe. En effet, on observe une plus forte représentation de verbes exprimant une menace de la part des machines et intelligences autonomes relevant d’un discours prophétique, voire apocalyptique. Parmi les verbes sélectionnés comme bons candidats à l’expression de troubles ayant les plus importants scores tf-idf, on trouve des verbes qui expriment des notions de destruction (*doom*, *destroy*, *eradicate*, *kill*, *eliminate*) et de domination des machines sur l'homme (*enslave*, *dominate*), mais également de dépassement ou de remplacement des hommes par les ces agents techniques (*overtake*, *surpass*, *replace*, *defeat*). D’autres verbes davantage représentés dans le sous ensemble « Robots » renvoient à des notions de transformation et de changement (*reshape*, *transform*, *disrupt*) ou aux capacités de ces agents techniques à imiter ou simuler les comportements humains (*ressemble*, *simulate*, *reproduce*, *mimic*).
@@ -42,11 +42,11 @@ Les verbes dont les scores tf-idf sont les plus importants dans les articles qui
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}} 
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
   colorScaleType={'continuous'} 
   filters={[{"attribute":"algo_robot","value":"algo"}]} 
-  title={'TF-IDF scores for issue-related verbs'} 
-  legend={'filtering articles annotated as algorithms'} 
+  title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'} 
+  legend={'Filtrage du meta-cluster "algorithmes'} 
   reverseFlickering={true}
 />
 
@@ -60,9 +60,9 @@ Dans le sous-ensemble d’articles associés aux « Algorithmes » on retrouve �
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
   colorScaleType={'continuous'}
-  title={'TF-IDF scores for issue-related verbs'} 
+  title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'} 
 />
 
 <div className="methodo-container">
