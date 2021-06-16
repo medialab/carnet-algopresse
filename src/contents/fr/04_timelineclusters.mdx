@@ -2,17 +2,16 @@ import LinearGraphBlock from '../../components/LinearGraphBlock';
 
 ## Comment évolue l'agenda médiatique ? 
 
-<GraphBlock 
-  x={0.4588867805186573} 
-  y={0.5190807505798019} 
-  ratio={0.8} 
-  displayAllLabels={true} 
-  nodeColorVariable={'algo_robot_intermed'} 
-  nodeLabelVariable={'cluster_label'} 
-  labelDensity={1} 
-  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6","Intermed":"#a39f9f"}} 
-  title={'Réseau sémantique du contenu des articles critiques sur l\’IA'} 
-  legend={'2991 noeuds, 54062 liens de cooccurrences, couleurs relatives aux meta-clusters, taille des relative fréquence des termes dans le corpus'}
+<LinearGraphBlock 
+  graphType={'linegraph'} 
+  xVariable={'month'} 
+  xLabelVariable={'fullName'} 
+  yVariable={'value'} 
+  colorVariable={'topic'} 
+  colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
+  filters={[{"attribute":"topic","value":"Web_Algorithms"},{"attribute":"topic","value":"Future_of_AI"}]} 
+  title={'Distribution du nombre d\'articles critiques par clusters (2015-2019)'} 
+  legend={'Clusters Web_Algorithms, Future_of_AI'}
 />
 
 L’analyse de la distribution temporelle du nombre d’articles des dix plus importants clusters sur la période de 5 années que couvre le corpus critique laisse apparaître trois profils distincts. On observe une distribution assez stable sur la période de la répartition des articles des deux plus grands clusters structurants de la cartographie que sont les “Web Algortihms” et “Future of AI”. La distribution de ces deux plus grands clusters montre qu’il existe une production régulière d’articles critiques sur les troubles liés aux algorithmes du web et aux craintes relatives aux développements futurs de l’intelligence artificielle et des robots. Ces thèmes concentrent le plus grand nombre d’articles et forment deux pôles sur lesquels s'établit de façon récurrente un discours critique. 
