@@ -16,6 +16,7 @@ import Part5Fr from '!babel-loader!mdx-loader!./contents/fr/05_toporobotalgo.mdx
 import Part6Fr from '!babel-loader!mdx-loader!./contents/fr/06_explore_entities.mdx'
 import Part7Fr from '!babel-loader!mdx-loader!./contents/fr/07_IssueVERB.mdx'
 import Part8Fr from '!babel-loader!mdx-loader!./contents/fr/08_NERdate.mdx'
+import ReferencesFr from '!babel-loader!mdx-loader!./contents/fr/references.mdx'
 
 import IntroEn from '!babel-loader!mdx-loader!./contents/en/00_home.mdx'
 import Part1En from '!babel-loader!mdx-loader!./contents/en/01_couverture_media.mdx'
@@ -26,6 +27,7 @@ import Part5En from '!babel-loader!mdx-loader!./contents/en/05_toporobotalgo.mdx
 import Part6En from '!babel-loader!mdx-loader!./contents/en/06_explore_entities.mdx'
 import Part7En from '!babel-loader!mdx-loader!./contents/en/07_IssueVERB.mdx'
 import Part8En from '!babel-loader!mdx-loader!./contents/en/08_NERdate.mdx'
+import ReferencesEn from '!babel-loader!mdx-loader!./contents/en/references.mdx'
 
 const routes = [
   {
@@ -225,7 +227,26 @@ const routes = [
     },
     Component: IceCreamAnnotation,
     data: 'date_ner_tfidf_v3.csv'
-  }
+  },
+  {
+    title: {
+      fr: 'Références',
+      en: 'References',
+    },
+    route: {
+      fr: 'references',
+      en: 'references',
+    },
+    contents: {
+      fr: 'references.mdx',
+      en: 'references.mdx',
+    },
+    contentsCompiled: {
+      fr: () => <ReferencesFr />,
+      en: () => <ReferencesEn />
+    },
+    Component: PlainPage
+  },
 ]
 
 export default routes;
