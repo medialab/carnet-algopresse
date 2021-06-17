@@ -13,7 +13,7 @@ $padding_medium: 1rem;
 
 $screen_gutter_small: 10vw;
 $screen_gutter_large: 15vw;
-$vis_width: 65%;
+$vis_width: 60%;
 
 $line_border: 2px;
 
@@ -24,7 +24,7 @@ $fontsize_toc: .8rem;
 $fontsize_title: 2rem;
 $fontsize_secondarytitle: 1.2rem;
 $fontsize_legend: .9rem;
-$fontsize_methodo_title: 1.5rem;
+$fontsize_methodo_title: 1.2rem;
 $fontsize_running_title: .8rem;
 $fontsize_footer: .8rem;
 
@@ -73,6 +73,12 @@ $fontsize_footer: .8rem;
       font-size: $fontsize_title;
 
     }
+    ul {
+      margin-bottom: $padding_medium;
+    }
+    li {
+      margin-bottom: $padding_small;
+    }
 
     a {
       /* These are technically the same, but use both */
@@ -95,11 +101,11 @@ $fontsize_footer: .8rem;
       line-height: 1.5;
     }
     &.has-visualization {
-      max-width: 100% - $vis_width;
+      max-width: calc(100% - #{$vis_width} - #{$padding_medium * 2});
       padding-left: 4rem;
       h1, h2{
         // margin-left: $padding_medium * 4; // $screen_gutter_large - $screen_gutter_small /4;
-        margin-right: 2rem;
+        // margin-right: 2rem;
         margin-bottom: $padding_medium;
       }
     }
@@ -107,12 +113,18 @@ $fontsize_footer: .8rem;
     .methodo-container {
       font-family: $font_sans;
       border: $line_border solid $red;
-      padding: $padding_medium;
+      padding: $padding_small $padding_medium $padding_small $padding_medium;
       margin-top: $padding_medium;
+      p {
+        margin-bottom: $padding_small * .5;
+        margin-top: 0;
+        font-size: $fontsize-legend;
+      }
       h1, h2 {
         background: inherit;
         color: inherit;
         padding-left: 0;
+        // padding-bottom: 0;
         font-weight: 800;
         margin: 0;
         font-size: $fontsize_methodo_title;
@@ -581,49 +593,54 @@ $fontsize_footer: .8rem;
     box-sizing: border-box;
     display: inline-block;
     font-family: $font_sans;
-    padding: $padding_medium;
+    padding: $padding_small $padding_medium;
     // transition: .5s ease all;
     cursor: pointer;
     width: 100%;
     .block-title {
       margin: 0;
       transition: .5s ease all;
+      font-size: $fontsize_methodo_title;
     }
-    .block-legend {
-      transition: .5s ease all;
-      max-height: 0;
-      overflow: hidden;
-      margin: 0;
-      font-size: $fontsize_legend;
-    }
-    .ColorLegend {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: .2rem;
-      // grid-auto-rows: minmax(1rem, auto);
-      max-width: 100%;
-      li {
-        display: flex;
-        align-items: center;
-        .color {
-          min-width: 1rem;
-          min-height: 1rem;
-          max-width: 1rem;
-          max-height: 1rem;
-          display: inline-block;
-        }
-        .label {
-          padding-left: .2rem;
-          font-size: $fontsize_legend;
+    .secondary {
+      display: flex;
+      flex-flow: row nowrap;
+      &.has-colors {
+        margin-top: $padding_medium;
+      }
+      .block-legend {
+        margin: 0;
+        font-size: $fontsize_legend;
+        font-style: italic;
+      }
+      .ColorLegend {
+        flex: 1;
+        min-width: 66%;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: .3rem;
+        li {
+          display: flex;
+          // align-items: center;
+          .color {
+            min-width: 1rem;
+            min-height: 1rem;
+            max-width: 1rem;
+            max-height: 1rem;
+            display: inline-block;
+          }
+          .label {
+            padding-left: .2rem;
+            font-size: $fontsize_legend;
+          }
         }
       }
-      transition: .5s ease all;
-      max-height: 0;
-      overflow: hidden;
     }
+    
+    
     // &.is-active {
 
      
@@ -633,11 +650,6 @@ $fontsize_footer: .8rem;
       .block-legend {
         max-height: 100vh;
         margin-top: $padding_small;
-      }
-
-      .ColorLegend {
-        max-height: 100vh;
-        margin-top: $padding_medium;
       }
     // }
     &.is-active {

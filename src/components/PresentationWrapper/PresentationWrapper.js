@@ -29,40 +29,40 @@ const Sections = ({
 }) => {
   return (
     <main>
-          {
-            routes.map((route, index) => {
-              const {
-                data,
-                contentsCompiled
-              } = route;
-              const Content = contentsCompiled[lang];
-              const onRegisterVisualization = (id, params) => {
-                const finalParams = {
-                  ...params,
-                  sectionIndex: index,
-                  data
-                }
-                setTimeout(() => setVisualizations({ ...visualizations, [id]: finalParams }));
-              }
-              const onUnregisterVisualization = id => {
-                setVisualizations(omit(visualizations, [id]))
-              }
-              return (
-                <VisualizationControlContext.Provider
-                  key={index}
-                  value={{
-                    onRegisterVisualization,
-                    onUnregisterVisualization,
-                  }}
-                >
-                  <section className={cx("section-container", {'is-active': index === activeSectionIndex, 'has-visualization': data !== undefined})} ref={sectionsRef.current[index]}>
-                    <Content />
-                  </section>
-                </VisualizationControlContext.Provider>
-              )
-            })
+      {
+        routes.map((route, index) => {
+          const {
+            data,
+            contentsCompiled
+          } = route;
+          const Content = contentsCompiled[lang];
+          const onRegisterVisualization = (id, params) => {
+            const finalParams = {
+              ...params,
+              sectionIndex: index,
+              data
+            }
+            setTimeout(() => setVisualizations({ ...visualizations, [id]: finalParams }));
           }
-        </main>
+          const onUnregisterVisualization = id => {
+            setVisualizations(omit(visualizations, [id]))
+          }
+          return (
+            <VisualizationControlContext.Provider
+              key={index}
+              value={{
+                onRegisterVisualization,
+                onUnregisterVisualization,
+              }}
+            >
+              <section className={cx("section-container", { 'is-active': index === activeSectionIndex, 'has-visualization': data !== undefined })} ref={sectionsRef.current[index]}>
+                <Content />
+              </section>
+            </VisualizationControlContext.Provider>
+          )
+        })
+      }
+    </main>
   )
 }
 
@@ -88,7 +88,7 @@ const PresentationWrapper = ({ match: { params } }) => {
 
   const scrollRef = useRef(null);
   const scrollY = useScrollYPosition();
-  
+
   /**
    * Scroll on coumponent mount
    */
@@ -123,7 +123,7 @@ const PresentationWrapper = ({ match: { params } }) => {
             const bodyRect = document.body.getBoundingClientRect();
             const visY = y - bodyRect.top;
             window.scrollTo({
-              left: 0, 
+              left: 0,
               top: visY - window.innerHeight / 2 + 10,
             });
           }
@@ -135,7 +135,7 @@ const PresentationWrapper = ({ match: { params } }) => {
             const bodyRect = document.body.getBoundingClientRect();
             const sectionY = y - bodyRect.top;
             window.scrollTo({
-              left: 0, 
+              left: 0,
               top: sectionY,
             })
           }
@@ -181,7 +181,7 @@ const PresentationWrapper = ({ match: { params } }) => {
                 } else if (url.split('.').pop() === 'tsv') {
                   loadedData = tsvParse(inputData);
                 }
-                resolve({...res, [data]: loadedData})
+                resolve({ ...res, [data]: loadedData })
               })
             })
             .catch(reject)
@@ -189,89 +189,89 @@ const PresentationWrapper = ({ match: { params } }) => {
 
       }))
     }, Promise.resolve({}))
-    .then(newDatasets => {
-      setLoadingFraction(1);
-      setDatasets(newDatasets)
-    })
-    .catch(console.log)
+      .then(newDatasets => {
+        setLoadingFraction(1);
+        setDatasets(newDatasets)
+      })
+      .catch(console.log)
   }, [])
 
-  
+
 
   /**
    * Scrollytelling managmeent
    */
-   useEffect(() => {
+  useEffect(() => {
     const DISPLACE_Y = window.innerHeight * .5;
-      const y = scrollY + DISPLACE_Y;
-      let newActiveRouteIndex;
-      let newActiveVisualizationIndex;
-      let newActiveRoute;
-      let newActiveVisualization;
+    const y = scrollY + DISPLACE_Y;
+    let newActiveRouteIndex;
+    let newActiveVisualizationIndex;
+    let newActiveRoute;
+    let newActiveVisualization;
 
-      // find active section
-      sectionsRef.current.find((ref, index) => {
-        if (ref.current) {
-          const { y: initialSectionY, height } = ref.current.getBoundingClientRect();
-          const bodyRect = document.body.getBoundingClientRect();
-          const sectionY = initialSectionY - bodyRect.top;
-          if (index === 0 && y > sectionY && inHeader) {
-            setInHeader(false);
-          } else if (index === 0 && y < sectionY && !inHeader) {
-            setInHeader(true);
-          }
-          if (index === sectionsRef.current.length - 1 && y > sectionY + height && !inFooter) {
-            setInFooter(true);
-          } else if (inFooter) {
-            setInFooter(false);
-          }
-          if (y > sectionY && y < sectionY + height) {
-            newActiveRouteIndex = index;
-            newActiveRoute = routes[index];
-            return true;
-          }
+    // find active section
+    sectionsRef.current.find((ref, index) => {
+      if (ref.current) {
+        const { y: initialSectionY, height } = ref.current.getBoundingClientRect();
+        const bodyRect = document.body.getBoundingClientRect();
+        const sectionY = initialSectionY - bodyRect.top;
+        if (index === 0 && y > sectionY && inHeader) {
+          setInHeader(false);
+        } else if (index === 0 && y < sectionY && !inHeader) {
+          setInHeader(true);
         }
-        return false;
-      });
-      if (activeSectionIndex !== newActiveRouteIndex) {
-        setActiveSectionIndex(newActiveRouteIndex);
-        setActiveSection(newActiveRoute);
+        if (index === sectionsRef.current.length - 1 && y > sectionY + height && !inFooter) {
+          setInFooter(true);
+        } else if (inFooter) {
+          setInFooter(false);
+        }
+        if (y > sectionY && y < sectionY + height) {
+          newActiveRouteIndex = index;
+          newActiveRoute = routes[index];
+          return true;
+        }
       }
-      if (newActiveRouteIndex !== undefined) {
-        // const id = buildRouteId(newActiveRouteIndex, newRoute, lang);
-        // find active visualization
-        const relevantVisualizations = Object.entries(visualizations)
-          .filter(([id, params]) => params.sectionIndex === newActiveRouteIndex)
-          .map(t => t[1])
-        for (let index = relevantVisualizations.length - 1; index >= 0; index--) {
-          const params = relevantVisualizations[index];
-          const { ref } = params;
-          if (ref.current) {
-            const { y: initialVisY } = ref.current.getBoundingClientRect();
-            const visY = initialVisY + window.scrollY;
-            if (y > visY) {
-              newActiveVisualization = params;
-              newActiveVisualizationIndex = index;
-              break;
-            }
+      return false;
+    });
+    if (activeSectionIndex !== newActiveRouteIndex) {
+      setActiveSectionIndex(newActiveRouteIndex);
+      setActiveSection(newActiveRoute);
+    }
+    if (newActiveRouteIndex !== undefined) {
+      // const id = buildRouteId(newActiveRouteIndex, newRoute, lang);
+      // find active visualization
+      const relevantVisualizations = Object.entries(visualizations)
+        .filter(([id, params]) => params.sectionIndex === newActiveRouteIndex)
+        .map(t => t[1])
+      for (let index = relevantVisualizations.length - 1; index >= 0; index--) {
+        const params = relevantVisualizations[index];
+        const { ref } = params;
+        if (ref.current) {
+          const { y: initialVisY } = ref.current.getBoundingClientRect();
+          const visY = initialVisY + window.scrollY;
+          if (y > visY) {
+            newActiveVisualization = params;
+            newActiveVisualizationIndex = index;
+            break;
           }
         }
-        if (relevantVisualizations.length && newActiveVisualization === undefined) {
-          newActiveVisualization = relevantVisualizations[0];
-          newActiveVisualizationIndex = 0;
-        }
-        if (activeVisualizationIndex !== newActiveVisualizationIndex || activeSectionIndex !== newActiveRouteIndex) {
-          setActiveVisualization(newActiveVisualization);
-          setActiveVisualizationIndex(newActiveVisualizationIndex);
-        }
-        } else {
-          if (activeVisualization) {
-            setActiveVisualization(undefined);
-            setActiveVisualizationIndex(undefined);
-          }
-        }
+      }
+      if (relevantVisualizations.length && newActiveVisualization === undefined) {
+        newActiveVisualization = relevantVisualizations[0];
+        newActiveVisualizationIndex = 0;
+      }
+      if (activeVisualizationIndex !== newActiveVisualizationIndex || activeSectionIndex !== newActiveRouteIndex) {
+        setActiveVisualization(newActiveVisualization);
+        setActiveVisualizationIndex(newActiveVisualizationIndex);
+      }
+    } else {
+      if (activeVisualization) {
+        setActiveVisualization(undefined);
+        setActiveVisualizationIndex(undefined);
+      }
+    }
   }, [scrollY])
-  
+
   const preventScroll = e => {
     e.preventScroll();
     e.stopPropagation();
@@ -282,8 +282,8 @@ const PresentationWrapper = ({ match: { params } }) => {
     setActiveSectionIndex(index);
     setActiveSection(routes[index]);
     let relevantVisualizations = Object.entries(visualizations)
-    .filter(([id, params]) => params.sectionIndex === index)
-    .map(t => t[1]);
+      .filter(([id, params]) => params.sectionIndex === index)
+      .map(t => t[1]);
     setActiveVisualization(relevantVisualizations.length ? relevantVisualizations[0] : undefined);
     setActiveVisualizationIndex(relevantVisualizations.length ? 0 : undefined);
 
@@ -293,7 +293,7 @@ const PresentationWrapper = ({ match: { params } }) => {
       const bodyRect = document.body.getBoundingClientRect();
       const sectionY = y - bodyRect.top;
       window.scrollTo({
-        left: 0, 
+        left: 0,
         top: sectionY, // - window.innerHeight / 2,
         behavior: 'smooth'
       })
@@ -306,7 +306,7 @@ const PresentationWrapper = ({ match: { params } }) => {
       const bodyRect = document.body.getBoundingClientRect();
       const sectionY = y - bodyRect.top;
       window.scrollTo({
-        left: 0, 
+        left: 0,
         top: sectionY - window.innerHeight / 2 + 5,
         behavior: 'smooth'
       })
@@ -318,7 +318,7 @@ const PresentationWrapper = ({ match: { params } }) => {
     setActiveSection(undefined);
     setActiveSectionIndex(undefined);
     window.scrollTo({
-      left: 0, 
+      left: 0,
       top: 0,
       behavior: 'smooth'
     })
@@ -333,10 +333,10 @@ const PresentationWrapper = ({ match: { params } }) => {
       }}
     >
       <div ref={scrollRef} id="presentation-wrapper">
-        <Header 
-          lang={lang} 
-          routes={routes} 
-          onRouteNav={handleRouteNav} 
+        <Header
+          lang={lang}
+          routes={routes}
+          onRouteNav={handleRouteNav}
           isVisible={inHeader}
           activeSectionIndex={activeSectionIndex}
           loadingFraction={loadingFraction}
@@ -346,17 +346,17 @@ const PresentationWrapper = ({ match: { params } }) => {
         />
         <Sections
           {
-            ...{
-              routes,
-              lang,
-              setVisualizations,
-              visualizations,
-              activeSectionIndex,
-              sectionsRef
-            }
+          ...{
+            routes,
+            lang,
+            setVisualizations,
+            visualizations,
+            activeSectionIndex,
+            sectionsRef
+          }
           }
         />
-        <aside onScroll={preventScroll} className={cx('visualization-container', {'is-visible': !(inHeader || inFooter)})}>
+        <aside onScroll={preventScroll} className={cx('visualization-container', { 'is-visible': !(inHeader || inFooter) })}>
           {
             datasets ?
             <VisualizationController

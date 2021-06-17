@@ -60,6 +60,7 @@ const VisBlock = React.forwardRef(({
       onBlockClick(id, ref);
     }
   }
+  const colors = filterColorPalette(nodeColorVariable || colorVariable, colorPalette, filters, filtersModeAnd);
   return (
     <div onClick={onClick} ref={ref} id={id} className={cx("VisualizationBlock LinearGraphBlock", {'is-active': activeVisualization && activeVisualization.id === id})}>
       {
@@ -67,14 +68,16 @@ const VisBlock = React.forwardRef(({
         <h5 className="block-title">{title}</h5>
         : null
       }
-      {
-        legend ?
-        <p className="block-legend">
-          {legend}
-        </p>
-        : null
-      }
-      <ColorLegend colorPalette={filterColorPalette(nodeColorVariable || colorVariable, colorPalette, filters, filtersModeAnd)} />
+      <div className={cx("secondary", {'has-colors': colors && colors.length > 0})}>
+        {
+          legend ?
+          <p className="block-legend">
+            {legend}
+          </p>
+          : null
+        }
+        <ColorLegend colorPalette={colors} />
+      </div>
       
     </div>
   )
