@@ -19,6 +19,10 @@ Pour mettre en évidence les caractéristiques de ces deux espaces de critique, 
 
 Afin de différencier ces entités au sein du réseau, la plupart des termes, ne souffrants pas trop d'ambiguïté (66% des termes du graphe), ont été annotés manuellement en dix catégories distinctes. Parmi ces catégories, notre analyse consiste à comparer trois d’entre elles qui apparaissent particulièrement pertinentes pour différencier les deux espaces. La catégorie “Technical” renvoie à ce que nous avons désigné comme agents calculateurs, elle concerne tous les termes relatifs aux entités techniques tels que les algorithmes, les machines, les fonctionnalités ou services techniques, les terminaux mais également les technologies issues de startup, parfois difficiles à différencier des entités économiques. La seconde catégorie relative aux agents humains, nommée “People”, concerne tous les termes désignant des personnes ou groupes de personnes non nominatives (à la différence des catégories “Person” pour les noms propres et “Institutions” pour les groupes ou structures ayant une existence juridique). Enfin, la troisième catégorie, nommée “Issues”, permet d’identifier les termes qui désignent des enjeux, des difficultés ou des problèmes extraits au sein des articles. 
 
+
+
+## Quelles sont les entités techniques ?
+
 <GraphBlock 
   x={0.4588867805186573} 
   y={0.5190807505798019} 
@@ -32,7 +36,7 @@ Afin de différencier ces entités au sein du réseau, la plupart des termes, ne
   legend={'filtrage par tag "techinal"'}
 />
 
-## Quelles sont les entités techniques ?
+Si l’on compare les termes les plus fréquents catégorisés en tant qu’entités techniques, ce qui caractérise la zone « Robots » de notre cartographie est le très haut degré d’intelligence et d’autonomie des IA, ainsi que leur capacité à être incarnées sous la forme de machines. Que ce soit pour la conduite automobile, le sexe, la guerre ou la production industrielle, ces entités techniques sont dotées de capacité d’initiatives autonomes. 
 
 <GraphBlock 
   x={0.4588867805186573} 
@@ -48,7 +52,7 @@ Afin de différencier ces entités au sein du réseau, la plupart des termes, ne
   legend={'filtrage par tag "techinal" et meta-cluster "robots"'}
 />
 
-Si l’on compare les termes les plus fréquents catégorisés en tant qu’entités techniques, ce qui caractérise la zone « Robots » de notre cartographie est le très haut degré d’intelligence et d’autonomie des IA, ainsi que leur capacité à être incarnées sous la forme de machines. Que ce soit pour la conduite automobile, le sexe, la guerre ou la production industrielle, ces entités techniques sont dotées de capacité d’initiatives autonomes. On observe que dans l’espace « Robots » les calculateurs renvoient le plus souvent à des dispositifs incarnés tels que les *robots*, *machines*, *computers*, *cars*, *weapons*, *drones* ou *dolls*. D’autres entités techniques se distinguent car elles renvoient à une définition très abstraite et générique des calculateurs qui sont désignés en tant que *system*, *artificial intelligence* ou encore comme *automation* ou *model*.
+On observe que dans l’espace « Robots » les calculateurs renvoient le plus souvent à des dispositifs incarnés tels que les *robots*, *machines*, *computers*, *cars*, *weapons*, *drones* ou *dolls*. D’autres entités techniques se distinguent car elles renvoient à une définition très abstraite et générique des calculateurs qui sont désignés en tant que *system*, *artificial intelligence* ou encore comme *automation* ou *model*.
 
 <GraphBlock 
   x={0.4588867805186573} 
@@ -64,7 +68,6 @@ Si l’on compare les termes les plus fréquents catégorisés en tant qu’enti
   legend={'filtrage par tag "techinal" et meta-cluster "algortihmes"'}
 />
 
-
 En revanche, les entités techniques de la zone « Algorithmes » de notre cartographie sont davantage définies comme des parties ou des éléments de systèmes socio-techniques distribués dans des environnements numériques. Dans cet espace, on retrouve des dénominations abstraites mais ces entités ne constituent pas systématiquement des objets autonomes (*algorithm*, *devices*, *program*, *bot* ou *phone*). La majorité des termes se distingue par le fait qu’elle relève de technologies beaucoup plus spécifiques, renvoyant le plus souvent à des dispositifs technologiques précis tels que *facial recognition*, *deepfake*, *social network*, *chatbot*, *criminal justice algortihm* et de manière encore plus spécifique à des fonctionnalités de certains services embarqués dans nos terminaux mobiles ou sur le web, parfois associés à des marques, tels que *Siri*, *Search engine*, *Trending topics*, *Google assistant*, *Iphone*, *recommendation algorithm*, *Facebook messenger*, *Google images*, *image search*. Ces qualifications n’isolent pas les IA mais les incorporent dans un environnement sociotechnique dans lequel le calcul joue un rôle de plus en plus intense pour assister, trouver de l’information, guider ou prévenir un comportement.
 
 ## Qui sont les agents humains ? 
@@ -76,7 +79,7 @@ En revanche, les entités techniques de la zone « Algorithmes » de notre carto
   filters={[{"attribute":"tag_entity","value":"People"}]} 
   nodeColorVariable={'algo_robot'} 
   nodeLabelVariable={'label_copy'} 
-  labelDensity={0.90} 
+  labelDensity={0.92} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
   legend={'filtrage par tag "people"'}
@@ -92,7 +95,7 @@ La catégorie “People” à partir de laquelle ont été annotés les termes d
   nodeColorVariable={'algo_robot'} 
   nodeLabelVariable={'label_copy'}
   filtersModeAnd={true}
-  labelDensity={0.90} 
+  labelDensity={0.92} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
   legend={'filtrage par tag "people" et meta-cluster "robots"'}
@@ -108,7 +111,7 @@ Du côté de l’espace « Robots » on observe parmi les termes les plus fréqu
   nodeColorVariable={'algo_robot'} 
   nodeLabelVariable={'label_copy'}
   filtersModeAnd={true}
-  labelDensity={0.90} 
+  labelDensity={0.92} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
   legend={'filtrage par tag "people" et meta-cluster "algorithmes"'}
@@ -127,7 +130,7 @@ L’analyse topologique des clusters faisant apparaître une opposition entre le
   filters={[{"attribute":"tag_entity","value":"Issue"}]} 
   nodeColorVariable={'algo_robot'} 
   nodeLabelVariable={'label_copy'} 
-  labelDensity={0.80} 
+  labelDensity={0.88} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
   legend={'filtrage par tag "issues"'}
@@ -143,7 +146,7 @@ La catégorie intitulée “Issues” permet une lecture comparée des termes re
   nodeColorVariable={'algo_robot'} 
   nodeLabelVariable={'label_copy'} 
   filtersModeAnd={true}
-  labelDensity={0.80} 
+  labelDensity={0.88} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
   legend={'filtrage par tag "issues" et meta-cluster "robots"'}
@@ -159,7 +162,7 @@ Du côté de l'espace sémantique « Robots », c’est l’affrontement entre l
   nodeColorVariable={'algo_robot'} 
   nodeLabelVariable={'label_copy'}
   filtersModeAnd={true}
-  labelDensity={0.80} 
+  labelDensity={0.88} 
   colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
   title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
   legend={'filtrage par tag "issues" et meta-cluster "algorithmes"'}
