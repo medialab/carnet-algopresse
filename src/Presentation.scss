@@ -287,6 +287,8 @@ $fontsize_footer: .8rem;
    * Nav
    */
   .Nav {
+    opacity: 1;
+    transition: .5s ease opacity;
     ul {
       list-style: none;
       padding: 0;
@@ -404,6 +406,11 @@ $fontsize_footer: .8rem;
         }
       }
       
+    }
+
+    &.is-hidden {
+      opacity: 0;
+      pointer-events: none;
     }
   }
 

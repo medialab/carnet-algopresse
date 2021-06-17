@@ -259,7 +259,15 @@ const Header = ({
           lang={lang} 
           onRouteNav={onRouteNav} 
           routes={routes} 
-          isDeployed={isVisible}
+          isDeployed={true}
+          activeSectionIndex={activeSectionIndex}
+        />
+        <Nav 
+          lang={lang} 
+          onRouteNav={onRouteNav} 
+          routes={routes} 
+          isDeployed={false}
+          isHidden={isVisible}
           activeSectionIndex={activeSectionIndex}
         />
         {/* réseau */}

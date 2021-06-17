@@ -6,10 +6,11 @@ const Nav = ({
   routes,
   onRouteNav,
   isDeployed,
+  isHidden,
   activeSectionIndex
 }) => {
   return (
-    <nav className={cx('Nav', {'is-deployed': isDeployed})}>
+    <nav className={cx('Nav', {'is-deployed': isDeployed, 'is-hidden': isHidden})}>
       <ul>
         {
           routes.map((route, routeIndex) => {
