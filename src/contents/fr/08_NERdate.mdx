@@ -30,6 +30,7 @@ A partir de notre corpus, nous avons extrait 1000 entités nommées qui sont des
   rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
   colorScaleType={'continuous'}
+  filters={[{"attribute":"algo_robot","value":"robot"}]}
   title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'}
   legend={'Filtrage du meta-cluster "robots"'}
 />
@@ -46,6 +47,7 @@ Du côté des articles associés au sous-ensemble « Robots » les marqueurs de 
   rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
   colorScaleType={'continuous'}
+  filters={[{"attribute":"algo_robot","value":"algo"}]} 
   title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'} 
   legend={'Filtrage du meta-cluster "algortihmes"'}
   reverseFlickering={true}
