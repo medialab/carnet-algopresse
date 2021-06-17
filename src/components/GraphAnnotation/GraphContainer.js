@@ -10,6 +10,7 @@ import {
   usePrevious, 
 } from './hooks';
 import GraphControls from './GraphControls';
+import GraphNav from './GraphNav';
 import {createNodeReducer, createEdgeReducer} from './reducers';
 import {generatePalette} from '../../helpers/palettes';
 import Input from '../DebouncedInput';
@@ -44,6 +45,7 @@ export function GraphContainer({
   // nodeSize,
   labelDensity,
   displayAllLabels,
+  lockCamera,
   extents,
 
   searchString = '',
@@ -58,6 +60,8 @@ export function GraphContainer({
 
   onCameraUpdate,
   presentationMode,
+  showNav = true,
+  onToggleCameraLock,
 
   cameraPosition,
 
@@ -163,14 +167,38 @@ export function GraphContainer({
   const container = useRef(null);
   const [renderer, setRenderer] = useState(null);
 
-
   useEffect(() => {
-    if (cameraPosition && renderer) {
-        const camera = renderer.getCamera();
-        // console.log('animate camera', camera);
-        camera.animate(cameraPosition);     
-    }  
-  }, [updateTimestamp])
+    if (renderer) {
+      const camera = renderer.getCamera();
+      if (cameraPosition) {
+        camera.enable();
+        camera.animate({...camera.getState(), ...cameraPosition});     
+        // camera.setState({...camera.getState(), ...cameraPosition});     
+        if (lockCamera) {
+          camera.disable();
+        }
+        // renderer.refresh();
+      }
+      if (camera.enabled && lockCamera) {
+        camera.disable();
+        // renderer.refresh();
+      }
+      if (!camera.enabled && !lockCamera) {
+        camera.enable();
+        // renderer.refresh();
+      }
+    }
+    
+  }, [
+    updateTimestamp, 
+    lockCamera, 
+    cameraPosition,
+    nodeColorVariable,
+    nodeSizeVariable,
+    filters,
+    filtersModeAnd,
+    colorPalette,
+  ])
 
   // Should we refresh?
   if (renderer) {
@@ -271,13 +299,19 @@ export function GraphContainer({
           newRenderer.refresh();
           setRenderer(newRenderer);
           const camera = newRenderer.getCamera();
+          
           if (cameraPosition) {
-            onCameraUpdate({
+            camera.setState({
               ...camera.getState(),
               ...cameraPosition
             })
           } else {
-            onCameraUpdate(camera.getState())
+            if (typeof onCameraUpdate === 'function') {
+              onCameraUpdate(camera.getState())
+            }
+          }
+          if (lockCamera || !presentationMode) {
+            camera.disable();
           }
           camera.on('updated', state => {
             onCameraUpdate(state);
@@ -291,10 +325,25 @@ export function GraphContainer({
     },
     [graph] /* eslint react-hooks/exhaustive-deps : 0 */
   );
+  const handleToggleCameraLock = () => {
+    if (typeof onToggleCameraLock === 'function') {
+      onToggleCameraLock();
+    }
+  }
   return (
     <>
 
       <div ref={setContainer} style={{width: '100%', height: '100%'}}></div>
+      {
+        renderer && presentationMode && showNav &&
+        <GraphNav
+          rescale={rescale.bind(null, renderer)}
+          zoomIn={zoomIn.bind(null, renderer)}
+          zoomOut={zoomOut.bind(null, renderer)}
+          isLocked={lockCamera}
+          onToggleLock={handleToggleCameraLock}
+          />
+      }
       {renderer && !presentationMode && (
         <>
           <GraphControls

@@ -1,4 +1,4 @@
-import React, {useMemo, useState, useEffect} from 'react';
+import React, {useMemo} from 'react';
 import {NavLink} from 'react-router-dom';
 import Helmet from 'react-helmet';
 import Graph from 'graphology';
@@ -16,19 +16,19 @@ import {homepage} from '../../../package.json';
 import {GraphContainer} from '../GraphAnnotation/GraphContainer'
 
 const GraphWrapper = ({data, ...props}) => {
-  const [cameraPosition, setCameraPosition] = useState({x: props.x, y: props.y, ratio: props.ratio})
-  useEffect(() => {
-    setCameraPosition({
-      x: props.x, y: props.y, ratio: props.ratio
-    })
-  }, [props.x, props.y, props.ratio])
+  // const [cameraPosition, setCameraPosition] = useState({x: props.x, y: props.y, ratio: props.ratio})
+  // useEffect(() => {
+  //   setCameraPosition({
+  //     x: props.x, y: props.y, ratio: props.ratio
+  //   })
+  // }, [props.x, props.y, props.ratio])
   const graph = useMemo(() => {
     return gexf.parse(Graph, data);
   }, [data]);
 
-  const onCameraUpdate = (pos) => {
-    setCameraPosition(pos);
-  }
+  // const onCameraUpdate = (pos) => {
+  //   setCameraPosition(pos);
+  // }
   let sizes = [];
   graph.forEachNode((node, attributes) => {
     sizes.push(attributes.size);
@@ -37,6 +37,8 @@ const GraphWrapper = ({data, ...props}) => {
   return (
     <div style={{width: props.width, height: props.height}}>
     <GraphContainer
+      lockCamera
+      showNav={false}
       {...{
         ...props,
         graph,
@@ -46,8 +48,8 @@ const GraphWrapper = ({data, ...props}) => {
             max: sizeExtent[1]
           }
         },
-        onCameraUpdate,
-        cameraPosition,
+        // onCameraUpdate,
+        // cameraPosition,
       }
       }
     />

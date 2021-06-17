@@ -60,6 +60,7 @@ const VisualizationController = ({
   height,
   loadingFraction,
 }) => {
+  const [lockCamera, setLockCamera] = useState(true);
   const firstInstanceOfEachVisualization = useMemo(() => {
     return Object.entries(
       groupBy(
@@ -77,6 +78,11 @@ const VisualizationController = ({
   if (activeVisualization) {
     activeImprint = buildImprint(activeVisualization);
   }
+  useEffect(() => {
+    if (!lockCamera) {
+      setLockCamera(true);
+    }
+  }, [activeVisualization])/* eslint react-hooks/exhaustive-deps : 0 */
 
   const renderVisualization = vis => {
     if (!datasets[vis.data]) {
@@ -103,7 +109,9 @@ const VisualizationController = ({
               data: datasets[vis.data],
               width: width - 5,
               height,
-              presentationMode: true
+              presentationMode: true,
+              lockCamera,
+              onToggleCameraLock: () => setLockCamera(!lockCamera)
             }}
           />
         );

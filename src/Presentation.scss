@@ -127,9 +127,9 @@ $fontsize_footer: .8rem;
     position: fixed;
     right: 0;
     height: 100%;
-    box-sizing: content-box;
+    box-sizing: border-box;
     padding: $padding_medium;
-    width: calc(#{$vis_width} - 5rem);
+    width: $vis_width;
     top: 0;
     z-index: -1;
     opacity: 0;
@@ -449,7 +449,7 @@ $fontsize_footer: .8rem;
     position: absolute;
     // padding-left: 3rem;
     // padding-right: 5rem;
-    box-sizing: content-box;
+    box-sizing: border-box;
     .visualization-item {
       width: 100%;
       height: 100%;
@@ -465,6 +465,48 @@ $fontsize_footer: .8rem;
     }
     &.networkGraph {
       padding-left: 3rem;
+      width: calc(100% - 5rem);
+
+      .GraphNav {
+        position: absolute;
+        right: 0;
+        top: 0;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+        li {
+          button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            &[disabled] {
+              opacity: .5;
+              cursor: not-allowed;
+            }
+            
+          }
+          img {
+            max-width: 2.3rem;
+          }
+          max-width: 0;
+          overflow: hidden;
+          transition: .5s ease all;
+          &:last-of-type {
+            max-width: 4rem;
+            img {
+              max-width: 3rem;
+            }
+          }
+
+        }
+        &.is-expanded {
+          li {
+            max-width: 4rem;
+          }
+        }
+      }
     }
 
     &.linearGraph {
