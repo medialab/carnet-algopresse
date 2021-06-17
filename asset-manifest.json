@@ -1,29 +1,34 @@
 {
   "files": {
-    "static/js/0.d8fdde48.chunk.js": "/carnet-algopresse/static/js/0.d8fdde48.chunk.js",
-    "static/js/0.d8fdde48.chunk.js.map": "/carnet-algopresse/static/js/0.d8fdde48.chunk.js.map",
-    "static/js/1.231f6b7e.chunk.js": "/carnet-algopresse/static/js/1.231f6b7e.chunk.js",
-    "static/js/1.231f6b7e.chunk.js.map": "/carnet-algopresse/static/js/1.231f6b7e.chunk.js.map",
-    "main.css": "/carnet-algopresse/static/css/main.6d616001.chunk.css",
-    "main.js": "/carnet-algopresse/static/js/main.5d0a5975.chunk.js",
-    "main.js.map": "/carnet-algopresse/static/js/main.5d0a5975.chunk.js.map",
-    "runtime-main.js": "/carnet-algopresse/static/js/runtime-main.f356d7af.js",
-    "runtime-main.js.map": "/carnet-algopresse/static/js/runtime-main.f356d7af.js.map",
+    "static/js/0.d9744fcf.chunk.js": "/carnet-algopresse/static/js/0.d9744fcf.chunk.js",
+    "static/js/0.d9744fcf.chunk.js.map": "/carnet-algopresse/static/js/0.d9744fcf.chunk.js.map",
+    "static/js/1.2abbb86e.chunk.js": "/carnet-algopresse/static/js/1.2abbb86e.chunk.js",
+    "static/js/1.2abbb86e.chunk.js.map": "/carnet-algopresse/static/js/1.2abbb86e.chunk.js.map",
+    "main.css": "/carnet-algopresse/static/css/main.110a53f0.chunk.css",
+    "main.js": "/carnet-algopresse/static/js/main.0ab9e8b6.chunk.js",
+    "main.js.map": "/carnet-algopresse/static/js/main.0ab9e8b6.chunk.js.map",
+    "runtime-main.js": "/carnet-algopresse/static/js/runtime-main.12e2696c.js",
+    "runtime-main.js.map": "/carnet-algopresse/static/js/runtime-main.12e2696c.js.map",
     "static/css/4.5b92a664.chunk.css": "/carnet-algopresse/static/css/4.5b92a664.chunk.css",
-    "static/js/4.abd60fa4.chunk.js": "/carnet-algopresse/static/js/4.abd60fa4.chunk.js",
-    "static/js/4.abd60fa4.chunk.js.map": "/carnet-algopresse/static/js/4.abd60fa4.chunk.js.map",
-    "static/js/5.b7616a8b.chunk.js": "/carnet-algopresse/static/js/5.b7616a8b.chunk.js",
-    "static/js/5.b7616a8b.chunk.js.map": "/carnet-algopresse/static/js/5.b7616a8b.chunk.js.map",
+    "static/js/4.a3582c18.chunk.js": "/carnet-algopresse/static/js/4.a3582c18.chunk.js",
+    "static/js/4.a3582c18.chunk.js.map": "/carnet-algopresse/static/js/4.a3582c18.chunk.js.map",
+    "static/js/5.aa67b997.chunk.js": "/carnet-algopresse/static/js/5.aa67b997.chunk.js",
+    "static/js/5.aa67b997.chunk.js.map": "/carnet-algopresse/static/js/5.aa67b997.chunk.js.map",
     "index.html": "/carnet-algopresse/index.html",
     "static/css/4.5b92a664.chunk.css.map": "/carnet-algopresse/static/css/4.5b92a664.chunk.css.map",
-    "static/css/main.6d616001.chunk.css.map": "/carnet-algopresse/static/css/main.6d616001.chunk.css.map",
-    "static/js/4.abd60fa4.chunk.js.LICENSE.txt": "/carnet-algopresse/static/js/4.abd60fa4.chunk.js.LICENSE.txt"
+    "static/css/main.110a53f0.chunk.css.map": "/carnet-algopresse/static/css/main.110a53f0.chunk.css.map",
+    "static/js/4.a3582c18.chunk.js.LICENSE.txt": "/carnet-algopresse/static/js/4.a3582c18.chunk.js.LICENSE.txt",
+    "static/media/add-searching.77b7787c.svg": "/carnet-algopresse/static/media/add-searching.77b7787c.svg",
+    "static/media/delete-searching.661600dd.svg": "/carnet-algopresse/static/media/delete-searching.661600dd.svg",
+    "static/media/magnifier-and-delete-mark.dd5080f6.svg": "/carnet-algopresse/static/media/magnifier-and-delete-mark.dd5080f6.svg",
+    "static/media/magnifier-with-an-eye.726b433c.svg": "/carnet-algopresse/static/media/magnifier-with-an-eye.726b433c.svg",
+    "static/media/validate-search.08e22081.svg": "/carnet-algopresse/static/media/validate-search.08e22081.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.f356d7af.js",
+    "static/js/runtime-main.12e2696c.js",
     "static/css/4.5b92a664.chunk.css",
-    "static/js/4.abd60fa4.chunk.js",
-    "static/css/main.6d616001.chunk.css",
-    "static/js/main.5d0a5975.chunk.js"
+    "static/js/4.a3582c18.chunk.js",
+    "static/css/main.110a53f0.chunk.css",
+    "static/js/main.0ab9e8b6.chunk.js"
   ]
 }
