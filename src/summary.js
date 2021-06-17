@@ -150,7 +150,7 @@ const routes = [
   },
   {
     title: {
-      fr: 'Qu’est-ce que la topologie du réseau nous apprend de la critique médiatique ?',
+      fr: 'Que nous apprend la topologie du réseau ?',
       en: '5. Network topology',
     },
     route: {
@@ -170,7 +170,7 @@ const routes = [
   },
   {
     title: {
-      fr: 'Qui sont les agents calculateurs ?',
+      fr: 'Quelles entités peuplent le réseau sémantique ?',
       en: '6. Calculating agents',
     },
     route: {
@@ -190,7 +190,7 @@ const routes = [
   },
   {
     title: {
-      fr: 'Comment sont exprimés les verbes de troubles ?',
+      fr: 'Comment sont exprimés les troubles produits par ces technologies ?',
       en: '7. Trouble verbs',
     },
     route: {
