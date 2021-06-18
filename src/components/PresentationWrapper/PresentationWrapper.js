@@ -215,13 +215,15 @@ const PresentationWrapper = ({ match: { params } }) => {
 
     // find active section
     sectionsRef.current.find((ref, index) => {
+      
       if (ref.current) {
         const { y: initialSectionY, height } = ref.current.getBoundingClientRect();
         const bodyRect = document.body.getBoundingClientRect();
         const sectionY = initialSectionY - bodyRect.top;
-        if (index === 0 && y > sectionY && inHeader) {
+
+        if (index === 1 && y > sectionY && inHeader) {
           setInHeader(false);
-        } else if (index === 0 && y < sectionY && !inHeader) {
+        } else if (index === 1 && y < sectionY && !inHeader) {
           setInHeader(true);
         }
         if (index === sectionsRef.current.length - 1 && y > sectionY + height && !inFooter) {
@@ -274,7 +276,7 @@ const PresentationWrapper = ({ match: { params } }) => {
         setActiveVisualizationIndex(undefined);
       }
     }
-  }, [scrollY])
+  }, [scrollY]);
 
   const preventScroll = e => {
     e.preventScroll();
