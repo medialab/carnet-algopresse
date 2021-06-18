@@ -44,6 +44,7 @@ export function GraphContainer({
   // nodeColor,
   // nodeSize,
   labelDensity,
+  labelSize = 12,
   displayAllLabels,
   lockCamera,
   extents,
@@ -293,7 +294,7 @@ export function GraphContainer({
             width: cellWidth,
             height: cellHeight
           };
-          newRenderer.settings.labelSize = 12;
+          newRenderer.settings.labelSize = labelSize;
           newRenderer.settings.labelFont = 'Fira Sans';
           newRenderer.displayedLabels = new Set();
           newRenderer.refresh();

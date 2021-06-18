@@ -36,7 +36,7 @@ $fontsize_footer: .8rem;
    * Generic
    */
    a {
-    color: inherit;
+    color: $red;
     // font-weight: 800;
     // text-decoration: none;
   }
@@ -220,7 +220,7 @@ $fontsize_footer: .8rem;
 
     .header-main {
       color: $red;
-      padding-top: $screen_gutter_small / 2;
+      padding-top: 0;
       padding-left: $screen_gutter_large;
       .general-author {
         margin: 0;
@@ -266,29 +266,79 @@ $fontsize_footer: .8rem;
     .header-secondary {
       padding-left: $screen_gutter_large;
       padding-right: $screen_gutter_large;
+      margin-top: $padding_medium * 2;
       display: flex;
       flex-flow: row nowrap;
       justify-content: stretch;
-      .Nav {
-        flex: 1;
-        max-width: calc(100% - 500px);
-        padding-top: $screen_gutter_small /3;
-        padding-right: $padding_medium;
+      position: relative;
+      min-height: 70vh;
+      // background: green;
+
+      .left {
+        max-width: 50%;
+        .chapo {
+          color: $grey_dark;
+          opacity: .8;
+          font-weight: 800;
+          margin-left: 2rem;
+          margin-right: 4rem;
+          text-align: justify;
+          // font-family: $font_serif;
+        }
+        .Nav {
+          flex: 1;
+          // position: absolute;
+          // max-width: calc(100% - 500px);
+          padding-top: $padding_medium;
+          padding-right: $padding_medium;
+          // left: $screen_gutter_large;
+          // bottom: 0;
+        }
       }
-      .GraphWrapperContainer {
-        padding-top: 0;// $screen_gutter_small /3;
-        flex: 1;
-        width: 500px;
-        height: 500px; // calc(100vh - #{$padding_small} / 2);
-        transition: .5s ease all;
-        position: relative;
+      .right {
+        .GraphWrapperContainer {
+          padding-top: 0;// $screen_gutter_small /3;
+          flex: 1;
+          // background: red;
+          position: absolute;
+          // width: 500px;
+          width: 50vw - $screen_gutter_large;
+          right: $screen_gutter_large;
+          // top: $padding_medium;
+          // min-height: 30vh;
+          height:  calc(50vh - #{$padding_small});
+          transition: .5s ease all;
+          // position: relative;
+        }
+        .paper-citation {
+          position: absolute;
+          width: 50vw - $screen_gutter_large;
+          right: $screen_gutter_large;
+          bottom: $padding_medium * 0;
+          padding: $padding_medium;
+          padding-left: 2rem;
+          background: $grey;
+          opacity: .7;
+          transition: .5s ease all;
+          &:hover {
+            opacity: 1;
+          }
+          h3 {
+            font-size: $fontsize_methodo_title;
+            margin: 0;
+          }
+          blockquote {
+            margin-left: 0;
+            font-size: $fontsize-legend;
+          }
+        }
       }
     }
 
     .starter-button {
       position: absolute;
       bottom: 1rem;
-      left: calc(50vw - 2rem);
+      left: calc(50vw - 10rem);
       background: inherit;
       border: none;
       outline: none;
@@ -678,7 +728,9 @@ $fontsize_footer: .8rem;
     padding: $padding_medium * 2;
     padding-left: $screen_gutter_large;
     padding-right: $screen_gutter_large;
-    border-top: $line_border solid $red;
+    &.in-bottom {
+      border-top: $line_border solid $red;
+    }
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1rem;

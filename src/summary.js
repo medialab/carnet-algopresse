@@ -47,7 +47,8 @@ const routes = [
       fr: () => <ChapoFr />,
       en: () => <ChapoEn />
     },
-    Component: PlainPage
+    Component: PlainPage,
+    hideInContents: true
   },
   {
     title: {

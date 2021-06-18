@@ -1,16 +1,17 @@
 import React, {useContext/*, useMemo, Suspense*/} from 'react';
+import cx from 'classnames';
 import { LanguageContext } from '../../contexts';
 
 import Fr from '!babel-loader!mdx-loader!../../contents/fr/footer.mdx';
 import En from '!babel-loader!mdx-loader!../../contents/en/footer.mdx';
 
-const Footer = () => {
+const Footer = ({inBottom}) => {
   const {lang} = useContext(LanguageContext);
   // const Content = useMemo(() => {
   //   return  React.lazy(() => import(`!babel-loader!mdx-loader!../../contents/${lang}/footer.mdx`));
   // }, [lang])
   return (
-    <footer className="Footer">
+    <footer className={cx("Footer", {'in-bottom': inBottom})}>
       {
         lang === 'fr' ? <Fr /> : <En />
       }

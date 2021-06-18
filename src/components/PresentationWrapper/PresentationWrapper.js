@@ -14,7 +14,7 @@ import VisualizationController from '../VisualizationController';
 import { VisualizationControlContext, PresentationContext } from '../../contexts'
 // import {useDebouncedEffect} from '../../helpers/hooks';
 
-import routes from '../../summary'
+import routes from '../../summary';
 import { omit } from 'lodash-es';
 
 const buildRouteId = (_index, route, lang) => `${encodeURIComponent(route.route[lang].toLowerCase())}`;
@@ -30,7 +30,11 @@ const Sections = ({
   return (
     <main>
       {
-        routes.map((route, index) => {
+        routes
+        .map((route, index) => {
+          if (route.hideInContents) {
+            return null;
+          }
           const {
             data,
             contentsCompiled
@@ -344,6 +348,7 @@ const PresentationWrapper = ({ match: { params } }) => {
           onScrollToTop={handleScrollToTop}
           onScrollToFirstSection={handleScrollToFirstSection}
         />
+        <Footer />
         <Sections
           {
           ...{
@@ -369,7 +374,7 @@ const PresentationWrapper = ({ match: { params } }) => {
             <Loader percentsLoaded={loadingFraction * 100} />
           }
         </aside>
-        <Footer />
+        <Footer inBottom />
       </div>
     </PresentationContext.Provider>
   )

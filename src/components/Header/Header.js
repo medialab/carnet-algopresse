@@ -5,9 +5,13 @@ import Graph from 'graphology';
 import gexf from 'graphology-gexf';
 import {extent} from 'd3-array';
 import cx from 'classnames';
+import ContainerDimensions from 'react-container-dimensions';
 
 import Loader from '../Loader';
 import Nav from '../Nav';
+
+import CitationFr from '!babel-loader!mdx-loader!../../contents/fr/citation.mdx'
+import CitationEn from '!babel-loader!mdx-loader!../../contents/en/citation.mdx'
 
 import frMetadata from '../../contents/fr/metadata';
 import enMetadata from '../../contents/en/metadata';
@@ -15,7 +19,7 @@ import {homepage} from '../../../package.json';
 
 import {GraphContainer} from '../GraphAnnotation/GraphContainer'
 
-const GraphWrapper = ({data, ...props}) => {
+let GraphWrapper = ({data, ...props}) => {
   // const [cameraPosition, setCameraPosition] = useState({x: props.x, y: props.y, ratio: props.ratio})
   // useEffect(() => {
   //   setCameraPosition({
@@ -56,6 +60,14 @@ const GraphWrapper = ({data, ...props}) => {
     </div>
   );
 }
+
+const GraphWrapperWithDimensions = props => (
+  <ContainerDimensions>
+    {
+      dimensions => <GraphWrapper {...{...props, ...dimensions}} />
+    }
+  </ContainerDimensions>
+)
 
 const LanguageToggler = ({lang}) => {
   return (
@@ -130,7 +142,6 @@ const Header = ({
               ]
             }, total)
           }, [])
-          
         }
         <meta
           name={ 'DC.issued' }
@@ -235,7 +246,7 @@ const Header = ({
               {title}
             </h1>
            </div>
-           <ul className="creators">
+           {/* <ul className="creators">
              {
                creators.map(({role, people}) => (
                  <li key={role}>
@@ -250,21 +261,65 @@ const Header = ({
                  </li>
                ))
              }
-           </ul>
-           <div className="chapo">
-             <Chapo />
-           </div>
+           </ul> */}
       </div>
       <div className="header-secondary">
         {/* Summary */}
-        <Nav 
-          lang={lang} 
-          onRouteNav={onRouteNav} 
-          routes={routes} 
-          isDeployed={true}
-          activeSectionIndex={activeSectionIndex}
-        />
-        <Nav 
+        <div className="left">
+          <div className="chapo">
+            <Chapo />
+          </div>
+          <Nav 
+            lang={lang} 
+            onRouteNav={onRouteNav} 
+            routes={routes} 
+            isDeployed={true}
+            activeSectionIndex={activeSectionIndex}
+          />
+          
+        </div>
+        {/* réseau */}
+        <div className="right">
+        <div
+            onScroll={preventScroll}
+            className={cx("GraphWrapperContainer", {'has-visualization': graphData !== undefined})}
+          >
+            {
+              graphData ?
+              <GraphWrapperWithDimensions
+                data={graphData}
+                presentationMode={true}
+                x={0.5} 
+                y={0.5} 
+                ratio={.8} 
+                labelSize={10}
+                displayAllLabels={true}
+                nodeColorVariable={'cluster_rename'} 
+                nodeLabelVariable={'cluster_label'} 
+                labelDensity={1} 
+                colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
+              />
+              :
+              <Loader percentsLoaded={loadingFraction * 100} />
+            }
+          
+          </div>
+          <div className="paper-citation">
+          {
+            lang === 'fr' ?
+            <CitationFr />
+            :
+            <CitationEn />
+          }
+          </div>
+          <button onClick={onScrollToFirstSection} className="starter-button">
+        ⌄
+        </button>
+        </div>
+        
+      </div>
+      
+      <Nav 
           lang={lang} 
           onRouteNav={onRouteNav} 
           routes={routes} 
@@ -272,37 +327,6 @@ const Header = ({
           isHidden={isVisible}
           activeSectionIndex={activeSectionIndex}
         />
-        {/* réseau */}
-        <div
-          onScroll={preventScroll}
-          className={cx("GraphWrapperContainer", {'has-visualization': graphData !== undefined})}
-        >
-          {
-            graphData ?
-            <GraphWrapper
-              data={graphData}
-              presentationMode={true}
-              width={500}
-              height={500}
-              x={0.5} 
-              y={0.5} 
-              ratio={0.8} 
-              displayAllLabels={true}
-              nodeColorVariable={'cluster_rename'} 
-              nodeLabelVariable={'cluster_label'} 
-              labelDensity={1} 
-              colorPalette={{"Future_of_AI":"#f17325","Profiling_Algorthms":"#2cab57","Job_Automation":"#f5253e","Market_&_Prices":"#6bc06c","Predictive_Algorithms":"#adcd24","Web_Algorithms":"#d8dd0d","Facial_Recognition":"#54a5e8","Voice_Assistant":"#106f88","DeepDream_Nightmares":"#e1194a","Health_Algorithms":"#fa8566","Autonomous_Cars":"#e9c33f","Game_&_Education":"#a1943c","Chatbot":"#32968a","Consumer_&_Copyright":"#f49c57","Killer_Robots":"#4650ee","Robo-Advisers":"#19d2d4","Sex_Robots":"#e94d6c","Deepfake":"#4f990f","Image_Search":"#2ea2b3","Scientific_Research":"#cff157","Music":"#18a1bc","Email":"#ffb7e0","Deep_Voice":"#799c89"}} 
-            />
-            :
-            <Loader percentsLoaded={loadingFraction * 100} />
-          }
-        
-        </div>
-        
-      </div>
-      <button onClick={onScrollToFirstSection} className="starter-button">
-      ⌄
-      </button>
     </header>
   )
 }
