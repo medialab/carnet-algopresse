@@ -537,6 +537,32 @@ $fontsize_footer: .8rem;
       padding-left: 3rem;
       width: calc(100% - 5rem);
 
+      .labels-toggler {
+        position: absolute;
+        right: 0;
+        bottom: $padding_medium;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-flow: row nowrap;
+        button {
+          color: $red;
+          border: 1px solid $red;
+          background: white;
+          padding: $padding_small;
+          font-size: $fontsize_legend;
+          cursor: pointer;
+          &.is-active {
+            background: $red;
+            color: white;
+            cursor: default;
+          }
+        }
+        li:first-of-type button {
+          border-right: none;
+        }
+      }
+
       .GraphNav {
         position: absolute;
         right: 0;

@@ -1,10 +1,13 @@
-import React, {useCallback, useRef, useState, useEffect, useMemo} from 'react';
+import React, {useCallback, useRef, useState, useEffect, useMemo, useContext} from 'react';
 // import Graph from 'graphology';
 import {WebGLRenderer} from 'sigma';
 import {scaleLinear} from 'd3-scale';
 // import colorParse from 'parse-color';
 import {min, max} from 'd3-array';
+import cx from 'classnames';
 import ContainerDimensions from 'react-container-dimensions';
+
+import {LanguageContext} from '../../contexts';
 
 import {
   usePrevious, 
@@ -83,8 +86,16 @@ export function GraphContainer({
   onLegendChange,
   onDisplayAllLabelsChange,
 }) {
+  const {lang} = useContext(LanguageContext);
   const CELL_HEIGHT_RANGE = [height / 5, 1];
   const CELL_WIDTH_RANGE = [width / 5, 1];
+
+  const [labelsMode, setLabelsMode] = useState(false);
+
+  useEffect(() => {
+    setLabelsMode(false);
+  }, [nodeColorVariable, JSON.stringify(filters), labelDensity, labelSize, displayAllLabels])
+
 
   // const CELL_HEIGHT_RANGE = [200, 10];
   // const CELL_WIDTH_RANGE = [300, 30];
@@ -143,11 +154,13 @@ export function GraphContainer({
   const previousColorPalette = usePrevious(colorPalette);
   const previousFiltersModeAnd = usePrevious(filtersModeAnd);
   const previousDisplayAllLabels = usePrevious(displayAllLabels);
+  const previousLabelsMode = usePrevious(labelsMode);
+
 
   const nodeReducer = createNodeReducer({
     nodeColor,
     nodeSize,
-    nodeLabel: nodeLabelVariable,
+    nodeLabel: !labelsMode ? nodeLabelVariable : 'default',
     extents,
     filters,
     filtersModeAnd,
@@ -212,7 +225,8 @@ export function GraphContainer({
       previousColorPalette !== colorPalette ||
       // previousSearchString !== searchString ||
       JSON.stringify(previousFilters) !== JSON.stringify(filters) ||
-      previousFiltersModeAnd !== filtersModeAnd
+      previousFiltersModeAnd !== filtersModeAnd ||
+      labelsMode !== previousLabelsMode
     ) {
       // console.log('Refreshing sigma');
 
@@ -240,8 +254,9 @@ export function GraphContainer({
     // @todo replace this with a cleaner solution at some point
     if ((
       previousDisplayAllLabels !== displayAllLabels || !previousDisplayAllLabels || renderer.displayedLabels.size === 0
-      || previousNodeLabelVariable !== nodeLabelVariable || JSON.stringify(previousFilters) !== JSON.stringify(filters)
-      ) && displayAllLabels) {
+      || previousNodeLabelVariable !== nodeLabelVariable || JSON.stringify(previousFilters) !== JSON.stringify(filters) ||
+      previousLabelsMode !== labelsMode
+      ) && displayAllLabels && !labelsMode) {
       graph.forEachNode((id, attributes) => {
         const {label} = attributes;
         
@@ -253,7 +268,11 @@ export function GraphContainer({
         }
       })
       needToRefresh = true;
-    } else if (previousDisplayAllLabels !== displayAllLabels && !displayAllLabels) {
+    } else if (
+      (previousDisplayAllLabels !== displayAllLabels && !displayAllLabels)
+      ||
+      (previousLabelsMode !== labelsMode && !labelsMode)
+      ) {
       renderer.highlightedNodes = new Set();
       needToRefresh = true;
     }
@@ -343,7 +362,19 @@ export function GraphContainer({
           zoomOut={zoomOut.bind(null, renderer)}
           isLocked={lockCamera}
           onToggleLock={handleToggleCameraLock}
+          lang={lang}
           />
+      }
+      {
+        renderer && presentationMode && showNav && nodeLabelVariable !== 'default' &&
+        <ul className="labels-toggler">
+          <li>
+            <button onClick={() => setLabelsMode(true)} className={cx({'is-active': labelsMode})}>{lang === 'fr' ? 'montrer les labels': 'show labels'}</button>
+          </li>
+          <li>
+            <button onClick={() => setLabelsMode(false)} className={cx({'is-active': !labelsMode})}>{lang === 'fr' ? 'montrer les clusters': 'show clusters'}</button>
+          </li>
+        </ul>
       }
       {renderer && !presentationMode && (
         <>

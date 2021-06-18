@@ -14,29 +14,34 @@ export default function GraphNav({
   zoomIn,
   zoomOut,
   isLocked,
-  onToggleLock
+  onToggleLock,
+  lang
 }) {
+  let lockMessage = isLocked ? 'permettre la navigation dans le graphe' : 'bloquer la navigation dans le graphe';
+  if (lang !== 'en') {
+    lockMessage = isLocked ? 'enable navigation' : 'disable navigation';
+  }
   return (
     <ul className={cx("GraphNav", {'is-expanded': !isLocked})}>
       
       <li className="vis-controls-item">
 
-        <ControlButton title={'dézoomer dans la vue'} disabled={isLocked} onClick={zoomOut}>
+        <ControlButton title={lang === 'fr' ? 'dézoomer dans la vue' : 'unzoom'} disabled={isLocked} onClick={zoomOut}>
           <img alt="btn-icon" src={minus} />
         </ControlButton>
       </li>
       <li className="vis-controls-item">
-        <ControlButton title={'zoomer dans la vue'} disabled={isLocked} onClick={zoomIn}>
+        <ControlButton title={lang === 'fr' ? 'zoomer dans la vue' : 'zoom'} disabled={isLocked} onClick={zoomIn}>
           <img alt="btn-icon" src={plus} />
         </ControlButton>
       </li>
       <li className="vis-controls-item">
-        <ControlButton title={'recentrer la vue'} disabled={isLocked} onClick={rescale}>
+        <ControlButton title={lang === 'fr' ? 'recentrer la vue' : 'recenter'} disabled={isLocked} onClick={rescale}>
           <img alt="btn-icon" src={eye} />
         </ControlButton>
       </li>
       <li className="vis-controls-item">
-        <ControlButton title={isLocked ? 'permettre la navigation dans le graphe' : 'bloquer la navigation dans le graphe'} onClick={onToggleLock}>
+        <ControlButton title={lockMessage} onClick={onToggleLock}>
           {isLocked ? <img alt="btn-icon" src={activate} /> : <img alt="btn-icon" src={deactivate} />}
         </ControlButton>
       </li>
