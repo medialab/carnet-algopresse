@@ -37,8 +37,8 @@ $fontsize_footer: .8rem;
    */
    a {
     color: inherit;
-    font-weight: 800;
-    text-decoration: none;
+    // font-weight: 800;
+    // text-decoration: none;
   }
   svg {
     text {
@@ -62,7 +62,7 @@ $fontsize_footer: .8rem;
     // }
     padding-left: $screen_gutter_large;
     padding-right: $screen_gutter_large;
-    margin-top: $screen_gutter_large / 2;
+    margin-top: $padding_medium * 3;
     h1, h2 {
       font-family: $font_sans;
       font-weight: 300;
@@ -112,10 +112,18 @@ $fontsize_footer: .8rem;
     font-family: $font_serif;
     .methodo-container {
       font-family: $font_sans;
-      border: $line_border solid $red;
+      // border: $line_border solid $red;
       padding: $padding_small $padding_medium $padding_small $padding_medium;
       margin-top: $padding_medium;
-      p {
+      background: $grey;
+      opacity: .7;
+      transition: .5s ease all;
+      &:hover {
+        opacity: 1;
+      }
+      p,
+      li,
+      ul {
         margin-bottom: $padding_small * .5;
         margin-top: 0;
         font-size: $fontsize-legend;
@@ -593,7 +601,7 @@ $fontsize_footer: .8rem;
     box-sizing: border-box;
     display: inline-block;
     font-family: $font_sans;
-    padding: $padding_small $padding_medium;
+    padding: $padding_medium;
     // transition: .5s ease all;
     cursor: pointer;
     width: 100%;
@@ -615,10 +623,12 @@ $fontsize_footer: .8rem;
       }
       .ColorLegend {
         flex: 1;
-        min-width: 66%;
+        min-width: 60%;
         list-style: none;
         padding: 0;
+        padding-top: .2rem;
         margin: 0;
+        margin-left: $padding_medium;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: .3rem;
@@ -676,20 +686,23 @@ $fontsize_footer: .8rem;
     .column {
       max-width: calc(50vw - #{$screen_gutter_large});
       p {
-        margin: 0;
+        margin-top: 0;
       }
     }
     .logos-container {
       margin-top: $padding_medium;
       display: flex;
       flex-flow: row nowrap;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      a {
-        flex: 1;
-      }
+      
       img {
         max-width: 100%;
+        max-height: 3rem;
+      }
+      a:first-of-type img {
+        max-height: 6rem;
+        padding-top: 1rem;
       }
     }
   }
