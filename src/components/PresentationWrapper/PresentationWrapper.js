@@ -93,7 +93,7 @@ const PresentationWrapper = ({ match: { params } }) => {
 
   const scrollRef = useRef(null);
   const liveScrollY = useScrollYPosition();
-  const scrollY = useDebounce(liveScrollY, 50);
+  const scrollY = useDebounce(liveScrollY, 100);
 
   /**
    * Scroll on coumponent mount
