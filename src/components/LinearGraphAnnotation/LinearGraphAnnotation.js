@@ -97,7 +97,7 @@ const LinearGraphAnnotation = ({
 
     if (thatColorPalette && ((!colorVariable && thatColorVariable) || colorVariable === thatColorVariable)) {
       setColorPalette(thatColorPalette);
-    } else if (thatColorVariable) {
+    } else if (thatColorVariable && filtersOptions[thatColorVariable]) {
       let colors = thatColorVariable && thatColorVariable !== 'default' ? generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.length) : undefined
       // const colors = generatePalette(thatColorVariable, filtersOptions[thatColorVariable].options.size);
       const finalPalette = {};
