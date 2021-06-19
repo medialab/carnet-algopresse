@@ -59,7 +59,7 @@ export function GraphContainer({
   onToggleFiltersModeAnd,
 
   filtersOptions = {},
-  filters = [],
+  filters : inputFilters = [],
   onFiltersChange,
 
   onCameraUpdate,
@@ -75,7 +75,7 @@ export function GraphContainer({
 
   nodeSizeVariable,
   nodeColorVariable,
-  colorPalette,
+  colorPalette : inputColorPalette,
   nodeLabelVariable,
   onNodeSizeVariableChange,
   onNodeColorVariableChange,
@@ -92,9 +92,13 @@ export function GraphContainer({
 
   const [labelsMode, setLabelsMode] = useState(false);
 
+  const filters = useMemo(() => inputFilters, [JSON.stringify(inputFilters)]);
+  const colorPalette = useMemo(() => inputColorPalette, [JSON.stringify(inputColorPalette)]);
+
   useEffect(() => {
+    console.log('1');
     setLabelsMode(false);
-  }, [nodeColorVariable, JSON.stringify(filters), labelDensity, labelSize, displayAllLabels])
+  }, [nodeColorVariable, filters, labelDensity, labelSize, displayAllLabels])
 
 
   // const CELL_HEIGHT_RANGE = [200, 10];
@@ -182,6 +186,7 @@ export function GraphContainer({
   const [renderer, setRenderer] = useState(null);
 
   useEffect(() => {
+    console.log('2');
     if (renderer) {
       const camera = renderer.getCamera();
       if (cameraPosition) {
@@ -204,7 +209,6 @@ export function GraphContainer({
     }
     
   }, [
-    updateTimestamp, 
     lockCamera, 
     cameraPosition,
     nodeColorVariable,
@@ -224,7 +228,7 @@ export function GraphContainer({
       previousNodeLabelVariable !== nodeLabelVariable ||
       previousColorPalette !== colorPalette ||
       // previousSearchString !== searchString ||
-      JSON.stringify(previousFilters) !== JSON.stringify(filters) ||
+      previousFilters !== filters ||
       previousFiltersModeAnd !== filtersModeAnd ||
       labelsMode !== previousLabelsMode
     ) {
@@ -254,7 +258,7 @@ export function GraphContainer({
     // @todo replace this with a cleaner solution at some point
     if ((
       previousDisplayAllLabels !== displayAllLabels || !previousDisplayAllLabels || renderer.displayedLabels.size === 0
-      || previousNodeLabelVariable !== nodeLabelVariable || JSON.stringify(previousFilters) !== JSON.stringify(filters) ||
+      || previousNodeLabelVariable !== nodeLabelVariable || previousFilters !== filters ||
       previousLabelsMode !== labelsMode
       ) && displayAllLabels && !labelsMode) {
       graph.forEachNode((id, attributes) => {

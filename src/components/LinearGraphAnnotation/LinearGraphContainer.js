@@ -41,7 +41,7 @@ export function LinearGraphContainer({
   filtersOptions = {},
 
   filtersModeAnd,
-  filters = [],
+  filters: inputFilters = [],
   presentationMode,
 
   
@@ -74,6 +74,8 @@ export function LinearGraphContainer({
   let xRange = [MARGIN, WIDTH - MARGIN / 2];
   let yRange = [HEIGHT - MARGIN, MARGIN];
 
+
+  const filters = useMemo(() => inputFilters, [JSON.stringify(inputFilters)]);
 
   const xLabelMap = useMemo(() => {
     return data.reduce((dict, datum) => {
@@ -182,17 +184,21 @@ export function LinearGraphContainer({
     
   
   // manage palette
-  let colorPalette;
-  if (inputColorPalette) {
-    colorPalette = inputColorPalette;
-  }
-  else if (colorVariable && colorVariable !== 'default') {
-    const palette = generatePalette(colorVariable, filtersOptions[colorVariable].options.length);
-    colorPalette = filtersOptions[colorVariable].options.reduce((res, option, index) => ({
-      ...res,
-      [option]: palette[index]
-    }), {})
-  }
+  const colorPalette = useMemo(() => {
+    let newColorPalette;
+    if (inputColorPalette) {
+      newColorPalette = inputColorPalette;
+    }
+    else if (colorVariable && colorVariable !== 'default') {
+      const palette = generatePalette(colorVariable, filtersOptions[colorVariable].options.length);
+      newColorPalette = filtersOptions[colorVariable].options.reduce((res, option, index) => ({
+        ...res,
+        [option]: palette[index]
+      }), {})
+    }
+    return newColorPalette;
+  }, [JSON.stringify(inputColorPalette), colorVariable, filtersOptions])/* eslint react-hooks/exhaustive-deps: 0*/
+  
   let getColor = (val) => {
     return colorPalette ? colorPalette[val] : 'grey';
   }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ContainerDimensions from 'react-container-dimensions';
 import { scaleLinear } from 'd3-scale';
 import { min, extent } from 'd3-array';
@@ -41,7 +41,7 @@ export function IceCreamContainer({
   onToggleFiltersModeAnd,
   filtersModeAnd,
   onFiltersChange,
-  filters = [],
+  filters : inputFilters = [],
   title,
   legend,
   reverseFlickering,
@@ -64,6 +64,7 @@ export function IceCreamContainer({
 
   const [zoomedIndex, setZoomedIndex] = useState(null);
   const [enableZoom, setEnableZoom] = useState(true);
+  const filters = useMemo(() => inputFilters, [JSON.stringify(inputFilters)]);
   const updateActive = () => {
     if (filters && filters.length) {
       const existing = zoomedIndex === null ? -1 : zoomedIndex;
@@ -145,30 +146,38 @@ export function IceCreamContainer({
   const getSize = sizeVariable && sizeVariable !== 'default' ? scaleLinear().domain(extent(data.map(d => +d[sizeVariable]))).range([MIN_AREA, MAX_AREA]) : () => 0;
 
   // manage palette
-  let colorPalette;
-  if (inputColorPalette) {
-    colorPalette = inputColorPalette;
-  }
-  else if (colorVariable && colorVariable !== 'default' && filtersOptions[colorVariable]) {
-    const palette = generatePalette(colorVariable, filtersOptions[colorVariable].options.length);
-    colorPalette = filtersOptions[colorVariable].options.reduce((res, option, index) => ({
-      ...res,
-      [option]: palette[index]
-    }), {})
-  }
-  let continuousColorScale;
-  if (colorScaleType === 'continuous') {
-    let colorRange = ['#D77186', '#61A2DA'];
-    if (colorPalette && colorPalette['from'] && colorPalette['to']) {
-      colorRange = [colorPalette['from'], colorPalette['to']]
-    } else {
-      colorPalette = {
-        from: '#D77186',
-        to: '#61A2DA'
-      }
+  const {continuousColorScale, colorPalette} = useMemo(() => {
+    let newColorPalette;
+    if (inputColorPalette) {
+      newColorPalette = inputColorPalette;
     }
-    continuousColorScale = scaleLinear().domain(extent(data.map(d => +d[colorVariable]))).range(colorRange)
-  }
+    else if (colorVariable && colorVariable !== 'default' && filtersOptions[colorVariable]) {
+      const palette = generatePalette(colorVariable, filtersOptions[colorVariable].options.length);
+      newColorPalette = filtersOptions[colorVariable].options.reduce((res, option, index) => ({
+        ...res,
+        [option]: palette[index]
+      }), {})
+    }
+    let newContinuousColorScale;
+    if (colorScaleType === 'continuous') {
+      let colorRange = ['#D77186', '#61A2DA'];
+      if (newColorPalette && newColorPalette['from'] && newColorPalette['to']) {
+        colorRange = [newColorPalette['from'], newColorPalette['to']]
+      } else {
+        newColorPalette = {
+          from: '#D77186',
+          to: '#61A2DA'
+        }
+      }
+      newContinuousColorScale = scaleLinear().domain(extent(data.map(d => +d[colorVariable]))).range(colorRange)
+    }
+    return {
+      colorPalette: newColorPalette,
+      continuousColorScale: newContinuousColorScale
+    }
+  }, [JSON.stringify(inputColorPalette), colorScaleType, filtersOptions, colorVariable])/* eslint react-hooks/exhaustive-deps: 0*/
+  
+  
   let getColor = (val) => {
     if (colorScaleType === 'continuous') {
       return continuousColorScale(+val);

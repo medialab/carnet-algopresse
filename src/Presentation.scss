@@ -708,19 +708,23 @@ $fontsize_footer: .8rem;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: .3rem;
+        overflow: hidden;
         li {
           display: flex;
           // align-items: center;
+          box-sizing: border-box;
           .color {
             min-width: 1rem;
             min-height: 1rem;
             max-width: 1rem;
             max-height: 1rem;
             display: inline-block;
+            box-sizing: border-box;
           }
           .label {
             padding-left: .2rem;
             font-size: $fontsize_legend;
+            box-sizing: border-box;
           }
         }
       }
