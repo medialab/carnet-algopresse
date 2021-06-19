@@ -16,6 +16,7 @@ import { VisualizationControlContext, PresentationContext } from '../../contexts
 
 import routes from '../../summary';
 import { omit } from 'lodash-es';
+import { useDebounce } from '../../helpers/hooks';
 
 const buildRouteId = (_index, route, lang) => `${encodeURIComponent(route.route[lang].toLowerCase())}`;
 
@@ -91,7 +92,8 @@ const PresentationWrapper = ({ match: { params } }) => {
   )
 
   const scrollRef = useRef(null);
-  const scrollY = useScrollYPosition();
+  const liveScrollY = useScrollYPosition();
+  const scrollY = useDebounce(liveScrollY, 100);
 
   /**
    * Scroll on coumponent mount
@@ -283,6 +285,7 @@ const PresentationWrapper = ({ match: { params } }) => {
     e.stopPropagation();
     e.preventDefault();
   }
+
   const handleRouteNav = index => {
     setActiveVisualization(undefined);
     setActiveSectionIndex(index);
