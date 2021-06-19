@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import ContainerDimensions from 'react-container-dimensions';
-import { scaleLinear } from 'd3-scale';
+import { scaleLinear, scalePow } from 'd3-scale';
 import { min, extent } from 'd3-array';
 import cx from 'classnames';
 
@@ -161,7 +161,9 @@ export function IceCreamContainer({
     let newContinuousColorScale;
     if (colorScaleType === 'continuous') {
       let colorRange = ['#D77186', '#61A2DA'];
-      if (newColorPalette && newColorPalette['from'] && newColorPalette['to']) {
+      if (newColorPalette && newColorPalette['From'] && newColorPalette['To']) {
+        colorRange = [newColorPalette['From'], newColorPalette['To']]
+      } else if (newColorPalette && newColorPalette['from'] && newColorPalette['to']) {
         colorRange = [newColorPalette['from'], newColorPalette['to']]
       } else {
         newColorPalette = {
@@ -169,14 +171,13 @@ export function IceCreamContainer({
           to: '#61A2DA'
         }
       }
-      newContinuousColorScale = scaleLinear().domain(extent(data.map(d => +d[colorVariable]))).range(colorRange)
+      newContinuousColorScale = scalePow().domain(extent(data.map(d => +d[colorVariable]))).range(colorRange)
     }
     return {
       colorPalette: newColorPalette,
       continuousColorScale: newContinuousColorScale
     }
   }, [JSON.stringify(inputColorPalette), colorScaleType, filtersOptions, colorVariable])/* eslint react-hooks/exhaustive-deps: 0*/
-  
   
   let getColor = (val) => {
     if (colorScaleType === 'continuous') {
