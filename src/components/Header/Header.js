@@ -95,7 +95,8 @@ const Header = ({
   graphData,
   loadingFraction,
   onScrollToTop,
-  onScrollToFirstSection
+  onScrollToFirstSection,
+  inFooter
 }) => {
   const meta = lang === 'fr' ? frMetadata : enMetadata;
   const {
@@ -318,15 +319,15 @@ const Header = ({
         </div>
         
       </div>
-      
       <Nav 
-          lang={lang} 
-          onRouteNav={onRouteNav} 
-          routes={routes} 
-          isDeployed={false}
-          isHidden={isVisible}
-          activeSectionIndex={activeSectionIndex}
-        />
+        lang={lang} 
+        onRouteNav={onRouteNav} 
+        routes={routes} 
+        isDeployed={false}
+        isHidden={inFooter}
+        activeSectionIndex={activeSectionIndex}
+      />
+      
     </header>
   )
 }
