@@ -312,9 +312,9 @@ const Header = ({
             <CitationEn />
           }
           </div>
-          <button onClick={onScrollToFirstSection} className="starter-button">
+          {/* <button onClick={onScrollToFirstSection} className="starter-button">
         ⌄
-        </button>
+        </button> */}
         </div>
         
       </div>

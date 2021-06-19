@@ -220,7 +220,7 @@ $fontsize_footer: .8rem;
 
     .header-main {
       color: $red;
-      padding-top: 0;
+      padding-top: $padding_medium * 3;
       padding-left: $screen_gutter_large;
       .general-author {
         margin: 0;
@@ -266,12 +266,12 @@ $fontsize_footer: .8rem;
     .header-secondary {
       padding-left: $screen_gutter_large;
       padding-right: $screen_gutter_large;
-      margin-top: $padding_medium * 2;
+      margin-top: $padding_medium ;
       display: flex;
       flex-flow: row nowrap;
       justify-content: stretch;
       position: relative;
-      min-height: 70vh;
+      min-height: 50vh;
       // background: green;
 
       .left {
@@ -283,14 +283,16 @@ $fontsize_footer: .8rem;
           margin-left: 2rem;
           margin-right: 4rem;
           text-align: justify;
+          
           // font-family: $font_serif;
         }
         .Nav {
           flex: 1;
           // position: absolute;
           // max-width: calc(100% - 500px);
-          padding-top: $padding_medium;
+          // padding-top: $padding_medium;
           padding-right: $padding_medium;
+          // font-size: $fontsize_toc;
           // left: $screen_gutter_large;
           // bottom: 0;
         }
@@ -312,7 +314,7 @@ $fontsize_footer: .8rem;
         }
         .paper-citation {
           position: absolute;
-          width: 50vw - $screen_gutter_large;
+          width: 45vw - $screen_gutter_large;
           right: $screen_gutter_large;
           bottom: $padding_medium * 0;
           padding: $padding_medium;
@@ -338,7 +340,7 @@ $fontsize_footer: .8rem;
     .starter-button {
       position: absolute;
       bottom: 1rem;
-      left: calc(50vw - 10rem);
+      left: calc(50vw - 2rem);
       background: inherit;
       border: none;
       outline: none;
@@ -758,6 +760,9 @@ $fontsize_footer: .8rem;
     padding: $padding_medium * 2;
     padding-left: $screen_gutter_large;
     padding-right: $screen_gutter_large;
+    &:not(.in-bottom) {
+      padding-top: $padding_medium * 4;
+    }
     &.in-bottom {
       border-top: $line_border solid $red;
     }
@@ -788,4 +793,117 @@ $fontsize_footer: .8rem;
       }
     }
   }
+
+
+  // medium breakpoint
+  @media screen and (max-width: 950px) {
+    .Header {
+      .header-main {
+        padding-left: $padding_medium * 2;
+      }
+      .header-secondary {
+        flex-flow: column nowrap;
+        padding-right: $padding_medium * 2;
+        padding-left: $padding_medium * 2;
+        .left,.right {
+          max-width: unset;
+        }
+        .GraphWrapperContainer {
+          display: none;
+        }
+        .left {
+          display: flex;
+          flex-flow: row nowrap;
+          .chapo {
+            margin-left: 0;
+            margin-right: 0;
+            flex: 1;
+            padding-right: $padding_medium;
+          }
+        }
+        .right {
+          .paper-citation {
+            position: relative;
+            width: unset;
+            margin-left: 0;
+            right: unset;
+          }
+        }
+        
+      }
+      .LanguageToggler {
+        right: $padding_medium * 2;
+      }
+    }
+    
+    .Footer {
+      padding-left: $padding_medium * 2;
+      padding-right: $padding_medium * 2;
+      grid-gap: 8rem;
+    }
+  }
+  // ipad vertical breakpoint
+  @media screen and (max-width: 800px) {
+    .Header {
+      justify-content: unset;
+      min-height: unset;
+      .header-main {
+        margin-top: $padding_medium * 2;
+        .main-title {
+          font-size: 3rem;
+        }
+      }
+    }
+
+    .section-container.has-visualization {
+      max-width: calc(50% - 2rem);
+    }
+    .visualization-container {
+      width: 40%;
+    }
+  }
+
+  // mobile breakpoint
+  @media screen and (max-width: 600px) {
+    .Header {
+      .header-main {
+        padding-left: $padding_medium;
+        padding-right: $padding_medium;
+      }
+      .header-secondary {
+        padding-left: $padding_medium;
+        padding-right: $padding_medium;
+        .left {
+          flex-flow: column nowrap;
+          .chapo {
+            padding-right: 0;
+          }
+        }
+      }
+    }
+    .section-container.has-visualization {
+      max-width: calc(100% - 2rem);
+      padding-right: $padding_medium;
+    }
+    .visualization-container {
+      display: none;
+    }
+    .VisualizationBlock {
+      .secondary {
+        flex-flow: column nowrap;
+        .ColorLegend {
+          margin-left: 0;
+          display: block;
+          margin-top: $padding_medium;
+        }
+      }
+    }
+    .Footer {
+      display: block;
+      .column {
+        max-width: unset;
+      }
+    }
+  }
+
 }
