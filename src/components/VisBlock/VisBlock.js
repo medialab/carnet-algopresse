@@ -19,10 +19,31 @@ const filterColorPalette = (colorVariable, colorPalette = {}, filters = [], filt
   })
 }
 
-const ColorLegend = ({colorPalette = []}) => {
+const ColorLegend = ({
+  colorPalette = [],
+  colorScaleType,
+  colorVariable
+}) => {
   return (
-    <ul className="ColorLegend">
+    <ul className={cx("ColorLegend", {'is-continuous': colorScaleType === 'continuous'})}>
       {
+        colorScaleType === 'continuous' ?
+        <li className="continuous-scale-container">
+          <div className="prelabel">
+            couleur en fonction du score <strong>{colorVariable}</strong>
+          </div>
+          <div className="labels">
+            <span>0</span>
+            <span>1</span>
+          </div>
+          <div 
+            className="continuous-scale"
+            style={{
+              background: colorPalette.length === 2 ? `linear-gradient(to right, ${colorPalette[0][1]} 20%, ${colorPalette[1][1]} 60%)` : undefined
+            }}
+          />
+        </li>
+        :
         colorPalette
         .sort(([labelA], [labelB]) => {
           if (labelA > labelB) {
@@ -49,7 +70,8 @@ const VisBlock = React.forwardRef(({
   nodeColorVariable,
   filters,
   filtersModeAnd,
-  colorVariable
+  colorVariable,
+  colorScaleType,
 }, ref) => {
   const {
     activeVisualization,
@@ -76,7 +98,11 @@ const VisBlock = React.forwardRef(({
           </p>
           : null
         }
-        <ColorLegend colorPalette={colors} />
+        <ColorLegend 
+          colorPalette={colors} 
+          colorScaleType={colorScaleType} 
+          colorVariable={colorVariable}
+        />
       </div>
       
     </div>

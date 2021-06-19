@@ -711,6 +711,9 @@ $fontsize_footer: .8rem;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: .3rem;
         overflow: hidden;
+        &.is-continuous {
+          display: block;
+        }
         li {
           display: flex;
           // align-items: center;
@@ -727,6 +730,22 @@ $fontsize_footer: .8rem;
             padding-left: .2rem;
             font-size: $fontsize_legend;
             box-sizing: border-box;
+          }
+        }
+        .continuous-scale-container {
+          flex-flow: column nowrap;
+          .prelabel {
+            font-size: $fontsize_toc;
+          }
+          .labels {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            font-weight: 800;
+          }
+          .continuous-scale {
+            height: 1rem;
+            width: 100%;
           }
         }
       }
