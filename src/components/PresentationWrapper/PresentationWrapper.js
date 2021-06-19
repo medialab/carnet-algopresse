@@ -347,6 +347,7 @@ const PresentationWrapper = ({ match: { params } }) => {
           routes={routes}
           onRouteNav={handleRouteNav}
           isVisible={inHeader}
+          inFooter={inFooter}
           activeSectionIndex={activeSectionIndex}
           loadingFraction={loadingFraction}
           graphData={datasets && datasets['Graph_Critic_EN_algopress_webV2.gexf']}

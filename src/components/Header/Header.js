@@ -319,12 +319,13 @@ const Header = ({
         </div>
         
       </div>
+
       <Nav 
         lang={lang} 
         onRouteNav={onRouteNav} 
         routes={routes} 
         isDeployed={false}
-        isHidden={inFooter}
+        isHidden={isVisible || inFooter}
         activeSectionIndex={activeSectionIndex}
       />
       
