@@ -125,7 +125,7 @@ const PresentationWrapper = ({ match: { params } }) => {
           if (relevantVisualization) {
             setActiveVisualizationIndex(+visualizationIndex);
             setActiveVisualization(relevantVisualization);
-            const y = relevantVisualization.ref.current.getBoundingClientRect().y;
+            const y = relevantVisualization.ref.current ? relevantVisualization.ref.current.getBoundingClientRect().y : 0;
             const bodyRect = document.body.getBoundingClientRect();
             const visY = y - bodyRect.top;
             window.scrollTo({
