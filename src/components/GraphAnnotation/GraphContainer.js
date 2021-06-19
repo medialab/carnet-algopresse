@@ -96,7 +96,6 @@ export function GraphContainer({
   const colorPalette = useMemo(() => inputColorPalette, [JSON.stringify(inputColorPalette)]);
 
   useEffect(() => {
-    console.log('1');
     setLabelsMode(false);
   }, [nodeColorVariable, filters, labelDensity, labelSize, displayAllLabels])
 
@@ -186,7 +185,6 @@ export function GraphContainer({
   const [renderer, setRenderer] = useState(null);
 
   useEffect(() => {
-    console.log('2');
     if (renderer) {
       const camera = renderer.getCamera();
       if (cameraPosition) {
