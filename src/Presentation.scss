@@ -582,29 +582,39 @@ $fontsize_footer: .8rem;
             border: none;
             background: transparent;
             cursor: pointer;
+            color: $red;
+            border: 1px solid $red;
+            background: white;
+            padding: $padding_small;
+            font-size: $fontsize_legend;
             &[disabled] {
               opacity: .5;
               cursor: not-allowed;
             }
+
+            &.is-active {
+              background: $red;
+              color: white;
+            }
             
           }
-          img {
-            max-width: 2.3rem;
-          }
+          // img {
+          //   max-width: 2.3rem;
+          // }
           max-width: 0;
           overflow: hidden;
           transition: .5s ease all;
           &:last-of-type {
-            max-width: 4rem;
-            img {
-              max-width: 3rem;
-            }
+            max-width: 15rem;
+            // img {
+            //   max-width: 3rem;
+            // }
           }
 
         }
         &.is-expanded {
           li {
-            max-width: 4rem;
+            max-width: 15rem;
           }
         }
       }
@@ -704,7 +714,7 @@ $fontsize_footer: .8rem;
       }
       .ColorLegend {
         flex: 1;
-        min-width: 60%;
+        min-width: 70%;
         list-style: none;
         padding: 0;
         padding-top: .2rem;
@@ -731,7 +741,7 @@ $fontsize_footer: .8rem;
           }
           .label {
             padding-left: .2rem;
-            font-size: $fontsize_legend;
+            font-size: $fontsize_toc;
             box-sizing: border-box;
           }
         }
