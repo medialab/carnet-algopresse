@@ -382,13 +382,49 @@ export function LinearGraphContainer({
                     />
                     {
                       values.map(({x, y}, index) => (
-                        <circle
-                          key={index}
-                          cx={getX(x)}
-                          cy={getY(y)}
-                          fill={ color }
-                          r={2}
-                        />
+                        <g key={index} className="linegraph-object-group">
+                          <circle
+                            className="hover-placeholder"
+                            cx={getX(x)}
+                            cy={getY(y)}
+                            fill={ 'transparent' }
+                            r={MARGIN / 7}
+                          />
+                          <text
+                            x={getX(x) < (WIDTH - MARGIN) / 2 ? getX(x) : getX(x)}
+                            y={getY(y) - MARGIN / 10}
+                            className="visible-on-hover"
+                            fontSize={MARGIN / 7}
+                            textAnchor={getX(x) < (WIDTH - MARGIN) / 2 ? 'start' : 'end'}
+                          >
+                            {colorValue}, {xLabelMap[x]} : {y}
+                          </text>
+                          <line
+                            className="control-line horizontal-line visible-on-hover"
+                            x1={MARGIN}
+                            y1={getY(y)}
+                            x2={getX(x)}
+                            y2={getY(y)}
+                            stroke="black"
+                            strokeDasharray={'4, 4'}
+                          />
+                          <line
+                            className="control-line vertical-line visible-on-hover"
+                            x1={getX(x)}
+                            y1={getY(y)}
+                            x2={getX(x)}
+                            y2={HEIGHT - MARGIN}
+                            stroke="black"
+                            strokeDasharray={'4, 4'}
+                          />
+                          <circle
+                            key={index}
+                            cx={getX(x)}
+                            cy={getY(y)}
+                            fill={ color }
+                            r={2}
+                          />
+                        </g>
                       ))
                     }
                   </>

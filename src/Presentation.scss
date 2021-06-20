@@ -625,6 +625,23 @@ $fontsize_footer: .8rem;
         position: relative;
         margin-top: 20vh;
       }
+
+      .linegraph-object-group {
+        .visible-on-hover {
+          opacity: 0;
+          transition: .5s ease all;
+          pointer-events: none;
+          // .control-line {
+            // stroke: black;
+            // stroke-dasharray: 4, 4;
+          // }
+        }
+        &:hover {
+          .visible-on-hover {
+            opacity: 1;
+          }
+        }
+      }
     }
     
   }
