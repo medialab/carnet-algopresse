@@ -3,11 +3,11 @@ import cx from 'classnames';
 
 import ControlButton from '../ControlButton';
 
-import eye from './icons/magnifier-with-an-eye.svg';
-import plus from './icons/add-searching.svg';
-import minus from './icons/delete-searching.svg';
-import activate from './icons/validate-search.svg';
-import deactivate from './icons/magnifier-and-delete-mark.svg';
+// import eye from './icons/magnifier-with-an-eye.svg';
+// import plus from './icons/add-searching.svg';
+// import minus from './icons/delete-searching.svg';
+// import activate from './icons/validate-search.svg';
+// import deactivate from './icons/magnifier-and-delete-mark.svg';
 
 export default function GraphNav({
   rescale,
@@ -27,22 +27,26 @@ export default function GraphNav({
       <li className="vis-controls-item">
 
         <ControlButton title={lang === 'fr' ? 'dézoomer dans la vue' : 'unzoom'} disabled={isLocked} onClick={zoomOut}>
-          <img alt="btn-icon" src={minus} />
+          {/* <img alt="btn-icon" src={minus} /> */}
+          {lang === 'fr' ? 'dézoomer' : 'unzoom'}
         </ControlButton>
       </li>
       <li className="vis-controls-item">
         <ControlButton title={lang === 'fr' ? 'zoomer dans la vue' : 'zoom'} disabled={isLocked} onClick={zoomIn}>
-          <img alt="btn-icon" src={plus} />
+          {/* <img alt="btn-icon" src={plus} /> */}
+          {lang === 'fr' ? 'zoomer' : 'zoom'}
         </ControlButton>
       </li>
       <li className="vis-controls-item">
         <ControlButton title={lang === 'fr' ? 'recentrer la vue' : 'recenter'} disabled={isLocked} onClick={rescale}>
-          <img alt="btn-icon" src={eye} />
+          {/* <img alt="btn-icon" src={eye} /> */}
+          {lang === 'fr' ? 'recentrer' : 'recenter'}
         </ControlButton>
       </li>
       <li className="vis-controls-item">
-        <ControlButton title={lockMessage} onClick={onToggleLock}>
-          {isLocked ? <img alt="btn-icon" src={activate} /> : <img alt="btn-icon" src={deactivate} />}
+        <ControlButton isActive={!isLocked} title={lockMessage} onClick={onToggleLock}>
+          {/* {isLocked ? <img alt="btn-icon" src={activate} /> : <img alt="btn-icon" src={deactivate} />} */}
+          {lang === 'fr' ? 'explorer' : 'explore'}
         </ControlButton>
       </li>
       

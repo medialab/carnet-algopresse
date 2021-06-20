@@ -3,8 +3,8 @@ import cx from 'classnames';
 import React, {useContext} from 'react';
 import { PresentationContext} from '../../contexts';
 
-const filterColorPalette = (colorVariable, colorPalette = {}, filters = [], filtersModeAnd) => {
-  if (!filters.length) {
+const filterColorPalette = (colorVariable, colorPalette = {}, filters = [], colorScaleType) => {
+  if (!filters.length || colorScaleType === 'continuous') {
     return Object.entries(colorPalette);
   }
   return Object.entries(colorPalette)
@@ -24,6 +24,7 @@ const ColorLegend = ({
   colorScaleType,
   colorVariable
 }) => {
+  
   return (
     <ul className={cx("ColorLegend", {'is-continuous': colorScaleType === 'continuous'})}>
       {
@@ -69,7 +70,7 @@ const VisBlock = React.forwardRef(({
   colorPalette,
   nodeColorVariable,
   filters,
-  filtersModeAnd,
+  // filtersModeAnd,
   colorVariable,
   colorScaleType,
 }, ref) => {
@@ -82,7 +83,7 @@ const VisBlock = React.forwardRef(({
       onBlockClick(id, ref);
     }
   }
-  const colors = filterColorPalette(nodeColorVariable || colorVariable, colorPalette, filters, filtersModeAnd);
+  const colors = filterColorPalette(nodeColorVariable || colorVariable, colorPalette, filters, colorScaleType);
   return (
     <div onClick={onClick} ref={ref} id={id} className={cx("VisualizationBlock LinearGraphBlock", {'is-active': activeVisualization && activeVisualization.id === id})}>
       {

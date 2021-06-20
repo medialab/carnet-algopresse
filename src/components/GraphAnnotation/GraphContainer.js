@@ -158,7 +158,7 @@ export function GraphContainer({
   const previousFiltersModeAnd = usePrevious(filtersModeAnd);
   const previousDisplayAllLabels = usePrevious(displayAllLabels);
   const previousLabelsMode = usePrevious(labelsMode);
-
+  const previousLockCamera = usePrevious(lockCamera);
 
   const nodeReducer = createNodeReducer({
     nodeColor,
@@ -184,25 +184,23 @@ export function GraphContainer({
   const container = useRef(null);
   const [renderer, setRenderer] = useState(null);
 
+
   useEffect(() => {
     if (renderer) {
       const camera = renderer.getCamera();
       if (cameraPosition) {
-        camera.enable();
-        camera.animate({...camera.getState(), ...cameraPosition});     
-        // camera.setState({...camera.getState(), ...cameraPosition});     
-        if (lockCamera) {
-          camera.disable();
+        if (camera.disabled) {
+          camera.enable();
         }
-        // renderer.refresh();
+        camera.animate({...camera.getState(), ...cameraPosition});     
       }
-      if (camera.enabled && lockCamera) {
-        camera.disable();
-        // renderer.refresh();
+      if (!previousLockCamera && lockCamera) {
+        camera.animate({...camera.getState(), ...cameraPosition});     
+        setTimeout(() => camera.disable(), 500);
       }
-      if (!camera.enabled && !lockCamera) {
+      if (previousLockCamera && !lockCamera) {
         camera.enable();
-        // renderer.refresh();
+        camera.animate({...camera.getState(), ...cameraPosition});   
       }
     }
     
@@ -273,7 +271,7 @@ export function GraphContainer({
     } else if (
       (previousDisplayAllLabels !== displayAllLabels && !displayAllLabels)
       ||
-      (previousLabelsMode !== labelsMode && !labelsMode)
+      (previousLabelsMode !== labelsMode && labelsMode)
       ) {
       renderer.highlightedNodes = new Set();
       needToRefresh = true;
@@ -352,6 +350,7 @@ export function GraphContainer({
       onToggleCameraLock();
     }
   }
+
   return (
     <>
 
