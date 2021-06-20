@@ -26,7 +26,7 @@ const ColorLegend = ({
 }) => {
   
   return (
-    <ul className={cx("ColorLegend", {'is-continuous': colorScaleType === 'continuous'})}>
+    <ul className={cx("ColorLegend", {'is-continuous': colorScaleType === 'continuous', 'is-big': colorPalette.length > 4})}>
       {
         colorScaleType === 'continuous' ?
         <li className="continuous-scale-container">

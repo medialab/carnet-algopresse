@@ -714,16 +714,20 @@ $fontsize_footer: .8rem;
       }
       .ColorLegend {
         flex: 1;
-        min-width: 70%;
+
         list-style: none;
         padding: 0;
         padding-top: .2rem;
         margin: 0;
         margin-left: $padding_medium;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: .3rem;
         overflow: hidden;
+        min-width: 33%;
+        &.is-big {
+          min-width: 70%;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: .3rem;
+        }
         &.is-continuous {
           display: block;
         }
