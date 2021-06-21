@@ -330,8 +330,8 @@ export function GraphContainer({
               onCameraUpdate(camera.getState())
             }
           }
-          if (lockCamera || !presentationMode) {
-            camera.disable();
+          if (lockCamera) {
+            setTimeout(() => camera.disable());
           }
           camera.on('updated', state => {
             onCameraUpdate(state);
