@@ -367,7 +367,7 @@ export function GraphContainer({
           />
       }
       {
-        renderer && presentationMode && showNav && nodeLabelVariable !== 'default' &&
+        renderer && presentationMode && showNav && displayAllLabels &&
         <ul className="labels-toggler">
           <li>
             <button onClick={() => setLabelsMode(true)} className={cx({'is-active': labelsMode})}>{lang === 'fr' ? 'montrer les labels': 'show labels'}</button>
