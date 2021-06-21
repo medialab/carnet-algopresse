@@ -231,7 +231,7 @@ export function IceCreamContainer({
         height={height}
       >
         <g
-          transform={`translate(${WIDTH < width ? (width - smallestDimension) / 2 : 0}, ${HEIGHT < height ? (height - smallestDimension) * .66 : 0})`}
+          transform={`translate(${WIDTH < width ? (width - smallestDimension) / 2 + width * .025 : 0}, ${HEIGHT < height ? (height - smallestDimension) * .66 + height * .05 : 0})`}
         >
           <polygon
             points={`${point1X},${point1Y} ${point2X},${point2Y} ${point3X},${point3Y} ${point4X},${point4Y}`}
@@ -239,7 +239,7 @@ export function IceCreamContainer({
             height={HEIGHT}
             fill="white"
           />
-          <g transform={`translate(${rotateMode ? 0 : MARGIN / 2}, ${rotateMode ? -MARGIN : 0})${rotateMode ? 'scale(1.05)' : ''}`}>
+          <g transform={`translate(${rotateMode ? 0 : MARGIN / 2}, ${rotateMode ? -MARGIN : 0})${rotateMode ? 'scale(1)' : ''}`}>
             <g className="axis axis-left">
               <line
                 x1={transf(MARGIN, MARGIN).x}
