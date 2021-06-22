@@ -282,7 +282,7 @@ $fontsize_footer: .8rem;
         .chapo {
           color: $grey_dark;
           opacity: .8;
-          font-weight: 800;
+          font-weight: 600;
           margin-left: 2rem;
           margin-right: 4rem;
           text-align: justify;
@@ -728,6 +728,7 @@ $fontsize_footer: .8rem;
         margin: 0;
         font-size: $fontsize_legend;
         font-style: italic;
+        flex: 1;
       }
       .ColorLegend {
         flex: 1;
@@ -739,8 +740,10 @@ $fontsize_footer: .8rem;
         margin-left: $padding_medium;
         overflow: hidden;
         min-width: 33%;
+        max-width: 33%;
         &.is-big {
           min-width: 70%;
+          max-width: unset;
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           grid-gap: .3rem;

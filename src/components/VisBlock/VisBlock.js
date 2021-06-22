@@ -13,7 +13,7 @@ const filterColorPalette = (colorVariable, colorPalette = {}, filters = [], colo
       if (attribute === colorVariable) {
         return value === label;
       }
-      return false;
+      return true;
     })
     return matchesAtLeastOne;
   })
