@@ -21,21 +21,20 @@ const filterColorPalette = (colorVariable, colorPalette = {}, filters = [], colo
 
 const ColorLegend = ({
   colorPalette = [],
+  colorLabels : inputColorLabels = {},
   colorScaleType,
   colorVariable
 }) => {
+  const colorLabels  = Object.entries(inputColorLabels);
   
   return (
     <ul className={cx("ColorLegend", {'is-continuous': colorScaleType === 'continuous', 'is-big': colorPalette.length > 4})}>
       {
         colorScaleType === 'continuous' ?
         <li className="continuous-scale-container">
-          <div className="prelabel">
-            couleur en fonction du score <strong>{colorVariable}</strong>
-          </div>
           <div className="labels">
-            <span>0</span>
-            <span>1</span>
+            <span>{colorLabels.length ? colorLabels[0][1] : '0'}</span>
+            <span>{colorLabels.length ? colorLabels[1][1] : '1'}</span>
           </div>
           <div 
             className="continuous-scale"
@@ -68,6 +67,7 @@ const VisBlock = React.forwardRef(({
   legend, 
   id,
   colorPalette,
+  colorLabels,
   nodeColorVariable,
   filters,
   // filtersModeAnd,
@@ -103,6 +103,7 @@ const VisBlock = React.forwardRef(({
           colorPalette={colors} 
           colorScaleType={colorScaleType} 
           colorVariable={colorVariable}
+          colorLabels={colorLabels}
         />
       </div>
       

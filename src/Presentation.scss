@@ -790,7 +790,9 @@ $fontsize_footer: .8rem;
             display: flex;
             flex-flow: row nowrap;
             justify-content: space-between;
-            font-weight: 800;
+            font-size: $fontsize_legend;
+            margin-bottom: $padding_small;
+            // font-weight: 800;
           }
           .continuous-scale {
             height: 1rem;
