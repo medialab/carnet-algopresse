@@ -230,13 +230,13 @@ $fontsize_footer: .8rem;
         font-weight: 500;
         font-size: $fontsize_general_author;
         margin-bottom: $padding_small / 2;
-        margin-left: $padding_medium;
+        padding-left: $padding_medium * 2;
       }
       .main-title {
         display: inline-block;
         background: $red;
         color: white;
-        padding: $padding_small;
+        padding: $padding_medium * 1.5;
         padding-top: 0;
         padding-bottom: 0;
         margin: 0;
@@ -282,10 +282,11 @@ $fontsize_footer: .8rem;
         .chapo {
           color: $grey_dark;
           opacity: .8;
-          font-weight: 600;
+          // font-weight: 600;
           margin-left: 2rem;
-          margin-right: 4rem;
-          text-align: justify;
+          font-size: $fontsize_methodo_title;
+          // margin-right: 4rem;
+          // text-align: justify;
           
           // font-family: $font_serif;
         }
@@ -293,11 +294,42 @@ $fontsize_footer: .8rem;
           flex: 1;
           // position: absolute;
           // max-width: calc(100% - 500px);
-          // padding-top: $padding_medium;
+          padding-top: $padding_medium;
           padding-right: $padding_medium;
+          margin-left: $padding_medium * 2;
           // font-size: $fontsize_toc;
           // left: $screen_gutter_large;
           // bottom: 0;
+        }
+        .paper-citation {
+          // position: absolute;
+          // width: 45vw - $screen_gutter_large;
+          // right: $screen_gutter_large;
+          // bottom: $padding_medium * 0;
+          padding: $padding_small;
+          padding-left: $padding_medium * 2;
+          // padding-left: 2rem;
+          // margin-left: $padding_medium * 2;
+          margin-top: $padding_medium * 2;
+          background: white;
+          border: 1px solid $red;
+          opacity: .7;
+          transition: .5s ease all;
+          &:hover {
+            opacity: 1;
+          }
+          h3 {
+            font-size: $fontsize_footer;
+            margin: 0;
+          }
+          blockquote,
+          p {
+            margin-left: 0;
+            font-size: $fontsize_footer;
+          }
+          blockquote:last-of-type {
+            margin-bottom: 0;
+          }
         }
       }
       .right {
@@ -314,28 +346,6 @@ $fontsize_footer: .8rem;
           height:  calc(50vh - #{$padding_small});
           transition: .5s ease all;
           // position: relative;
-        }
-        .paper-citation {
-          position: absolute;
-          width: 45vw - $screen_gutter_large;
-          right: $screen_gutter_large;
-          bottom: $padding_medium * 0;
-          padding: $padding_medium;
-          padding-left: 2rem;
-          background: $grey;
-          opacity: .7;
-          transition: .5s ease all;
-          &:hover {
-            opacity: 1;
-          }
-          h3 {
-            font-size: $fontsize_methodo_title;
-            margin: 0;
-          }
-          blockquote {
-            margin-left: 0;
-            font-size: $fontsize-legend;
-          }
         }
       }
     }

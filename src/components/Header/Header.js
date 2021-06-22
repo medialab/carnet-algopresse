@@ -277,6 +277,14 @@ const Header = ({
             isDeployed={true}
             activeSectionIndex={activeSectionIndex}
           />
+          <div className="paper-citation">
+          {
+            lang === 'fr' ?
+            <CitationFr />
+            :
+            <CitationEn />
+          }
+          </div>
           
         </div>
         {/* réseau */}
@@ -292,7 +300,7 @@ const Header = ({
                 presentationMode={true}
                 x={0.5} 
                 y={0.5} 
-                ratio={.8} 
+                ratio={.4} 
                 labelSize={10}
                 displayAllLabels={true}
                 nodeColorVariable={'cluster_rename'} 
@@ -305,14 +313,7 @@ const Header = ({
             }
           
           </div>
-          <div className="paper-citation">
-          {
-            lang === 'fr' ?
-            <CitationFr />
-            :
-            <CitationEn />
-          }
-          </div>
+          
           {/* <button onClick={onScrollToFirstSection} className="starter-button">
         ⌄
         </button> */}
