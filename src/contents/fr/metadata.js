@@ -10,7 +10,7 @@ const metadata = {
     },
     {
       "role": "Traitement de données",
-      "people": ["Yannis Bouachera", "Salomé Do", "Jean-Philippe Cointet"]
+      "people": ["Yannis Bouachera", "Salomé Do", "Jean-Philippe Cointet, Jean-Marie John-Mathews"]
     },
     {
       "role": "Design d'information",
