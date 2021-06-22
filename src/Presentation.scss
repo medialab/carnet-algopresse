@@ -285,6 +285,7 @@ $fontsize_footer: .8rem;
           // font-weight: 600;
           margin-left: 2rem;
           font-size: $fontsize_methodo_title;
+          line-height: 1.3;
           // margin-right: 4rem;
           // text-align: justify;
           
@@ -336,14 +337,15 @@ $fontsize_footer: .8rem;
         .GraphWrapperContainer {
           padding-top: 0;// $screen_gutter_small /3;
           flex: 1;
+          top: -1rem;
           // background: red;
           position: absolute;
           // width: 500px;
-          width: 50vw - $screen_gutter_large;
-          right: $screen_gutter_large;
+          width: 50vw - $screen_gutter_small;
+          right: $screen_gutter_small;
           // top: $padding_medium;
           // min-height: 30vh;
-          height:  calc(50vh - #{$padding_small});
+          height:  calc(70vh - #{$padding_small});
           transition: .5s ease all;
           // position: relative;
         }
