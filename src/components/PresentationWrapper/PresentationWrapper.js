@@ -72,7 +72,7 @@ const Sections = ({
 }
 
 const PresentationWrapper = ({ match: { params } }) => {
-  const { lang, sectionId, visualizationIndex } = params;
+  const { lang, /*sectionId, visualizationIndex*/ } = params;
   const sectionsRef = useRef(routes.map(() => createRef()));
 
   const [activeVisualization, setActiveVisualization] = useState(undefined);
@@ -98,7 +98,7 @@ const PresentationWrapper = ({ match: { params } }) => {
   /**
    * Scroll on coumponent mount
    */
-  useEffect(() => {
+  /*useEffect(() => {
     // waiting for visualizations
     setTimeout(() => {
       if (sectionId !== undefined) {
@@ -149,7 +149,7 @@ const PresentationWrapper = ({ match: { params } }) => {
 
       }
     }, 1000);
-  }, [])/* eslint react-hooks/exhaustive-deps : 0 */
+  }, [])*//* eslint react-hooks/exhaustive-deps : 0 */
   /**
    * Route update
    */
