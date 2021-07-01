@@ -1,39 +1,49 @@
 import LinearGraphBlock from '../../components/LinearGraphBlock';
 
-## Comment détecter le discours critique dans les médias ? 
+## How can criticism be detected in the media?
 
-En s’appuyant sur des outils d’annotations par apprentissage supervisé, un sous corpus d’articles produisant un discours critique des algorithmes et de l’IA a été constitué. À partir de l’annotation manuelle de 2000 titres d’articles de presse jugés "critiques", nous avons construit un modèle d’apprentissage automatique en réalisant plusieurs itérations incluant des phases de contrôle des résultats afin d’optimiser le modèle de détection des articles "critiques". Tous les titres d’articles comportant des arguments ou éléments sémantiques négatifs portant explicitement sur une forme de calculateur (algorithme, IA, robot, etc.) ont été annotés comme critiques. À l’inverse ont été annotés comme non critiques ou ignorés les titres d’articles aux énoncés neutres, positifs, ambigus ou n'évoquant pas directement un calculateur. Par exemple les titres "Robocops to replace british bobbies on the streets, police force reveals" ou "Growth of ai could boost cybercrime and security threats , report warns"  ont été annotés comme critiques, alors que "AI to create more than 7m jobs" ou "Google so advanced stores will pack your products before you’ve thought of ordering them" ont été annotés non critiques. Étant donné le travail de sourcing manuel du corpus de départ et l’usage de méthode d’annotation par apprentissage supervisé, ce corpus ne prétend pas à une quelconque exhaustivité ou représentativité. Notre démarche permet en revanche d’appréhender avec la plus large diversité possible les thèmes associés à la critique de l’IA et des algorithmes. 
+We used supervised learning annotation tools to establish a sub-corpus of articles criticizing algorithms and AI.
 
->Visuel taux sur la période et nb articles critic non critic
+First of all, manually annotating 2000 press articles deemed ‘critical’ allowed us to construct a machine learning model. Next, by carrying out multiple iterations, including results control phases, the ‘critical’ article detection model was progressively optimized (see the method section). All titles of articles containing arguments or negative semantic elements that were explicitly related to a calculator form (algorithm, AI, robot, etc.) were annotated as critical. Conversely, press articles with neutral, positive, or ambiguous statements or those not directly mentioning a calculator form were annotated as non-critical or were disregarded. For example, titles such as ‘Robocops to replace British bobbies on the streets, police force reveals’ or ‘Growth of AI could boost cybercrime and security threats, report warns’ were annotated as critical, whereas ‘AI to create more than 7m jobs’ or ‘Google so advanced stores will pack your products before you’ve thought of ordering them’ were annotated as non-critical.
 
 <LinearGraphBlock 
+  graphType={'histogram'} 
   xVariable={'index'} 
   xLabelVariable={'fullName'} 
   yVariable={'value'} 
   colorVariable={'type'} 
-  colorPalette={{"not critic":"#c2873d","critic":"#c3897e","Total":"#ffab77"}}
+  colorPalette={{"not critic":"#c5c9c9","critic":"#e60c26"}} 
+  filtersModeAnd={true} 
+  title={'Distribution du taux d\'articles critiques et non critiques (2015-2019) '} 
+  legend={'Fréquence en % des articles critiques et non critiques détectés par le modèle validés manuellement'} 
+  normalizeY={true}
 />
 
-A partir de ce protocole de catégorisation, un sous corpus de 2 091 articles de presse catégorisés comme critiques a été constitué. Le taux d'articles annotés comme critiques de la base initiale est de 7,1% en moyenne sur l’ensemble du corpus et présente une assez forte stabilité durant la période (écart type de +/- 2,2%). Si le volume d’articles portant sur l’IA et les algorithmes augmente significativement, le taux d’articles détectés par le modèle comme contenant un discours critique augmente simultanément durant la période. Des travaux portant sur l’analyse de la couverture médiatique du thème de l’IA en Grande Bretagne ont montré qu’une très large majorité des publications portaient sur les avancées technologiques dans le domaine et sur les potentiels développement que ces derniers permettent dans les secteurs du commerce et de l’industrie. Les questions éthiques et les problèmes sociaux tels que les risques de discrimination associés au déploiement de ces technologies sont sous représentés au sein de l’espace médiatique (Brennen et al, 2018). 
+Given the work of manually sourcing the initial corpus and the use of the supervised learning annotation method, this corpus makes no claims at being exhaustive or representative. On the contrary, our approach enables an understanding of subjects associated with criticism of AI and algorithms that is as diverse as possible.
+
+Using this categorization protocol, we established a sub-corpus of 2091 press articles categorized as critical. The percentage of such articles was 7.1% on average across the entire corpus, with relatively good stability over the observation period (standard deviation of +/- 2.2%). Research on the analysis of media coverage of AI in Great Britain has shown that the vast majority of publications are on technological advancements and developments in the economic sector, and that the ethical questions associated with the rollout of these technologies remains underrepresented in the press (Brennen et al, 2018).
+
 
 ---
-## Méthode : Détection du discours critique par apprentissage supervisé
+## Method: Use of supervised learning to detect criticism
 
-**Modèle utilisé pour la détection du discours critique :** fastText - https://fasttext.cc
+**Model used to detect criticism:** fastText - https://fasttext.cc
 
-**Corpus d'apprentissage :** 2000 articles annotés manuellement via prodigy - https://prodi.gy
+**Learning corpus:** 2000 articles manually annotated using Prodigy - https://prodi.gy
 
-**Règles de codage des articles :** 
- - CRITIQUE : énoncés critiques ou réponse à une critique  (champ sémantique ou arguments critiques), évocation d’un calculateur ( algorithme, IA, robot, etc.). Exemple : « Robots put jobs at risk », 
-« Robot lawyers: how humans can fight back »
- - NON CRITIQUE : énoncés neutres ou positifs, pas d’évocation d’un calculateur. Exemple : « AI to 'create more than 7m jobs’ », 
-« In the 2020s, artificial intelligence will transform the work of lawyers »
- - IGNORE : énoncés ambigus, pas d’évocation d’un calculateur. Exemple : « Restaurants are now employing robots – should chefs be worried? », « Need a lawyer? There's an algorithm for that »
+**Article coding rules:** 
+- Critical: critical statements or response to criticism (critical semantic field or arguments), mention of a calculator (algorithm, AI, robot, etc.). Example: ‘Robots put jobs at risk’, ‘Robot lawyers: how humans can fight back’.
+- Non-critical: neutral or positive statements, no mention of a calculator. Example: ‘AI to “create more than 7m jobs”’, ‘In the 2020s, artificial intelligence will transform the work of lawyers’.
+- Ignored: ambiguous statements, no mention of a calculator. Example: ‘Restaurants are now employing robots – should chefs be worried?’, ‘Need a lawyer? There's an algorithm for that’.
 
-**Comparaison des modèles de détection de la critique :** 
-Afin de s’assurer de la variété et de la précision des articles différents modèles d’annotation ont été comparés et améliorés par itérations successives et un contrôle manuel systématique des résultats produits par ces modèles ont été effectués. C'est finalement le modèle fastText qui a produit la détection la plus précise des articles critiques
 
->Tableau résutats comparatifs
-
-**Contrôle des résultats du modèle :** 
-Cette approche méthodologique a permis de traiter une large base de données qui aurait été difficilement catégorisable manuellement. En revanche, les outils mobilisés de catégorisation automatique par apprentissage supervisé comportent un risque potentiel de ne pas détecter certains articles critiques dans le corpus. Pourtant, les itérations successives réduisent ce biais car les résultats obtenus à chaque itération montrent un épuisement des capacités du modèle à détecter de nouveaux articles critiques. Par ailleurs, des opérations de contrôle manuel systématique de l’ensemble des résultats produits par l‘algorithme ont permis de s’assurer que le sous corpus d’articles catégorisés comme critiques ne contenait pas de faux positifs. 
+**Comparison of criticism detection models:** 
+To ensure the diversity and accuracy of articles, different annotation models were compared and improved through successive iterations, along with the systematic manual control of the results produced by these models. Ultimately, the FastText model produced the most accurate detection of critical articles. 
+                  
+**Results of the FastText criticism detection model:**                  
+ - Precision : 0.94
+ - Recall : 0.79
+ - F1-score : 0.86
+ 
+This methodological approach allowed us to process a large database that would have been impossible to categorize manually. Although the supervised learning-based automatic categorization tools used do entail a potential risk of not detecting certain critical articles in the corpus, the successive iterations reduce this bias because the results obtained during each iteration show the development of the model’s abilities to detect new critical articles. Furthermore, systematic manual control of all results produced by the algorithm ensure that the sub-corpus of articles categorized as critical do not contain false positives.
+                  
