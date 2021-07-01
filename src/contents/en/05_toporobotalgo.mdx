@@ -1,101 +1,95 @@
 import GraphBlock from '../../components/GraphBlock';
 
-## Qu'est-ce que la topologie du réseau nous apprend de la critique médiatique ? 
-
->Visualisation Clusters Name BICOLOR full algo robot intermed
->RQ probeme couleur choisies dans sigma ou gexf ? + Afficher label cluster (ou en surcouche plus les termes 
+## What does the network topology teach us?
 
 <GraphBlock 
   x={0.4588867805186573} 
-  y={0.5190807505798019}
-  ratio={0.80} 
+  y={0.5190807505798019} 
+  ratio={1} 
   nodeColorVariable={'algo_robot_intermed'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
-  colorPalette={{"Robot":"#eb2941","Algo":"#9e41f0","Intermed":"#9b9b9b"}}
+  labelDensity={.8}   
+  displayAllLabels={true}
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6","Intermed":"#a39f9f"}}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'2991 noeuds, 54062 liens de cooccurrences, couleurs relatives aux meta-clusters, taille des relative fréquence des termes dans le corpus '}
 />
 
-La dispersion des clusters dans l’espace topologique laisse apparaître une opposition entre deux principaux types de calculateurs. On observe ainsi un déplacement entre la partie droite du graphe qui comporte des articles mettant en scène des techniques de calcul algorithmique incorporées dans l'environnement de l’utilisateur pour guider, orienter ou calculer ses comportements, vers la partie gauche qui comporte des articles qui se caractérisent par la personnification de l’IA dans une entité incarnée et autonome à l’égard des humains.  
-
->Visualisation Clusters Name BICOLOR droite web algo et al
->RQ : estce qu'on zoom ou pas pour eviter de perdre la lsibilité de la topologie ? 
+The dispersal of clusters across the topographical space reveals a contrast between two main types of calculators. We find a separation between the right-hand side of the graph, which groups together articles presenting algorithmic calculation techniques incorporated into users’ environments to guide, direct, or calculate their behaviours, and the left-hand side, which encompasses articles characterized by the personification of AI in the form of an embodied entity independent from humans.
 
 <GraphBlock 
   x={0.4588867805186573} 
-  y={0.5190807505798019}
-  ratio={0.80} 
+  y={0.5190807505798019} 
+  ratio={1} 
   filters={[{"attribute":"algo_robot_intermed","value":"Algo"}]} 
   nodeColorVariable={'algo_robot_intermed'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
-  colorPalette={{"Robot":"#eb2941","Algo":"#9e41f0","Intermed":"#9b9b9b"}}
+  labelDensity={.8}  
+  displayAllLabels={true}
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6","Intermed":"#a39f9f"}}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'Filtrage par meta-cluster "algorithmes"'}
 />
 
-- La première zone à droite concerne exclusivement des algorithmes, qu’ils s'agissent des algorithmes du Web comme le fil d’actualité de Facebook, la section trending topic de Twitter, les algorithmes de recherche d’images et de sites web de Google. La plupart de ces agents algorithmiques constituent les couches techniques de services largement déployés dans nos environnements numériques quotidiens. D’autres représentent des technologies plus émergentes qui font l'objet de développements et d'expérimentations plus localisées et plus régulées tels les algorithmes de police ou de justice prédictive, de détection des images dans les systèmes de reconnaissance faciale ou les deepfakes.
 
->Visualisation Clusters Name BICOLOR gauche AI robots
->RQ : idem 
+The first region to the right exclusively concerns algorithms, whether web algorithms such as Facebook’s newsfeed, Twitter’s trending topics section, or Google’s image and website search algorithms. The majority of these algorithmic entities are the technical layers of services offered in our everyday digital environments. Others represent more emerging technologies that are the subject of more localized and regulated development and experimentation, such as policing or predictive justice algorithms, image detection in facial recognition systems, or deepfakes.
 
 <GraphBlock 
   x={0.4588867805186573} 
-  y={0.5190807505798019}
-  ratio={0.80} 
+  y={0.5190807505798019} 
+  ratio={1} 
   filters={[{"attribute":"algo_robot_intermed","value":"Robot"}]} 
   nodeColorVariable={'algo_robot_intermed'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
-  colorPalette={{"Robot":"#eb2941","Algo":"#9e41f0","Intermed":"#9b9b9b"}}
+  labelDensity={.8}  
+  displayAllLabels={true}
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6","Intermed":"#a39f9f"}}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'Filtrage par meta-cluster "robots"'}
 />
 
-- Dans la partie la plus à gauche, à l’opposé du graphe, les clusters se concentrent autour d’agents calculateurs qui sont davantage incarnés sous forme de machines ou de robots. Les entités qui peuplent cette zone sont personnifiées dans des dispositifs physiques séparés de nos équipements numériques habituels que sont nos ordinateurs et nos smartphones. Ces dispositifs, en plus d’être incarnés physiquement sont équipés d’une capacité d’agir autonome via de systèmes de calcul basés sur l’IA. En simulant à la fois le corps et les capacités cognitives des humains ils sont en mesure de produire certaines actions sans intervention humaine dans différents domaines telles que le transport avec les voitures autonomes, la défense avec les “robots tueurs” et les drones, le travail avec l'automatisation des tâches professionnelles ou encore les relations physiques avec les robots sexuels.
-
->Visualisation Clusters Name BICOLOR centre zone grise ??? mettre en gris les zone intérmédiaire ??? ou possibilité d'annotation
->RQ idem 
+On the far left-hand side, at the opposite end of the network, the clusters are concentrated around calculator entities that are more embodied, in the form of machines or robots. The entities populating this region are personified in physical devices that are separate from the everyday digital equipment consisting of our computers and smartphones. These devices have an autonomous capacity to act via AI-based calculation systems. By simulating both the human body and humans’ cognitive abilities, they are capable of carrying out certain actions without human intervention in diverse conditions, such as transportation using autonomous vehicles, military actions using killer robots and drones, work using task automation, or even physical relations using sex robots.
 
 <GraphBlock 
   x={0.4588867805186573} 
-  y={0.5190807505798019}
-  ratio={0.80} 
+  y={0.5190807505798019} 
+  ratio={1} 
   filters={[{"attribute":"algo_robot_intermed","value":"Intermed"}]} 
   nodeColorVariable={'algo_robot_intermed'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
-  colorPalette={{"Robot":"#eb2941","Algo":"#9e41f0","Intermed":"#9b9b9b"}}
+  labelDensity={.8}  
+  displayAllLabels={true}
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6","Intermed":"#a39f9f"}}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'Filtrage par meta-cluster "intermédiaire"'}
 />
 
-- Entre ces deux pôles existe une zone intermédiaire plus difficilement identifiable, constituée de dispositifs à mi-chemin entre les machines autonomes et les algorithmes de nos environnements numériques quotidiens. Parmi les agents calculateurs présents dans cet espace on retrouve par exemple les assistants vocaux pouvant être embarqués dans nos smartphone ou dans des dispositifs du type enceinte connectées, les chatbots du Web, les robo-advisors qui sont les algorithmes effectuant des opérations dans le domaine de la finance ou encore des technologies de deep learning comme le dispositif Deep Dream de Google. Ces technologies bien qu’assez accessibles au grand public sont souvent encore émergentes. Elles sont en capacité de gérer un certain nombre de tâches parfois basiques de manière autonome mais ne sont pas toujours incarnées dans des dispositifs physiques, elles sont encore le plus souvent implémentées et accessibles via nos ordinateurs et smartphones.
-
->Visualisation Clusters Name BICOLOR full
->Probleme couleur affichage label idem et taille du graphe zoom si on enleve les slides à droite coordonnées pas bonnes 
+Between these two poles there is an intermediate region that is more difficult to identify, composed of devices halfway between autonomous machines and the algorithms of our everyday digital environments. The calculating entities present in this space include voice assistants embedded in smartphones or smart speakers, online chatbots, robo-advisors (algorithms that carry out transactions in the finance sector), or deep learning technologies such as Google’s Deep Dream device. Despite being relatively accessible to the general public, these are often still emerging technologies. They are capable of autonomously managing a specific number of sometimes basic tasks, but are not yet embodied in physical devices; on the contrary, they are most often implemented and accessible through computers and smartphones.
 
 <GraphBlock 
   x={0.4588867805186573} 
-  y={0.5190807505798019}
-  ratio={0.80} 
+  y={0.5190807505798019} 
+  ratio={1} 
   nodeColorVariable={'algo_robot'} 
   nodeLabelVariable={'cluster_label'} 
-  labelDensity={1.5} 
-  colorPalette={{"Robot":"#eb2941","Algo":"#9e41f0"}}
+  labelDensity={.8}  
+  displayAllLabels={true}
+  colorPalette={{"Robot":"#fa1633","Algo":"#992ef6"}}
+  title={'Réseau sémantique du contenu des articles critiques sur l’IA'} 
+  legend={'Filtrage par meta-cluster'}
 />
 
-
-La tendance du graphe à séparer des dispositifs de calcul aux propriétés différenciées, nous amène à explorer ces dimensions de manière plus approfondie. Afin de réaliser une analyse comparative entre les deux pôles qui se dégagent de l’analyse topologique, le choix a été fait de découper le réseau en deux sous-ensembles comparables en volume d’articles, de clusters et de termes. Ainsi, l’espace intitulé “robots” compte 52% des articles du corpus, 9 clusters principaux (de taille supérieure à 1%) et 1790 termes. L’espace intitulé “algorithmes” représente quant à lui 48% articles, 8 clusters principaux et 1201 termes. Par une approche comparative, ce découpage en deux sous-ensembles équivalents permet d’explorer les différents attributs qui peuplent ces deux espaces sémantiques.
-
-Les méthodes de traitement automatique du langage permettent une analyse des éléments des discours critiques, à partir des termes saillants extraits au sein des articles, peuplant ces deux espaces sémantiques. Pour mettre en évidence les caractéristiques de ces deux espaces de critique, nous avons entrepris d’identifier systématiquement la manière dont sont désignées les entités techniques, la société qui les abrite et la façon dont les premiers ont des effets sur la seconde. Tous ces discours critiques cherchent à qualifier la manière dont des Agents produisent des Victimes en exerçant un type particulier d’opération ; ces dernières sont constitutives d’un ensemble de troubles révélant autant de nouveaux défis, ou d’enjeux, produits par le déploiement des techniques d’IA dans nos sociétés (Cardon, Crépel, 2019).
-
-Afin de différencier ces entités au sein du graphe, la plupart des termes, ne souffrants pas trop d'ambiguïté (66% des termes du graphe), ont été annotés manuellement en dix catégories distinctes. Parmi ces catégories, notre analyse consiste à comparer trois d’entre elles qui apparaissent particulièrement pertinentes pour différencier les deux espaces. La catégorie “Technical” renvoie à ce que nous avons désigné comme agents calculateurs, elle concerne toutes les termes relatifs aux entités techniques tels que les algorithmes, les machines, les fonctionnalités ou services techniques, les terminaux mais également les produits ou services issus le plus souvent de startup qui sont parfois difficiles à différencier de l'entité économique qui les a produit. La seconde catégorie relative aux agents humains, nommée “People”, concerne tous les termes désignant des personnes ou groupes de personnes non nommées (à la différence des catégories “Person” pour les noms propres et “Institutions” pour les groupes ou structures ayant une existence juridique). Enfin, la troisième catégorie que nous présenterons par la suite, nommée “Issues”, permet d’identifier les termes qui désignent des enjeux, des difficultés ou des problèmes extraits au sein des articles. 
+Given the graph’s separation of calculation devices with different properties, we explored these dimensions in greater depth. To conduct a comparative analysis of the two poles that stand out in the topographical analysis, we decided to divide the network into two subsets that are comparable in terms of volume of articles, clusters, and terms. The space entitled ‘Robots’ contains 52% of the articles in the corpus and 9 clusters. The space entitled ‘Algorithms’ has 48% of the articles, and 14 clusters. Using a comparative approach, this division into two equivalent subsets allows us to explore the different attributes that populate these two semantic spaces.
 
 ---
-## Méthode : Division du graphe et du corpus selon la topologie
+## Method: Division of the network and the corpus based on the topology
 
-Pour faciliter une analyse comparative entre l'espace sémantique interprété comme lié aux "robots" et l'espace lié aux "algorithmes" chaque cluster a été associé à l'une ou l'autre de ces catégories. Les deux sous-ensembles sont comparables en volume d’articles, de clusters et de termes. 
+To facilitate a comparative analysis between the semantic space interpreted as being related to ‘robots’, and that related to ‘algorithms’, each cluster was associated with one of these two categories. The two subsets are comparable in terms of volume of articles.
 
-L'espace intitulé “robots” compte : 
-- 9 clusters principaux (de taille supérieure à 1% du corpus d'articles)
-- 52% des articles du corpus (chaque article étant associé à un unique cluster)
-- 1790 termes au sein du réseau (chaque terme étant associé à un unique cluster). 
+The ‘robots’ space contains:
+- 9 clusters
+- 52% of corpus articles (with each article being associated with a single cluster)
 
-L’espace intitulé “algorithmes” compte 
-- 8 clusters principaux (de taille supérieure à 1% du corpus d'articles)
-- 48% articles (chaque article étant associé à un unique cluster)
-- 1201 termes au sein du réseau (chaque terme étant associé à un unique cluster).
+The ‘algorithms’ space contains:
+- 14 clusters
+- 48% of corpus articles (with each article being associated with a single cluster)
