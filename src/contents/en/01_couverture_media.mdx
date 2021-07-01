@@ -1,28 +1,32 @@
 
 import LinearGraphBlock from '../../components/LinearGraphBlock';
 
-## Quelle est la couverture médiatique de l'IA ?
+## What is the media coverage of AI?
 
-Notre recherche a consisté à extraire un large corpus de 29342 d'articles de presse portant sur  l’IA et les algorithmes sur une période de 5 années, réalisée sur l'agrégateur de presse Factiva sur un ensemble de 47 sources de presse généraliste aux États unis et au Royaume Uni (27 sources pour USA et 20 sources pour UK).
+Our research consisted in extracting a large corpus of 29,342 press articles on AI and algorithms over a period of 5 years. We did so by means of the press aggregator Factiva applied to a set of 47 general-interest press sources in the United States and United Kingdom (27 in the USA and 20 in the UK).
 
-Les données récoltées font apparaître une augmentation du volume d’articles portant sur l’IA - telle que définie par notre requête - sur la période d’observation. Cette augmentation atteste de la place de plus en plus importante du thème des algorithmes et de l’IA dans l’espace médiatique ces dernières années. Afin de contrôler cette augmentation au sein de notre corpus, nous avons comparé avec d’autres requêtes effectuées sur la même période et des sources identiques, pour lesquelles on attend une distribution stable. L’observation du volume d’articles extraits à partir de notre requête montre une augmentation significative de 163% entre 2015 et 2019 des publications portant sur l’IA et les algorithmes alors que les articles consacrés à l’art (-9%), la culture (+2%), l'économie (+0%) ou la technologie (+14%) restent relativement stables. 
+Today, the term artificial intelligence (AI) is broadly used to refer to calculation devices ranging from simple algorithms to more complex systems based on deep learning technologies. In order to give a broad and functional definition of AI, we will use the term to refer to a ‘calculation entity’ encompassing all techniques that employ automated calculation to produce a result from any type of data. This broad definition allows us to understand how actors themselves define these technologies and associate them with a variety of activities and sociotechnical entities (Seaver, 2017).
 
->Visuel Comparatif volume articles Les statistiques comparées des différentes requêtes intègrent les doublons présents dans la base Factiva
+The distribution of the data over time reveals an increase in the volume of articles on AI – as defined by our query (see the Method section) – over the observation period. This increase reflects the increasingly important place granted to the subject of algorithms and AI in the media in recent years. To control for this increase in our corpus, we compared it to other queries made over the same period and identical sources, for which a stable distribution is expected. The volume of articles extracted in our query shows a significant increase (163%) of publications on AI and algorithms between 2015 and 2019, whereas those dedicated to art (-9%), culture (+2%), the economy (+0%), or technology (+14%) have remained relatively stable.
 
 <LinearGraphBlock 
+  graphType={'histogram'} 
   xVariable={'month'} 
   xLabelVariable={'fullName'} 
-  yVariable={'value'}
+  yVariable={'value'} 
+  colorVariable={'default'} 
+  title={'Distribution du nombre  d\'articles sur la requête IA (2015-2019)'} 
+  legend={'nombre d\'articles par mois'}
 />
 
-Ce constat d’une augmentation de la visibilité croissante du thème de l’IA a été observé dans d’autres travaux à partir d'analyses statistiques portants sur différentes sources informationnelles (Perrault et al, 2019). Tout d'abord dans presse anglophone, à l'échelle mondiale, à partir d'analyses statistiques produites par le projet GDELT, s’observe une croissance du thème de l'IA et des termes associés tels que Deep learning, Machine Learning entre 2017 et 2019. Cette augmentation de la présence du terme de l'IA est aussi largement visible à partir des statistiques de requêtes effectuées sur le moteur de recherche Google aux USA et analysables via le service Google trends sur la période allant de 2015 à 2019. Enfin le même constat est également fait d'une augmentation entre 2017 et 2019 de la fréquence d'apparition des termes AI et Machine Learning dans différents corpus de documents issus par exemple d'organisations gouvernementales aux USA, au Canada, et au Royaume Uni, mais également dans les appels de fonds des entreprises américaines.
+This evident increase in the growing visibility of the subject of AI has been reported in other research based on statistical analyses of different information sources (Perrault et al, 2019). First, in the English-language press worldwide, based on the statistical analyses produced by the GDELT project, we find an increase in the subject of AI and related terms, such as deep learning or machine learning, between 2017 and 2019. This increase in the presence of the term AI is also clearly visible in statistics on Google Search queries in the USA, which can be analysed using Google Trends over the period of 2015 to 2019. Last of all, an increase is similarly found in the frequency of the appearance of the terms AI and machine learning between 2017 and 2019 in different document corpuses, such as those from government organizations in the USA, Canada, and the United Kingdom, as well as in calls for capital by US companies.
 
 ---
-## Méthode : Extraction de corpus
+## Method: Corpus extraction
 
-**Requête utilisée sur Factiva** : "artificial intelligence" OR "AI" OR "algorithm*" OR "machine learning" OR "deep learning" OR "neural network*" -"amnesty international" -"weiwei" -"air india" 
-**Période d'extraction** : du 01/01/2015 au 31/12/2019 
-**Volume d'articles extraits** : 29 342 articles
+**Factiva query used:** : "artificial intelligence" OR "AI" OR "algorithm*" OR "machine learning" OR "deep learning" OR "neural network*" -"amnesty international" -"weiwei" -"air india" 
+**Extraction period**: from 01/01/2015 to 12/31/2019 
+**Volume of articles extracted**: 29,342 articles
 
 **Sources UK (n=20)** : Daily Mail, Daily Record, Daily star, Economist, Evening Standard, Evening Times, Express, Guardian, Independent, Mail online, Morning Star, Observer, Sunday Mall, Telegraph, The Mirror, The Sunday Mirror, The Sun, The Sunday Times, The Times, Which
 
