@@ -1,8 +1,6 @@
 import IceCreamBlock from '../../components/IceCreamBlock';
 
-## Comment est exprimée la temporalité ? 
-
->Visualisation Temporalité full
+## How is temporality expressed?
 
 <IceCreamBlock 
   xVariable={'algorithms'} 
@@ -12,20 +10,16 @@ import IceCreamBlock from '../../components/IceCreamBlock';
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorPalette={{"from":"#eb2941","to":"#9e41f0"}} 
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}}
+  colorLabels={{"From": "robots", "To": "algorithms"}} 
   colorScaleType={'continuous'}
+  title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'}
+  legend={'Taille des noeuds relative à la fréqeunce du terme dans le coprus'}
 />
 
+Research on forms of argumentation in the sociology of controversies invites us to look at the way that temporal scales and the regimes of stating the future associated with them are deployed (Chateauraynaud, 2013, 2019). Coherency and credibility tests in controversies require the definition of temporal scales that modify judgements. It is by mobilizing temporal markers that connect references to the past to short- or long-term projections that actors are capable of establishing affordances in the future to modulate the type of action to undertake and the urgency of acting to address the situation.
 
-L'opposition entre les deux espaces sémantiques semble donc dessiner deux régimes d’énonciation distincts qui cohabitent au sein de l’espace médiatique. Le premier exprime les peurs face à des technologies autonomes focalisant la critique sur leur capacité à simuler, dépasser, remplacer ou exterminer à terme l’espèce humaine et représentant une menace qu’il serait nécessaire de contrôler. L’autre régime est davantage ancré dans le répertoire habituel de la critique sociale, mobilisant le répertoire du droit et des  injustices (censure, discrimination, surveillance) envers des populations spécifiques ou relève d’enjeux de régulation quant à la manière de gérer la diffusion de l’information (exposition, amplification).
-
-Cette distinction entre l’énonciation de la peur et de la critique s’exprime également à travers les marqueurs temporels. L’espace intitulé “Robots” évoque majoritairement un ensemble de technologies encore en cours de développement au sein de laboratoires de recherche ou de start-ups qui les destinent à des applications dans des domaines très spécialisés, le monde du travail “job automation”, la défense pour les “Killer Robots”, les marchés financiers pour les "Robo-advisors", la sexualité “Sex Robots”. On trouve aussi dans cette partie du graphe les clusters “Scientific research” et ”Future of AI” qui portent tous deux sur des recherches plus fondamentales en lien avec les déploiements les plus récents en intelligence artificielle et en robotisation. L’autre partie du graphe intitulée "Algorithmes" se concentre davantage sur des systèmes techniques largement déployés dans l’environnement technologique quotidien et adoptées par les utilisateurs, tels que les algorithmes du Web, l’automatisation des emails, les algorithmes de moteurs de recherche d’image ou encore la synthèse vocale. Dans cet espace sémantique d’autres technologies commencent à se diffuser auprès du grand public tels que les assistants vocaux, les “Deepfake” via des applications mobiles telles que Reface ou Faceswap. Enfin d’autres dispositifs ne sont pas encore démocratisés mais font pour la plupart l’objet d’expérimentation plus ou moins importantes par des institutions et des sociétés tels que la reconnaissance faciale, les algorithmes prédictifs dans le domaine de la police et de la justice par exemple qui connaissent actuellement des développement locaux, à l’échelle d’une institution ou d’un territoire, tout en faisant l’objet d’une attention particulière en terme de régulation et quant aux risques qu’ils font peser sur la société dans leur développement. 
-
-Mais plus que cette analyse de l’adoption plus ou moins avancée de ces différentes familles de technologies de calcul, il est intéressant de comprendre la manière dont au sein du discours critique est exprimée la temporalité. Des travaux portant sur les formes argumentatives en sociologie des controverses nous invitent à nous intéresser à la manière dont sont déployées les échelles temporelles et les régimes d’énonciation du futur qui leur sont associés (Chateauraynaud, 2013, 2014 ; Chateauraynaud, Debaz, 2019). Les épreuves de cohérence et de crédibilité dans les controverses nécessitent de définir des échelles temporelles qui vont venir modifier les jugements mais aussi les logiques d’action qui y vont y être associées. C’est en mobilisant des marqueurs temporels qui articulent des références au passé et une projection à plus ou moins long terme dans le temps que les acteurs sont en mesure de constituer des prises sur le futur qui vont venir moduler le type d’action à entreprendre et l’urgence à agir pour faire face à une situation. 
-
-A partir de notre corpus, nous avons extrait 500 entités nommées qui sont des marqueurs temporels présents au sein des articles et de la même manière que pour les verbes, nous avons calculé de manière comparative leur score tf-idf sur l’ensemble des articles constituant les deux sous-ensembles intitulés “Robots” et "Algorithmes". La liste des entités extraite a été filtrer manuellement afin de ne conserver que les marqueurs temporels interprétables en dehors de leur contexte d’énonciation . L’analyse comparative de la distribution entre les deux sous-ensembles des scores tf-idf des marqueurs temporels laisse apparaître deux régimes distincts de référence au temps au sein des articles. 
-
->Visualisation Temporalité robot
+From our corpus, we extracted 1,000 named entities that are temporal markers present in the articles. Like for verbs, we calculated their relative frequency across all articles in the two subsets entitled ‘Robots’ and ‘Algorithms’. The list of extracted entities was manually filtered in order to retain only temporal markers that are interpretable outside of the context in which they are stated. The comparative analysis of temporal markers reveals two different regimes of reference to time within the two subsets of articles.
 
 <IceCreamBlock 
   xVariable={'algorithms'} 
@@ -35,13 +29,15 @@ A partir de notre corpus, nous avons extrait 500 entités nommées qui sont des 
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorScaleType={'continuous'} 
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}}
+  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorScaleType={'continuous'}
   filters={[{"attribute":"algo_robot","value":"robot"}]}
+  title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'}
+  legend={'Filtrage du meta-cluster "robots" - Taille des noeuds relative à la fréqeunce du terme dans le coprus'}
 />
 
-Du côté des articles associés au sous-ensemble “Robots” les marqueurs de temps relèvent d’une temporalité sur le long terme, qu’ils fassent référence au passé ou au futur. Ainsi la grande majorité des marqueurs se structurent autour d’expressions sur le futur qui mobilisent la figure the next associés à des temporalités qui se comptent souvent en dizaines d’années ou centaines d’années (the next 10 years, the next 30 years, the next 100 years, the next 1,000 years). D’autre part, les énoncés qui ont les plus importants scores dans cet espace ont comme particularité le plus souvent de ne pas définir précisément les échéances auxquelles ils renvoient (the next decades, coming decades, next century, this century). D’autres marqueurs également présents dans ce sous-ensemble ne font pas référence au futur mais au passé et ils se caractérisent par le fait de référer également à une projection lointaine dans le temps passé (30 years ago, 150 years ago, the last 20 years, the past 25 years, the past 15 years). Les entités dans ce sous-ensemble ont donc comme particularité de majoritairement exprimer un futur lointain et souvent peu précis. Par ailleurs, lorsque les entités font référence au passé, elles sont également projetées dans une temporalité lointaine.
-
->Visualisation Temporalité algo
+With respect to the articles associated with the ‘Robots’ subset, time markers are related to a long timespan, regardless of whether they refer to the past or the future. For example, the large majority of markers are structured around expressions on the future that use the figure of ‘the next’ combined with timespans of decades or centuries (*the next 30 years, the next 50 years, the next 100 years, the next 1,000 to 10,000 years*). On the other hand, the statements in this space most often have the particularity of not precisely defining the time scales to which they refer (*the next few decades, coming decades, the next century, this century*). Other markers that are also present in this subset refer to the past rather than the future, and are characterized by the fact that they also refer to a relatively distant past (*150 years ago, a few years ago, a decade ago*). The entities in this subset thus have the particularity of mainly expressing a distant and often relatively undefined future.
 
 <IceCreamBlock 
   xVariable={'algorithms'} 
@@ -51,31 +47,40 @@ Du côté des articles associés au sous-ensemble “Robots” les marqueurs de 
   colorVariable={'algorithms'} 
   labelVariable={'entity'} 
   rotateMode={true} 
-  colorScaleType={'continuous'} 
-  filters={[{"attribute":"algo_robot","value":"algo"}]}
-/>
-
-Au sein du sous-ensemble d’articles associés aux "Algorithmes" les marqueurs temporels extraits ayant les scores tf-idf les plus hauts se distinguent des premiers car ils renvoient majoritairement au présent (this day, these days, that year), à un passé plus proche souvent exprimé en jour, semaine ou mois (recent days, just last week, a few weeks ago, just a month, six months ago, the end of last year), mais également à un futur très proche en comparaison du premier sous-ensemble (the next day, the next few weeks, the coming weeks, the coming months, the following two years). 
-
->Visualisation Temporalité full
-
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
-  labelVariable={'entity'} 
-  rotateMode={true} 
-  colorPalette={{"from":"#eb2941","to":"#9e41f0"}} 
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}}
+  colorLabels={{"From": "robots", "To": "algorithms"}} 
   colorScaleType={'continuous'}
+  filters={[{"attribute":"algo_robot","value":"algo"}]} 
+  title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'} 
+  legend={'Filtrage du meta-cluster "algortihmes" - Taille des noeuds relative à la fréqeunce du terme dans le coprus'}
+  reverseFlickering={true}
 />
 
+In the subset of articles associated with ‘Algorithms’, the time markers extracted mainly refer either to the present (*this week, this month, this summer*) or to a recent past often expressed as a day, week, or month (*yesterday, recent weeks, recent months, the end of last year, a year ago*), or to or a very near future in relation to the terms of the first subset (*the next day, the coming weeks, the coming months, the following two years*).
+
+<IceCreamBlock 
+  xVariable={'algorithms'} 
+  yVariable={'robots'} 
+  reverseY={true} 
+  sizeVariable={'frequency'} 
+  colorVariable={'algorithms'} 
+  labelVariable={'entity'} 
+  rotateMode={true} 
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}}
+  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorScaleType={'continuous'}
+  title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'}
+  legend={'Taille des noeuds relative à la fréqeunce du terme dans le coprus'}
+/>
+
+The opposition between the two semantic spaces therefore appears to outline two different regimes of utterance that coexist within the media space and which express different timeframes. The first expresses fears projected into a future inhabited by autonomous technologies. It focuses criticism on these technologies’ ability to simulate, surpass, replace, or ultimately exterminate the human species, and thus on the threat they represent, which we should control. The other regime is rooted more in social criticism regarding the present; it uses the repertoires of the law and of injustice (censorship, discrimination, surveillance) committed against specific populations, or refers to regulatory concerns with respect to the dissemination of information (exposure, amplification).
 
 ---
 
-## Méthode : Extraction des marqueurs de temps et calcul des TF-IDF sur le corpus
+## Method: Extraction of time markers and calculation of relative frequency over the corpus
 
-En suivant la même procédure que pour le calcul des scores tf-idf sur les verbes, un travail de comparaison d’entités nommées “Date” a été réalisé. Afin de lister ces marqueurs de temps, une première extraction de 500 entités nommées "Date" via le modèle Spacy effectuée sur Cortext a été effectuée, puis un nettoyage de cette liste afin de conserver les entités les plus interprétables permettant de qualifier une dimension temporelle sans ambiguïté. On était supprimées les entités produisant des ambiguïtés et moins interprétables comme les dates spécifique ou chiffrée, les durées (ex: several years, winter), les fréquences (ex : everyday, weekly), les périodes (the late 1980s) événement spécifique (ex : Christmas). Pour cette liste de 112 entités “Date” un score de tf-df a été calculé en suivant la même procédure que pour les entités, soit une séparation du corpus d’articles en deux grand ensemble équivalent suivant la topologie du graphe telle que décrite précédemment et un calcul du score tf-idf pour chaque entité à partir du module TfidfTransformer.
+Following the same procedure as for the calculation of the tf-idf scores of verbs (see the previous Method section), the ‘Data’ entities were compared. To list these time markers, 1,000 entities named ‘Date’ were first extracted using Cortext’s Spacy model. This list was then cleaned to retain the most interpretable entities allowing us to describe the temporal dimension unambiguously. We eliminated the entities that caused ambiguities and were less interpretable, such as specific or numerical dates, durations (e.g. several years, winter), frequencies (e.g. every day, weekly), or specific events (e.g. Christmas). The relative frequency The opposition between the two semantic spaces therefore appears to outline two different regimes of utterance that coexist within the media space and which express different timeframes. The first expresses fears projected into a future inhabited by autonomous technologies. It focuses criticism on these technologies’ ability to simulate, surpass, replace, or ultimately exterminate the human species, and thus on the threat they represent, which we should control. The other regime is rooted more in social criticism regarding the present; it uses the repertoires of the law and of injustice (censorship, discrimination, surveillance) committed against specific populations, or refers to regulatory concerns with respect to the dissemination of information (exposure, amplification).
+was calculated for this list of 109 ‘Date’ entities, following the same procedure as for verb entities, namely the separation of the corpus of articles into two large equivalent subsets following the topology of the graph as described above.
+
 
 
