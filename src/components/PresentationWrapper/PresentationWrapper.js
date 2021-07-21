@@ -37,9 +37,11 @@ const Sections = ({
             return null;
           }
           const {
-            data,
-            contentsCompiled
+            data: initialData,
+            contentsCompiled,
+            lab,
           } = route;
+          const data = lang === 'en' && lab && lab.data ? lab.data : initialData;
           const Content = contentsCompiled[lang];
           const onRegisterVisualization = (id, params) => {
             const finalParams = {
@@ -166,7 +168,8 @@ const PresentationWrapper = ({ match: { params } }) => {
    * loading all datasets
    */
   useEffect(() => {
-    routes.reduce((cur, route, routeIndex) => {
+    routes
+    .reduce((cur, route, routeIndex) => {
       return cur.then((res) => new Promise((resolve, reject) => {
 
         const { data } = route;
@@ -195,15 +198,47 @@ const PresentationWrapper = ({ match: { params } }) => {
 
       }))
     }, Promise.resolve({}))
-      .then(newDatasets => {
+    .then(newDatasets => {
+      return routes
+        // second pass for the lab property of routes (temporary, @todo remove when scaffolding will be over)
+        .reduce((cur, route, routeIndex) => {
+          return cur.then((res) => new Promise((resolve, reject) => {
+  
+            const { lab } = route;
+            if (lang === 'en' && lab && lab.data) {
+              const data = lab.data;
+              const url = data ? `${process.env.PUBLIC_URL}/data/${data}` : undefined;
+              if (url) {
+                axios.get(url, {
+                  onDownloadProgress: progressEvent => {
+                    const status = progressEvent.loaded / progressEvent.total;
+                    const globalFraction = routeIndex / routes.length;
+                    setLoadingFraction(globalFraction + status / routes.length);
+                  }
+                })
+                  .then(({ data: inputData }) => {
+                    setTimeout(() => {
+                      let loadedData = inputData;
+                      if (url.split('.').pop() === 'csv') {
+                        loadedData = csvParse(inputData);
+                      } else if (url.split('.').pop() === 'tsv') {
+                        loadedData = tsvParse(inputData);
+                      }
+                      resolve({ ...res, [data]: loadedData })
+                    })
+                  })
+                  .catch(reject)
+              } else return resolve(res);
+            } else return resolve(res);
+          }))
+        }, Promise.resolve(newDatasets))
+    })
+    .then(newDatasets => {
         setLoadingFraction(1);
         setDatasets(newDatasets)
       })
       .catch(console.log)
   }, [])
-
-
-
   /**
    * Scrollytelling managmeent
    */

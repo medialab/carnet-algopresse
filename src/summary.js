@@ -207,7 +207,10 @@ const routes = [
       en: () => <Part7En />
     },
     data: 'verbs_bin_normalise.csv',
-    Component: IceCreamAnnotation
+    Component: IceCreamAnnotation,
+    lab: {
+      data: 'verbs_bin_v2.csv',
+    }
   },
   {
     title: {
@@ -227,7 +230,10 @@ const routes = [
       en: () => <Part8En />
     },
     Component: IceCreamAnnotation,
-    data: 'date_ner_tfidf_v3.csv'
+    data: 'date_ner_tfidf_v3.csv',
+    lab: {
+      data: 'dates_bin_v2.csv',
+    }
   },
   {
     title: {
