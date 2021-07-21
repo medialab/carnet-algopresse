@@ -1,15 +1,11 @@
-import IceCreamBlock from '../../components/IceCreamBlock';
+import HorizonBlock from '../../components/HorizonBlock';
 
 ## How are the issues produced by these technologies expressed?
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}}
   colorLabels={{"From": "robots", "To": "algorithms"}}
   colorScaleType={'continuous'}
@@ -19,16 +15,12 @@ import IceCreamBlock from '../../components/IceCreamBlock';
 
 Another way to undertake this comparative analysis of issues and the forms of agency associated with calculators is to explore another semantic entity in the corpus of articles: verbs. After extracting a list of verbs that can be interpreted as potentially linked to the issues produced by technical devices, we calculated the relative frequency of this vebrs in the two subsets of articles composing the two poles highlighted by the network topology.
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorLabels={{"From": "robots", "To": "algorithms"}}
   colorScaleType={'continuous'} 
   filters={[{"attribute":"algo_robot","value":"robot"}]}
   title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'} 
@@ -37,16 +29,12 @@ Another way to undertake this comparative analysis of issues and the forms of ag
 
 The most frequent verbs in the articles composing the ‘Robots’ semantic space support the analysis of issues carried out using terms categorized as ‘Issues’ in the graph. We find a more frequent occurrence of verbs expressing a threat caused by machines and autonomous intelligence pertaining to a prophetic or even apocalyptic discourse. The verbs as being likely to express issues include verbs relating not only to destruction (*doom, destroy, eradicate, kill, eliminate*) and to the notion of machines dominating humans (*enslave, dominate*), but also to how humans are being surpassed or replaced by these technical entities (*overtake, surpass, replace, defeat*). Other verbs occurring more frequently in the ‘Robots’ subset refer to concepts of transformation and change (*reshape, transform, disrupt*) or to the abilities of these technical entities to imitate or simulate human behaviour (*resemble, simulate, reproduce*).
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorLabels={{"From": "robots", "To": "algorithms"}}
   colorScaleType={'continuous'} 
   filters={[{"attribute":"algo_robot","value":"algo"}]} 
   title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'} 
@@ -56,16 +44,12 @@ The most frequent verbs in the articles composing the ‘Robots’ semantic spac
 
 In the subset of articles associated with ‘Algorithms’, we also find verbs that support the previous analyses carried out based on the ‘Issues’ categories in the network of terms. The verbs in this part of the corpus refer to issues related to information filtering and censorship (*filter, delete, supress, censor*), surveillance and privacy issues (*profile, suspect, spy, target, track*), denouncing forms of discrimination (*bias, discriminate*), or phenomena concerning the propagation and spread of fraudulent content (*promote, amplify, spread*).
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorLabels={{"From": "robots", "To": "algorithms"}}
   colorScaleType={'continuous'}
   title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'}
   legend={'Taille des noeuds relative à la fréqeunce du terme dans le coprus'}

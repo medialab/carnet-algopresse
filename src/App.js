@@ -98,11 +98,11 @@ const Edition = ({match, lang, onLangChange}) => {
                   const nextPage = index < routes.length - 1 ? routes[index + 1] : undefined;
                   const Content = React.lazy(() => import(`!babel-loader!mdx-loader!./contents/${lang}/${contents[lang]}`))
                   const contentsURL = `${repository}/blob/main/src/contents/${lang}/${contents[lang]}`;
-                  console.log('test', lang, lab)
                   const currentData = lang === 'en' && lab && lab.data ? lab.data : data;
+                  const CurrentComponent = lang === 'en' && lab && lab.Component ? lab.Component : ThatComponent;
                   return (
                     <Route key={index} path={route}>
-                      {renderRoute({ data: currentData, contentsURL, Content, ThatComponent, prevPage, nextPage })}
+                      {renderRoute({ data: currentData, contentsURL, Content, ThatComponent: CurrentComponent, prevPage, nextPage })}
                     </Route>
                   )
                 })

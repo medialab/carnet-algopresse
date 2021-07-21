@@ -10562,6 +10562,11 @@ react-container-dimensions@^1.4.1:
     invariant "^2.2.2"
     prop-types "^15.5.8"
 
+react-d3-axis@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-d3-axis/-/react-d3-axis-0.1.2.tgz#48c58251f01772638784585882bfce1d7dfd1400"
+  integrity sha512-Id2C208SGcLcIfgrdl9ffgZKXtp3wELV7dC3HJVjim+J0IQiAaZo9APSnlvJE2kB90C7wJKlXdFI1bYPg7jytA==
+
 react-dev-utils@^11.0.3:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.4.tgz#a7ccb60257a1ca2e0efe7a83e38e6700d17aa37a"

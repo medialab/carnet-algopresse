@@ -1,6 +1,7 @@
 import GraphAnnotation from './components/GraphAnnotation';
 import IceCreamAnnotation from './components/IceCreamAnnotation';
 import LinearGraphAnnotation from './components/LinearGraphAnnotation';
+import HorizonAnnotation from './components/HorizonAnnotation';
 import PlainPage from './components/PlainPage';
 
 import ChapoFr from '!babel-loader!mdx-loader!./contents/fr/chapo.mdx'
@@ -210,6 +211,7 @@ const routes = [
     Component: IceCreamAnnotation,
     lab: {
       data: 'verbs_bin_v2.csv',
+      Component: HorizonAnnotation
     }
   },
   {
@@ -233,6 +235,7 @@ const routes = [
     data: 'date_ner_tfidf_v3.csv',
     lab: {
       data: 'dates_bin_v2.csv',
+      Component: HorizonAnnotation
     }
   },
   {

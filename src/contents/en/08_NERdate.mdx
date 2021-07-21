@@ -1,17 +1,13 @@
-import IceCreamBlock from '../../components/IceCreamBlock';
+import HorizonBlock from '../../components/HorizonBlock';
 
 ## How is temporality expressed?
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorLabels={{"From": "robots", "To": "algorithms"}}
   colorScaleType={'continuous'}
   title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'}
   legend={'Taille des noeuds relative à la fréqeunce du terme dans le coprus'}
@@ -21,16 +17,12 @@ Research on forms of argumentation in the sociology of controversies invites us 
 
 From our corpus, we extracted 1,000 named entities that are temporal markers present in the articles. Like for verbs, we calculated their relative frequency across all articles in the two subsets entitled ‘Robots’ and ‘Algorithms’. The list of extracted entities was manually filtered in order to retain only temporal markers that are interpretable outside of the context in which they are stated. The comparative analysis of temporal markers reveals two different regimes of reference to time within the two subsets of articles.
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorLabels={{"From": "robots", "To": "algorithms"}}
   colorScaleType={'continuous'}
   filters={[{"attribute":"algo_robot","value":"robot"}]}
   title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'}
@@ -39,16 +31,12 @@ From our corpus, we extracted 1,000 named entities that are temporal markers pre
 
 With respect to the articles associated with the ‘Robots’ subset, time markers are related to a long timespan, regardless of whether they refer to the past or the future. For example, the large majority of markers are structured around expressions on the future that use the figure of ‘the next’ combined with timespans of decades or centuries (*the next 30 years, the next 50 years, the next 100 years, the next 1,000 to 10,000 years*). On the other hand, the statements in this space most often have the particularity of not precisely defining the time scales to which they refer (*the next few decades, coming decades, the next century, this century*). Other markers that are also present in this subset refer to the past rather than the future, and are characterized by the fact that they also refer to a relatively distant past (*150 years ago, a few years ago, a decade ago*). The entities in this subset thus have the particularity of mainly expressing a distant and often relatively undefined future.
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorLabels={{"From": "robots", "To": "algorithms"}}
   colorScaleType={'continuous'}
   filters={[{"attribute":"algo_robot","value":"algo"}]} 
   title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'} 
@@ -58,16 +46,12 @@ With respect to the articles associated with the ‘Robots’ subset, time marke
 
 In the subset of articles associated with ‘Algorithms’, the time markers extracted mainly refer either to the present (*this week, this month, this summer*) or to a recent past often expressed as a day, week, or month (*yesterday, recent weeks, recent months, the end of last year, a year ago*), or to or a very near future in relation to the terms of the first subset (*the next day, the coming weeks, the coming months, the following two years*).
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
   colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorLabels={{"From": "robots", "To": "algorithms"}}
   colorScaleType={'continuous'}
   title={'Scores TF-IDF des marqueurs de temps "Date" dans les articles selon les méta-clusters'}
   legend={'Taille des noeuds relative à la fréqeunce du terme dans le coprus'}

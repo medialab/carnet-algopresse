@@ -23,6 +23,7 @@ const buildComponentCode = (componentName, props) => `<${componentName}
 export const buildGraphCode = props => buildComponentCode('GraphBlock', props)
 
 export const buildIceCreamScatterPlotCode = props => buildComponentCode('IceCreamBlock', props)
+export const buildHorizonScatterPlotCode = props => buildComponentCode('HorizonBlock', props)
 export const buildLinearGraphCode = props => buildComponentCode('LinearGraphBlock', props)
 
 export const computeFiltersOptions = (type, ...args) => {
