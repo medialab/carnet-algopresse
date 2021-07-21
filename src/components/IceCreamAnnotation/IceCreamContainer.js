@@ -141,7 +141,7 @@ export function IceCreamContainer({
     yRange = yRange.reverse();
   }
 
-  const getX = xVariable && xVariable !== 'default' ? scaleLinear().range(xRange).domain([0, 1]) : () => 0;
+  const getX = xVariable && xVariable !== 'default' ? scalePow().range(xRange).domain([0, 1]) : () => 0;
   const getY = yVariable && yVariable !== 'default' ? scaleLinear().range(yRange).domain([0, 1]) : () => 0;
   const getSize = sizeVariable && sizeVariable !== 'default' ? scaleLinear().domain(extent(data.map(d => +d[sizeVariable]))).range([MIN_AREA, MAX_AREA]) : () => 0;
 
