@@ -10,7 +10,6 @@ import HorizonBlock from '../../components/HorizonBlock';
   colorScaleType={'continuous'} 
   colorLabels={{"From":"robots","To":"algorithms"}} 
   title={'Distribution des fréquences relatives des verbes de troubles dans les articles selon les méta-clusters'} 
-  legend={'Taille des noeuds relative à la fréqeunce du terme dans le coprus'}
 />
 
 Une autre manière de poursuivre cette analyse comparative des troubles et des formes d’agentivité associés aux calculateurs consiste en l’exploration d’une autre entité sémantique au sein du corpus d’articles que sont les verbes. Après avoir réalisé une extraction d’une liste de verbes interprétables comme étant potentiellement de bons candidats aux troubles produits par les dispositifs techniques, nous avons calculé et comparé leur fréquence relative au sein des deux sous-ensembles d’articles constitutifs des deux pôles mis en évidence par la topologie du réseau.
@@ -24,7 +23,7 @@ Une autre manière de poursuivre cette analyse comparative des troubles et des f
   colorLabels={{"From":"robots","To":"algorithms"}} 
   filters={[{"attribute":"algo_robot","value":"robot"}]} 
   title={'Distribution des fréquences relatives des verbes de troubles dans les articles selon les méta-clusters'} 
-  legend={'Filtrage du meta-cluster "robots" - taille des noeuds relative à la fréqeunce du terme dans le coprus'}
+  legend={'Filtrage du meta-cluster "robots"'}
 />
 
 Les verbes dont les fréquences relatives sont les plus élevées dans les articles qui composent l’espace sémantique « Robots » viennent conforter l’analyse des troubles effectuée à partir des termes catégorisés comme “Issues” au sein du graphe. En effet, on observe une plus forte représentation de verbes exprimant une menace de la part des machines et intelligences autonomes relevant d’un discours prophétique, voire apocalyptique. Parmi les verbes sélectionnés comme bons candidats à l’expression de troubles ayant les fréquences les plus élevées, on trouve des verbes qui expriment des notions de destruction (*doom*, *destroy*, *eradicate*, *kill*, *eliminate*) et de domination des machines sur l'homme (*enslave*, *dominate*), mais également de dépassement ou de remplacement des hommes par les ces agents techniques (*overtake*, *surpass*, *replace*, *defeat*). D’autres verbes davantage représentés dans le sous ensemble « Robots » renvoient à des notions de transformation et de changement (*reshape*, *transform*, *disrupt*) ou aux capacités de ces agents techniques à imiter ou simuler les comportements humains (*ressemble*, *simulate*, *reproduce*).
@@ -38,7 +37,7 @@ Les verbes dont les fréquences relatives sont les plus élevées dans les artic
   colorLabels={{"From":"robots","To":"algorithms"}} 
   filters={[{"attribute":"algo_robot","value":"algo"}]} 
   title={'Distribution des fréquences relatives des verbes de troubles dans les articles selon les méta-clusters'} 
-  legend={'Filtrage du meta-cluster "algorithmes - taille des noeuds relative à la fréqeunce du terme dans le coprus'} 
+  legend={'Filtrage du meta-cluster "algorithmes"'} 
   reverseFlickering={true}
 />
 
@@ -52,7 +51,6 @@ Dans le sous-ensemble d’articles associés aux « Algorithmes » on retrouve �
   colorScaleType={'continuous'} 
   colorLabels={{"From":"robots","To":"algorithms"}} 
   title={'Distribution des fréquences relatives des verbes de troubles dans les articles selon les méta-clusters'} 
-  legend={'Taille des noeuds relative à la fréqeunce du terme dans le coprus'}
 />
 
 <div className="methodo-container">
