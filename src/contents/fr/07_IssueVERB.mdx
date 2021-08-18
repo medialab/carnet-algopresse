@@ -2,81 +2,65 @@ import IceCreamBlock from '../../components/IceCreamBlock';
 
 ## Comment sont exprimés les troubles produits par ces technologies ? 
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
-  colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}}
-  colorScaleType={'continuous'}
-  title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'}
-  legend={'Taille des noeuds relative à la fréquence du terme dans le coprus'}
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
+  colorScaleType={'continuous'} 
+  colorLabels={{"From":"robots","To":"algorithms"}} 
+  title={'Distribution des fréquences relatives des verbes de troubles dans les articles selon les méta-clusters'} 
+  legend={'Taille des noeuds relative à la fréqeunce du terme dans le coprus'}
 />
 
-Une autre manière de poursuivre cette analyse comparative des troubles et des formes d’agentivité associés aux calculateurs consiste en l’exploration d’une autre entité sémantique au sein du corpus d’articles que sont les verbes. Après avoir réalisé une extraction d’une liste de verbes interprétables comme étant potentiellement de bons candidats aux troubles produits par les dispositifs techniques, nous avons calculé et comparé leur score tf-idf au sein des deux sous-ensembles d’articles constitutifs des deux pôles mis en évidence par la topologie du réseau.
+Une autre manière de poursuivre cette analyse comparative des troubles et des formes d’agentivité associés aux calculateurs consiste en l’exploration d’une autre entité sémantique au sein du corpus d’articles que sont les verbes. Après avoir réalisé une extraction d’une liste de verbes interprétables comme étant potentiellement de bons candidats aux troubles produits par les dispositifs techniques, nous avons calculé et comparé leur fréquence relative au sein des deux sous-ensembles d’articles constitutifs des deux pôles mis en évidence par la topologie du réseau.
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
-  colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
   colorScaleType={'continuous'} 
-  filters={[{"attribute":"algo_robot","value":"robot"}]}
-  title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'} 
-  legend={'Filtrage du meta-cluster "robots" - taille des noeuds relative à la fréquence du terme dans le coprus'}
+  colorLabels={{"From":"robots","To":"algorithms"}} 
+  filters={[{"attribute":"algo_robot","value":"robot"}]} 
+  title={'Distribution des fréquences relatives des verbes de troubles dans les articles selon les méta-clusters'} 
+  legend={'Filtrage du meta-cluster "robots" - taille des noeuds relative à la fréqeunce du terme dans le coprus'}
 />
 
-Les verbes dont les scores tf-idf sont les plus importants dans les articles qui composent l’espace sémantique « Robots » viennent conforter l’analyse des troubles effectuée à partir des termes catégorisés comme “Issues” au sein du graphe. En effet, on observe une plus forte représentation de verbes exprimant une menace de la part des machines et intelligences autonomes relevant d’un discours prophétique, voire apocalyptique. Parmi les verbes sélectionnés comme bons candidats à l’expression de troubles ayant les plus importants scores tf-idf, on trouve des verbes qui expriment des notions de destruction (*doom*, *destroy*, *eradicate*, *kill*, *eliminate*) et de domination des machines sur l'homme (*enslave*, *dominate*), mais également de dépassement ou de remplacement des hommes par les ces agents techniques (*overtake*, *surpass*, *replace*, *defeat*). D’autres verbes davantage représentés dans le sous ensemble « Robots » renvoient à des notions de transformation et de changement (*reshape*, *transform*, *disrupt*) ou aux capacités de ces agents techniques à imiter ou simuler les comportements humains (*ressemble*, *simulate*, *reproduce*, *mimic*).
+Les verbes dont les fréquences relatives sont les plus élevées dans les articles qui composent l’espace sémantique « Robots » viennent conforter l’analyse des troubles effectuée à partir des termes catégorisés comme “Issues” au sein du graphe. En effet, on observe une plus forte représentation de verbes exprimant une menace de la part des machines et intelligences autonomes relevant d’un discours prophétique, voire apocalyptique. Parmi les verbes sélectionnés comme bons candidats à l’expression de troubles ayant les fréquences les plus élevées, on trouve des verbes qui expriment des notions de destruction (*doom*, *destroy*, *eradicate*, *kill*, *eliminate*) et de domination des machines sur l'homme (*enslave*, *dominate*), mais également de dépassement ou de remplacement des hommes par les ces agents techniques (*overtake*, *surpass*, *replace*, *defeat*). D’autres verbes davantage représentés dans le sous ensemble « Robots » renvoient à des notions de transformation et de changement (*reshape*, *transform*, *disrupt*) ou aux capacités de ces agents techniques à imiter ou simuler les comportements humains (*ressemble*, *simulate*, *reproduce*).
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
-  colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
   colorScaleType={'continuous'} 
+  colorLabels={{"From":"robots","To":"algorithms"}} 
   filters={[{"attribute":"algo_robot","value":"algo"}]} 
-  title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'} 
-  legend={'Filtrage du meta-cluster "algorithmes - taille des noeuds relative à la fréquence du terme dans le coprus'}
+  title={'Distribution des fréquences relatives des verbes de troubles dans les articles selon les méta-clusters'} 
+  legend={'Filtrage du meta-cluster "algorithmes - taille des noeuds relative à la fréqeunce du terme dans le coprus'} 
   reverseFlickering={true}
 />
 
-Dans le sous-ensemble d’articles associés aux « Algorithmes » on retrouve également des verbes qui viennent conforter les analyses précédentes réalisées à partir de la catégories “Issues” dans le réseau de termes. En effet, les verbes qui présentent les plus hauts scores de tf-idf dans cette partie du corpus renvoient aux questions de filtrage et de censure de l’information (*filter*, *delete*, *supress*, *censor*), aux problèmes de surveillance et de privacy (*profile*, *suspect*, *spy*, *target*, *track*), à la dénonciation des formes de discrimination (*bias*, *discriminate*) ou encore aux phénomènes de propagation et d’amplification de contenus frauduleux (*promote*, *amplify*, *spread*).
+Dans le sous-ensemble d’articles associés aux « Algorithmes » on retrouve également des verbes qui viennent conforter les analyses précédentes réalisées à partir de la catégories “Issues” dans le réseau de termes. En effet, les verbes qui présentent les fréquences relatives les plus élevées dans cette partie du corpus renvoient aux questions de filtrage et de censure de l’information (*filter*, *delete*, *supress*, *censor*), aux problèmes de surveillance et de privacy (*profile*, *suspect*, *spy*, *target*, *track*), à la dénonciation des formes de discrimination (*bias*, *discriminate*) ou encore aux phénomènes de propagation et d’amplification de contenus frauduleux (*promote*, *amplify*, *spread*).
 
-<IceCreamBlock 
-  xVariable={'algorithms'} 
-  yVariable={'robots'} 
-  reverseY={true} 
-  sizeVariable={'frequency'} 
-  colorVariable={'algorithms'} 
+<HorizonBlock 
+  sizeVariable={'ratio'} 
+  colorVariable={'ratio'} 
   labelVariable={'entity'} 
-  rotateMode={true} 
-  colorPalette={{"From":"#fa1633","To":"#992ef6"}}
-  colorLabels={{"From": "robots", "To": "algorithms"}} 
-  colorScaleType={'continuous'}
-  title={'Scores TF-IDF des verbes de troubles dans les articles selon les méta-clusters'}
-  legend={'Taille des noeuds relative à la fréquence du terme dans le coprus'}
+  colorPalette={{"From":"#fa1633","To":"#992ef6"}} 
+  colorScaleType={'continuous'} 
+  colorLabels={{"From":"robots","To":"algorithms"}} 
+  title={'Distribution des fréquences relatives des verbes de troubles dans les articles selon les méta-clusters'} 
+  legend={'Taille des noeuds relative à la fréqeunce du terme dans le coprus'}
 />
 
 <div className="methodo-container">
-  <h2 id="m-thode-extraction-des-verbes-de-troubles-et-calcul-des-tf-idf-sur-le-corpus">Méthode : Extraction des verbes de troubles et calcul des TF-IDF sur le corpus</h2>
+  <h2 id="m-thode-extraction-des-verbes-de-troubles-et-calcul-des-tf-idf-sur-le-corpus">Méthode : Extraction des verbes de troubles et calcul des fréquences relatives sur le corpus</h2>
 <p>L’analyse des verbes de troubles a été réalisée en effectuant une première extraction de 1000 verbes sur le texte complet des articles critiques du corpus en employant la méthode “pigeon holes” via le logiciel Cortext (identique à la méthode d'extraction des termes du graphe). La liste de verbes produite a d’abord été manuellement annotée afin d’extraire une liste de verbes pouvant être interprétés comme des problèmes, des difficultés ou des troubles. Une liste restreinte de 66 verbes explicitement interprétables comme troubles a été sélectionnée.
   
-Le score Tf-idf des verbes est calculé sur les articles des 17 plus importants clusters (supérieur à 1% des articles du corpus), composant les deux grands sous-ensembles « Robots » et « Algorithmes » définis en suivant la topologie. Il est obtenu à partir du module <a href="TfidfTransformer">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html</a> en conservant les options par défaut (intégrant la fonction smooth_idf=True, la constante &quot;1&quot; est ajoutée au numérateur et au dénominateur de l&#39;idf comme si l&#39;on voyait un document supplémentaire contenant chaque terme de la collection exactement une fois, ce qui évite les divisions par zéro : </p>
+Nous mesurons ensuite la fréquence relative des verbes de troubles dans les sous-corpus Algorithme et Robot, montrant ainsi quelles entités sont particulièrement sur/sous-représentées des deux côtés de notre réseau. Plus précisément, pour une entité i, nous mesurons le score suivant : </p>
 <blockquote>
-<p>idf(t) = log [ (1 + n) / (1 + df(t)) ] + 1.</p>
+<p>s(i) = log (p(i|Algos)/p(i|Algos))</p>
 </blockquote>
 </div>
