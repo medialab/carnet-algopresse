@@ -24,8 +24,8 @@ Given the work of manually sourcing the initial corpus and the use of the superv
 Using this categorization protocol, we established a sub-corpus of 2091 press articles categorized as critical. The percentage of such articles was 7.1% on average across the entire corpus, with relatively good stability over the observation period (standard deviation of +/- 2.2%). Research on the analysis of media coverage of AI in Great Britain has shown that the vast majority of publications are on technological advancements and developments in the economic sector, and that the ethical questions associated with the rollout of these technologies remains underrepresented in the press (Brennen et al, 2018).
 
 
----
-## Method: Use of supervised learning to detect criticism
+<div className="methodo-container">
+<h2>Method: Use of supervised learning to detect criticism</h2>
 
 **Model used to detect criticism:** fastText - https://fasttext.cc
 
@@ -46,4 +46,4 @@ To ensure the diversity and accuracy of articles, different annotation models we
  - F1-score : 0.86
  
 This methodological approach allowed us to process a large database that would have been impossible to categorize manually. Although the supervised learning-based automatic categorization tools used do entail a potential risk of not detecting certain critical articles in the corpus, the successive iterations reduce this bias because the results obtained during each iteration show the development of the model’s abilities to detect new critical articles. Furthermore, systematic manual control of all results produced by the algorithm ensure that the sub-corpus of articles categorized as critical do not contain false positives.
-                  
+</div>
