@@ -1,5 +1,5 @@
 import GraphAnnotation from './components/GraphAnnotation';
-import IceCreamAnnotation from './components/IceCreamAnnotation';
+// import IceCreamAnnotation from './components/IceCreamAnnotation';
 import LinearGraphAnnotation from './components/LinearGraphAnnotation';
 import HorizonAnnotation from './components/HorizonAnnotation';
 import PlainPage from './components/PlainPage';
@@ -207,12 +207,12 @@ const routes = [
       fr: () => <Part7Fr />,
       en: () => <Part7En />
     },
-    data: 'verbs_bin_normalise.csv',
-    Component: IceCreamAnnotation,
-    lab: {
+    // data: 'verbs_bin_normalise.csv',
+    // Component: IceCreamAnnotation,
+    // lab: {
       data: 'verbs_bin_v2.csv',
       Component: HorizonAnnotation
-    }
+    // }
   },
   {
     title: {
@@ -231,12 +231,12 @@ const routes = [
       fr: () => <Part8Fr />,
       en: () => <Part8En />
     },
-    Component: IceCreamAnnotation,
-    data: 'date_ner_tfidf_v3.csv',
-    lab: {
+    // Component: IceCreamAnnotation,
+    // data: 'date_ner_tfidf_v3.csv',
+    // lab: {
       data: 'dates_bin_v2.csv',
       Component: HorizonAnnotation
-    }
+    // }
   },
   {
     title: {
