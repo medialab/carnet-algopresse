@@ -5,7 +5,7 @@ import HorizonAnnotation from './components/HorizonAnnotation';
 import PlainPage from './components/PlainPage';
 
 import ChapoFr from '!babel-loader!mdx-loader!./contents/fr/chapo.mdx'
-import ChapoEn from '!babel-loader!mdx-loader!./contents/en/headline.mdx'
+import ChapoEn from '!babel-loader!mdx-loader!./contents/en/chapo.mdx'
 
 
 import IntroFr from '!babel-loader!mdx-loader!./contents/fr/00_home.mdx'
@@ -42,7 +42,7 @@ const routes = [
     },
     contents: {
       fr: 'chapo.mdx',
-      en: 'headline.mdx',
+      en: 'chapo.mdx',
     },
     contentsCompiled: {
       fr: () => <ChapoFr />,
@@ -73,7 +73,7 @@ const routes = [
   {
     title: {
       fr: 'Quelle est la couverture médiatique de l\'IA ?',
-      en: '1. Media coverage',
+      en: 'What is AI media coverage?',
     },
     route: {
       fr: '01-couverture-media',
@@ -93,7 +93,7 @@ const routes = [
   {
     title: {
       fr: 'Comment détecter le discours critique dans les médias ?',
-      en: '2. Detecting critiques',
+      en: 'How to detect critical discourse in the media?',
     },
     route: {
       fr: '02-detecter-critiques',
@@ -113,7 +113,7 @@ const routes = [
   {
     title: {
       fr: 'Quels sont les thèmes sur lesquels porte la critique ?',
-      en: '3. Graph clusters',
+      en: 'What are the themes targeted by the critique?',
     },
     route: {
       fr: '03-graph-clusters',
@@ -133,7 +133,7 @@ const routes = [
   {
     title: {
       fr: 'Comment évolue l’agenda médiatique ?',
-      en: '4. Evolution of the mediatic agenda',
+      en: 'How does the mediatic agenda evolve?',
     },
     route: {
       fr: '04-timeline-clusters',
@@ -153,7 +153,7 @@ const routes = [
   {
     title: {
       fr: 'Que nous apprend la topologie du réseau ?',
-      en: '5. Network topology',
+      en: 'What can we learn from the network\'s topology?',
     },
     route: {
       fr: '05-topologie',
@@ -173,7 +173,7 @@ const routes = [
   {
     title: {
       fr: 'Quelles entités peuplent le réseau sémantique ?',
-      en: '6. Calculating agents',
+      en: 'What entities are populating the semantic network?',
     },
     route: {
       fr: '06-agents',
@@ -193,7 +193,7 @@ const routes = [
   {
     title: {
       fr: 'Comment sont exprimés les troubles produits par ces technologies ?',
-      en: '7. Trouble verbs',
+      en: 'How are troubles produced by these technologies expressed?',
     },
     route: {
       fr: '07-verbes',
@@ -217,7 +217,7 @@ const routes = [
   {
     title: {
       fr: 'Comment est exprimée la temporalité ?',
-      en: '8. Temporality',
+      en: 'How is temporality expressed?',
     },
     route: {
       fr: '08-temporalite',
