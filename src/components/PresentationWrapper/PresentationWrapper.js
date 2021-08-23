@@ -11,7 +11,7 @@ import Loader from '../Loader';
 import VisualizationController from '../VisualizationController';
 
 
-import { VisualizationControlContext, PresentationContext } from '../../contexts'
+import { VisualizationControlContext, PresentationContext, LanguageContext } from '../../contexts'
 // import {useDebouncedEffect} from '../../helpers/hooks';
 
 import routes from '../../summary';
@@ -369,55 +369,61 @@ const PresentationWrapper = ({ match: { params } }) => {
   }
 
   return (
-    <PresentationContext.Provider
+    <LanguageContext.Provider
       value={{
-        presentationMode: true,
-        activeVisualization,
-        onBlockClick: handleBlockClick
+        lang
       }}
     >
-      <div ref={scrollRef} id="presentation-wrapper">
-        <Header
-          lang={lang}
-          routes={routes}
-          onRouteNav={handleRouteNav}
-          isVisible={inHeader}
-          inFooter={inFooter}
-          activeSectionIndex={activeSectionIndex}
-          loadingFraction={loadingFraction}
-          graphData={datasets && datasets['Graph_Critic_EN_algopress_webV2.gexf']}
-          onScrollToTop={handleScrollToTop}
-          onScrollToFirstSection={handleScrollToFirstSection}
-        />
-        <Footer />
-        <Sections
-          {
-          ...{
-            routes,
-            lang,
-            setVisualizations,
-            visualizations,
-            activeSectionIndex,
-            sectionsRef
-          }
-          }
-        />
-        <aside onScroll={preventScroll} className={cx('visualization-container', { 'is-visible': !(inHeader || inFooter) })}>
-          {
-            datasets ?
-            <VisualizationController
-              datasets={datasets}
-              activeVisualization={activeVisualization}
-              visualizations={visualizations}
-              loadingFraction={loadingFraction}
-            />
-            :
-            <Loader percentsLoaded={loadingFraction * 100} />
-          }
-        </aside>
-        <Footer inBottom />
-      </div>
-    </PresentationContext.Provider>
+      <PresentationContext.Provider
+        value={{
+          presentationMode: true,
+          activeVisualization,
+          onBlockClick: handleBlockClick
+        }}
+      >
+        <div ref={scrollRef} id="presentation-wrapper">
+          <Header
+            lang={lang}
+            routes={routes}
+            onRouteNav={handleRouteNav}
+            isVisible={inHeader}
+            inFooter={inFooter}
+            activeSectionIndex={activeSectionIndex}
+            loadingFraction={loadingFraction}
+            graphData={datasets && datasets['Graph_Critic_EN_algopress_webV2.gexf']}
+            onScrollToTop={handleScrollToTop}
+            onScrollToFirstSection={handleScrollToFirstSection}
+          />
+          <Footer />
+          <Sections
+            {
+            ...{
+              routes,
+              lang,
+              setVisualizations,
+              visualizations,
+              activeSectionIndex,
+              sectionsRef
+            }
+            }
+          />
+          <aside onScroll={preventScroll} className={cx('visualization-container', { 'is-visible': !(inHeader || inFooter) })}>
+            {
+              datasets ?
+              <VisualizationController
+                datasets={datasets}
+                activeVisualization={activeVisualization}
+                visualizations={visualizations}
+                loadingFraction={loadingFraction}
+              />
+              :
+              <Loader percentsLoaded={loadingFraction * 100} />
+            }
+          </aside>
+          <Footer inBottom />
+        </div>
+      </PresentationContext.Provider>
+    </LanguageContext.Provider>
   )
 }
 
