@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-// import {NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import Helmet from 'react-helmet';
 import Graph from 'graphology';
 import gexf from 'graphology-gexf';
@@ -69,22 +69,22 @@ const GraphWrapperWithDimensions = props => (
   </ContainerDimensions>
 )
 
-// const LanguageToggler = ({lang}) => {
-//   return (
-//     <ul className="LanguageToggler">
-//       <li>
-//         <NavLink to="/publication/fr">
-//           fr
-//         </NavLink>
-//       </li>
-//       <li>
-//         <NavLink to="/publication/en">
-//           en
-//         </NavLink>
-//       </li>
-//     </ul>
-//   )
-// }
+const LanguageToggler = ({lang}) => {
+  return (
+    <ul className="LanguageToggler">
+      <li>
+        <NavLink to="/publication/fr">
+          fr
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/publication/en">
+          en
+        </NavLink>
+      </li>
+    </ul>
+  )
+}
 
 const Header = ({
   lang, 
@@ -234,7 +234,7 @@ const Header = ({
           content={ description }
         />
       </Helmet>
-      {/* <LanguageToggler lang={lang} /> */}
+      <LanguageToggler lang={lang} />
       <div onClick={onScrollToTop} className="running-title">
         <h1>{title}</h1>
       </div>
